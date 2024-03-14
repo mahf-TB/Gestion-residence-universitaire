@@ -1,0 +1,18 @@
+<template>
+  <div class="bg-white">
+   <Header></Header>
+    <div class="container pt-14">
+      <router-view class="font-Avenir" />
+    </div>
+  </div>
+</template>
+
+<script>
+import Header from '../../components/ResidentComponents/Header.vue'
+export default {
+  name: 'LayoutPage',
+  components: {
+    Header
+  },
+}
+</script>

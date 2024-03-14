@@ -4,8 +4,10 @@ import router from './router'
 import store from './store'
 
 import '../public/css/Tailwind.css';
+import '../public/css/style.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'vue-multiselect/dist/vue-multiselect.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 createApp(App).use(store).use(router).mount('#app')

@@ -1,20 +1,60 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { auth  } from "../_Helper";
+
+import Login from '../views/Login.vue'
+import Signup from '../views/Signup.vue'
+import Page404 from '../views/Page404.vue'
+
+import * as Admin from '@/views/Admin/_NavAdmin'
+import * as Etudiant from '@/views/Residents/_NavUser'
+import * as User from '@/views/Visiteur/_NavVisite'
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/admin',
+    name: 'Admin',
+    component: Admin.LayoutAdmin,
+    beforeEnter: auth.adminConnect,
+    children:[
+      { path: 'home',  name: 'HomePage', component: Admin.Home }
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/user',
+    name: 'HomeUser',
+    beforeEnter: auth.userConnect,
+    component: Etudiant.LayoutUser,
+    children:[
+      { path: 'residences',  name: 'Residence', component: Etudiant.Residence }
+    ]
+  },
+  {
+    path: '/',
+    name: 'Home',
+    redirect: 'accueil',
+    beforeEnter: auth.userVisite,
+    component: User.LayoutPage,
+    children:[
+      { path: 'accueil',  name: 'Accueil', component: User.Accueil }
+    ]
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    beforeEnter: auth.Deconnect,
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: Signup,
+    beforeEnter: auth.Deconnect,
+  },
+  {
+    path:'/:pathMatch(.*)*',
+    name: 'Page404',
+    component: Page404
+  },
 ]
 
 const router = createRouter({
