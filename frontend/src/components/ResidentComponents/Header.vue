@@ -14,7 +14,8 @@
                 <button class="btn btn-primary" v-if="isConnect">
                     <router-link to="/login" class="text-blue-0 font-light">se connecter</router-link>
                 </button>
-                <div v-if="!isConnect" @click="deconnect()" class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2"
+                <div v-if="!isConnect" @click="deconnect()"
+                    class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2"
                     style="background-image: url(https://i.pinimg.com/564x/de/0f/3d/de0f3d06d2c6dbf29a888cf78e4c0323.jpg)">
                 </div>
             </div>
@@ -23,18 +24,21 @@
             <div class="container flex items-center justify-between py-2 ">
                 <div class="text-blue-0 ">
                     <nav>
-                        <router-link to="/" class="text-blue-0 px-4">Accueil</router-link>|
-                        <router-link to="/adme" class="text-blue-0 px-4">Nos résidences</router-link>|
-                        <router-link to="/voitures" class="text-blue-0 px-4">Activités</router-link>|
-                        <router-link to="/achats" class="text-blue-0 px-4">Service</router-link>| 
-                        <router-link to="/admin/home" class="text-blue-0 px-4">contact: </router-link>
+                        <router-link to="/accueil" class="text-blue-0 px-4">Accueil</router-link>
+                        <router-link to="/user/residences" v-if="!isConnect"  class="text-blue-0 px-4">Nos résidences</router-link>
+                        <router-link to="/activites" class="text-blue-0 px-4">Activités</router-link>
+                        <router-link to="/user/service" class="text-blue-0 px-4">Service</router-link>
+                        <router-link to="/contact" class="text-blue-0 px-4">contact</router-link>
                     </nav>
                 </div>
                 <div class="flex items-center text-gray-500">
-                    <span class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer">
+                    <span v-if="isConnect" class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer">
                         <i class="fa-brands fa-facebook  mx-2" style="font-size: 1.9rem"></i>
                         <i class="fa-brands fa-instagram  mx-2" style="font-size: 1.9rem"></i>
                         <i class="fa-brands fa-x-twitter  mx-2" style="font-size: 1.9rem"></i>
+                    </span>
+                    <span v-if="!isConnect" class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer">
+                        <i class="fa-solid fa-bell mx-3" style="font-size: 1.9rem"></i>
                     </span>
                 </div>
             </div>
@@ -43,23 +47,24 @@
 </template>
 
 <script>
-
+import { onMounted } from 'vue'
 export default {
     name: 'Header',
     components: {
 
     },
     data() {
-        return {}
+        return {
+            isUser: false
+        }
     },
     mounted() {
-
     },
     computed: {
         isConnect() {
             let user = JSON.parse(localStorage.getItem('user-info'))
             console.log(user)
-            if (user && user.nom == 'user') {
+            if (user) {
                 return false
             }
             return true
@@ -70,10 +75,8 @@ export default {
             localStorage.removeItem('user-info');
             this.$router.push("/login");
         },
+        
 
     },
-    setup() {
-
-    }
 }
 </script>

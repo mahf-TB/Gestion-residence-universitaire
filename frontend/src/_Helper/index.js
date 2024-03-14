@@ -1,35 +1,43 @@
 import router from "@/router/index";
 
+// #####################################
+// Admin Connecting...
 let adminConnect = (to) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user)
-    if (user && user.nom == 'admin') {
+    if (user.nom == 'admin') {
         return true
     }
     router.push('/login')
 }
 
+// #####################################
+// User Connecting...
 let userConnect = (to) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user)
-    if (user && user.nom == 'user') {
-        return true
+    if (user.nom == 'user') {
+        return true 
     }
     router.push('/login')
 }
-
+// #####################################
+// User Connecting...
 let userVisite = (to , from) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
+    let token = localStorage.getItem('user-info')
 
     console.log('route from ',from)
     console.log('route to ',to)
 
-    if ( from.name == 'HomeUser' || user.nom == 'user') {
+    if ( !token || from.name == 'HomeUser' || user.nom == 'user') {
         return true
     }
-    router.push({name:'Admin'})
+    router.push('/admin/home')
 }
 
+// #####################################
+// Deconnecting...
 let Deconnect = (to) => {
     let token = localStorage.getItem('user-info')
     let user = JSON.parse(localStorage.getItem('user-info'))

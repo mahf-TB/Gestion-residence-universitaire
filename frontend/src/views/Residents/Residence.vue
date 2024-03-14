@@ -1,7 +1,7 @@
 <template>
     <div class="">
-      <h1 class="text-xxl text-[#2b6b88]">Actuallité Residence</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam dolores blanditiis odio quidem ipsum, atque inventore, rerum eos voluptatibus, sint dolore. Nisi repellendus temporibus velit dicta nulla! Hic, harum!
+      <h1 class="text-xxl text-[#2b6b88]">Residence Universitaire</h1>
+      <p class="text-blue-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam dolores blanditiis odio quidem ipsum, atque inventore, rerum eos voluptatibus, sint dolore. Nisi repellendus temporibus velit dicta nulla! Hic, harum!
       Ipsum blanditiis aperiam harum molestiae rem labore esse! Sit magni, perferendis modi pariatur corporis mollitia totam unde maiores eum molestias, ea rerum voluptas assumenda nostrum. Laborum dicta expedita vel provident?
       Repellendus molestias omnis doloribus deleniti maxime sit laboriosam eaque consectetur iusto. Quidem reprehenderit nobis quibusdam. Soluta, perferendis est. Eveniet veniam earum deleniti laudantium esse labore odit ab voluptates expedita optio!
       Ratione ducimus odit dignissimos velit perspiciatis totam, ipsum voluptates dolores doloribus corporis numquam repellendus voluptatem rerum pariatur quae eveniet facere, placeat sunt illum nostrum magni alias. Impedit ducimus doloribus officiis!

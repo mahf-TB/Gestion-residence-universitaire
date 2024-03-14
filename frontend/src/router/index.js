@@ -35,7 +35,9 @@ const routes = [
     beforeEnter: auth.userVisite,
     component: User.LayoutPage,
     children:[
-      { path: 'accueil',  name: 'Accueil', component: User.Accueil }
+      { path: 'accueil',  name: 'Accueil', component: User.Accueil },
+      { path: 'contact',  name: 'Contact', component: User.Contact },
+      { path: 'activites',  name: 'Activites', component: User.Activites }
     ]
   },
   {
