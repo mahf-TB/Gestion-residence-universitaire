@@ -14,9 +14,9 @@
         <form @submit.prevent="login()">
           <div class="flex flex-col text-sm rounded-md">
             <!-- adresse email ou username -->
-            <input type="text"
+            <input type="email"
               class="rounded-[4px] text-[16px] p-3 hover:outline-none focus:outline-none border-1 border-gray-400 hover:border-green-400"
-              name="integration[matricule_name]" required placeholder="Email ou username" v-model="user.nom" />
+              name="integration[email]" required placeholder="Email ou username" v-model="user.email" />
             <p class="text-red-500 text-xs italic mb-3">{{ errorID }}</p>
 
             <!-- input pour votre mot de passe -->
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import Axios from '@/_Service/caller.service';
 export default {
   name: 'HomeView',
   components: {
@@ -63,7 +64,7 @@ export default {
   data() {
     return {
       user: {
-        nom: "",
+        email: "",
         motdepasse: "",
       },
       toggle: false,
@@ -73,16 +74,32 @@ export default {
     };
   },
   methods: {
-    login() {
-      console.log(this.user)
-      localStorage.setItem("user-info", JSON.stringify(this.user))
-      let users = JSON.parse(localStorage.getItem('user-info'))
-      console.log(users)
-      if (this.user.nom == 'admin') {
-        this.$router.push("/admin/home");
-      } else if(this.user.nom == 'user') {
-        this.$router.push("/user/residences");
-      } 
+    async login() {
+      const formData = new FormData()
+      formData.append('email', this.user.email)
+      formData.append('password', this.user.motdepasse)
+      try {
+        const response = await Axios.post('/auth/login', formData)
+          if (response.data.status == 'success') {
+            //access to user-info dans le localeStorage
+            let user = response.data.user
+            localStorage.setItem("user-info", JSON.stringify(user))
+
+            //access to token dans le localeStorage
+            let access_token = response.data.access_token
+            localStorage.setItem("token", JSON.stringify(access_token))
+
+            console.log(user)
+            
+            if (user.type == 'admin') {
+              this.$router.push("/admin/home");
+            } else if (user.type == 'user') {
+              this.$router.push("/user/residences");
+            }
+          }
+      } catch (error) {
+        console.log(error);
+      }
     },
     onToggle() {
       this.toggle = !this.toggle;

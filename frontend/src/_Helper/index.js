@@ -5,7 +5,7 @@ import router from "@/router/index";
 let adminConnect = (to) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user)
-    if (user.nom == 'admin') {
+    if (user.type == 'admin') {
         return true
     }
     router.push('/login')
@@ -16,7 +16,7 @@ let adminConnect = (to) => {
 let userConnect = (to) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user)
-    if (user.nom == 'user') {
+    if (user.type == 'user') {
         return true 
     }
     router.push('/login')
@@ -30,7 +30,7 @@ let userVisite = (to , from) => {
     console.log('route from ',from)
     console.log('route to ',to)
 
-    if ( !token || from.name == 'HomeUser' || user.nom == 'user') {
+    if ( !token || from.name == 'HomeUser' || user.type == 'user') {
         return true
     }
     router.push('/admin/home')
@@ -44,10 +44,11 @@ let Deconnect = (to) => {
     if (!token) {
         return true
     }
-    if (user.nom == 'admin') {
+
+    if (user.type == 'admin') {
         router.push('/admin/home')
-    } else if (user.nom == 'user') {
-        router.push('/')
+    } else if (user.type == 'user') {
+        router.push('/accueil')
     }
 }
 
