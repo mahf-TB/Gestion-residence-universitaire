@@ -22,19 +22,19 @@
           <div class="bg-gradient-to-r from-blue-1 to-blue-2 h-px my-3"></div>
           <div class="cursor-pointer">
             <div  class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
-              <i class="pi pi-fw pi-sign-out mx-3"></i>
+              <i class="pi pi-user mx-3"></i>
               Profile
             </div>
             <div  class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="fa-solid fa-bell  mx-3"></i>
-              Notification
+              Notifications
             </div>
             <div  class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
-              <i class="pi pi-fw pi-sign-out mx-3"></i>
+              <i class="fa-brands fa-facebook-messenger mx-3"></i>
               Messages
             </div>
             <div  class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
-              <i class="pi pi-fw pi-sign-out mx-3"></i>
+              <i class="pi pi-cog mx-3"></i>
              Parametre
             </div>
           </div>

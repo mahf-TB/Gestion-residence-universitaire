@@ -2,8 +2,11 @@
   <div class="">
     <div class="flex items-center justify-center h-screen relative  overflow-hidden">
       <!-- Login Container -->
-      <div class="min-w-[400px] flex-col z-10 border bg-white px-6 py-14 shadow-md rounded-xl">
-        <div class="mb-8 text-center">
+      <div class="min-w-[400px] relative flex-col z-10 border bg-white px-6 py-14 shadow-md rounded-xl">
+        <div class="mb-8 text-center text-blue-1">
+          <div class="absolute top-3 text-xl cursor-pointer transition-all duration-300 hover:bg-blue-0 rounded" @click="this.$router.push('/accueil');">
+            <i class="fa-solid fa-arrow-left-long p-2 "></i>
+          </div>
           <div class="flex justify-center">
             <img class="w-[100px] h-[100px]" :src="require('@/assets/LC.png')" alt="logo pour le residence" />
           </div>

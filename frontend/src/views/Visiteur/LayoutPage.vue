@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white h-full">
    <Header></Header>
-    <div class="pt-14">
+    <div class="container pt-14">
       <router-view class="font-Avenir" />
     </div>
   </div>

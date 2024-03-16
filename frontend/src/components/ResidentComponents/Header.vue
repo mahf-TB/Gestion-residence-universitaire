@@ -33,13 +33,12 @@
                 <div class="flex items-center text-gray-500">
                     <span v-if="isConnect" class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer">
                         <i class="fa-brands fa-facebook  mx-2" style="font-size: 1.9rem"></i>
-
                         <i class="fa-brands fa-instagram  mx-2" style="font-size: 1.9rem"></i>
                         <i class="fa-brands fa-x-twitter  mx-2" style="font-size: 1.9rem"></i>
                     </span>
-
                     <span v-if="!isConnect" class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer">
                         <i class="fa-solid fa-bell mx-3" style="font-size: 1.9rem"></i>
+                        <i class="fa-brands fa-facebook-messenger" style="font-size: 1.9rem"></i>
                     </span>
                 </div>
             </div>
@@ -97,6 +96,7 @@ export default {
     padding: 0;
     width: 100%;
 }
+
 .p-menuitem-content:hover {
     background: #D7E4F5;
     color: aliceblue;

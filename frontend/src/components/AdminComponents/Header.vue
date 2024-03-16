@@ -32,7 +32,11 @@
                     </span>
 
                     <span v-if="!isConnect" class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer">
-                        <i class="fa-solid fa-bell mx-3" style="font-size: 1.9rem"></i></span>
+                        <i class="fa-solid fa-bell mx-3" style="font-size: 1.9rem"></i>
+
+                        <i class="fa-brands fa-facebook-messenger" style="font-size: 1.9rem"></i>
+                    </span>
+
                 </div>
             </div>
         </div>
