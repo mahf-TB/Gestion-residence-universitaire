@@ -11,10 +11,7 @@
                     <span>
                         <i class="fa-solid fa-envelope pr-2"></i>lodgecite.univ@gmail.com</span>
                 </div>
-                <div @click="deconnect()"
-                    class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2"
-                    style="background-image: url(https://i.pinimg.com/564x/de/0f/3d/de0f3d06d2c6dbf29a888cf78e4c0323.jpg)">
-                </div>
+                <side-bar-menu></side-bar-menu>
             </div>
         </div>
         <div class="sticky top-0 bg-blue-2 transition duration-[400ms] shadow text-blue-800  py-1 z-10 w-full">
@@ -35,8 +32,7 @@
                     </span>
 
                     <span v-if="!isConnect" class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer">
-                        <i class="fa-solid fa-bell mx-3" style="font-size: 1.9rem"></i>
-                    </span>
+                        <i class="fa-solid fa-bell mx-3" style="font-size: 1.9rem"></i></span>
                 </div>
             </div>
         </div>
@@ -44,11 +40,11 @@
 </template>
 
 <script>
-
+import SideBarMenu from '../ResidentComponents/SideMenu.vue'
 export default {
     name: 'Header',
     components: {
-
+        SideBarMenu
     },
     computed: {
         isConnect() {
@@ -58,6 +54,9 @@ export default {
             }
             return true
         }
+    },
+    mounted(){
+        
     },
     methods: {
         deconnect() {

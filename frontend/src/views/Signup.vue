@@ -2,9 +2,10 @@
   <div class="">
     <div class="flex items-center justify-center h-screen relative  overflow-hidden">
       <div class="max-w-md text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694" class="min-w-[400px] hidden lg:block"
-          alt="https://undraw.co/illustrations" title="https://undraw.co/illustrations"
-          viewBox="0 0 524.67004 531.39694" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694"
+          class="min-w-[400px] hidden lg:block" alt="https://undraw.co/illustrations"
+          title="https://undraw.co/illustrations" viewBox="0 0 524.67004 531.39694"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
           <polygon
             points="117.67523 88.74385 113.67523 109.74385 133.61763 115.36589 131.1398 92.94604 117.67523 88.74385"
             fill="#a0616a" />
@@ -168,27 +169,26 @@
         </div>
         <form @submit.prevent="signUp()">
           <div class="flex flex-col text-sm rounded-md">
-               <!-- adresse email ou username -->
-               <input type="text"
-              class="rounded-[4px] p-3 text-[16px]  mb-3  border-1 border-gray-400 hover:border-green-400"
+            <!-- adresse email ou username -->
+            <input type="text"
+              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[name]" required placeholder="Entrer votre Nom" v-model="user.nom" />
-
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.username ? 'Username est en 6 caracteur minimum':''}}</p>
             <!-- adresse email ou username -->
             <input type="email"
-              class="rounded-[4px] p-3 text-[16px]  mb-3  border-1 border-gray-400 hover:border-green-400"
+              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[email]" required placeholder="Entrer votre Email" v-model="user.email" />
-
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.email ? 'Email est deja enregistrer':''}}</p>
             <!-- input pour votre mot de passe -->
-            <input
-              class=" rounded-[4px] p-3 text-[16px]  mb-3  border-1 border-gray-400 hover:border-green-400"
-              name="integration[password]" :type="[toggle ? 'text' : 'password']"
-              placeholder="Entrer mot de passe" v-model="user.motdepasse" />
-              <!-- input pour votre mot de passe -->
-            <input
-              class=" rounded-[4px] p-3 text-[16px]  mb-3  border-1 border-gray-400 hover:border-green-400"
+            <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
+              name="integration[password]" :type="[toggle ? 'text' : 'password']" placeholder="Entrer mot de passe"
+              v-model="user.motdepasse" />
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'Mot de passe est en 6 caracteur minimum':''}}</p>
+            <!-- input pour votre mot de passe -->
+            <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[confirmePwd]" :type="[toggle ? 'text' : 'password']"
               placeholder="Confirmer le mot de passe" v-model="user.confirmePwd" />
-
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'Mot de passe de confirmation different':''}}</p>
             <!-- toggle voir ou hash pour votre mot de passe -->
             <div class="flex mb-1 justify-between">
               <div class="mb-3 relative rounded-full w-12 h-6 transition duration-200 ease-linear"
@@ -217,7 +217,7 @@
 </template>
 
 <script>
-
+import Axios from '@/_Service/caller.service';
 export default {
   name: 'Signup',
   components: {
@@ -227,16 +227,48 @@ export default {
     return {
       user: {
         nom: '',
-        email:'',
-        motdepasse:'',
-        confirmePwd:'',
+        email: '',
+        motdepasse: '',
+        confirmePwd: '',
+        type:'user'
       },
       toggle: false,
+      Erreur:[]
     }
   },
   methods: {
-    signUp() {
+    async signUp() {
       console.log(this.user)
+      const formData = new FormData()
+      formData.append('username', this.user.nom)
+      formData.append('email', this.user.email)
+      formData.append('password', this.user.motdepasse)
+      formData.append('password_confirmation', this.user.confirmePwd)
+      formData.append('type', this.user.type)
+      try {
+        const response = await Axios.post('/auth/register', formData)
+        console.log(response)
+        if (response.data.status == 'success') {
+          //ajouter a user-info dans le localeStorage
+          let user = response.data.user
+          localStorage.setItem("user-info", JSON.stringify(user))
+
+          //ajouter a token dans le localeStorage
+          let access_token = response.data.access_token
+          localStorage.setItem("token", JSON.stringify(access_token))
+
+          
+
+          if (user.type == 'admin') {
+            this.$router.push("/admin/home");
+          } else if (user.type == 'user') {
+            this.$router.push("/user/residences");
+          }
+        }
+      } catch (error) {
+        console.log(error.response.data.errors);
+        this.Erreur = error.response.data.errors
+      }
     },
     onToggle() {
       this.toggle = !this.toggle;
