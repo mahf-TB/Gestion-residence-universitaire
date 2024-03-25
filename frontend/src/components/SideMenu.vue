@@ -1,7 +1,7 @@
 <template>
-  <div v-if="!isConnect" @click="open()"
-    class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2"
-    style="background-image: url(https://i.pinimg.com/564x/de/0f/3d/de0f3d06d2c6dbf29a888cf78e4c0323.jpg)">
+  <div v-if="!isConnect" @click="visible=true"
+    class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2">
+    <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12  object-cover rounded-full" alt="photo de profile">
 
     <!-- // SideBar Menu pour l'utilisateur -->
     <Sidebar v-model:visible="visible" :baseZIndex="1000" position="right"
@@ -10,32 +10,31 @@
       <div class="flex flex-col  justify-between h-full">
         <div>
           <div class="flex items-center justify-start my-3">
-            <div v-if="!isConnect"
-              class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-10 w-10   ml-2"
-              style="background-image: url(https://i.pinimg.com/564x/de/0f/3d/de0f3d06d2c6dbf29a888cf78e4c0323.jpg)">
+            <div v-if="!isConnect" class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12  ml-2">
+              <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12 object-cover rounded-full" alt="photo de profile">
             </div>
-            <div class="-0 ">
+            <div class="pt-2">
               <h1 class="text-[16px] ml-3">{{ User.username }}</h1>
               <h1 class="text-[14px] ml-3 text-gray-500  font-Avenir">{{ User.email }}</h1>
             </div>
           </div>
           <div class="bg-gradient-to-r from-blue-1 to-blue-2 h-px my-3"></div>
           <div class="cursor-pointer">
-            <div  class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
+            <div class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-user mx-3"></i>
               Profile
             </div>
-            <div  class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
+            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="fa-solid fa-bell  mx-3"></i>
               Notifications
             </div>
-            <div  class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
+            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="fa-brands fa-facebook-messenger mx-3"></i>
               Messages
             </div>
-            <div  class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
+            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-cog mx-3"></i>
-             Parametre
+              Parametre
             </div>
           </div>
         </div>
@@ -75,7 +74,6 @@ export default {
   computed: {
     isConnect() {
       let user = JSON.parse(localStorage.getItem('user-info'))
-      console.log(user)
       if (user) {
         this.User = user
         return false
@@ -84,15 +82,20 @@ export default {
     }
   },
   methods: {
-    open() {
-      this.visible = true
+    async deconnect() {
+      try {
+        const log = await Axios.get('/logout')
+        console.log(log)
+        if (log.data.status) {
+        localStorage.removeItem('user-info');
+        localStorage.removeItem('token');
+        this.$router.push("/login");
+      }
+      } catch (error) {
+        console.error(error)
+      }
+     
     },
-    deconnect() {
-      localStorage.removeItem('user-info');
-      this.$router.push("/login");
-    },
-
-
   },
 }
 </script>

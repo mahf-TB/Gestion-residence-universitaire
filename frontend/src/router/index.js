@@ -16,7 +16,9 @@ const routes = [
     component: Admin.LayoutAdmin,
     beforeEnter: auth.adminConnect,
     children:[
-      { path: 'home',  name: 'HomePage', component: Admin.Home }
+      { path: 'home',  name: 'HomePage', component: Admin.Home },
+      { path: 'etudiant',  name: 'Etudiant', component: Admin.Etudiant },
+      { path: 'logement',  name: 'Logement', component: Admin.Logement },
     ]
   },
   {
@@ -37,7 +39,8 @@ const routes = [
     children:[
       { path: 'accueil',  name: 'Accueil', component: User.Accueil },
       { path: 'contact',  name: 'Contact', component: User.Contact },
-      { path: 'activites',  name: 'Activites', component: User.Activites }
+      { path: 'activites',  name: 'Activites', component: User.Activites },
+      { path: 'reservation',  name: 'Reservation', component: User.Reservation },
     ]
   },
   {

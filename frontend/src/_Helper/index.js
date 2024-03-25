@@ -4,10 +4,11 @@ import router from "@/router/index";
 // Admin Connecting...
 let adminConnect = (to) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user)
-    if (user.type == 'admin') {
+    // console.log('admin gruad',user);
+    if (user && user.type == 'admin') {
         return true
     }
+    console.log('admin gruad',user);
     router.push('/login')
 }
 
@@ -15,7 +16,6 @@ let adminConnect = (to) => {
 // User Connecting...
 let userConnect = (to) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user)
     if (user.type == 'user') {
         return true 
     }
@@ -26,9 +26,6 @@ let userConnect = (to) => {
 let userVisite = (to , from) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     let token = localStorage.getItem('user-info')
-
-    console.log('route from ',from)
-    console.log('route to ',to)
 
     if ( !token || from.name == 'HomeUser' || user.type == 'user') {
         return true
@@ -44,7 +41,6 @@ let Deconnect = (to) => {
     if (!token) {
         return true
     }
-
     if (user.type == 'admin') {
         router.push('/admin/home')
     } else if (user.type == 'user') {
