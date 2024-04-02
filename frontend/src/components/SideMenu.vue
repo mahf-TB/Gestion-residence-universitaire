@@ -14,17 +14,17 @@
               <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12 object-cover rounded-full" alt="photo de profile">
             </div>
             <div class="pt-2">
-              <h1 class="text-[16px] ml-3">{{ User.username }}</h1>
-              <h1 class="text-[14px] ml-3 text-gray-500  font-Avenir">{{ User.email }}</h1>
+              <h1 class="text-[14px] ml-3">{{ User.username }}</h1>
+              <h1 class="text-[12px] ml-3 text-gray-500  font-Avenir">{{ User.email }}</h1>
             </div>
           </div>
           <div class="bg-gradient-to-r from-blue-1 to-blue-2 h-px my-3"></div>
-          <div class="cursor-pointer">
+          <div class="cursor-pointer text-[14px]">
             <div class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-user mx-3"></i>
               Profile
             </div>
-            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
+            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2" @click="this.$router.push('/user/home')">
               <i class="fa-solid fa-bell  mx-3"></i>
               Notifications
             </div>
@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        <div class="">
+        <div class="text-[14px]">
           <div @click="deconnect()" class="mt-auto cursor-pointer py-2 rounded transition-all hover:bg-blue-2">
             <i class="pi pi-fw pi-sign-out mx-3"></i>
             Se déconnecter
@@ -84,13 +84,9 @@ export default {
   methods: {
     async deconnect() {
       try {
-        const log = await Axios.get('/logout')
-        console.log(log)
-        if (log.data.status) {
         localStorage.removeItem('user-info');
         localStorage.removeItem('token');
         this.$router.push("/login");
-      }
       } catch (error) {
         console.error(error)
       }

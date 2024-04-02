@@ -1,9 +1,9 @@
 <template>
-    <div class="">
-        <div class="px-4 py-1">
-            <h1 class="text-xxl text-[#2b6b88]">Réservation de logement</h1>
+    <div class="container my-3">
+        <div class=" py-2">
+            <h1 class="text-xxl text-center mb-4 text-[#2b6b88]">Réservation de logement</h1>
             <div class="flex items-start justify-between surface-section text-800 mb-5">
-                <div class="px-2 text-left my-2 md:text-left flex w-[700px] items-center ">
+                <div class=" text-left my-2 md:text-left flex w-[700px] items-center ">
                     <section class="animate-fade-right animate-ease-in-out w-full">
                         <form-reservation></form-reservation>
                     </section>
@@ -19,7 +19,7 @@
 </template> 
 
 <script>
-import FormReservation from '@/components/FormReservation.vue';
+import FormReservation from '@/components/VisiteurComponents/FormReservation.vue';
 export default {
     name: 'Reservation',
     components: {
@@ -29,6 +29,9 @@ export default {
         return {
 
         }
+    },
+    methods:{
+       
     }
 }
 </script>

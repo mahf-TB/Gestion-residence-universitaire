@@ -27,10 +27,14 @@ let userVisite = (to , from) => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     let token = localStorage.getItem('user-info')
 
-    if ( !token || from.name == 'HomeUser' || user.type == 'user') {
+    if ( !token ) {
         return true
     }
-    router.push('/admin/home')
+    if (user.type == 'admin') {
+        router.push('/admin/home')
+    } else if (user.type == 'user') {
+        router.push('/user/home')
+    }
 }
 
 // #####################################
@@ -38,9 +42,11 @@ let userVisite = (to , from) => {
 let Deconnect = (to) => {
     let token = localStorage.getItem('user-info')
     let user = JSON.parse(localStorage.getItem('user-info'))
+    
     if (!token) {
         return true
     }
+
     if (user.type == 'admin') {
         router.push('/admin/home')
     } else if (user.type == 'user') {

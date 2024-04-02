@@ -1,7 +1,8 @@
-import Residence from './Residence.vue'
-import LayoutUser from './LayoutUser.vue'
+import LayoutUser from './LayoutUser.vue';
+import HomePage from './HomePage.vue';
+import Service from './Service.vue';
+import Evenement from './Evenement.vue';
 
-//exporter ato no alefa any route/index.js
 export{
-    Residence,LayoutUser
+    LayoutUser, HomePage, Service, Evenement
 }

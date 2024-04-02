@@ -16,9 +16,11 @@ const routes = [
     component: Admin.LayoutAdmin,
     beforeEnter: auth.adminConnect,
     children:[
-      { path: 'home',  name: 'HomePage', component: Admin.Home },
+      { path: 'dashboard',  name: 'Dashboard', component: Admin.Home },
       { path: 'etudiant',  name: 'Etudiant', component: Admin.Etudiant },
       { path: 'logement',  name: 'Logement', component: Admin.Logement },
+      { path: 'listeReservation',  name: 'Liste Reservation', component: Admin.Reservation },
+      { path: 'listeMaintenace',  name: 'Liste Maintenace', component: Admin.Maintenace },
     ]
   },
   {
@@ -27,7 +29,9 @@ const routes = [
     beforeEnter: auth.userConnect,
     component: Etudiant.LayoutUser,
     children:[
-      { path: 'residences',  name: 'Residence', component: Etudiant.Residence }
+      { path: 'home',  name: 'HomePage', component: Etudiant.HomePage },
+      { path: 'evenement',  name: 'Evenement', component: Etudiant.Evenement },
+      { path: 'service',  name: 'Service', component: Etudiant.Service },
     ]
   },
   {
@@ -38,9 +42,11 @@ const routes = [
     component: User.LayoutPage,
     children:[
       { path: 'accueil',  name: 'Accueil', component: User.Accueil },
-      { path: 'contact',  name: 'Contact', component: User.Contact },
+      { path: 'fondation',  name: 'Fondation', component: User.Fondation },
+      { path: 'residences',  name: 'Residence', component: User.Residence },
       { path: 'activites',  name: 'Activites', component: User.Activites },
-      { path: 'reservation',  name: 'Reservation', component: User.Reservation },
+      { path: 'contact',  name: 'Contact', component: User.Contact },
+      { path: 'reservation/:id',  name: 'Reservation', component: User.Reservation },
     ]
   },
   {

@@ -97,11 +97,11 @@
                                 </td>
                                 <td class="px-6 py-3 border-b  text-sm font-medium text-center whitespace-nowrap">
                                     <div class="flex items-center justify-between text-[1rem]">
-                                        <div class="text-center p-2 hover:shadow-lg text-xs cursor-pointer text-yellow-600 bg-yellow-100 rounded-full"
+                                        <div class="text-center py-2 px-3 hover:shadow-lg text-xs cursor-pointer text-yellow-600 rounded-full"
                                             @click="deleteOne(row.id)">
                                             <i class="fa-solid fa-pen-to-square text-[14px]"></i>
                                         </div>
-                                        <div class="text-center hover:shadow-lg p-2 text-xs cursor-pointer text-red-500 bg-red-100 rounded-full"
+                                        <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500  rounded-full"
                                             @click="deleteOne(row.id)">
                                             <i class="fa-solid fa-trash-can text-[14px]"></i>
                                         </div>
@@ -111,7 +111,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="p-4 text-lg text-center">
+                <div class="py-1 text-lg text-center">
                     <Paginator :rows="itemsPerPage" :totalRecords="length"
                         template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                         currentPageReportTemplate="Affichage {first} de {last} à {totalRecords}"
@@ -126,7 +126,7 @@
 
 import Axios from '@/_Service/caller.service';
 import Paginator from 'primevue/paginator';
-import AjouterEtudiant from '@/components/AdminComponents/AjouterEtudiant.vue';
+import AjouterEtudiant from '@/components/AdminComponents/Reservation/AjouterEtudiant.vue';
 export default {
     name: 'Etudiant',
     components: { Paginator, AjouterEtudiant },

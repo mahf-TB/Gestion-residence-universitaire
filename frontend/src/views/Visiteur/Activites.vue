@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-2">
+    <div class="container my-5">
       <!-- lien pour un template de site pour visiteur -->
       <!-- https://nicepage.com/fr/templates/preview/gestion-de-la-propriete-4460252?device=desktop -->
       <h1 class="text-xxl text-[#2b6b88]">Nos Activités Pedagogique</h1>

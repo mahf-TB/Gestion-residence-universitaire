@@ -32,6 +32,9 @@
             <thead>
               <tr class="text-sm leading-normal bg-blue-1 text-blue-0">
                 <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                  id
+                </th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   Batiments
                 </th>
                 <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
@@ -58,11 +61,11 @@
             <tbody class="divide-y divide-gray-200">
               <tr class="transition-all hover:bg-gray-100 hover:shadow-lg" v-for="(data, index) in paginatedData"
                 v-bind:key="index">
+                <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.id }}</td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.batiment.nom_batiment }}</td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.num_logement }}</td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.type_logement }}</td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.prix }}</td>
-
                 <td class="py-2 px-4 border-b border-grey-light text-left">{{ new
               Date(data.created_at).toLocaleDateString() }}</td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">
@@ -73,18 +76,18 @@
                   </span>
                 </td>
                 <td class="py-2 px-4 border-b border-grey-light text-center">
-                  <div class="flex items-center justify-around">
-                    <div class="flex items-center justify-between text-[1rem]">
-                      <div class="text-center hover:shadow-lg p-2 text-xs cursor-pointer text-yellow-600 bg-yellow-100 rounded-full"
+                  
+                    <div class="flex items-center justify-around text-[1rem]">
+                      <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-yellow-600  rounded-full"
                         @click="deleteOne(row.id)">
                         <i class="fa-solid fa-pen-to-square text-[14px]"></i>
                       </div>
-                      <div class="text-center hover:shadow-lg p-2 text-xs cursor-pointer text-red-500 bg-red-100 rounded-full"
+                      <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500 rounded-full"
                         @click="deleteOne(row.id)">
                         <i class="fa-solid fa-trash-can text-[14px]"></i>
                       </div>
                     </div>
-                  </div>
+                  
                 </td>
               </tr>
             </tbody>

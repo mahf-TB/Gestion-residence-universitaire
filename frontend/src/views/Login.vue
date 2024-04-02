@@ -94,9 +94,9 @@ export default {
             console.log(user)
             
             if (user.type == 'admin') {
-              this.$router.push("/admin/home");
+              this.$router.push("/admin/dashboard");
             } else if (user.type == 'user') {
-              this.$router.push("/user/residences");
+              this.$router.push("/user/home");
             }
           }
       } catch (error) {
