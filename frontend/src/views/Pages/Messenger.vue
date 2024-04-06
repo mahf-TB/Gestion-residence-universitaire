@@ -8,9 +8,9 @@
           <div class="h-14  border-b px-2 rounded-t-xl  flex items-center justify-between space-x-4">
             <div class="px-2 py-3 border-b-4 border-blue-500">Discusions</div>
 
-            <div class="flex items-center justify-end">
-              <div class="px-2 py-4 ">Amis</div>
-              <div class="px-2 py-4 ">Groupe</div>
+            <div class="flex items-center justify-end text-blue-2">
+              <div class="px-2 py-4 "><i class="fa-solid  fa-users"></i></div>
+              <div class="px-2 py-4 "><i class="fa-regular fa-pen-to-square"></i></div>
             </div>
           </div>
           <div class="h-full overflow-scroll">
