@@ -8,6 +8,7 @@ import Page404 from '../views/Page404.vue'
 import * as Admin from '@/views/Admin/_NavAdmin'
 import * as Etudiant from '@/views/Residents/_NavUser'
 import * as User from '@/views/Visiteur/_NavVisite'
+import * as Page from '@/views/Pages/_pageNav'
 
 const routes = [
   {
@@ -16,7 +17,12 @@ const routes = [
     component: Admin.LayoutAdmin,
     beforeEnter: auth.adminConnect,
     children:[
-      { path: 'home',  name: 'HomePage', component: Admin.Home }
+      { path: 'dashboard',  name: 'Dashboard', component: Admin.Home },
+      { path: 'etudiant',  name: 'Etudiant', component: Admin.Etudiant },
+      { path: 'logement',  name: 'Logement', component: Admin.Logement },
+      { path: 'listeReservation',  name: 'Liste Reservation', component: Admin.Reservation },
+      { path: 'listeMaintenace',  name: 'Liste Maintenace', component: Admin.Maintenace },
+      { path: 'messenger',  name: 'Admin Messenger', component: Page.Messenger },
     ]
   },
   {
@@ -25,7 +31,11 @@ const routes = [
     beforeEnter: auth.userConnect,
     component: Etudiant.LayoutUser,
     children:[
-      { path: 'residences',  name: 'Residence', component: Etudiant.Residence }
+      { path: 'home',  name: 'HomePage', component: Etudiant.HomePage },
+      { path: 'evenement',  name: 'Evenement', component: Etudiant.Evenement },
+      { path: 'service',  name: 'Service', component: Etudiant.Service },
+      { path: 'maintenance',  name: 'Maintenance', component: Etudiant.Maintenance },
+      { path: 'messenger',  name: 'Messenger User', component: Page.Messenger },
     ]
   },
   {
@@ -36,8 +46,11 @@ const routes = [
     component: User.LayoutPage,
     children:[
       { path: 'accueil',  name: 'Accueil', component: User.Accueil },
+      { path: 'fondation',  name: 'Fondation', component: User.Fondation },
+      { path: 'residences',  name: 'Residence', component: User.Residence },
+      { path: 'activites',  name: 'Activites', component: User.Activites },
       { path: 'contact',  name: 'Contact', component: User.Contact },
-      { path: 'activites',  name: 'Activites', component: User.Activites }
+      { path: 'reservation/:id',  name: 'Reservation', component: User.Reservation },
     ]
   },
   {

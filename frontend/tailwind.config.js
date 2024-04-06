@@ -3,7 +3,7 @@ module.exports = {
   content: [
     "./public/index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
-    // "./node_modules/primevue/**/*.{vue,js,ts,jsx,tsx}"
+    "./node_modules/primevue/**/*.{vue,js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
@@ -19,6 +19,9 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss"),
+    require("tailwindcss-animated"),
+  ],
 }
 

@@ -10,8 +10,38 @@ button a {
     text-decoration-line: none;
 }
 
+
 .sticky-content {
     position: sticky;
     top: 0;
     z-index: 10;
+}
+
+.p-menuitem-link {
+    text-decoration-line: none;
+    padding: 10px;
+    margin: 4px 0 4px 0;
+}
+
+.p-menu-list {
+    margin: 4px;
+    padding: 0;
+    font-size: 14px;
+    width: 100%;
+}
+
+.p-menuitem-content:hover {
+    background: #D7E4F5;
+    color: aliceblue;
+}
+
+.p-sidebar-header {
+    position: absolute;
+    right: 0;
+}
+.p-paginator>button {
+    background: #1D48A7;
+    color: #FFF;
+    margin: 4px;
+    border-radius: 5px;
 }
