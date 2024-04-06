@@ -1,6 +1,6 @@
 <template>
     <div class="md:flex items-center justify-between  bg-blue-4 py-2 px-20">
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-center cursor-pointer" @click="this.$router.push('/accueil')">
                 <img class="w-[100px] h-[100px]" :src="require('@/assets/LC.png')" alt="logo pour le residence" />
                 <h1 class="text-blue-0 text-[28px]">Lodge Cité <br /> Universitaire</h1>
             </div>

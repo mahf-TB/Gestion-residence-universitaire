@@ -25,8 +25,10 @@
               Profile
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2" @click="this.$router.push('/user/home')">
-              <i class="fa-solid fa-bell  mx-3"></i>
+              
+                <i class="fa-solid fa-bell  mx-3"></i>
               Notifications
+            
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="fa-brands fa-facebook-messenger mx-3"></i>

@@ -31,7 +31,7 @@ let userVisite = (to , from) => {
         return true
     }
     if (user.type == 'admin') {
-        router.push('/admin/home')
+        router.push('/admin/dashboard')
     } else if (user.type == 'user') {
         router.push('/user/home')
     }
@@ -48,7 +48,7 @@ let Deconnect = (to) => {
     }
 
     if (user.type == 'admin') {
-        router.push('/admin/home')
+        router.push('/admin/dashboard')
     } else if (user.type == 'user') {
         router.push('/accueil')
     }

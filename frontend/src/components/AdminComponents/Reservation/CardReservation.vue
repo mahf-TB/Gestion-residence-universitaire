@@ -7,7 +7,8 @@
               </h1>
               <div class="text-3xl flex items-center justify-between mt-3 text-blue-3">
                 <span>{{ count.attente }}</span>
-                <span class="text-sm ml-3 cursor-pointer flex items-center hover:text-blue-1">Cliquez ici pour afficher
+                <span class="text-sm ml-3 cursor-pointer flex items-center hover:text-blue-1" @click="functStatus('enattend')">
+                  Cliquez ici pour afficher
                   <i class="fa-solid fa-angle-right ml-1"></i> </span>
               </div>
             </div>
@@ -17,7 +18,8 @@
               </h1>
               <div class="text-3xl flex items-center justify-between mt-3 text-blue-3">
                 <span>{{ count.refuse }}</span>
-                <span class="text-sm ml-3 cursor-pointer flex items-center hover:text-blue-1">Cliquez ici pour afficher
+                <span class="text-sm ml-3 cursor-pointer flex items-center hover:text-blue-1" @click="functStatus('refuser')">
+                  Cliquez ici pour afficher
                   <i class="fa-solid fa-angle-right ml-1"></i> </span>
               </div>
             </div>
@@ -27,7 +29,8 @@
               </h1>
               <div class="text-3xl flex items-center justify-between mt-3 text-blue-3">
                 <span>{{ count.accepte }}</span>
-                <span class="text-sm ml-3 cursor-pointer flex items-center hover:text-blue-1">Cliquez ici pour afficher
+                <span class="text-sm ml-3 cursor-pointer flex items-center hover:text-blue-1" @click="functStatus('accepter')">
+                  Cliquez ici pour afficher
                   <i class="fa-solid fa-angle-right ml-1"></i> </span>
               </div>
             </div>
@@ -40,6 +43,9 @@
 import Axios from '@/_Service/caller.service';
 export default {
     name :'CardReservation',
+    props:{
+      functStatus:Function
+    },
     data(){
         return {
             count: {

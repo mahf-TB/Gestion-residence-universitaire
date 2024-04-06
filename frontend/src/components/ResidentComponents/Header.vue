@@ -26,14 +26,15 @@
                                 style="font-size: 1.4rem"></i>
                             <i class="fa-solid fa-utensils" style="font-size: 1.4rem"></i>
                         </router-link>
-                        <router-link to="/user/servicef" :class="{ 'text-blue-4': $route.path === '/user/servicef' }"
+                        <router-link to="/user/maintenance" :class="{ 'text-blue-4': $route.path === '/user/maintenance' }"
                             class="text-blue-0 px-5"><i class="fa-solid fa-briefcase"
                                 style="font-size: 1.4rem"></i></router-link>
                     </nav>
                 </div>
                 <div class="flex items-center justify-center text-gray-500">
                     <span class="material-icons-outlined text-blue-0 relative cursor-pointer flex">
-                        <button class="bg-blue-0 text-blue-1 p-2 mx-3 rounded-full flex items-center"><i
+                        <button  @click="this.$router.push('/user/messenger')"
+                        class="bg-blue-0 text-blue-1 p-2 mx-3 rounded-full flex items-center"><i
                                 class="fa-brands fa-facebook-messenger" style="font-size: 1.4rem"></i>
                         </button>
                         <button class="bg-blue-0 text-blue-1 py-2 px-[10px] mx-3 rounded-full flex items-center"

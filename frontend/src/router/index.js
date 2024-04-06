@@ -8,6 +8,7 @@ import Page404 from '../views/Page404.vue'
 import * as Admin from '@/views/Admin/_NavAdmin'
 import * as Etudiant from '@/views/Residents/_NavUser'
 import * as User from '@/views/Visiteur/_NavVisite'
+import * as Page from '@/views/Pages/_pageNav'
 
 const routes = [
   {
@@ -21,6 +22,7 @@ const routes = [
       { path: 'logement',  name: 'Logement', component: Admin.Logement },
       { path: 'listeReservation',  name: 'Liste Reservation', component: Admin.Reservation },
       { path: 'listeMaintenace',  name: 'Liste Maintenace', component: Admin.Maintenace },
+      { path: 'messenger',  name: 'Admin Messenger', component: Page.Messenger },
     ]
   },
   {
@@ -32,6 +34,8 @@ const routes = [
       { path: 'home',  name: 'HomePage', component: Etudiant.HomePage },
       { path: 'evenement',  name: 'Evenement', component: Etudiant.Evenement },
       { path: 'service',  name: 'Service', component: Etudiant.Service },
+      { path: 'maintenance',  name: 'Maintenance', component: Etudiant.Maintenance },
+      { path: 'messenger',  name: 'Messenger User', component: Page.Messenger },
     ]
   },
   {

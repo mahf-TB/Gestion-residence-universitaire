@@ -2,7 +2,7 @@
   <div class="mt-24">
     <div class=" bg-white p-4 divide-y border-gray-400 rounded-md shadow ">
       <div class="relative rounded-md">
-        <card-reservation></card-reservation>
+        <card-reservation :functStatus='getterReservation'></card-reservation>
         <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px mt-5 mb-4"></div>
         <div class="flex justify-between max-md:flex-col">
           <!-- Recherche input en top -->
@@ -82,7 +82,11 @@
               </tr>
             </tbody>
           </table>
+          <div class="p-2 text-center bg-blue-0 w-full" v-if="paginatedData == ''">
+            Aucune données trouver
+          </div>
         </div>
+
         <div class="p-2 text-lg text-center">
           <Paginator :rows="itemsPerPage" :totalRecords="length"
             template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
@@ -105,7 +109,7 @@ export default {
   name: 'Reservation',
   components: {
     Paginator, Menu,
-    CardReservation, 
+    CardReservation,
     DetailleValidation
   },
   data() {
@@ -132,13 +136,13 @@ export default {
     },
   },
   mounted() {
-    this.getterLogement();
+    this.getterReservation();
 
   },
   methods: {
-    async getterLogement() {
+    async getterReservation(data) {
       try {
-        var response = await Axios.get('/reservation')
+        var response = await Axios.get(`/reservation?status=${data}`)
         this.dataArray = response.data;
       } catch (error) {
         console.error(error);
