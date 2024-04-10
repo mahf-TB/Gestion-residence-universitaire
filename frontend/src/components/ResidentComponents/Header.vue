@@ -4,12 +4,12 @@
         <div class="sticky top-0 bg-blue-2 transition duration-[400ms] shadow text-blue-800  py-1 z-10 w-full">
             <div class="flex items-center justify-between py-2 px-4">
                 <div>
-                    <div class="relative max-w-lg w-full mb-1">
+                    <div class="relative max-w-lg w-full mb-1 ">
                         <div class="absolute top-1 left-2 inline-flex items-center p-2">
                             <i class="fas fa-search text-gray-400 "> </i>
                         </div>
                         <input v-model="query"
-                            class="w-full h-10 pl-10 pr-4 py-1 text-base placeholder-gray-500 border rounded-full focus:shadow-outline"
+                            class="w-full h-10 pl-10 pr-4 py-1 text-base bg-blue-0 placeholder-gray-500 border rounded-full focus:shadow-outline"
                             type="search" placeholder="Recherche..." />
                     </div>
                 </div>
@@ -72,14 +72,6 @@ export default {
     mounted() {
     },
     computed: {
-        isConnect() {
-            let user = JSON.parse(localStorage.getItem('user-info'))
-            console.log(user)
-            if (user) {
-                return false
-            }
-            return true
-        }
     },
     methods: {
 

@@ -10,15 +10,18 @@
             </template>
             <div>
                 <div class="flex items-center text-lg px-2 py-3">
+                    <div class="mr-5"> 
+                        <img :src="data.image" alt="" class="">
+                    </div>
                     <div class="flex flex-col text-sm rounded-md ">
                         <div class="flex mb-3 text-lg items-center">
                            <span class="mr-3">Date du demande : {{ new Date(data.date).toLocaleDateString() }}   à </span>
                            <span class="text-sm text-gray-500"> {{ new Date(data.date).toLocaleTimeString() }}</span>
                         </div>
-                        <div class="flex mb-3 text-lg items-center">
+                        <div class="flex mb-1 text-lg items-center">
                             Type du probleme : <span class="ml-3">{{ data.type }}</span>
                         </div>
-                        <div class="flex mb-3 text-lg items-center">
+                        <div class="flex mb-3 text-sm items-center">
                              <span class="ml-3 text-gray-500">{{ data.design }}</span>
                         </div>
                         <div class="flex mb-3 text-lg items-center">
@@ -31,7 +34,7 @@
                    </div>
                 </div>
                 <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px my-3"></div>
-                <div class="flex items-center justify-end" v-if="data.status == 'en attend'">
+                <div class="flex items-center justify-end" v-if="data.status == 'en attente'">
                     <button @click="visible = false"
                         class="text-center hover:shadow-lg mx-2 text-lg cursor-pointer btn btn-danger  rounded-full">
                         Non
@@ -73,13 +76,9 @@ export default {
     },
     methods: {
         async reparationEncours(status,data) {
-            let post = {
-                'id': data.id,
-                'type': data.type,
-            }
-            console.log(response);
+            
             try {
-                var response = await Axios.post(`/updateReparation?status=${status}`, post);
+                var response = await Axios.get(`/reparer?status=${status}&id=${data.id}`);
                 console.log(response);
                 this.visible = false
             } catch (error) {
