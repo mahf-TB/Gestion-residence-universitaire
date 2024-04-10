@@ -95,6 +95,7 @@
                             <input type="email"
                                 class="rounded-[4px] w-full p-2 text-[16px] bg-blue-0 border-none placeholder:text-blue-1  mb-1  border-1 border-gray-400 hover:border-blue-2"
                                 name="integration[prenom]" required placeholder="Entrer votre email" v-model="email" />
+                            <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                         </div>
                         <button
                             class=" p-5 py-2 px-3 flex items-center justify-center cursor-pointer text-blue-0 border-3 border-blue-2 rounded bg-blue-2 hover:bg-blue-1 hover:border-blue-1 transition-all duration-300"
@@ -112,7 +113,6 @@
                     @click="preveIndex()">
                     <i class="fa-solid fa-chevron-left mr-2"></i>Retour
                 </div>
-
                 <form @submit.prevent="enregistrer()" class="px-1">
                     <div class="flex flex-col text-sm rounded-md">
                         <!-- adresse email -->
@@ -166,7 +166,8 @@
                             <div class="grow flex flex-col ml-1 border-b-2 pb-1">
                                 <label for="sexe" class="my-1 text-sm">Civilité<span
                                         class="text-red-500">*</span></label>
-                                <select class=" w-100  mb-1 rounded-[4px] p-[10px] text-[14px] text-blue-1 bg-blue-0 border-none placeholder:text-blue-1"
+                                <select
+                                    class=" w-100  mb-1 rounded-[4px] p-[10px] text-[14px] text-blue-1 bg-blue-0 border-none placeholder:text-blue-1"
                                     v-model="client.sexe" aria-label="Default select example" id="sexe" name="sexe"
                                     required>
                                     <option disabled value="" class="text-sm">Selectionner ici</option>
@@ -194,7 +195,7 @@
                                     v-model="client.telephone" />
                             </div>
                         </div>
-                         <div class="flex">
+                        <div class="flex">
                             <!-- adresse email -->
                             <div class="grow flex flex-col mr-1   border-b-2 pb-1">
                                 <label for="integration[debut]" class="my-1 text-sm">Date debut<span
@@ -233,6 +234,7 @@ import Axios from '@/_Service/caller.service';
 import VueMultiselect from 'vue-multiselect'
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
+import { computed } from 'vue';
 
 export default {
     name: 'FormReservation',
@@ -257,22 +259,26 @@ export default {
             bati: [],
             etage: '',
             email: '',
-            index:0,
-          
+            index: 0,
+            emptyEmail: '',
+
         }
     },
     mounted() {
         this.getOneLogement();
+        this.index = JSON.parse(localStorage.getItem('index'));
     },
     methods: {
         async enregistrer() {
             console.log(this.client);
-            try {
-                const response = await Axios.post('/reservation', this.client)
-                console.log(response);
-                this.client = []
-            } catch (error) {
-                console.error(error)
+            if (condition) {
+                try {
+                    const response = await Axios.post('/reservation', this.client)
+                    console.log(response);
+                    this.client = []
+                } catch (error) {
+                    console.error(error)
+                }
             }
 
         },
@@ -293,12 +299,14 @@ export default {
         },
         passeIndex() {
             if (this.index < 1 || this.email != '') {
-                this.index += 1
+                localStorage.setItem("index", this.index += 1)
+            } else {
+                this.emptyEmail = 'Veillez entre votre E-mail pour vous contactez'
             }
         },
         preveIndex() {
             if (this.index > 0) {
-                this.index -= 1
+                localStorage.setItem("index", this.index -= 1)
             }
         },
     }

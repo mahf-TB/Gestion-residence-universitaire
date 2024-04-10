@@ -169,11 +169,11 @@
           <div>
             <h1 class="text-[24px] italic text-blue-1">Lodge Cité Universitaire</h1>
           </div>
-        </div>
+        </div> 
         <form @submit.prevent="signUp()">
           <div class="flex flex-col text-sm rounded-md">
             <!-- adresse email ou username -->
-            <input type="email" readonly
+            <input type="email" 
               class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 "
               name="integration[email]" required  placeholder="Entrer votre Email" v-model="user.email" />
               <p class="text-red-500 text-xs italic mb-3">{{ Erreur.email ? 'Email est deja enregistrer':''}}</p>
@@ -235,7 +235,7 @@ export default {
     return {
       user: {
         nom: '',
-        email: '',
+        email: 'baba.code@gmail.com',
         motdepasse: '',
         confirmePwd: '',
         type:'user'

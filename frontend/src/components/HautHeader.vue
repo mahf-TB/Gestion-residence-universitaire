@@ -33,7 +33,7 @@ export default{
     }, 
     computed: {
         isConnect() {
-            let user = JSON.parse(localStorage.getItem('user-info'))
+            let user = JSON.parse(localStorage.getItem('token'))
             if (user) {
                 return false
             }

@@ -1,7 +1,8 @@
 <template>
-  <div v-if="!isConnect" @click="visible=true"
+  <div v-if="isConnect" @click="visible = true"
     class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2">
-    <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12  object-cover rounded-full" alt="photo de profile">
+    <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12  object-cover rounded-full"
+      alt="photo de profile">
 
     <!-- // SideBar Menu pour l'utilisateur -->
     <Sidebar v-model:visible="visible" :baseZIndex="1000" position="right"
@@ -10,8 +11,10 @@
       <div class="flex flex-col  justify-between h-full">
         <div>
           <div class="flex items-center justify-start my-3">
-            <div v-if="!isConnect" class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12  ml-2">
-              <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12 object-cover rounded-full" alt="photo de profile">
+            <div v-if="isConnect"
+              class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12  ml-2">
+              <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12 object-cover rounded-full"
+                alt="photo de profile">
             </div>
             <div class="pt-2">
               <h1 class="text-[14px] ml-3">{{ User.username }}</h1>
@@ -24,11 +27,12 @@
               <i class="pi pi-user mx-3"></i>
               Profile
             </div>
-            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2" @click="this.$router.push('/user/home')">
-              
-                <i class="fa-solid fa-bell  mx-3"></i>
+            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/user/home')">
+
+              <i class="fa-solid fa-bell  mx-3"></i>
               Notifications
-            
+
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="fa-brands fa-facebook-messenger mx-3"></i>
@@ -60,6 +64,7 @@
 
 import Axios from '@/_Service/caller.service'
 import Sidebar from 'primevue/sidebar';
+import Swal from 'sweetalert2';
 export default {
   name: 'SideMenu',
   components: {
@@ -69,30 +74,50 @@ export default {
     return {
       visible: false,
       User: '',
+      isConnect: null
     }
   },
   mounted() {
+    this.isConnectUser()
   },
   computed: {
-    isConnect() {
-      let user = JSON.parse(localStorage.getItem('user-info'))
-      if (user) {
-        this.User = user
-        return false
-      }
-      return true
-    }
+
   },
   methods: {
+    async isConnectUser() {
+      let token = JSON.parse(localStorage.getItem('token'))
+      if (token) {
+        const res = await Axios.get('userConnect')
+        
+        this.User = res.data.user
+        this.isConnect = true
+      }else{
+        this.isConnect =false
+      }
+    },
     async deconnect() {
-      try {
-        localStorage.removeItem('user-info');
-        localStorage.removeItem('token');
-        this.$router.push("/login");
+      const result = await Swal.fire({
+        title: 'Se deconnecter du compte?',
+        text: "Cette action est irréversible!",
+        // icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Annuler',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Déconnexion'
+      });
+      if (result.isConfirmed) {
+        try {
+          const res = await Axios.get('logout')
+          if (res.data.status) {
+          localStorage.removeItem('token');
+          this.$router.push("/login");
+          }
       } catch (error) {
         console.error(error)
       }
-     
+      }
+      
     },
   },
 }

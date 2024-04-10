@@ -120,10 +120,7 @@
         length: null,
         first: 0,
         query: '',
-        items1: [
-          { label: 'Accepter', command: () => this.getterLogement() },
-          { label: 'Refuser', command: () => this.getterLogement() },
-        ]
+        
       }
     },
     computed: {
