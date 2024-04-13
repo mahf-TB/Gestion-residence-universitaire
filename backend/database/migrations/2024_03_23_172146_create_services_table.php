@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string('type_service');
             $table->string('nom_service');
             $table->string('description');
             $table->double('tarifs');
-            $table->boolean('disponible');
+            $table->boolean('disponible')->default(false);
             $table->string('image')->nullable();
             $table->unsignedBigInteger('id_user')->nullable();
             $table->foreign('id_user')->references('id')->on('users');

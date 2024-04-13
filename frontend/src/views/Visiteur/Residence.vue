@@ -123,9 +123,8 @@ export default {
     async getAllLogement(){
       try {
         var response = await Axios.get('/logement')
-        console.log(response.data);
         this.dataArray = response.data;
-        console.log(this.dataArray);
+        localStorage.setItem("index", 0)
       } catch (error) {
         console.error(error);
       }
@@ -134,7 +133,6 @@ export default {
       this.first = event.first
     },
     getEtage(data){
-      
       return data.charAt(0)
     }
   }

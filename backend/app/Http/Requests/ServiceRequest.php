@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class MaintenanceRequest extends FormRequest
+class ServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,12 @@ class MaintenanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type_probleme' => ['required', 'string', 'max:255'],
+            'type_service' => ['required', 'string', 'max:255'],
+            'nom_service' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
+            'tarifs' => ['required','numeric'],
+            'disponible' => ['required'],
             'image' => ['nullable'],
-            'status' => ['required', 'string'],
             'id_user' => ['numeric'],
         ];
     }
@@ -35,7 +37,6 @@ class MaintenanceRequest extends FormRequest
     {
         $this->merge([
             'id_user' => Auth::user()->id,
-            'status' => 'en attente',
         ]);
     }
 }

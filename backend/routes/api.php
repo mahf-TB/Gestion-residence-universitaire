@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Logements\BatimentController;
 use App\Http\Controllers\Admin\Logements\LogementController;
 use App\Http\Controllers\Admin\MaintenanceController;
 use App\Http\Controllers\Admin\ReservationController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Resident\ReparationController;
@@ -23,7 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
     return $request->user();
+    
 });
 
 //authentification
@@ -47,19 +50,28 @@ Route::get('/type_logement', [LogementController::class, 'getTypeLogement']);
 Route::get('/logement_type', [LogementController::class, 'getLogement']);
 
 //RESERVATIONS routes
-
 Route::group(['controller' => ReservationController::class], function () {
     Route::post('/reservation', 'addReservationAction');
     Route::get('/reservation',  'getAllReservation');
-    Route::post('/send_email',  'validationDemande');
+    Route::post('/send_email',  'validationDemande'); 
     Route::get('/reservation_status', 'countReserseStatus');
 });
+
 //MAINTENANCE routes
-Route::group(['controller' => MaintenanceController::class], function () {
+Route::group(['controller' =>  MaintenanceController::class], function () {
     Route::get('/maintenance',  'index');
     Route::get('/count_status',  'countMaintenanceStatus');
     Route::get('/reparer',  'updateReparation');
     Route::post('/demande_reparation',  'demandeReparation');
 });
 
-Route::get('/index_reparer', [ReparationController::class, 'index']);
+//Service routes
+Route::group(['controller' => ServiceController::class], function () {
+    Route::post('/ajouter_service',  'ajouterService');
+    Route::get('/index_resto',  'indexResto');
+});
+
+
+Route::group(['controller' => ReparationController::class], function () {
+    Route::get('/index_reparer',  'index');
+});

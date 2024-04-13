@@ -10,10 +10,20 @@
         </div>
         <div class="grid grid-cols grid-cols-2">
             <div class=" w-[100%] mx-3 my-3 flex justify-between rounded-md" v-for="(data, index) in 4" :key="index">
-                <div class="relative overflow-hidden mx-3  w-full">
+                <div class="relative overflow-hidden mx-3 text-center w-full">
                     <img :src="require('@/assets/image/EtudiantCode.jpg')" alt="Image"
                         class="md:ml-auto block w-full h-[500px] object-cover rounded-md  animate-jump-in  animate-ease-in-out">
-                    <div class="absolute bottom-0 bg-blue-0 w-full p-3 rounded-b-md">
+                    <div
+                        class=" absolute -bottom-10 group-hover:top-0 left-0 w-full h-full group-hover:bg-green-900 transition-all ease-in-out duration-500  ">
+                        <div class="w-full h-full   p-5   relative">
+                            <div
+                                class="absolute bottom-0 group-hover:bottom-24 text-white  text-left   transition-all ease-in-out duration-500 ">
+                                <h2 class="text-2xl font-bold  text-white mb-0 pb-1">Standard Color</h2>
+                                <p class="text-lg font-light text-white">Lorem ipsum dolor sit amet, #brands.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="absolute bottom-0 bg-blue-0 w-full p-3 rounded-b-md">
                         <div>
                             <div class="text-3xl flex items-center font-bold text-blue-2 cursor-pointer">
                                 Club Sportifs <span class="text-base font-light ml-3">(BasketBall, Football, VolleyBall, HandBall, ...)</span>
@@ -23,10 +33,10 @@
                                 architecto temporibus. Optio voluptate sed distinctio nesciunt repellendus.
                             </p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            
+
         </div>
     </div>
 </template>

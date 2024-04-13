@@ -9,7 +9,7 @@
                         class="text-blue-0 px-4 h-full  flex items-center transition-all hover:border-b-4 hover:border-blue-0">
                             Dashboard
                         </router-link>|
-                        <Button @mouseover="$refs.menu1.toggle($event)"   :class="{ 'border-b-4 border-blue-0': $route.path === '/admin/etudiant' || $route.path === '/admin/listeReservation' || $route.path === '/admin/logement'}"
+                        <Button @click="$refs.menu1.toggle($event)"   :class="{ 'border-b-4 border-blue-0': $route.path === '/admin/etudiant' || $route.path === '/admin/listeReservation' || $route.path === '/admin/logement'}"
                             class="text-blue-0 uppercase px-4 h-full  flex items-center transition-all hover:border-b-4 hover:border-blue-0">
                             Réservation
                         </Button>| 
@@ -18,10 +18,11 @@
                         class="text-blue-0 px-4  h-full  flex items-center transition-all hover:border-b-4 hover:border-blue-0">
                             Maintenance
                         </router-link>|
-                        <router-link to="" :class="{ 'border-b-4 border-blue-0': $route.path === '/admin/service' }"
-                            class="text-blue-0 px-4  h-full  flex items-center transition-all hover:border-b-4 hover:border-blue-0">
+                        <Button @click="$refs.menu2.toggle($event)" :class="{ 'border-b-4 border-blue-0': $route.path === '/admin/liste-commande' || $route.path === '/admin/restaurent' || $route.path === '/admin/logement' }"
+                            class="text-blue-0 px-4 uppercase h-full  flex items-center transition-all hover:border-b-4 hover:border-blue-0">
                             Service <span class="lowercase mx-1">et</span> Activités
-                        </router-link>
+                        </Button>
+                        <Menu ref="menu2" :popup="true" class="flex"   :model="items1"></Menu>
                     </nav>
                 </div>
                 <div class="flex items-center text-gray-500">
@@ -55,12 +56,17 @@ export default {
                 { label: 'Liste des étudiants', command: () => this.$router.push("/admin/etudiant") },
                 { label: 'Liste des logements', command: () => this.$router.push("/admin/logement") },
             ],
+            items1: [
+                { label: 'Commande des etudiant', command: () => this.$router.push("/admin/liste-commande") },
+                { label: 'Restaurent Interne', command: () => this.$router.push("/admin/restaurent") },
+                { label: 'Autre Service', command: () => this.$router.push("/admin/logement") },
+            ],
            routeClass: 'border-b-4 border-blue-0'
         }
     },
     computed: {
         isConnect() {
-            let user = localStorage.getItem('user-info')
+            let user = localStorage.getItem('token')
             if (user) {
                 return false
             }
