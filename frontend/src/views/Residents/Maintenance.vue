@@ -6,7 +6,7 @@
         <div class="flex w-full">
           <img :src="require('@/assets/image/pdpNone.jpeg')"
             class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full" alt="photo de profile">
-          <demande-maintenance></demande-maintenance>
+          <demande-maintenance :getAllReparations="getAllReparations"></demande-maintenance>
           <div
             class="mx-1 px-3  my-1 flex items-center text-sm text-blue-0 bg-blue-1 hover:bg-slate-50 hover:text-blue-1 rounded transition-all cursor-pointer">
             <span class="mx-1"><i class="fa-regular fa-calendar-days "></i></span>
@@ -33,14 +33,14 @@
           </div>
         </div>
       </div>
-      <div class="my-2" v-if="dataArray== ''">
+      <div class="my-2" v-if="dataArray == ''">
         <div class=" h-full p-2 text-center">
           <span class="font-semibold text-lg text-blue-2">Aucune demande effectué</span>
         </div>
       </div>
     </div>
     <!-- right contenu -->
-    <liste-reparer class="my-3" :dataArray="dataArray"  v-if="dataArray!= ''" ></liste-reparer>
+    <liste-reparer class="my-3" :dataArray="dataArray" v-if="dataArray != ''"></liste-reparer>
   </div>
 </template>
 
@@ -59,7 +59,9 @@ export default {
       dataArray: []
     }
   },
-   mounted() { this.getAllReparations()},
+  mounted() {
+    this.getAllReparations()
+  },
   methods: {
     async getAllReparations() {
       try {

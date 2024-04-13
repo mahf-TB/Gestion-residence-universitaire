@@ -1,7 +1,7 @@
 <template>
     <div class="relative">
         <haut-header-vue></haut-header-vue>
-        <div class="sticky top-0 bg-blue-2 transition duration-[400ms] shadow text-blue-800  py-1 z-10 w-full">
+        <div class=" bg-blue-2 transition duration-[400ms] shadow text-blue-800  py-1 z-10 w-full">
             <div class="flex items-center justify-between py-2 px-4">
                 <div>
                     <div class="relative max-w-lg w-full mb-1 ">

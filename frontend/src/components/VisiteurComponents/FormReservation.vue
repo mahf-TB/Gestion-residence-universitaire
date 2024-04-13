@@ -88,14 +88,30 @@
                         <div class="mb-2 text-3xl">
                             <span class="text-blue-2 font-bold">Comment pouvons-nous vous contacter ?</span>
                         </div>
-                        <div class="mt-3">
-                            <span class="text-base mb-2">Quel est votre e-mail </span>
+                     
+                        
+                        <div class="my-4 ">
+                            <div class="relative z-0">
+                            <input type="email" name="name" v-model="email" required :class="emptyEmail !=''?'border-red-600':'border-blue-3'"
+                                class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                placeholder=" " />
+                            <label :class="emptyEmail !=''?' text-red-600':'text-gray-500 '"
+                                class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                Quel est votre e-mail</label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p> 
                         </div>
-                        <div class="mb-4 border-b-2 pb-2 ">
-                            <input type="email"
+                            <!-- <div class="relative z-0 w-full mb-5">
+                                <input type="email" name="email" placeholder=" " v-model="email" required
+                                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200" />
+                                <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">
+                                   
+                                </label>
+                                <span class="text-sm text-red-600 hidden" id="error">Email address is required</span>
+                            </div> -->
+                            <!-- <input type="email"
                                 class="rounded-[4px] w-full p-2 text-[16px] bg-blue-0 border-none placeholder:text-blue-1  mb-1  border-1 border-gray-400 hover:border-blue-2"
                                 name="integration[prenom]" required placeholder="Entrer votre email" v-model="email" />
-                            <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
+                            -->
                         </div>
                         <button
                             class=" p-5 py-2 px-3 flex items-center justify-center cursor-pointer text-blue-0 border-3 border-blue-2 rounded bg-blue-2 hover:bg-blue-1 hover:border-blue-1 transition-all duration-300"
@@ -123,6 +139,7 @@
                                 class="rounded-[4px]  p-2 text-[14px]  mb-1 bg-blue-0 border-none placeholder:text-blue-1"
                                 name="integration[email]" required placeholder="Confirmation d'E-mail"
                                 v-model="client.email" />
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p> 
                         </div>
                         <div class="flex mb-3">
                             <!-- adresse email ou username -->
@@ -266,12 +283,13 @@ export default {
     },
     mounted() {
         this.getOneLogement();
-        this.index = JSON.parse(localStorage.getItem('index'));
+        var tok = JSON.parse(localStorage.getItem('index'));
+        this.index = tok ? tok : 0;
     },
     methods: {
         async enregistrer() {
             console.log(this.client);
-            if (condition) {
+            if (this.email == this.client.email) {
                 try {
                     const response = await Axios.post('/reservation', this.client)
                     console.log(response);
@@ -279,6 +297,8 @@ export default {
                 } catch (error) {
                     console.error(error)
                 }
+            }else{
+                this.emptyEmail = 'verifiez votre E-mail '
             }
 
         },
@@ -298,8 +318,16 @@ export default {
             }
         },
         passeIndex() {
+            var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
             if (this.index < 1 || this.email != '') {
-                localStorage.setItem("index", this.index += 1)
+                if ( this.index < 1 || this.email.match(validRegex)) {
+                    localStorage.setItem("index", this.index += 1)
+                    this.emptyEmail = ''
+                }else{
+                    this.emptyEmail = 'verifiez votre E-mail '
+                }
+
             } else {
                 this.emptyEmail = 'Veillez entre votre E-mail pour vous contactez'
             }

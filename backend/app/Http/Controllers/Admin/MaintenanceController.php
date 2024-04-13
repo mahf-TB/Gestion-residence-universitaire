@@ -8,13 +8,12 @@ use App\Models\Batiment;
 use App\Models\Etudiant;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class MaintenanceController extends Controller
 {
-    //
     public function index()
     {
+
         $Mainte = Maintenance::with('user')->orderBy('created_at', 'desc')->get();
 
         $dataRes =  $Mainte->map(function ($items) {
@@ -25,9 +24,9 @@ class MaintenanceController extends Controller
                 "type" => $items->type_probleme,
                 "design" => $items->description,
                 "status" => $items->status,
-                "image" => $items->imageUrl(),
+                "image" =>  $items->image != null ? $items->imageUrl() : '',
                 "user" => $items->user->username,
-                "etudiant" => $etudiant->nom . ' ' . $etudiant->prenom,
+                "etudiant" => $etudiant->nom .' '. $etudiant->prenom,
                 "logement" => $etudiant->logement->type_logement . ' N°: ' . $etudiant->logement->num_logement,
                 "batiment" => $batiment->nom_batiment,
                 "date" => $items->created_at,

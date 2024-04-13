@@ -104,6 +104,9 @@ import Axios from '@/_Service/caller.service'
 import Dialog from 'primevue/dialog';
 export default {
     name: 'DemandeMaintenance',
+    props:{
+        getAllReparations:Function
+    },
     components: {
         Dialog
     },
@@ -138,6 +141,7 @@ export default {
                     console.log(res)
                     if (res.data.status) {
                         this.visible = false;
+                        this.getAllReparations()
                     }
                 } catch (error) {
                     console.log(error)

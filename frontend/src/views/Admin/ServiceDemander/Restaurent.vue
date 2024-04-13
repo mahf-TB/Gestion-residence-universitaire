@@ -3,7 +3,7 @@
         <div class="mt-8 p-4 border-b bg-white border-gray-400 divide-y rounded-md shadow">
             <div class="bg-white rounded-md ">
                 <h2 class="text-blue-2 text-xl text-center uppercase font-semibold ">
-                    Liste de tous les Etudiant habite dans le cité
+                    Liste des plats et des goutés dans resto-interne
                 </h2>
                 <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px mb-4"></div>
                 <div class="flex justify-between max-md:flex-col">
@@ -27,27 +27,31 @@
                             <tr>
                                 <th scope="col"
                                     class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
-                                    Matricule
+                                    Id
                                 </th>
                                 <th scope="col"
                                     class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
-                                    Noms
+                                    image
                                 </th>
                                 <th scope="col"
                                     class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
-                                    Ages
+                                    Nom du plat
                                 </th>
                                 <th scope="col"
                                     class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
-                                    Contact
+                                    Description
                                 </th>
                                 <th scope="col"
                                     class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
-                                    Status
+                                    Tarfis
                                 </th>
                                 <th scope="col"
                                     class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
-                                    Ajouter
+                                    disponiblité
+                                </th>
+                                <th scope="col"
+                                    class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                                    Date d'ajouter
                                 </th>
                                 <th scope="col"
                                     class="px-3 py-3 text-xs font-medium tracking-wider text-center text-gray-100 uppercase">
@@ -59,40 +63,39 @@
                             <tr v-for="(row, index) in paginatedData" v-bind:key="index"
                                 class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-3 py-3 border-b whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ row.matricule }}</div>
+                                    <div class="text-sm text-gray-900">{{ row.id }}</div>
                                 </td>
-                                <td class="px-6 py-3 border-b   whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="flex-shrink-0 w-10 h-10">
-                                            <img class="w-10 h-10 rounded-full"
-                                                :src="require('@/assets/image/pdpNone.jpeg')" alt="" />
+                                <td class="px-6 py-3 border-b  whitespace-nowrap">
+                                    <div class="flex items-center  ">
+                                        <div class="flex-shrink-0 w-16 h-16">
+                                            <img class="w-full h-full object-cover"
+                                                :src="row.image" alt="" />
                                         </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">{{ row.nom }}
-                                            </div>
-                                            <div class="text-sm text-gray-500">{{ row.prenom }}</div>
-                                        </div>
+                                       
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
-                                        {{ new Date(row.date_naissance).toLocaleDateString() }}
+                                        {{ row.nom_service}}
                                     </div>
-                                    <div class="text-sm text-gray-500">CIN: {{ row.cin }}</div>
                                 </td>
                                 <td class="px-6 py-3  border-b whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ row.telephone }}</div>
-                                    <div class="text-sm text-gray-500">{{ row.email }}</div>
+                                    <div class="text-sm text-gray-900">{{ row.description }}</div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
                                     <span
                                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                        {{ getDateAjouter(row.created_at) }}
+                                        {{ row.tarifs }}
                                     </span>
                                 </td>
                                 <td class="px-3 py-3  border-b whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
-                                        {{ new Date(row.created_at).toLocaleDateString() }}
+                                        {{ row.dispo ? 'Disponible' : 'Pas disponible' }}
+                                    </div>
+                                </td>
+                                <td class="px-3 py-3  border-b whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        {{ new Date(row.date).toLocaleDateString() }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-3 border-b  text-sm font-medium text-center whitespace-nowrap">
@@ -112,7 +115,7 @@
                     </table>
                 </div>
                 <div class="py-1 text-lg text-center">
-                    <Paginator :rows="itemsPerPage" :totalRecords="length"
+                    <Paginator :rows="itemsPerPage" :totalRecords="length" 
                         template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                         currentPageReportTemplate="Affichage {first} de {last} à {totalRecords}"
                         @page="handlePagination" />
@@ -126,9 +129,9 @@
 
 import Axios from '@/_Service/caller.service';
 import Paginator from 'primevue/paginator';
-import AjouterEtudiant from '@/components/AdminComponents/Reservation/AjouterEtudiant.vue';
+import AjouterEtudiant from '@/components/AdminComponents/Resto-Service/AjouterPlat.vue';
 export default {
-    name: 'Etudiant',
+    name: 'Restaurent',
     components: { Paginator, AjouterEtudiant },
     data() {
         return {
@@ -155,10 +158,9 @@ export default {
     methods: {
         async getterEtudiant() {
             try {
-                var response = await Axios.get('/etudiants')
-                this.arrayData = response.data.data.filter(items => {
-                    return items.id_logement != null;
-                });
+                var response = await Axios.get('/index_resto')
+                this.arrayData = response.data
+                console.log(this.arrayData)
             } catch (error) {
                 console.error(error);
             }

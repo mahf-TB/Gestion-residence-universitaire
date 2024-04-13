@@ -23,7 +23,8 @@
           </div>
           <div class="bg-gradient-to-r from-blue-1 to-blue-2 h-px my-3"></div>
           <div class="cursor-pointer text-[14px]">
-            <div class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
+            <div   @click="this.$router.push('/profile')"
+            class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-user mx-3"></i>
               Profile
             </div>

@@ -3,6 +3,22 @@
       <!-- lien pour un template de site pour visiteur -->
       <!-- https://nicepage.com/fr/templates/preview/gestion-de-la-propriete-4460252?device=desktop -->
       <h1 class="text-xxl text-[#2b6b88]">Nos Activités Pedagogique</h1>
+      <div class="w-[500px]">
+        <a href="#" class=" shadow-2xl relative ">
+                <div class="  h-full relative shadow-2xl  overflow-hidden group ">
+                    <div class=" absolute -bottom-10 group-hover:top-0 left-0 w-full h-full group-hover:bg-slate-900/60 transition-all ease-in-out duration-500  ">
+                        <div class="w-full h-full   p-5   relative">
+                            <div class="absolute bottom-0 group-hover:top-0 text-white  text-left   transition-all ease-in-out duration-500 ">
+                                <h2 class="text-2xl font-bold  text-white mb-0 pb-1">Standard Color</h2>
+                                <p class="text-lg font-light text-white">Lorem ipsum dolor sit amet, #brands.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="https://source.unsplash.com/random/400x400" class="w-full z-0  h-full    object-fill example ">
+                </div>
+            </a>
+      </div>
+    
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, excepturi, iste laboriosam maiores nesciunt velit in reprehenderit architecto quae sunt, quo veritatis ratione sequi maxime? Nesciunt dolore officiis consequuntur vero!
       Porro quidem voluptatem cupiditate distinctio vel provident a doloribus consequatur deleniti eligendi dolores praesentium asperiores dolorum, voluptate obcaecati ipsam ipsa cum. Ad doloribus eius suscipit nostrum sed aut repellendus omnis!
       Repellendus odio sunt eum ducimus perspiciatis illo. Veritatis modi quas commodi consequatur velit minus omnis aliquid perferendis quasi. Debitis ad laudantium minus, itaque nobis explicabo temporibus atque ab ipsum blanditiis?
