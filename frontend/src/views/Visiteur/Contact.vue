@@ -4,6 +4,7 @@
       <!-- https://nicepage.com/fr/templates/preview/gestion-de-la-propriete-4460252?device=desktop -->
       
       <h1 class="text-xxl text-[#2b6b88]">Nos Contact</h1>
+      <h2>Appeler-nous</h2>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, excepturi, iste laboriosam maiores nesciunt velit in reprehenderit architecto quae sunt, quo veritatis ratione sequi maxime? Nesciunt dolore officiis consequuntur vero!
       Porro quidem voluptatem cupiditate distinctio vel provident a doloribus consequatur deleniti eligendi dolores praesentium asperiores dolorum, voluptate obcaecati ipsam ipsa cum. Ad doloribus eius suscipit nostrum sed aut repellendus omnis!
       Repellendus odio sunt eum ducimus perspiciatis illo. Veritatis modi quas commodi consequatur velit minus omnis aliquid perferendis quasi. Debitis ad laudantium minus, itaque nobis explicabo temporibus atque ab ipsum blanditiis?
