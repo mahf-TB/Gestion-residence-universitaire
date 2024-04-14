@@ -2,7 +2,7 @@
   <div class="container flex items-center flex-col justify-center">
 
     <div class=" w-[60%]">
-      <div class="bg-blue-0 px-3 pt-3 rounded-xl shadow-sm">
+      <div class="bg-fotsy px-3 pt-3 rounded-xl shadow-sm">
         <div class="flex w-full">
           <img :src="require('@/assets/image/pdpNone.jpeg')"
             class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full" alt="photo de profile">
@@ -66,7 +66,8 @@ export default {
     async getAllReparations() {
       try {
         var response = await Axios.get('/index_reparer')
-        this.dataArray = response.data;;
+        console.log(response.data)
+        this.dataArray = response.data;
       } catch (error) {
         console.error(error);
       }

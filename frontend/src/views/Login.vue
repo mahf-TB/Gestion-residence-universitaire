@@ -50,7 +50,7 @@
           </button>
         </form>
         <div class="mt-2 flex justify-center text-center text-[#2f7c89]">
-          <!-- <RouterLink to="/signup">Créer un nouveaux compte?</RouterLink> -->
+          <RouterLink to="/signup">Créer un nouveaux compte?</RouterLink>
         </div>
       </div>
     </div>

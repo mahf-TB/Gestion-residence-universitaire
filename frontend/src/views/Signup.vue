@@ -169,32 +169,32 @@
           <div>
             <h1 class="text-[24px] italic text-blue-1">Lodge Cité Universitaire</h1>
           </div>
-        </div> 
+        </div>
         <form @submit.prevent="signUp()">
           <div class="flex flex-col text-sm rounded-md">
             <!-- adresse email ou username -->
-            <input type="email" 
-              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 "
-              name="integration[email]" required  placeholder="Entrer votre Email" v-model="user.email" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.email ? 'Email est deja enregistrer':''}}</p>
+            <input type="email" class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 "
+              name="integration[email]" required placeholder="Entrer votre Email" v-model="user.email" />
+            <p class="text-red-500 text-xs italic mb-3">{{ Erreur.email ? 'Email est deja enregistrer' : '' }}</p>
 
             <!-- adresse email ou username -->
-            <input type="text" 
+            <input type="text"
               class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[name]" required placeholder="Entrer nom d'utilisateur" v-model="user.nom" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.username ? 'Username est en 6 caracteur minimum':''}}</p>
-            
+            <p class="text-red-500 text-xs italic mb-3">{{ Erreur.username ? 'Username est en 6 caracteur minimum' : '' }}
+            </p>
+
             <!-- input pour votre mot de passe -->
             <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
-              name="integration[password]" :type="[toggle ? 'text' : 'password']" placeholder="Entrer votre mot de passe"
-              v-model="user.motdepasse" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe':''}}</p>
+              name="integration[password]" :type="[toggle ? 'text' : 'password']"
+              placeholder="Entrer votre mot de passe" v-model="user.motdepasse" />
+            <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe' : '' }}</p>
 
             <!-- input pour votre mot de passe -->
             <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[confirmePwd]" :type="[toggle ? 'text' : 'password']"
               placeholder="Confirmer votre mot de passe" v-model="user.confirmePwd" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe si il est même':''}}</p>
+            <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe si il est même':''}}</p>
 
             <!-- toggle voir ou hash pour votre mot de passe -->
             <div class="flex mb-1 justify-between">
@@ -238,26 +238,15 @@ export default {
         email: 'baba.code@gmail.com',
         motdepasse: '',
         confirmePwd: '',
-        type:'user'
+        type: 'user'
       },
       toggle: false,
-      Erreur:[]
+      Erreur: []
     }
   },
-  created() {
-    const queryString = window.location.search;
-    const getParameterByName = (name, url) => {
-      if (!url) url = window.location.href;
-      name = name.replace(/[[\]]/g, "\\$&");
-      const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-          results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, " "));
-    };
-
-    const email = getParameterByName('email');
-    this.user.email = email;
+  mounted() {
+    const cas = this.$route.query.cas;
+    console.log('Valeur du paramètre "cas" :', cas);
   },
   methods: {
     async signUp() {
@@ -274,7 +263,6 @@ export default {
         if (response.data.status == 'success') {
           //ajouter a user-info dans le localeStorage
           let user = response.data.user
-          localStorage.setItem("user-info", JSON.stringify(user))
 
           //ajouter a token dans le localeStorage
           let access_token = response.data.access_token
@@ -283,7 +271,7 @@ export default {
           if (user.type == 'admin') {
             this.$router.push("/admin/home");
           } else if (user.type == 'user') {
-            this.$router.push("/user/residences");
+            this.$router.push("/user/home");
           }
         }
       } catch (error) {

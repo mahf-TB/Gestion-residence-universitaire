@@ -3,7 +3,7 @@
     <!-- left contenu -->
     <!-- contenu center -->
     <div class=" w-[60%]">
-      <div class="bg-blue-0 px-3 py-3 rounded-xl shadow-sm">
+      <div class="bg-fotsy px-3 py-3 rounded-xl shadow-sm">
         <div class="flex w-full">
           <img :src="require('@/assets/image/pdpNone.jpeg')"
             class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full" alt="photo de profile">
@@ -23,8 +23,8 @@
       </div>
       <!-- liste des publication  -->
 
-    <div class="container py-3" v-for="(data, i) in datas" :key="i">
-      <ListePublicationVue class="bg-blue-4 hover:bg-gray-900"></ListePublicationVue>
+      <div class="container py-3" v-for="(data, i) in dataArray" :key="i" >
+        <ListePublicationVue class="bg-fotsy hover:bg-gray-50" :data="data"></ListePublicationVue>
       </div>
     </div>
     <div class="my-2">
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import Axios from '@/_Service/caller.service';
 import Publication from '@/components/ResidentComponents/Publication.vue'
 import ListePublicationVue from '@/components/ResidentComponents/ListePublication.vue'
 export default {
@@ -45,9 +46,24 @@ export default {
   components: {
     Publication, ListePublicationVue
 
-  }, data(){
+  }, 
+  data() {
     return {
-      datas:4
+      dataArray:[]
+    }
+  },
+  mounted() {
+    this.getAllReparations()
+  },
+  methods: {
+    async getAllReparations() {
+      try {
+        var response = await Axios.get('/index_pub')
+        console.log(response.data)
+        this.dataArray = response.data;
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 }

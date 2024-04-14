@@ -46,7 +46,7 @@
       </div>
       <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px "></div>
       <div>
-        <div class="bg-blue-0 h-full p-3 text-center" v-if="dataArray == '' ">
+        <div class="bg-blue-0 h-full p-3 text-center" v-if="dataArray == ''">
           <span class="font-semibold text-lg text-blue-2">Aucun résultat à trouver ...</span>
         </div>
         <div class="grid  grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mt-3">
@@ -60,13 +60,16 @@
                 </div>
                 <div class="px-4 py-1 flex flex-col items-start justify-between text-blue-1">
                   <div class=" text-left pt-2">
-                    <span class="font-light text-sm uppercase text-gray-500">{{data.batiment.nom_batiment}} </span>
+                    <span class="font-light text-sm uppercase text-gray-500">{{ data.batiment.nom_batiment }} </span>
                   </div>
                   <div class=" text-left py-2">
-                    <a :href="`/reservation/${data.id}`" class="text-2xl flex items-center hover:text-blue-2 cursor-pointer" style="text-decoration: none;">
-                      {{ 'Chambre N°: '+ data.num_logement }}
+                    <a :href="`/reservation/${data.id}`"
+                      class="text-2xl flex items-center hover:text-blue-2 cursor-pointer"
+                      style="text-decoration: none;">
+                      {{ 'Chambre N°: ' + data.num_logement }}
                     </a>
-                    <span class="text-sm text-gray-500">{{getEtage(data.num_logement) }} {{ getEtage(data.num_logement)=='1' ?'ère Etage' : 'ème Etage' }}</span>
+                    <span class="text-sm text-gray-500">{{ getEtage(data.num_logement) }} {{
+                      getEtage(data.num_logement) == '1' ?'ère Etage' : 'ème Etage' }}</span>
                   </div>
                   <div class=" text-left py-2">
                     <span class="font-light text-sm uppercase text-gray-500">À prix de </span><br />
@@ -74,14 +77,13 @@
                   </div>
                 </div>
               </div>
-
             </div>
 
           </div>
         </div>
-        
+
         <div class="p-4 text-lg text-center mb-5 ">
-          <Paginator :rows="itemsPerPage" :totalRecords="dataArray.length" @page="handlePagination" ></Paginator>
+          <Paginator :rows="itemsPerPage" :totalRecords="dataArray.length" @page="handlePagination"></Paginator>
         </div>
       </div>
     </div>
@@ -106,7 +108,7 @@ export default {
       query: ''
     }
   },
-  computed:{
+  computed: {
     paginatedData() {
       if (!this.dataArray) {
         return [];
@@ -118,9 +120,13 @@ export default {
   },
   mounted() {
     this.getAllLogement();
+
+    const cas = this.$route.query.cas;
+    console.log('Valeur du paramètre "cas" :', cas);
+
   },
-  methods:{
-    async getAllLogement(){
+  methods: {
+    async getAllLogement() {
       try {
         var response = await Axios.get('/logement')
         this.dataArray = response.data;
@@ -132,7 +138,7 @@ export default {
     handlePagination(event) {
       this.first = event.first
     },
-    getEtage(data){
+    getEtage(data) {
       return data.charAt(0)
     }
   }
@@ -142,6 +148,6 @@ export default {
 
 <style>
 a {
-    text-decoration-line: none;
+  text-decoration-line: none;
 }
 </style>

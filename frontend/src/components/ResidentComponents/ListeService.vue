@@ -2,16 +2,16 @@
     <article class="transition duration-350 rounded ease-in-out">
         <div class="flex flex-shrink-0 p-4 pb-0">
                 <div class="flex items-center">
-                    <div>
+                    <div> 
                         <img class="inline-block h-10 w-10 rounded-full"
                             src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="">
                     </div>
                     <div class="flex flex-col ml-4 list-none">
                         <span class="text-base  font-medium text-blue-1">
-                            {{ data.auteur.username }}
+                            {{data.user}}
                         </span>
                         <span
-                            class="text-sm font-ligth text-gray-600 transition ease-in-out duration-150">
+                            class="text-sm font-ligth text-gray-600  transition ease-in-out duration-150">
                             <span>{{ new Date(data.date).toLocaleDateString() + ' à ' + new
                                             Date(data.date).toLocaleTimeString() }}</span>
                         </span>
@@ -20,11 +20,12 @@
         </div>
         <div class="p-4">
             <p class="text-base width-auto font-medium text-blue-4 flex-shrink">
-                {{ data.contenu }}
+                {{ data.description }}
+               
                 <br/>
-                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
+                <a href="#" class="text-blue-400"> #Prix: {{ data.tarifs }} Ar</a>
             </p>
-            <div class="md:flex-shrink  py-1">
+            <div class="md:flex-shrink px-6 py-3">
                 <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-74">
                     <img class="object-cover w-full h-full"
                     :src="data.image"
@@ -32,11 +33,10 @@
                 </div>
             </div>
 
-
-        <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
+            <hr class="border-gray-300">
             <div class="flex items-center justify-between">
                 <div
-                    class="flex items-center cursor-pointer justify-center rounded text-blue-4 text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
+                    class="flex items-center cursor-pointer justify-center rounded text-blue-4  text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                         <g>
                             <path
@@ -47,7 +47,7 @@
                     J'aime
                 </div>
                 <div
-                    class="flex items-center cursor-pointer justify-center rounded text-blue-4 text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
+                    class="flex items-center cursor-pointer justify-center rounded text-blue-4 text-xs py-2 w-1/3   hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                         <g>
                             <path
@@ -57,16 +57,10 @@
                     </svg>
                     Commenter
                 </div>
-                <div
-                    class="flex items-center cursor-pointer justify-center rounded text-blue-4 text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
-                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                        <g>
-                            <path
-                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
-                            </path>
-                        </g>
-                    </svg>
-                    {{data.service =!''?'Commander':'Parteger'}}
+                <div :class="data.dispo==1?'text-blue-4 hover:bg-blue-2 hover:text-white':'text-blue-4 '"
+                    class="flex items-center cursor-pointer justify-center rounded  text-xs py-2 w-1/3  transition duration-350 ease-in-out">
+                    <i class="fa fa-cart-plus mr-4"></i>
+                     {{ data.dispo==1?'Commander':'Pas Disponible' }}
                 </div>
 
             </div>
@@ -77,12 +71,14 @@
 
 <script>
 export default {
-    name: 'ListePublication',
+    name: 'ListeService',
     props: { data: Array },
     components: {
 
     },
-  
+    methods: {
+
+    }
 
 }
 </script>

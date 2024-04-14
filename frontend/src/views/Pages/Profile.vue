@@ -95,8 +95,8 @@
                 <h1>helloe</h1>
             </div>
             <div class="w-2/3">
-                <div class="bg-blue-2 px-3 py-3 rounded-xl shadow-sm">
-                    <div class="flex w-full my-3">
+                <div class="bg-fotsy px-3 py-3 rounded-xl shadow-sm">
+                    <div class="flex w-full">
                         <img :src="require('@/assets/image/pdpNone.jpeg')"
                             class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full" alt="photo de profile">
                         <publication></publication>
@@ -104,7 +104,7 @@
                     <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
                     <div class="flex items-center">
                         <div
-                            class="mx-1 px-4 py-2 flex text-blue-0 hover:bg-blue-0 hover:text-blue-3 rounded transition-all cursor-pointer">
+                            class="mx-1 px-4 py-2 flex text-blue-2 hover:bg-blue-1 hover:text-blue-0 rounded transition-all cursor-pointer">
                             <img :src="require('@/assets/icon-image.png')" class="mx-2 object-cover" height="24"
                                 width="24" alt="photo de profile">
                             <span class="uppercaose mx-1 font-bold text-base">
@@ -113,8 +113,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="container py-1 my-3">
-                    <ListePublicationVue class="bg-blue-900 hover:bg-blue-800"></ListePublicationVue>
+                <div class="container py-1 my-3" v-for="(data, i) in dataArray" :key="i">
+                    <ListePublicationVue class="bg-fotsy hover:bg-gray-50" :data="data">
+                    </ListePublicationVue>
                 </div>
             </div>
         </div>
@@ -122,22 +123,36 @@
 
     </div>
 
-
-
-
-
-
-
 </template>
 
 <script>
 
+import Axios from '@/_Service/caller.service';
 import Publication from '@/components/ResidentComponents/Publication.vue'
 import ListePublicationVue from '@/components/ResidentComponents/ListePublication.vue'
 export default {
     name: 'Profile',
     components: {
         Publication, ListePublicationVue
+    },
+    data() {
+        return {
+            dataArray: []
+        }
+    },
+    mounted() {
+        this.getAllReparations()
+    },
+    methods: {
+        async getAllReparations() {
+            try {
+                var response = await Axios.get('/index_pub')
+                console.log(response.data)
+                this.dataArray = response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
     }
 }
 </script>
