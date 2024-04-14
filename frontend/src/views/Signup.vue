@@ -235,7 +235,7 @@ export default {
     return {
       user: {
         nom: '',
-        email: 'baba.code@gmail.com',
+        email: '',
         motdepasse: '',
         confirmePwd: '',
         type:'user'
