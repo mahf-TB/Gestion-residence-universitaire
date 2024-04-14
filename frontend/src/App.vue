@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import 'aos/dist/aos.css'
 export default{
   name:'App',
 }

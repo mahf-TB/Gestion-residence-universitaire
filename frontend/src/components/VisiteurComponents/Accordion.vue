@@ -42,9 +42,9 @@
                     </div>
                     <p class="line-height-3 m-0">
                     <ul>
-                        <li class="my-2"><i class="fa-solid fa-tag mr-2"></i>Choisissez l'appartement que vous demandez</li>
-                        <li class="my-2"><i class="fa-solid fa-tag mr-2"></i>Préréservez en quelques clics.</li>
-                        <li class="my-2"><i class="fa-solid fa-tag mr-2"></i>Remplissez bien tout vos information </li>
+                        <li class="my-2"><i class="fa-solid fa-tag mr-2"></i>Choisissez l'appartement que vous souhaitez</li>
+                        <li class="my-2"><i class="fa-solid fa-tag mr-2"></i>Pré-réservez en quelques clics.</li>
+                        <li class="my-2"><i class="fa-solid fa-tag mr-2"></i>Remplissez le formulaire avec vos imformations </li>
                         <li class="my-2"><i class="fa-solid fa-tag mr-2"></i>Vous recevez votre réponse par e-mail.</li>
                         <li class="my-2"><i class="fa-solid fa-tag mr-2"></i>Signez votre bail et emménagez : vous êtes chez vous !
                         </li>
@@ -80,12 +80,11 @@
                     </template>
                     <div>
                         <h2 class="text-sm my-2 text-blue-2  font-semibold">
-                            Depuis 2009, le Groupe Réside Études est le spécialiste français des résidences urbaines
-                            avec services.
+                            Depuis 2021, le Groupe BABA est devenu le spécialiste des résidences urbaines avec services dans toutes l'île
                         </h2>
                     </div>
                     <p class="line-height-3 m-0">
-                        En plus de 1 et demi-décennies, nous avons appris à bien connaître nos locataires. Nous savons
+                        En seulement 3 ans, nous avons appris à bien connaître nos locataires. Nous savons
                         comment les
                         accompagner pour qu’ils puissent totalement se consacrer à leurs études.
                         Le reste ? C’est notre métier de le prendre en charge.
