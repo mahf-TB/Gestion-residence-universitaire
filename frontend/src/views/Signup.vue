@@ -158,37 +158,44 @@
         </svg>
       </div>
       <!-- formulaire pour register -->
-      <div class="min-w-[500px] flex-col z-10 border bg-white px-6 py-10 shadow-md rounded-xl">
-        <div class="mb-8 text-center">
+      <div class="min-w-[500px] relative flex-col z-10 border bg-white px-6 py-10 shadow-md rounded-xl">
+        <div class="mb-8 text-center text-blue-1">
+          <!-- <div class="absolute top-3 text-xl cursor-pointer  transition-all duration-300 hover:bg-blue-0 rounded" @click="this.$router.push('/login');">
+            <i class="fa-solid fa-arrow-left-long p-2"></i>
+          </div> -->
           <div class="flex justify-center">
             <img class="w-[100px] h-[100px]" :src="require('@/assets/LC.png')" alt="logo pour le residence" />
           </div>
           <div>
             <h1 class="text-[24px] italic text-blue-1">Lodge Cité Universitaire</h1>
           </div>
-        </div>
+        </div> 
         <form @submit.prevent="signUp()">
           <div class="flex flex-col text-sm rounded-md">
             <!-- adresse email ou username -->
-            <input type="text"
-              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
-              name="integration[name]" required placeholder="Entrer votre Nom" v-model="user.nom" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.username ? 'Username est en 6 caracteur minimum':''}}</p>
-            <!-- adresse email ou username -->
-            <input type="email"
-              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
-              name="integration[email]" required placeholder="Entrer votre Email" v-model="user.email" />
+            <input type="email" 
+              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 "
+              name="integration[email]" required  placeholder="Entrer votre Email" v-model="user.email" />
               <p class="text-red-500 text-xs italic mb-3">{{ Erreur.email ? 'Email est deja enregistrer':''}}</p>
+
+            <!-- adresse email ou username -->
+            <input type="text" 
+              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
+              name="integration[name]" required placeholder="Entrer nom d'utilisateur" v-model="user.nom" />
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.username ? 'Username est en 6 caracteur minimum':''}}</p>
+            
             <!-- input pour votre mot de passe -->
             <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
-              name="integration[password]" :type="[toggle ? 'text' : 'password']" placeholder="Entrer mot de passe"
+              name="integration[password]" :type="[toggle ? 'text' : 'password']" placeholder="Entrer votre mot de passe"
               v-model="user.motdepasse" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'Mot de passe est en 6 caracteur minimum':''}}</p>
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe':''}}</p>
+
             <!-- input pour votre mot de passe -->
             <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[confirmePwd]" :type="[toggle ? 'text' : 'password']"
-              placeholder="Confirmer le mot de passe" v-model="user.confirmePwd" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'Mot de passe de confirmation different':''}}</p>
+              placeholder="Confirmer votre mot de passe" v-model="user.confirmePwd" />
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe si il est même':''}}</p>
+
             <!-- toggle voir ou hash pour votre mot de passe -->
             <div class="flex mb-1 justify-between">
               <div class="mb-3 relative rounded-full w-12 h-6 transition duration-200 ease-linear"
@@ -218,6 +225,7 @@
 
 <script>
 import Axios from '@/_Service/caller.service';
+
 export default {
   name: 'Signup',
   components: {
@@ -236,6 +244,7 @@ export default {
       Erreur:[]
     }
   },
+
   methods: {
     async signUp() {
       console.log(this.user)
@@ -251,18 +260,15 @@ export default {
         if (response.data.status == 'success') {
           //ajouter a user-info dans le localeStorage
           let user = response.data.user
-          localStorage.setItem("user-info", JSON.stringify(user))
 
           //ajouter a token dans le localeStorage
           let access_token = response.data.access_token
           localStorage.setItem("token", JSON.stringify(access_token))
 
-          
-
           if (user.type == 'admin') {
             this.$router.push("/admin/home");
           } else if (user.type == 'user') {
-            this.$router.push("/user/residences");
+            this.$router.push("/user/home");
           }
         }
       } catch (error) {

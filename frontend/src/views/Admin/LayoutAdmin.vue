@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white h-full">
+  <div class="bg-blue-0 h-screen ">
     <Header></Header>
-    <div class="container pt-14">
+    <div class="container pt-3">
       <router-view class="font-Avenir" />
     </div>
   </div>

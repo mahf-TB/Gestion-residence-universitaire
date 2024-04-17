@@ -2,8 +2,12 @@
   <div class="">
     <div class="flex items-center justify-center h-screen relative  overflow-hidden">
       <!-- Login Container -->
-      <div class="min-w-[400px] flex-col z-10 border bg-white px-6 py-14 shadow-md rounded-xl">
-        <div class="mb-8 text-center">
+      <div class="min-w-[400px] relative flex-col z-10 border bg-white px-6 py-14 shadow-md rounded-xl">
+        <div class="mb-8 text-center text-blue-1">
+          <div class="absolute top-3 text-xl cursor-pointer transition-all duration-300 hover:bg-blue-0 rounded"
+            @click="this.$router.push('/accueil');">
+            <i class="fa-solid fa-arrow-left-long p-2 "></i>
+          </div>
           <div class="flex justify-center">
             <img class="w-[100px] h-[100px]" :src="require('@/assets/LC.png')" alt="logo pour le residence" />
           </div>
@@ -14,11 +18,10 @@
         <form @submit.prevent="login()">
           <div class="flex flex-col text-sm rounded-md">
             <!-- adresse email ou username -->
-            <input type="email"
+            <input type="text"
               class="rounded-[4px] text-[16px] p-3 hover:outline-none focus:outline-none border-1 border-gray-400 hover:border-green-400"
               name="integration[email]" required placeholder="Email ou username" v-model="user.email" />
             <p class="text-red-500 text-xs italic mb-3">{{ errorID }}</p>
-
             <!-- input pour votre mot de passe -->
             <input
               class=" rounded-[4px] p-3 text-[16px] hover:outline-none focus:outline-none border-1 border-gray-400 hover:border-green-400"
@@ -59,7 +62,6 @@ import Axios from '@/_Service/caller.service';
 export default {
   name: 'HomeView',
   components: {
-
   },
   data() {
     return {
@@ -80,25 +82,29 @@ export default {
       formData.append('password', this.user.motdepasse)
       try {
         const response = await Axios.post('/auth/login', formData)
-          if (response.data.status == 'success') {
-            //access to user-info dans le localeStorage
-            let user = response.data.user
-            localStorage.setItem("user-info", JSON.stringify(user))
-
-            //access to token dans le localeStorage
-            let access_token = response.data.access_token
-            localStorage.setItem("token", JSON.stringify(access_token))
-
-            console.log(user)
-            
-            if (user.type == 'admin') {
-              this.$router.push("/admin/home");
-            } else if (user.type == 'user') {
-              this.$router.push("/user/residences");
-            }
+        if (response.data.status == 'success') {
+          let user = response.data.user
+          console.log(user.type)
+          
+          //add to user and token dans le localeStorage
+          localStorage.setItem("token", JSON.stringify(response.data.access_token))
+          
+          if (user.type == 'admin') {
+            this.$router.push("/admin/dashboard");
+          } else if (user.type == 'user') {
+            this.$router.push("/user/home");
           }
+        } else {
+          this.errorID = 'Incorrect !, verifiez votre address email'
+          this.errorPWD = 'Incorrect !, verifiez votre mot de passe '
+        }
       } catch (error) {
-        console.log(error);
+        var erreur = error.response.data.errors
+        if (erreur.email != '') {
+          this.errorID = 'Incorrect !, verifiez votre address email'
+          this.errorPWD = 'Incorrect !, verifiez votre mot de passe '
+        }
+
       }
     },
     onToggle() {

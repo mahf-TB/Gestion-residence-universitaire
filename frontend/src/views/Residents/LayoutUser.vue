@@ -1,17 +1,17 @@
 <template>
   <div class="bg-white h-full">
-    <Header></Header>
-    <div class="container pt-14">
-    <router-view class="font-Avenir"/>
-  </div>
+    <Header class="sticky top-0 z-10"></Header>
+    <div class="container mt-3 overflow-auto">
+      <router-view class="font-Avenir" />
+    </div>
   </div>
 </template>
 
 <script>
 import Header from '../../components/ResidentComponents/Header.vue'
-export default{
-  name:'LayoutUser',
-  components:{
+export default {
+  name: 'LayoutUser',
+  components: {
     Header
   },
 }
