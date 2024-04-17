@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="bg-blue-4">
     <div class="flex items-center justify-center h-screen relative  overflow-hidden">
       <!-- Login Container -->
       <div class="min-w-[400px] relative flex-col z-10 border bg-white px-6 py-14 shadow-md rounded-xl">
@@ -28,18 +28,17 @@
               name="integration[password]" :class="errorClass" :type="[toggle ? 'text' : 'password']"
               placeholder="Mot de passe " v-model="user.motdepasse" />
             <p class="text-red-500 text-xs italic mb-3">{{ errorPWD }}</p>
-
             <!-- toggle voir ou hash pour votre mot de passe -->
             <div class="flex mb-1 justify-between">
-              <div class="mb-3 relative rounded-full w-12 h-6 transition duration-200 ease-linear"
+              <label for="toggle" class="mb-3 relative rounded-full w-12 h-6 transition duration-200 ease-linear"
                 :class="[toggle ? 'bg-green-400' : 'bg-gray-200']">
-                <label for="toggle"
+                <div 
                   class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer"
                   :class="[toggle ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-200']">
                   <input type="checkbox" id="toggle" name="toggle"
                     class="appearance-none w-full h-full active:outline-none focus:outline-none" @click="onToggle()" />
-                </label>
-              </div>
+                </div>
+              </label>
               <RouterLink to="/reset">Mot de passe oublié?</RouterLink>
             </div>
           </div>

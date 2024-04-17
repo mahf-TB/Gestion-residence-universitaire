@@ -43,12 +43,16 @@ Route::middleware(['auth'])->group(function () {
 
 //ETUDIANT routes api CRUD 
 Route::apiResource('/etudiants', EtudiantController::class);
+
+Route::get('/etudiant_logement', [EtudiantController::class, 'getEtudiantLogment']);
+
 //BATIMENT et batiments routes api CRUD 
 Route::apiResource('/batiments', BatimentController::class);
 //LOGEMENT et batiments routes api CRUD 
 Route::apiResource('/logement', LogementController::class);
 Route::get('/type_logement', [LogementController::class, 'getTypeLogement']);
 Route::get('/logement_type', [LogementController::class, 'getLogement']);
+Route::post('/uploadImage', [LogementController::class, 'uploadImage']);
 
 //RESERVATIONS routes
 Route::group(['controller' => ReservationController::class], function () {

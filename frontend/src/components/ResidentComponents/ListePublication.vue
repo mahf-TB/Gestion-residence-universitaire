@@ -18,15 +18,15 @@
                     </div>
                 </div>
         </div>
-        <div class="p-4">
+        <div class="p-4 pb-2">
             <p class="text-base width-auto font-medium text-blue-4 flex-shrink">
                 {{ data.contenu }}
                 <br/>
                 <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
             </p>
             <div class="md:flex-shrink  py-1">
-                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-74">
-                    <img class="object-cover w-full h-full"
+                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-[500px]">
+                    <img class="object-cover object-center w-full h-full"
                     :src="data.image"
                     alt="">
                 </div>

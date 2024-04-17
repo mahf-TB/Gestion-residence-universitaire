@@ -104,6 +104,7 @@ export default {
       try {
         var response = await Axios.get('/logement')
         this.dataArray = response.data;
+        console.log(this.dataArray);
         localStorage.setItem("index", 0)
       } catch (error) {
         console.error(error);

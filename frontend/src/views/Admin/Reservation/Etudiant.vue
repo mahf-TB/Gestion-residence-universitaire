@@ -97,12 +97,9 @@
                                 </td>
                                 <td class="px-6 py-3 border-b  text-sm font-medium text-center whitespace-nowrap">
                                     <div class="flex items-center justify-between text-[1rem]">
-                                        <div class="text-center py-2 px-3 hover:shadow-lg text-xs cursor-pointer text-yellow-600 rounded-full"
-                                            @click="deleteOne(row.id)">
-                                            <i class="fa-solid fa-pen-to-square text-[14px]"></i>
-                                        </div>
+                                        <modifier-etudiant :id="row.id"  :getterEtudiant="getterEtudiant"></modifier-etudiant>
                                         <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500  rounded-full"
-                                            @click="deleteOne(row.id)">
+                                            @click="deleteOne(row.id, row.nom)">
                                             <i class="fa-solid fa-trash-can text-[14px]"></i>
                                         </div>
                                     </div>
@@ -125,11 +122,13 @@
 <script>
 
 import Axios from '@/_Service/caller.service';
+import Swal from 'sweetalert2'
 import Paginator from 'primevue/paginator';
 import AjouterEtudiant from '@/components/AdminComponents/Reservation/AjouterEtudiant.vue';
+import ModifierEtudiant from '@/components/AdminComponents/Reservation/ModifierEtudiant.vue';
 export default {
     name: 'Etudiant',
-    components: { Paginator, AjouterEtudiant },
+    components: { Paginator, AjouterEtudiant ,  ModifierEtudiant},
     data() {
         return {
             arrayData: [],
@@ -163,6 +162,37 @@ export default {
                 console.error(error);
             }
         },
+
+        deleteOne(id, nom) {
+            console.log(id);
+            Swal.fire({
+                title: "Es-tu sûre de supprimer "+nom+"?",
+                text: "Vous ne serez pas en mesure d'inverser cela.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Annuler!",
+                confirmButtonText: "Oui, supprimez-le!",
+
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = Axios.delete(`/etudiants/${id}`)
+                        this.getterEtudiant();
+                        console.log(response)
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
+
+                }
+            });
+        },
         getDateAjouter(date) {
             let dateAjout = new Date(date);
             let dateNow = new Date()
@@ -183,6 +213,7 @@ export default {
             this.first = event.first
             console.log(event);
         },
+
     }
 }
 </script>
