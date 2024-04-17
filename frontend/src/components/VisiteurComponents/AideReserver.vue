@@ -39,11 +39,8 @@
 </template>
 
 <script>
-
 export default {
     name: 'AideReserver',
-    components: {
 
-    }
 } 
 </script>

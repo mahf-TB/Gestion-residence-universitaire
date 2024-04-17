@@ -14,8 +14,7 @@
             Depuis de nombreuses années, nos résidents nous font confiance pour
             leur logement. Nos exigences d’implantation, de qualité de
             construction et de bonne gestion, sont la garantie d’un vrai confort
-            de vie. Lieux de convivialité où chacun retrouve ses repères, les
-            estudines offrent un cadre idéal pour réussir ses études et son
+            de vie. Lieux de convivialité où chacun retrouve ses repères, nous offrons un cadre idéal pour réussir ses études et son
             entrée dans la vie active.
           </p>
         </div>
@@ -39,7 +38,7 @@
           </h1>
           <p>
             Situées dans les grandes villes universitaires et dans des quartiers
-            bien desservis, les résidences étudiantes les estudines proposent
+            bien desservis, Lodge Cité Universitaire propose
             des logements fonctionnels et des services adaptés à vos besoins.
             Nos appartements (du Studio au Quatre pièces) sont meublés et
             équipés. Ils comprennent une pièce principale, un espace cuisine,
