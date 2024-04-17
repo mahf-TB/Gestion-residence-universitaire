@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="relative flex flex-col justify-center text-center bg-blue-0 py-[100px]">
-      <h1 class="text-xxl text-blue-1">Toutes nos logement disponible dans la résidences</h1>
+      <h1 class="text-xxl text-blue-1">Toutes nos logement disponible dans la résidence</h1>
       <div class="flex  justify-center  ">
         <div class="relative max-w-xl mb-5 w-full">
           <div class="text-3xl flex items-center justify-between mt-3 text-blue-4 shadow rounded-md">
@@ -37,11 +37,11 @@
         <div class="text-xl flex items-end text-blue-2  cursor-pointer">
           <span class="text-3xl mr-2">{{ dataArray.length }}</span>
           <span class="pb-[2px]">
-            logement trouvées
+            logement trouvés
           </span>
         </div>
         <div>
-          <div>Appartemnt</div>
+          <div>Appartements</div>
         </div>
       </div>
       <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px "></div>
@@ -93,6 +93,7 @@ export default {
     },
   },
   mounted() {
+
     this.getAllLogement();
 
     const cas = this.$route.query.cas;
