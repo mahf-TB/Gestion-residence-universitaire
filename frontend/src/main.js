@@ -11,7 +11,6 @@ import 'primevue/resources/primevue.min.css';
 import 'primevue/resources/themes/aura-light-blue/theme.css'
 import 'primeicons/primeicons.css';
 
-
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'vue-multiselect/dist/vue-multiselect.css';
 import 'bootstrap/dist/css/bootstrap.min.css'

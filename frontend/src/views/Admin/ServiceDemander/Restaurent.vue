@@ -38,7 +38,7 @@
                                     Nom du plat
                                 </th>
                                 <th scope="col"
-                                    class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                                    class="px-3 py-3 max-w-52 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                                     Description
                                 </th>
                                 <th scope="col"
@@ -80,7 +80,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ row.description }}</div>
+                                    <div class="text-sm text-gray-900  max-w-52 overflow-hidden">{{ row.description }}</div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
                                     <span
@@ -136,7 +136,7 @@ export default {
     data() {
         return {
             arrayData: [],
-            itemsPerPage: 5,
+            itemsPerPage: 4,
             length: null,
             first: 0,
             query: '',

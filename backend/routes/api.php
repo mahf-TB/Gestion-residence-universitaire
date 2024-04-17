@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Resident\PubController;
 use App\Http\Controllers\Resident\ReparationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,12 +43,16 @@ Route::middleware(['auth'])->group(function () {
 
 //ETUDIANT routes api CRUD 
 Route::apiResource('/etudiants', EtudiantController::class);
+
+Route::get('/etudiant_logement', [EtudiantController::class, 'getEtudiantLogment']);
+
 //BATIMENT et batiments routes api CRUD 
 Route::apiResource('/batiments', BatimentController::class);
 //LOGEMENT et batiments routes api CRUD 
 Route::apiResource('/logement', LogementController::class);
 Route::get('/type_logement', [LogementController::class, 'getTypeLogement']);
 Route::get('/logement_type', [LogementController::class, 'getLogement']);
+Route::post('/uploadImage', [LogementController::class, 'uploadImage']);
 
 //RESERVATIONS routes
 Route::group(['controller' => ReservationController::class], function () {
@@ -70,8 +75,14 @@ Route::group(['controller' => ServiceController::class], function () {
     Route::post('/ajouter_service',  'ajouterService');
     Route::get('/index_resto',  'indexResto');
 });
+//Service routes
+Route::group(['controller' => PubController::class], function () {
+
+    Route::get('/index_pub',  'index');
+});
 
 
 Route::group(['controller' => ReparationController::class], function () {
     Route::get('/index_reparer',  'index');
+    Route::delete('/delete_reparation',  'annulerDemande');
 });

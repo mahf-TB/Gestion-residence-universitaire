@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-20">
+    <div class="mt-20 mb-10">
       <div class=" bg-white p-4  divide-y border-gray-400 rounded-md shadow ">
         <div class="relative rounded-md">
           <card-reservation></card-reservation>
@@ -116,7 +116,7 @@
     data() {
       return {
         dataArray: [],
-        itemsPerPage: 5,
+        itemsPerPage: 4,
         length: null,
         first: 0,
         query: '',

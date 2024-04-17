@@ -9,7 +9,7 @@
                             Accueil
                         </router-link>
                         <router-link to="/fondation" class="text-blue-0 flex items-center px-4  h-full " :class="{ 'border-b-4 border-blue-0': $route.path === '/fondation' }">
-                            Fondation du Lodge Cité
+                            Qui sommes-nous?
                         </router-link>
                         <button @click="$refs.menu1.toggle($event)" class="text-blue-0 flex items-center px-4 uppercase  h-full " :class="{ 'border-b-4 border-blue-0': $route.path === '/residences' }"> 
                             Nos Résidences 

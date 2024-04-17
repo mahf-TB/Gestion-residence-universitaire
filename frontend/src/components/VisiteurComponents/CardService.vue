@@ -1,5 +1,9 @@
 <template>
-    <div class="flex flex-col text-center w-full py-5">
+    <div class="flex flex-col text-center w-full py-5"         
+        data-aos="new-animation"
+        data-aos-offset="200"
+        data-aos-easing="ease-in-out"
+    >
         <h1 class="font-light mb-5"><span class="font-bold text-blue-1">Des prestations premium </span><br />pour un
             emménagement rapide </h1>
         <div class="grid grid-cols sm:grid-cols-2 lg:grid-cols-5">
@@ -20,7 +24,12 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
+import AOS from "aos";
 
+onMounted(() => {
+    AOS.init();
+})
 export default {
     name: 'CardService',
     components: {

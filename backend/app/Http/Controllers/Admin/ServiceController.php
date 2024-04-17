@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceRequest;
+use App\Models\Publication;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -35,13 +36,23 @@ class ServiceController extends Controller
     {
         $data = $request->validated();
         $image = $request->file('image');
-
         if ($request->hasFile('image')) {
             $data['image'] = $image->store('/ServiceImage', 'public');
         }
         $main = Service::create($data);
         if ($main) {
+            $dataPub = [
+                "contenu" => $data['description'],
+                "nb_like" => 0,
+                "nb_commentaire" =>0,
+                "image" => $data['image'],
+                "id_service" => $main->id,
+                "auteur" => auth()->user()->id,
+            ];
+            $pub = Publication::create($dataPub);
             return response()->json([
+                'dataPub' => $pub,
+                'data' => $main,
                 'message' => 'Enregistrer bien effectuer',
                 'status' =>  true
             ]);

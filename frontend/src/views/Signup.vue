@@ -173,29 +173,25 @@
         <form @submit.prevent="signUp()">
           <div class="flex flex-col text-sm rounded-md">
             <!-- adresse email ou username -->
-            <input type="email" 
-              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 "
-              name="integration[email]" required  placeholder="Entrer votre Email" v-model="user.email" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.email ? 'Email est deja enregistrer':''}}</p>
-
-            <!-- adresse email ou username -->
             <input type="text" 
               class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
-              name="integration[name]" required placeholder="Entrer nom d'utilisateur" v-model="user.nom" />
+              name="integration[name]" required placeholder="Entrer votre Nom" v-model="user.nom" />
               <p class="text-red-500 text-xs italic mb-3">{{ Erreur.username ? 'Username est en 6 caracteur minimum':''}}</p>
-            
+            <!-- adresse email ou username -->
+            <input type="email"
+              class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
+              name="integration[email]" required placeholder="Entrer votre Email" v-model="user.email" />
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.email ? 'Email est deja enregistrer':''}}</p>
             <!-- input pour votre mot de passe -->
             <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
-              name="integration[password]" :type="[toggle ? 'text' : 'password']" placeholder="Entrer votre mot de passe"
+              name="integration[password]" :type="[toggle ? 'text' : 'password']" placeholder="Entrer mot de passe"
               v-model="user.motdepasse" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe':''}}</p>
-
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'Mot de passe est en 6 caracteur minimum':''}}</p>
             <!-- input pour votre mot de passe -->
             <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[confirmePwd]" :type="[toggle ? 'text' : 'password']"
-              placeholder="Confirmer votre mot de passe" v-model="user.confirmePwd" />
-              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe si il est même':''}}</p>
-
+              placeholder="Confirmer le mot de passe" v-model="user.confirmePwd" />
+              <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'Mot de passe de confirmation different':''}}</p>
             <!-- toggle voir ou hash pour votre mot de passe -->
             <div class="flex mb-1 justify-between">
               <div class="mb-3 relative rounded-full w-12 h-6 transition duration-200 ease-linear"
@@ -238,13 +234,12 @@ export default {
         email: '',
         motdepasse: '',
         confirmePwd: '',
-        type:'user'
+        type: 'user'
       },
       toggle: false,
-      Erreur:[]
+      Erreur: []
     }
   },
-
   methods: {
     async signUp() {
       console.log(this.user)

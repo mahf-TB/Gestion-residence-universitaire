@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="relative flex flex-col justify-center text-center bg-blue-0 py-[100px]">
-      <h1 class="text-xxl text-blue-1">Toutes nos logement disponible dans la résidences</h1>
+      <h1 class="text-xxl text-blue-1">Toutes nos logement disponible dans la résidence</h1>
       <div class="flex  justify-center  ">
         <div class="relative max-w-xl mb-5 w-full">
           <div class="text-3xl flex items-center justify-between mt-3 text-blue-4 shadow rounded-md">
@@ -37,51 +37,26 @@
         <div class="text-xl flex items-end text-blue-2  cursor-pointer">
           <span class="text-3xl mr-2">{{ dataArray.length }}</span>
           <span class="pb-[2px]">
-            logement trouvées
+            logement trouvés
           </span>
         </div>
         <div>
-          <div>Appartemnt</div>
+          <div>Appartements</div>
         </div>
       </div>
       <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px "></div>
       <div>
-        <div class="bg-blue-0 h-full p-3 text-center" v-if="dataArray == '' ">
+        <div class="bg-blue-0 h-full p-3 text-center" v-if="dataArray == ''">
           <span class="font-semibold text-lg text-blue-2">Aucun résultat à trouver ...</span>
         </div>
         <div class="grid  grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mt-3">
           <div class="max-w-[300px] my-3 mx-3" v-for="(data, index) in paginatedData" :key="index">
-            <div class="w-full">
-              <div class="bg-white text-blue-1 rounded shadow relative">
-                <img :src="require('@/assets/image/logement1.jpg')" alt="Image"
-                  class="md:ml-auto block w-full h-[200px] object-cover animatejump-in animate-duration-[1500ms]">
-                <div class="absolute top-0 right-0 z-10 bg-green-600 px-3 py-1 text-blue-0">
-                  <span class="text-sm">{{ data.type_logement }}</span>
-                </div>
-                <div class="px-4 py-1 flex flex-col items-start justify-between text-blue-1">
-                  <div class=" text-left pt-2">
-                    <span class="font-light text-sm uppercase text-gray-500">{{data.batiment.nom_batiment}} </span>
-                  </div>
-                  <div class=" text-left py-2">
-                    <a :href="`/reservation/${data.id}`" class="text-2xl flex items-center hover:text-blue-2 cursor-pointer" style="text-decoration: none;">
-                      {{ 'Chambre N°: '+ data.num_logement }}
-                    </a>
-                    <span class="text-sm text-gray-500">{{getEtage(data.num_logement) }} {{ getEtage(data.num_logement)=='1' ?'ère Etage' : 'ème Etage' }}</span>
-                  </div>
-                  <div class=" text-left py-2">
-                    <span class="font-light text-sm uppercase text-gray-500">À prix de </span><br />
-                    <span class="font-bold text-xl text-blue-3">{{ data.prix + ' ar/mois ' }} </span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
+            <CardLogement :data="data"></CardLogement>
           </div>
         </div>
-        
+
         <div class="p-4 text-lg text-center mb-5 ">
-          <Paginator :rows="itemsPerPage" :totalRecords="dataArray.length" @page="handlePagination" ></Paginator>
+          <Paginator :rows="itemsPerPage" :totalRecords="dataArray.length" @page="handlePagination"></Paginator>
         </div>
       </div>
     </div>
@@ -91,11 +66,12 @@
 <script>
 
 import Axios from '@/_Service/caller.service';
+import CardLogement from '@/components/VisiteurComponents/cardLogement.vue';
 import Paginator from 'primevue/paginator';
 export default {
   name: 'Residence',
   components: {
-    Paginator
+    Paginator,CardLogement
   },
   data() {
     return {
@@ -106,7 +82,7 @@ export default {
       query: ''
     }
   },
-  computed:{
+  computed: {
     paginatedData() {
       if (!this.dataArray) {
         return [];
@@ -117,13 +93,19 @@ export default {
     },
   },
   mounted() {
+
     this.getAllLogement();
+
+    const cas = this.$route.query.cas;
+    console.log('Valeur du paramètre "cas" :', cas);
+
   },
-  methods:{
-    async getAllLogement(){
+  methods: {
+    async getAllLogement() {
       try {
         var response = await Axios.get('/logement')
         this.dataArray = response.data;
+        console.log(this.dataArray);
         localStorage.setItem("index", 0)
       } catch (error) {
         console.error(error);
@@ -132,9 +114,7 @@ export default {
     handlePagination(event) {
       this.first = event.first
     },
-    getEtage(data){
-      return data.charAt(0)
-    }
+   
   }
 
 }
@@ -142,6 +122,6 @@ export default {
 
 <style>
 a {
-    text-decoration-line: none;
+  text-decoration-line: none;
 }
 </style>

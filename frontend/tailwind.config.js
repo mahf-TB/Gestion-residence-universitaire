@@ -13,6 +13,7 @@ module.exports = {
         "blue-2": "#1D48A7",
         "blue-1": "#3C6DC6",
         "blue-0": "#D7E4F5",
+        "fotsy": "#FFFFFF",
       },
       fontFamily: {
         Avenir: ["Avenir, Helvetica, Arial, sans-serif"]

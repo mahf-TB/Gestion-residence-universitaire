@@ -36,7 +36,6 @@
                     </div> -->
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -47,6 +46,6 @@ export default {
     name: 'AideReserver',
     components: {
 
-    }
+    },
 } 
 </script>

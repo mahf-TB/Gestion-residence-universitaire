@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('telephone',20)->nullable();
             $table->string('email')->unique();
             $table->unsignedBigInteger('id_logement')->nullable();
-            $table->foreign('id_logement')->references('id')->on('logements')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_logement')->references('id')->on('logements')->onDelete('set null')->onUpdate('set null');
        
             $table->timestamps();
         });

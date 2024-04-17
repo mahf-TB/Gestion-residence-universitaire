@@ -1,52 +1,294 @@
 <template>
+  <div>
+    <!-- lien pour un template de site pour visiteur -->
+    <!-- https://nicepage.com/fr/templates/preview/gestion-de-la-propriete-4460252?device=desktop -->
+    <h1
+      class="text-5xl text-[#0458a0] font-bold mb-16 bg-[#ecf2f5] text-center py-16"
+    >
+      Activités Sportives et Loisirs
+    </h1>
     <div class="container my-5">
-      <!-- lien pour un template de site pour visiteur -->
-      <!-- https://nicepage.com/fr/templates/preview/gestion-de-la-propriete-4460252?device=desktop -->
-      <h1 class="text-xxl text-[#2b6b88]">Nos Activités Pedagogique</h1>
-      <div class="w-[500px]">
-        <a href="#" class=" shadow-2xl relative ">
-                <div class="  h-full relative shadow-2xl  overflow-hidden group ">
-                    <div class=" absolute -bottom-10 group-hover:top-0 left-0 w-full h-full group-hover:bg-slate-900/60 transition-all ease-in-out duration-500  ">
-                        <div class="w-full h-full   p-5   relative">
-                            <div class="absolute bottom-0 group-hover:top-0 text-white  text-left   transition-all ease-in-out duration-500 ">
-                                <h2 class="text-2xl font-bold  text-white mb-0 pb-1">Standard Color</h2>
-                                <p class="text-lg font-light text-white">Lorem ipsum dolor sit amet, #brands.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="https://source.unsplash.com/random/400x400" class="w-full z-0  h-full    object-fill example ">
+      <div class="flex flex-wrap justify-around">
+        <div class="w-[500px] pb-16">
+          <a href="#" class="shadow-2xl relative">
+            <div
+              class="h-full relative shadow-3xl overflow-hidden group rounded-lg"
+            >
+              <div
+                class="absolute -bottom-0 group-hover:top-0 left-0 w-full h-full bg-slate-900/60 group-hover:bg-slate-900/80 transition-all ease-in-out duration-500"
+              >
+                <div class="w-full h-full p-5 relative">
+                  <div
+                    class="absolute -bottom-[4rem] group-hover:top-0 text-white text-left transition-all ease-in-out duration-500"
+                  >
+                    <h2 class="text-3xl font-bold text-white pt-32 mb-4">
+                      Installation Sportives à disposition
+                    </h2>
+                    <p class="text-lg font-light text-white mb-0">
+                      Nous vous proposons toutes les installations et matériels
+                      sportifs dont vous aurez besoin
+                    </p>
+                  </div>
                 </div>
-            </a>
+              </div>
+              <img
+                :src="
+                  require('@/assets/image/activite_sportive_loisir/salle_de_sport1.jpg')
+                "
+                alt="Image"
+                class="w-full z-0 h-full object-fill example"
+              />
+              <!-- <img src="https://source.unsplash.com/random/400x400" class="w-full z-0 h-full object-fill example"> -->
+            </div>
+          </a>
+        </div>
+        <div class="w-[500px] pb-16">
+          <a href="#" class="shadow-2xl relative">
+            <div
+              class="h-full relative shadow-3xl overflow-hidden group rounded-lg"
+            >
+              <div
+                class="absolute -bottom-0 group-hover:top-0 left-0 w-full h-full bg-slate-900/60 group-hover:bg-slate-900/80 transition-all ease-in-out duration-500"
+              >
+                <div class="w-full h-full p-5 relative">
+                  <div
+                    class="absolute -bottom-20 group-hover:top-0 text-white text-left transition-all ease-in-out duration-500"
+                  >
+                    <h2 class="text-3xl font-bold text-white pt-32 mb-4">
+                      Tournois et <br />
+                      Événements sportifs
+                    </h2>
+                    <p class="text-lg mb-0 font-light text-white">
+                      Pour renforcer le lien entre nos locataires, nous
+                      organisons des tournois et événements où ils peuvent
+                      participer
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <img
+                :src="
+                  require('@/assets/image/activite_sportive_loisir/basketball_game.jpg')
+                "
+                alt="Image"
+                class="w-full z-0 h-full object-fill example"
+              />
+              <!-- <img src="https://source.unsplash.com/random/400x400" class="w-full z-0 h-full object-fill example"> -->
+            </div>
+          </a>
+        </div>
+        <div class="w-[500px] pb-16">
+          <a href="#" class="shadow-2xl relative">
+            <div
+              class="h-full relative shadow-3xl overflow-hidden group rounded-lg"
+            >
+              <div
+                class="absolute -bottom-0 group-hover:top-0 left-0 w-full h-full bg-slate-900/60 group-hover:bg-slate-900/80 transition-all ease-in-out duration-500"
+              >
+                <div class="w-full h-full p-5 relative">
+                  <div
+                    class="absolute -bottom-20 group-hover:top-0 text-white text-left transition-all ease-in-out duration-500"
+                  >
+                    <h2 class="text-3xl font-bold text-white pb-1 pt-32">
+                      Cours de sport <br />
+                      et de fitness
+                    </h2>
+                    <p class="text-lg font-light mb-0 pr-4 text-white">
+                      Pour que nos locataires puissent rester en forme, nous
+                      sommes heureux de leur proposer des cours de sport et de
+                      fitness
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <img
+                :src="
+                  require('@/assets/image/activite_sportive_loisir/yoga_classs.jpg')
+                "
+                alt="Image"
+                class="w-full z-0 h-full object-fill example"
+              />
+              <!-- <img src="https://source.unsplash.com/random/400x400" class="w-full z-0 h-full object-fill example"> -->
+            </div>
+          </a>
+        </div>
+        <div class="w-[500px] pb-16">
+          <a href="#" class="shadow-2xl relative">
+            <div
+              class="h-full relative shadow-3xl overflow-hidden group rounded-lg"
+            >
+              <div
+                class="absolute -bottom-0 group-hover:top-0 left-0 w-full h-full bg-slate-900/40 group-hover:bg-slate-900/70 transition-all ease-in-out duration-500"
+              >
+                <div class="w-full h-full p-5 relative">
+                  <div
+                    class="absolute -bottom-10 group-hover:top-0 text-white text-left transition-all ease-in-out duration-500"
+                  >
+                    <h2 class="text-3xl font-bold text-white pt-32">
+                      Clubs sportifs
+                    </h2>
+                    <p class="text-lg font-light -mb-4 text-white">
+                      Lodge Cité Universitaire a ses propres clubs sportifs tels
+                      qu'un club de Basketball, de Football, de Volleyball...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <img
+                :src="
+                  require('@/assets/image/activite_sportive_loisir/football_team.jpg')
+                "
+                alt="Image"
+                class="w-full z-0 h-full object-fill example"
+              />
+              <!-- <img src="https://source.unsplash.com/random/400x400" class="w-full z-0 h-full object-fill example"> -->
+            </div>
+          </a>
+        </div>
+        <div class="w-[500px] pb-16">
+          <a href="#" class="shadow-2xl relative">
+            <div
+              class="h-full relative shadow-3xl overflow-hidden group rounded-lg"
+            >
+              <div
+                class="absolute -bottom-0 group-hover:top-0 left-0 w-full h-full bg-slate-900/40 group-hover:bg-slate-900/70 transition-all ease-in-out duration-500"
+              >
+                <div class="w-full h-full p-5 relative">
+                  <div
+                    class="absolute -bottom-20 group-hover:top-0 text-white text-left transition-all ease-in-out duration-500"
+                  >
+                    <h2 class="text-3xl font-bold text-white pb-1 pt-32">
+                      Organisation de sorties <br />
+                      et de randonnées
+                    </h2>
+                    <p class="text-lg font-light mb-0 text-white">
+                      Se détendre de temps en temps est crucial pour la
+                      productivité, c'est pour celà que nous organisons des
+                      sorties lorsque vous en avez le plus besoin
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <img
+                :src="
+                  require('@/assets/image/activite_sportive_loisir/sorties.jpg')
+                "
+                alt="Image"
+                class="w-full z-0 h-full object-fill example"
+              />
+              <!-- <img src="https://source.unsplash.com/random/400x400" class="w-full z-0 h-full object-fill example"> -->
+            </div>
+          </a>
+        </div>
+        <div class="w-[500px] pb-16">
+          <a href="#" class="shadow-2xl relative">
+            <div
+              class="h-full relative shadow-3xl overflow-hidden group rounded-lg"
+            >
+              <div
+                class="absolute -bottom-0 group-hover:top-0 left-0 w-full h-full bg-slate-900/40 group-hover:bg-slate-900/70 transition-all ease-in-out duration-500"
+              >
+                <div class="w-full h-full p-5 relative">
+                  <div
+                    class="absolute -bottom-20 group-hover:top-0 text-white text-left transition-all ease-in-out duration-500"
+                  >
+                    <h2 class="text-3xl font-bold text-white pb-1 pt-32">
+                      Mise en place d'espaces de détente et de jeux:
+                    </h2>
+                    <p class="text-lg font-light text-white mb-0">
+                      Détente et plaisir, nous locataires bénéficient de
+                      plusieurs espaces leur permetant celà mais aussi de se
+                      divertir
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <img
+                :src="
+                  require('@/assets/image/activite_sportive_loisir/billard.jpg')
+                "
+                alt="Image"
+                class="w-full z-0 h-full object-fill example"
+              />
+              <!-- <img src="https://source.unsplash.com/random/400x400" class="w-full z-0 h-full object-fill example"> -->
+            </div>
+          </a>
+        </div>
       </div>
-    
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, excepturi, iste laboriosam maiores nesciunt velit in reprehenderit architecto quae sunt, quo veritatis ratione sequi maxime? Nesciunt dolore officiis consequuntur vero!
-      Porro quidem voluptatem cupiditate distinctio vel provident a doloribus consequatur deleniti eligendi dolores praesentium asperiores dolorum, voluptate obcaecati ipsam ipsa cum. Ad doloribus eius suscipit nostrum sed aut repellendus omnis!
-      Repellendus odio sunt eum ducimus perspiciatis illo. Veritatis modi quas commodi consequatur velit minus omnis aliquid perferendis quasi. Debitis ad laudantium minus, itaque nobis explicabo temporibus atque ab ipsum blanditiis?
-      Quia, vitae! Commodi inventore possimus iure delectus laborum, rerum sed explicabo ratione excepturi minima consectetur eveniet id ea assumenda omnis odit asperiores repellat et, qui dolore earum ab impedit soluta!
-      Nostrum, explicabo tempore. Temporibus tenetur sequi quidem voluptates tempora explicabo vero, architecto consectetur illum cupiditate autem, nihil dolor harum quod perferendis totam quaerat maxime? Esse, quod praesentium? Saepe, quis minima?
-      At debitis dolorem illum magni, dicta nihil impedit optio rem omnis, laudantium a quod nesciunt. Libero exercitationem pariatur numquam perspiciatis voluptatum provident modi animi quaerat? Ad, cum autem! Saepe, dolor!
-      Architecto officiis cum facilis deserunt accusamus impedit in fugit ad vitae doloribus harum ut dolor iste blanditiis, possimus quasi asperiores, laboriosam corrupti reiciendis fuga ratione autem quo dicta minus. Possimus.
-      Possimus excepturi magni vel repudiandae reiciendis magnam quod, sed at facilis quaerat unde natus illo tempora impedit ad! Quisquam sunt mollitia consectetur laudantium, fugit eum et ipsa velit libero dolore!
-      Officia eligendi et dolorum itaque, atque eveniet fugiat adipisci saepe. Impedit error excepturi numquam unde quis iusto facere, amet ratione dicta consequuntur odit sint, quidem fugiat nostrum molestiae totam porro?
-      os, ex eum! Id adipisci eaque libero neque, corporis dolores quia est tempora earum consequatur quis. Minus molestiae ab cum vel nihil repellendus accusantium enim quidem consequuntur. Veritatis, consequuntur numquam.
-      Aut similique vel corrupti natus? Doloribus obcaecati sunt at quia. Ducimus maiores et, ut perferendis molestias corrupti ipsa quasi facere nostrum ex corporis qui harum minus tempora quas voluptatum est?
-      Consequuntur tenetur fugiat vitae temporibus, odit saepe veniam non alias dolores tempore! Aliquam impedit, architecto molestias nam quos repellat delectus ullam necessitatibus eligendi odit in nesciunt inventore nisi quod et!
-      Rerum porro ratione error, voluptatibus officia alias maiores. Itaque asperiores vitae molestiae iste reprehenderit nesciunt deleniti quo voluptate, ex recusandae. Fugiat, voluptas mollitia quia labore molestiae quaerat culpa voluptates at?
-      A libero   error id in quo nostrum, iure voluptatibus magni et praesentium repellendus tempora corrupti, architecto ratione odio sed delectus cupiditate rem veniam quod perspiciatis! Vitae veritatis similique explicabo minus.
-      Voluptatibus at consequatur eaque porro deserunt a nulla, officiis, possimus animi ex dolore quis beatae asperiores alias. Veritatis cupiditate vero ad voluptate. Voluptates inventore aperiam recusandae fuga cum exercitationem corrupti.
-      Maxime, iusto dolor? Sint veritatis eaque harum nostrum, voluptates, quibusdam exercitationem earum culpa ipsam nihil autem corrupti magni tenetur nesciunt. Tempore assumenda amet labore asperiores nesciunt sunt ut deserunt tenetur?
-      Iure repudiandae reprehenderit, odit veniam laudantium consequatur debitis illum repellat nam porro. Saepe, quod. Mollitia, fugit optio dolores maxime quidem illo distinctio dicta ut assumenda voluptate ad qui consequatur deserunt.
-      Eveniet recusandae atque sunt dicta rem sed fugit omnis accusantium ab, in blanditiis odio aliquid iure, veniam illum cumque ea quod. Dolor rerum culpa molestias nesciunt possimus, modi impedit iure?
-      Ut distinctio esse tempore placeat ipsa vel suscipit, animi voluptatum deserunt optio autem in, voluptates voluptas alias tenetur aliquam nostrum perspiciatis? Ut error neque, eveniet obcaecati sequi dignissimos officia enim.</p>
     </div>
-  </template>
+    <div>
+      <h1
+        class="text-5xl text-[#0458a0] font-bold mb-16 bg-[#ecf2f5] text-center py-16"
+      >
+        Activités éducatives et de développement personnel
+      </h1>
+      <!-- component -->
+      <div class="flex min-h-screen items-center justify-center">
+        <div
+          class="relative flex w-full max-w-[48rem] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md"
+        >
+          <div
+            class="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-xl rounded-r-none bg-white bg-clip-border text-gray-700"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
+              alt="image"
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div class="p-6">
+            <h6
+              class="mb-4 block font-sans text-base font-semibold uppercase leading-relaxed tracking-normal text-pink-500 antialiased"
+            >
+              startups
+            </h6>
+            <h4
+              class="mb-2 block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased"
+            >
+              Lyft launching cross-platform service this week
+            </h4>
+            <p
+              class="mb-8 block font-sans text-base font-normal leading-relaxed text-gray-700 antialiased"
+            >
+              Like so many organizations these days, Autodesk is a company in
+              transition. It was until recently a traditional boxed software
+              company selling licenses. Yet its own business model disruption is
+              only part of the story
+            </p>
+          </div>
+        </div>
+        <!-- stylesheet -->
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
+        />
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="text-sm text-gray-700 py-1">
+          Made with
+          <a
+            class="text-gray-700 font-semibold"
+            href="https://www.material-tailwind.com/docs/html/card?ref=tailwindcomponents"
+            target="_blank"
+            >Material Tailwind</a
+          >
+          by
+          <a
+            href="https://www.creative-tim.com?ref=tailwindcomponents"
+            class="text-gray-700 font-semibold"
+            target="_blank"
+          >
+            Creative Tim</a
+          >.
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
   
   <script>
-  
-  export default {
-    name: 'Activites',
-    components: {
-  
-    }
-  }
-  </script>
+export default {
+  name: "Activites",
+  components: {},
+};
+</script>

@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
             $table->string('contenu',500);
-            $table->date('date_publication');
             $table->bigInteger('nb_like');
             $table->bigInteger('nb_commentaire');
             $table->string('image')->nullable();
-
+            
             $table->unsignedBigInteger('id_service')->nullable();
             $table->foreign('id_service')->references('id')->on('services')->onDelete('cascade');
 
-            $table->unsignedBigInteger('auteur')->nullable();
+            $table->unsignedBigInteger('auteur');
             $table->foreign('auteur')->references('id')->on('users');
+            
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Resident;
 use App\Http\Controllers\Controller;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ReparationController extends Controller
 {
@@ -19,7 +20,7 @@ class ReparationController extends Controller
                 "type" => $items->type_probleme,
                 "design" => $items->description,
                 "status" => $items->status,
-                "image" => $items->imageUrl(),
+                "image" =>  $items->image == null ? '' :$items->imageUrl() ,
                 "user" => $items->user->username,
                 "date" => $items->created_at,
             ];
@@ -28,8 +29,22 @@ class ReparationController extends Controller
         return  $dataRes;
     }
 
-    public function annulerDemande()
+    public function annulerDemande(Request $request)
     {
+        $main = Maintenance::find($request->id);
         
+        if ($main) {
+            if ($main->image) {
+                Storage::disk('public')->delete($main->image);
+            }
+            
+            $Del =  $main->delete();
+            if ($Del) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Reparation annuler avec successfully',
+                ]);
+            }
+        }
     }
 }

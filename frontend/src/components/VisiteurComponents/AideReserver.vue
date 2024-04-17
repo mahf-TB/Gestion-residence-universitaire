@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="px-4 py-3 bg-white text-blue-1 rounded shadow animate-fade-right hover:animate-shake">
-                <h1 class="text-lg flex items-center justify-between">Saisissez vos adresse email   </h1>
+                <h1 class="text-lg flex items-center justify-between">Saisissez votre adresse email</h1>
                 <div class="text-3xl flex items-center justify-between mt-3 text-blue-4">
                     <span class=" bg-blue-0 text-blue-1 px-3 py-2 rounded "><i class="fa-solid fa-envelope"></i></span>
                     <span class="text-sm ml-3  flex items-center hover:text-blue-1">Cliquez sur suivant
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="px-4 py-3 bg-white text-blue-1 rounded shadow animate-fade-left hover:animate-shake">
-                <h1 class="text-lg flex items-center justify-between">Entrez tout votre information </h1>
+                <h1 class="text-lg flex items-center justify-between">Entrez vos informations </h1>
                 <div class="text-3xl flex items-center justify-between mt-3 text-blue-4">
                     <span class=" bg-blue-0 text-blue-1 px-3 py-2 rounded"><i class="fa-solid fa-address-card"></i></span>
                     <span class="text-sm ml-3  flex items-center hover:text-blue-1">Cliquez sur Envoyer
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="px-4 py-3 bg-white text-blue-1 rounded shadow animate-fade-left hover:animate-shake">
-                <h1 class="text-lg flex items-center justify-between">Receivez resultat votre demande</h1>
+                <h1 class="text-lg flex items-center justify-between">Recevez le resultat de votre demande</h1>
                 <div class="text-3xl flex items-center justify-between mt-3 text-blue-4">
                     <span class=" bg-blue-0 text-blue-1 px-3 py-2 rounded"><i class="fa-solid fa-envelope-open-text"></i></span>
                     <span class="text-sm ml-3  flex items-center hover:text-blue-1">Attendez reponse par email
@@ -39,11 +39,8 @@
 </template>
 
 <script>
-
 export default {
     name: 'AideReserver',
-    components: {
 
-    }
 } 
 </script>

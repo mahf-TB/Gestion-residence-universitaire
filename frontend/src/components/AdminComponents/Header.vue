@@ -18,7 +18,7 @@
                         class="text-blue-0 px-4  h-full  flex items-center transition-all hover:border-b-4 hover:border-blue-0">
                             Maintenance
                         </router-link>|
-                        <Button @click="$refs.menu2.toggle($event)" :class="{ 'border-b-4 border-blue-0': $route.path === '/admin/liste-commande' || $route.path === '/admin/restaurent' || $route.path === '/admin/logement' }"
+                        <Button @click="$refs.menu2.toggle($event)" :class="{ 'border-b-4 border-blue-0': $route.path === '/admin/liste-commande' || $route.path === '/admin/restaurent' || $route.path === '/admin/restaurent' }"
                             class="text-blue-0 px-4 uppercase h-full  flex items-center transition-all hover:border-b-4 hover:border-blue-0">
                             Service <span class="lowercase mx-1">et</span> Activités
                         </Button>
@@ -47,22 +47,7 @@ import HautHeaderVue from '../HautHeader.vue'
 export default {
     name: 'Header',
     components: {
-        HautHeaderVue,Menu
-    },
-    data() {
-        return {
-            items: [
-                { label: 'Réservation de Logement', command: () => this.$router.push("/admin/listeReservation") },
-                { label: 'Liste des étudiants', command: () => this.$router.push("/admin/etudiant") },
-                { label: 'Liste des logements', command: () => this.$router.push("/admin/logement") },
-            ],
-            items1: [
-                { label: 'Commande des etudiant', command: () => this.$router.push("/admin/liste-commande") },
-                { label: 'Restaurent Interne', command: () => this.$router.push("/admin/restaurent") },
-                { label: 'Autre Service', command: () => this.$router.push("/admin/logement") },
-            ],
-           routeClass: 'border-b-4 border-blue-0'
-        }
+        SideBarMenu
     },
     computed: {
         isConnect() {
