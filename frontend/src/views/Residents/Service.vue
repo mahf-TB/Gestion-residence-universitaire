@@ -1,9 +1,5 @@
 <template>
   <div class="container flex items-center flex-col justify-center">
-    <!-- left contenu -->
-    <!-- <div class="bg-red-100">
-      <span>Left Mantenance</span>
-    </div> -->
     <!-- contenu center -->
     <div class=" w-[60%]">
       <div class="bg-fotsy px-3 pt-2 mb-1 rounded-xl shadow">

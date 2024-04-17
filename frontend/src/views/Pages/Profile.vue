@@ -1,7 +1,7 @@
 <template>
     <div class="relative bg-blue-0 text-blue-4">
-        <main class="bg-gray-800 ">
-            <div class="container bg-blue-4 pt-3 flex">
+        <main class="pt-2">
+            <div class="container bg-blue-4 pt-3 rounded-xl flex">
                 <section class=" w-full">
                     <!-- header profile -->
                     <div>

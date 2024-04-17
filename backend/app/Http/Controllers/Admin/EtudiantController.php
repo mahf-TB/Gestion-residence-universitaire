@@ -36,6 +36,7 @@ class EtudiantController extends Controller
         $validatedData = $request->validated();
         $dateNais = Carbon::parse($request->date_naissance);
         $validatedData['date_naissance'] = $dateNais;
+
         $chambre = Logement::find($request->id_logement);
         if ($chambre->status == 'libre') {
             $etudiant = Etudiant::create($validatedData);
@@ -68,16 +69,47 @@ class EtudiantController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $result = Etudiant::with('logement')->find($id);
+        if ($result) {
+            return $result;
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Etudiant not found',
+            ]);
+        }
+    }
+
+
+    public function getEtudiantLogment(Request $request)
+    {
+        $result = Etudiant::where('id_logement', $request->id )->get();
+        if ($result) {
+            return $result;
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Etudiant not found',
+            ]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update($id, Request $request)
     {
-        //
+        $etudiant = Etudiant::findOrFail($id);
+        $res = $etudiant->update($request->all());
+        if ($res) {
+            return response()->json([
+                'status' => 'success',
+                'new' => $etudiant->fresh(),
+                'message' => 'Etudiant updated successfully',
+            ]);
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -91,6 +123,11 @@ class EtudiantController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Etudiant delete successfully',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'Failure',
+                'message' => 'Etudiant delete failed',
             ]);
         }
     }

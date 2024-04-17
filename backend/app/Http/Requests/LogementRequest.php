@@ -23,11 +23,11 @@ class LogementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'num_logement' => ['required', 'string', 'max:10'],
+            'num_logement' => ['required', 'string', 'max:3' ],
             'type_logement' => ['required', 'string'],
             'prix' => ['required', 'numeric'],
-            'status' => ['required', 'string', Rule::in(['libre', 'occupe', 'reserve', 'en_maintenance'])],
-            'image' => ['nullable', 'string'],
+            'status' => ['required', 'string', Rule::in(['libre', 'occuper', 'reserve', 'en_maintenance'])],
+            'image' => ['nullable'],
             'id_batiment' => ['required', 'integer'],
         ];
     }

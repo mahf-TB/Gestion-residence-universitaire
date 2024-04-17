@@ -1,9 +1,9 @@
 <template>
-    <div class="text-xl  pb-4">
-        <button @click="visible = true"
-            class="uppercase max-md:w-full max-md:mt-2 bg-blue-2 hover:bg-blue-1 transition-all text-white text-sm py-2 px-4 rounded">
-            Nouveaux Etudiant
-        </button>
+    <div class="">
+        <div class="text-center py-2 px-3 hover:shadow-lg text-xs cursor-pointer text-yellow-600 rounded-full"
+            @click="open()">
+            <i class="fa-solid fa-pen-to-square text-[14px]"></i>
+        </div>
         <Dialog v-model:visible="visible" modal header="Header" :style="{ width: '50rem' }"
             :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
             <template #header>
@@ -125,7 +125,6 @@
             </div>
         </Dialog>
     </div>
-
 </template>
 
 <script>
@@ -133,8 +132,12 @@ import Axios from '@/_Service/caller.service';
 import Dialog from 'primevue/dialog';
 import VueMultiselect from 'vue-multiselect'
 export default {
-    name: 'AjouterEtudiant',
+    name: 'ModifierEtudiant',
     components: { Dialog, VueMultiselect },
+    props: {
+        id: Number,
+        getterEtudiant: Function
+    },
     data() {
         return {
             visible: false,
@@ -156,9 +159,33 @@ export default {
         }
     },
     mounted() {
-        this.getTypeLogement();
+        
     },
     methods: {
+        async open() {
+            this.visible = true;
+            try {
+                const response = await Axios.get(`/etudiants/${this.id}`)
+                var data = response.data;
+                this.etudiant = {
+                    nom: data.nom,
+                    prenom: data.prenom,
+                    matricule: data.matricule,
+                    cin: data.cin,
+                    date_naissance: data.date_naissance,
+                    sexe: data.sexe,
+                    telephone: data.telephone,
+                    email: data.email,
+                    id_logement: data.id_logement,
+                }
+                this.type = data.logement;
+                this.chambre = data.logement;
+
+
+            } catch (error) {
+                console.error(error.message)
+            }
+        },
         async getTypeLogement() {
             try {
                 const response = await Axios.get('/type_logement')
@@ -167,13 +194,13 @@ export default {
                 console.error(error.message)
             }
         },
-        enregistrer() {
+        async enregistrer() {
             console.log(this.etudiant)
             try {
-                const response = Axios.post('/etudiants', this.etudiant)
-                this.visible = false
-                this.$router.push("/admin/etudiant")
+                const response =await Axios.put(`/etudiants/${this.id}`, this.etudiant)
                 console.log(response)
+                this.visible = false
+                this.getterEtudiant()
 
             } catch (error) {
                 console.error(error.message)
@@ -184,9 +211,7 @@ export default {
                 this.type = newValue
                 var type = newValue.type_logement
                 const res = await Axios.get(`/logement_type?type_logement=${type}`)
-
                 this.optionsChambre = res.data.logement
-
                 this.$emit("update:modelValue", newValue);
 
             } catch (error) {
@@ -197,7 +222,6 @@ export default {
             try {
                 this.chambre = newValue
                 this.etudiant.id_logement = newValue.id
-
                 this.$emit("update:modelValue", newValue);
             } catch (error) {
                 console.log(error);

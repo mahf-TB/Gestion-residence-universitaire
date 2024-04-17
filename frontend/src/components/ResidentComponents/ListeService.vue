@@ -18,23 +18,23 @@
                     </div>
                 </div>
         </div>
-        <div class="p-4">
+        <div class="p-4 pb-1">
             <p class="text-base width-auto font-medium text-blue-4 flex-shrink">
                 {{ data.description }}
                
                 <br/>
                 <a href="#" class="text-blue-400"> #Prix: {{ data.tarifs }} Ar</a>
             </p>
-            <div class="md:flex-shrink px-6 py-3">
-                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-74">
+            <div class="md:flex-shrink px-6 py-3" v-if="data.image != ''">
+                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-[450px]">
                     <img class="object-cover w-full h-full"
                     :src="data.image"
                     alt="">
                 </div>
             </div>
 
-            <hr class="border-gray-300">
-            <div class="flex items-center justify-between">
+            <div class="mt-3 mb-1 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
+            <div class="flex items-center justify-between my-2">
                 <div
                     class="flex items-center cursor-pointer justify-center rounded text-blue-4  text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
