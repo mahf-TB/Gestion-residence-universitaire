@@ -135,6 +135,8 @@ export default {
     components: {
         Publication, ListePublicationVue
     },
+    data() {
+        return {
             dataArray: []
         }
     },
@@ -153,3 +155,4 @@ export default {
         }
     }
 }
+</script>
