@@ -1,15 +1,15 @@
 <template>
-    <div class="text-xl  pb-4">
-        <button @click="visible = true"
-            class="uppercase max-md:w-full max-md:mt-2 bg-blue-2 hover:bg-blue-1 transition-all text-white text-sm py-2 px-3 rounded">
-            <i class="fa-solid fa-plus pr-2"></i>Nouvelle Plat
-        </button>
+    <div class="">
+        <div class="text-center py-2 px-3 hover:shadow-lg text-xs cursor-pointer text-yellow-600 rounded-full"
+            @click="open()">
+            <i class="fa-solid fa-pen-to-square text-[14px]"></i>
+        </div>
         <Dialog v-model:visible="visible" modal header="Header" :style="{ width: '50rem' }"
             :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
             <template #header>
                 <div class="flex items-center justify-center w-full">
                     <h2 class="text-lg text-center font-light m-0 uppercase text-blue-2">
-                        Ajouter une nouvelle plat d'aujourd'hui
+                        Modification une nouvelle plat d'aujourd'hui , {{ id }}
                     </h2>
                 </div>
 
@@ -94,9 +94,10 @@ import Axios from '@/_Service/caller.service';
 import Dialog from 'primevue/dialog';
 import VueMultiselect from 'vue-multiselect'
 export default {
-    name: 'AjouterPlat',
+    name: 'ModifierPlat',
     components: { Dialog, VueMultiselect },
-    props:{
+    props: {
+        id: Number,
         getterPlatResto:Function
     },
     data() {
@@ -118,7 +119,28 @@ export default {
     mounted() {
     },
     methods: {
+        async open() {
+            this.visible = true;
+            this.imageUrl = null
+            try {
+                const response = await Axios.get(`/showOne/${this.id}`)
+                var data = response.data;
+                this.plat = {
+                    type_service: data.type_service,
+                    nom_service: data.nom_service,
+                    description: data.description,
+                    tarifs: data.tarifs,
+                    disponible: data.disponible,
+                    image: data.image,
+                    id_user: data.id_user,
 
+                }
+                this.imageUrl = data.imageUrl
+
+            } catch (error) {
+                console.error(error.message)
+            }
+        },
         async enregistrer() {
             console.log(this.plat)
             const formData = new FormData();
@@ -128,12 +150,15 @@ export default {
             formData.append('description', this.plat.description);
             formData.append('tarifs', this.plat.tarifs);
             formData.append('disponible', this.plat.disponible);
+            formData.append('id_user', this.plat.id_user);
+            console.log(formData)
 
             try {
-                const response = await Axios.post('/ajouter_service', formData)
+                const response = await Axios.post('/update_plat/'+this.id , formData)
                 this.visible = false
-                console.log(response)
                 this.getterPlatResto()
+                console.log(response)
+
             } catch (error) {
                 console.error(error.message)
             }

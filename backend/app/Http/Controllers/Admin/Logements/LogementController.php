@@ -16,12 +16,26 @@ class LogementController extends Controller
 
     public function index()
     {
-        return Logement::with('batiment')->get();
+        $Mainte = Logement::with('batiment')->get();
+        $dataRes =  $Mainte->map(function ($items) {
+            return [
+                "id" => $items->id,
+                "type_logement" => $items->type_logement,
+                "num_logement" => $items->num_logement,
+                "prix" => $items->prix,
+                "image" =>  $items->image == null ? '' :$items->imageUrl() ,
+                "isImage" => $items->image,
+                "status" => $items->status,
+                "batiment" => $items->batiment,
+                "date" => $items->updated_at,
+            ];
+        })->values();
+
+        return $dataRes;
     }
     public function getTypeLogement()
     {
         $type = Logement::select('type_logement')->distinct()->get();
-        // dd();
         return response()->json([
             'status' => 'success',
             'dataType' => $type,
@@ -93,7 +107,6 @@ class LogementController extends Controller
      */
     public function show($id)
     {
-
        $loge =  Logement::with('batiment')->find($id);
        $loge['imageUrl'] = $loge->image==null?'':$loge->imageUrl();
        $loge['image'] = $loge->image;
@@ -106,6 +119,11 @@ class LogementController extends Controller
     public function update($id, LogementRequest $request)
     {
         $loge = Logement::findOrFail($id);
+        if ($loge->image != $request->image){
+            if ($loge->image ) {
+                Storage::disk('public')->delete($loge->image);
+            }
+        }
         $data = $request->validated();
         $res = $loge->update($data);
         if ($res) {  
@@ -116,7 +134,12 @@ class LogementController extends Controller
             ]);
         }
     }
+
+
     public function uploadImage(Request $request){
+        if ($request->image_old) {
+            Storage::disk('public')->delete($request->image_old);
+        }
         $image = $request->file('image');
         if ( $image && $request->hasFile('image')) {
             $data = $image->store('/Logements', 'public');

@@ -14,7 +14,7 @@
             <div class="border p-2">
                 <form @submit.prevent="enregistrer()" class="px-1">
                     <div class="flex flex-col text-sm rounded-md ">
-                        <div class="flex mb-2 h-40">
+                        <div class="flex mb-2 h-40"> 
                             <section 
                                 class="p-2 w-full h-full flex flex-col ">
                                 <input type="file" id="fileInput" @change="handleFileUpload" multiple hidden />

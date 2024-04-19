@@ -29,6 +29,12 @@
               Profile
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/admin/liste-utilisateur') , visible=false">
+
+              <i class="fa-solid fa-bell  mx-3"></i>
+              Utilisateurs
+            </div>
+            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
               @click="this.$router.push('/user/home')">
 
               <i class="fa-solid fa-bell  mx-3"></i>

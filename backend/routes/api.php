@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Logements\LogementController;
 use App\Http\Controllers\Admin\MaintenanceController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Resident\PubController;
@@ -40,10 +41,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
+Route::apiResource('/utilisateurs', UtilisateurController::class);
 
 //ETUDIANT routes api CRUD 
 Route::apiResource('/etudiants', EtudiantController::class);
-
 Route::get('/etudiant_logement', [EtudiantController::class, 'getEtudiantLogment']);
 
 //BATIMENT et batiments routes api CRUD 
@@ -72,8 +73,11 @@ Route::group(['controller' =>  MaintenanceController::class], function () {
 
 //Service routes
 Route::group(['controller' => ServiceController::class], function () {
-    Route::post('/ajouter_service',  'ajouterService');
+    Route::post('/ajouter_service',  'ajouterPlat');
     Route::get('/index_resto',  'indexResto');
+    Route::get('/showOne/{id}',  'showPlat');
+    Route::post('/update_plat/{id}',  'updatePlatResto');
+    Route::delete('/deleteService/{id}',  'deleteService');
 });
 //Service routes
 Route::group(['controller' => PubController::class], function () {

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// const Axios = axios.create({ baseURL: 'http://192.168.1.137:8000/api/'})
 const Axios = axios.create({ baseURL: 'http://127.0.0.1:8000/api/'})
 
 Axios.interceptors.request.use(request => {

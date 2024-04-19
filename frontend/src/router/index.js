@@ -25,6 +25,8 @@ const routes = [
       { path: 'messenger', name: 'Admin Messenger', component: Page.Messenger },
       { path: 'restaurent', name: 'Restaurent', component: Admin.Restaurant },
       { path: 'liste-commande', name: 'Liste Commande', component: Admin.ListeCommande },
+      { path: 'service', name: 'Service ', component: Admin.Service },
+      { path: 'liste-utilisateur', name: 'Liste Utilisateur', component: Admin.Utilisateur },
     ]
   },
   {

@@ -90,6 +90,14 @@ class ReservationController extends Controller
             "status" => $request->status
         );
 
+        $logement = Logement::find($reservation->id_logement);
+        if ($logement->status == 'occuper') {
+            return response()->json([
+                'status' => 'cette chambre est deja prise',
+                'envoyer' => $logement,
+            ]);
+        }
+
         if ($request->status == 'accepter') {
             $resMail = $this->DemandeAccepted($data);
             if ($resMail) {
@@ -99,7 +107,7 @@ class ReservationController extends Controller
                 $etudiant = Etudiant::find($reservation->id_etudiant);
                 $res = $etudiant->update(["id_logement" => $reservation->id_logement]);
                 //modification du status de logement que occuper par l'etudiant 
-                $logement = Logement::find($reservation->id_logement);
+              
                 $resLog = $logement->update(["status" => 'occuper']);
 
                 if ($res1 && $res && $resLog) {

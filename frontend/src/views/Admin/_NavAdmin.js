@@ -6,7 +6,8 @@ import Reservation from './Reservation/Reservation.vue'
 import Maintenace from './Maintenance/ListeDemande.vue'
 import Restaurant from './ServiceDemander/Restaurent.vue'
 import ListeCommande from './ServiceDemander/ListeCommande.vue'
-
+import Service from './ServiceDemander/Service.vue'
+import Utilisateur from './Utilisateur/Utilisateur.vue'
 
 //exporter ato no alefa any route/index.js
 
@@ -18,5 +19,7 @@ export {
     Reservation,
     Maintenace,
     Restaurant, 
-    ListeCommande
+    ListeCommande,
+    Utilisateur,
+    Service
 }

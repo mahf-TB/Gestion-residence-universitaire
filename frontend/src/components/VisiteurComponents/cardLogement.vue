@@ -1,7 +1,7 @@
 <template>
     <div class="w-full">
         <div class="bg-white text-blue-1 rounded shadow-md relative">
-            <img :src="require('@/assets/image/logement1.jpg')" alt="Image"
+            <img :src="data.isImage==''? require('@/assets/image/logement1.jpg') : data.image" alt="Image de la chambre "
                 class="md:ml-auto block w-full h-[200px] object-cover animatejump-in animate-duration-[1500ms]" />
             <div class="absolute top-0 right-0 z-10 bg-green-600 px-3 py-1 text-blue-0">
                 <span class="text-sm">{{ data.type_logement }}</span>

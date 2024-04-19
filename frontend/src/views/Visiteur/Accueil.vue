@@ -79,7 +79,7 @@
         </div>
         <div class="w-2/3 overflow-hidden p-1">
           <div
-            class="flex items-center justify-between mx-2 my-1 overflow-auto"
+            class="flex items-center justify-between py-3 m-2 overflow-auto"
           >
             <div class="min-w-[300px] mx-2"  v-for="(data, index) in dataArray"  :key="index">
               <cardLogementVue :data="data"></cardLogementVue>

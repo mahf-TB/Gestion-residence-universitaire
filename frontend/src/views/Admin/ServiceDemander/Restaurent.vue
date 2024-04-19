@@ -16,7 +16,7 @@
                             class="w-full h-10 pl-10 pr-4 py-1 text-base placeholder-gray-500 border rounded-full focus:shadow-outline"
                             type="search" placeholder="Recherche..." />
                     </div>
-                    <AjouterEtudiant></AjouterEtudiant>
+                    <AjouterEtudiant :getterPlatResto="getterPlatResto"></AjouterEtudiant>
                 </div>
                 <div class="my-1"></div>
                 <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
@@ -100,12 +100,9 @@
                                 </td>
                                 <td class="px-6 py-3 border-b  text-sm font-medium text-center whitespace-nowrap">
                                     <div class="flex items-center justify-between text-[1rem]">
-                                        <div class="text-center py-2 px-3 hover:shadow-lg text-xs cursor-pointer text-yellow-600 rounded-full"
-                                            @click="deleteOne(row.id)">
-                                            <i class="fa-solid fa-pen-to-square text-[14px]"></i>
-                                        </div>
+                                       <modifier-plat :id="row.id" :getterPlatResto="getterPlatResto"></modifier-plat>
                                         <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500  rounded-full"
-                                            @click="deleteOne(row.id)">
+                                            @click="deleteOne(row.id, row.nom_service)">
                                             <i class="fa-solid fa-trash-can text-[14px]"></i>
                                         </div>
                                     </div>
@@ -127,12 +124,14 @@
 
 <script>
 
+import Swal from 'sweetalert2'
 import Axios from '@/_Service/caller.service';
 import Paginator from 'primevue/paginator';
 import AjouterEtudiant from '@/components/AdminComponents/Resto-Service/AjouterPlat.vue';
+import ModifierPlat from '../../../components/AdminComponents/Resto-Service/ModifierPlat.vue';
 export default {
     name: 'Restaurent',
-    components: { Paginator, AjouterEtudiant },
+    components: { Paginator, AjouterEtudiant, ModifierPlat },
     data() {
         return {
             arrayData: [],
@@ -143,7 +142,7 @@ export default {
         }
     },
     mounted() {
-        this.getterEtudiant();
+        this.getterPlatResto();
     },
     computed: {
         paginatedData() {
@@ -156,11 +155,11 @@ export default {
         },
     },
     methods: {
-        async getterEtudiant() {
+        async getterPlatResto() {
             try {
                 var response = await Axios.get('/index_resto')
                 this.arrayData = response.data
-                console.log(this.arrayData)
+
             } catch (error) {
                 console.error(error);
             }
@@ -185,6 +184,36 @@ export default {
             this.first = event.first
             console.log(event);
         },
+        deleteOne(id, nom) {
+      console.log(id);
+      Swal.fire({
+        title: "Es-tu sûre de supprimer " + nom + "?",
+        text: "Vous ne serez pas en mesure d'inverser cela.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Annuler!",
+        confirmButtonText: "Oui, supprimez-le!",
+
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const response = Axios.delete(`/deleteService/${id}`)
+            this.getterPlatResto();
+            console.log(response)
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success"
+            });
+          } catch (error) {
+            console.error(error);
+          }
+
+        }
+      });
+    },
     }
 }
 </script>

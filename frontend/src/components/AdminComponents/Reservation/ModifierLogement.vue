@@ -76,7 +76,7 @@
                             </select>
                         </div>
                         <div class="flex mb-3">
-                            <!-- Nom d'estudiant-->
+                            <!-- Nom d'estudiant--> 
                             <div class="grow flex flex-col mr-1">
                                 <label for="integration[name]" class="my-1 text-md">Montant du loyer<span
                                         class="text-red-500">*</span>
@@ -130,16 +130,17 @@ export default {
                 prix: '',
                 image: null
             },
-            imageUrl: null
+            imageUrl: null,
+            image_old:null,
         }
     },
     mounted() {
-        this.getTypeLogement();
+
     },
     methods: {
         async open() {
             this.visible = true;
-            this.imageUrl = null
+            this.imageUrl = null;
             try {
                 const response = await Axios.get(`/logement/${this.id}`)
                 var data = response.data;
@@ -155,14 +156,6 @@ export default {
                 }
                 this.imageUrl = data.imageUrl
 
-            } catch (error) {
-                console.error(error.message)
-            }
-        },
-        async getTypeLogement() {
-            try {
-                const response = await Axios.get('/type_logement')
-                this.optionsType = response.data.dataType;
             } catch (error) {
                 console.error(error.message)
             }
@@ -189,9 +182,11 @@ export default {
                 // envoyer le telechargement de file dans backend
                 const formData = new FormData();
                 formData.append('image', file);
+                formData.append('image_old', this.image_old);
                 try {
                     const response = await Axios.post('/uploadImage', formData);
                     console.log(response.data)
+                    this.image_old = response.data
                     this.logement.image = response.data
                 } catch (error) {
                     console.error(error.message)

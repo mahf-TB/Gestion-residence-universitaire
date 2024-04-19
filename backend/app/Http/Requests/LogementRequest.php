@@ -26,7 +26,7 @@ class LogementRequest extends FormRequest
             'num_logement' => ['required', 'string', 'max:3' ],
             'type_logement' => ['required', 'string'],
             'prix' => ['required', 'numeric'],
-            'status' => ['required', 'string', Rule::in(['libre', 'occuper', 'reserve', 'en_maintenance'])],
+            'status' => ['required', 'string', Rule::in(['libre', 'occuper', 'reserver', 'en_maintenance'])],
             'image' => ['nullable'],
             'id_batiment' => ['required', 'integer'],
         ];

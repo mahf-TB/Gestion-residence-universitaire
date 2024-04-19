@@ -1,7 +1,7 @@
 <template>
     <div class="relative bg-blue-0 text-blue-4">
         <main class="pt-2">
-            <div class="container bg-blue-4 pt-3 rounded-xl flex">
+            <div class="container bg-fotsy pt-3 rounded-xl flex">
                 <section class=" w-full">
                     <!-- header profile -->
                     <div>
@@ -19,8 +19,8 @@
                                 </a>
                             </div>
                             <div class="mx-2">
-                                <h2 class="mb-0 text-xl font-bold text-white">ANDRIMAHEFA Bienvenu</h2>
-                                <p class="mb-0 w-48 text-xs text-gray-200">Etudiant</p>
+                                <h2 class="mb-0 text-xl font-bold text-blue-4">ANDRIMAHEFA Bienvenu</h2>
+                                <p class="mb-0 w-48 text-xs text-gray-600">Etudiant</p>
                             </div>
                         </div>
                     </div>
@@ -46,42 +46,42 @@
                                     </div>
                                     <!-- User basic-->
                                     <div class="mx-2">
-                                        <h2 class="text-xl leading-6 font-bold text-white">ANDRIMAHEFA Bienvenu</h2>
-                                        <p class="text-sm leading-5 font-medium text-gray-200">@bienvenu</p>
+                                        <h2 class="text-xl leading-6 font-bold text-blue-4">ANDRIMAHEFA Bienvenu</h2>
+                                        <p class="text-sm leading-5 font-medium text-gray-500">@bienvenu</p>
                                     </div>
                                 </div>
                                 <div class="flex">
                                     <!-- Statistique d'user -->
                                     <div
                                         class="pt-3 flex justify-start items-start w-full divide-x divide-gray-100 divide-solid">
-                                        <div class="text-center px-3"><span class="font-bold text-white">10</span><span
-                                                class="text-gray-200"> Publication</span></div>
-                                        <div class="text-center px-3"><span class="font-bold text-white">20 </span><span
-                                                class="text-gray-200">Commande</span></div>
-                                        <div class="text-center px-3"><span class="font-bold text-white">2
-                                            </span><span class="text-gray-200">Demande</span></div>
+                                        <div class="text-center px-3"><span class="font-bold text-blue-4">10</span><span
+                                                class="text-gray-600"> Publication</span></div>
+                                        <div class="text-center px-3"><span class="font-bold text-blue-4">20 </span><span
+                                                class="text-gray-600">Commande</span></div>
+                                        <div class="text-center px-3"><span class="font-bold text-blue-4">2
+                                            </span><span class="text-gray-600">Demande</span></div>
                                     </div>
                                     <!-- Follow Button -->
                                     <div class="flex flex-col text-right">
                                         <button
-                                            class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  rounded max-w-max border bg-blue-0  items-center hover:shadow-lg font-bold py-2 px-4 r mr-0 ml-auto">
+                                            class="flex justify-center text-fotsy max-h-max whitespace-nowrap   rounded max-w-max border bg-blue-2  items-center hover:shadow-lg font-light py-2 px-4 r mr-0 ml-auto">
                                             Modifier Profile
                                         </button>
                                     </div>
 
                                 </div>
                             </div>
-                            <hr class="border-gray-300">
+                            <hr class="border-gray-400">
                             <!-- Profile info -->
                             <div class="flex justify-start w-full mt-3 ml-3">
                                 <!-- Description and others -->
-                                <div class="text-center px-3 py-2 border-b-4 border-blue-1 text-blue-1">
+                                <div class="text-center px-3 py-2 border-b-4 border-blue-2 text-blue-2">
                                     <span class="font-bold"> Publication</span>
                                 </div>
-                                <div class="text-center px-3 py-2 text-white">
+                                <div class="text-center px-3 py-2 text-blue-4">
                                     <span class="font-bold">Commande</span>
                                 </div>
-                                <div class="text-center px-3 py-2 text-white">
+                                <div class="text-center px-3 py-2 text-blue-4">
                                     <span class="font-bold">Demande</span>
                                 </div>
                             </div>

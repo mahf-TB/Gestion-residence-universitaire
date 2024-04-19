@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,14 @@ class RegisterRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    { 
+    {
         return [
             'username' => ['required', 'string', 'min:4',],
             'email' => ['required', 'email:filter',  'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'type' => ['required', 'string', Rule::in(['user'])],
-            'photo' => ['nullable','string'],
-            'id_etudiant' => ['nullable','integer'],
+            'type' => ['required', 'string', Rule::in(['P-service', 'P-maintenance', 'P-accueil'])],
+            'photo' => ['nullable', 'string'],
+            'id_etudiant' => ['nullable', 'integer'],
         ];
     }
 }

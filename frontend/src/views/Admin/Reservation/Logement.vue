@@ -45,7 +45,7 @@
                 </th>
 
                 <th scope="col"  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
-                  Date de création
+                  Date de modification
                 </th>
                 <th  scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   Status
@@ -66,7 +66,7 @@
                 <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.type_logement }}</td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.prix }}</td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">
-                  {{ new Date(data.created_at).toLocaleDateString() }}
+                  {{ new Date(data.date).toLocaleDateString() }}
                 </td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">
                   <span
