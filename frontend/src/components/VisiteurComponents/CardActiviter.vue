@@ -23,17 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="absolute bottom-0 bg-blue-0 w-full p-3 rounded-b-md">
-                        <div>
-                            <div class="text-3xl flex items-center font-bold text-blue-2 cursor-pointer">
-                                Club Sportifs <span class="text-base font-light ml-3">(BasketBall, Football, VolleyBall, HandBall, ...)</span>
-                            </div>
-                            <p class="test-sm text-blue-2 m-0 pl-5">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis excepturi repellat
-                                architecto temporibus. Optio voluptate sed distinctio nesciunt repellendus.
-                            </p>
-                        </div>
-                    </div> -->
+                    
                 </div>
             </div>
         </div>

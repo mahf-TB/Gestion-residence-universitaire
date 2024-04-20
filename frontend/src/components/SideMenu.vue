@@ -23,27 +23,26 @@
           </div>
           <div class="bg-gradient-to-r from-blue-1 to-blue-2 h-px my-3"></div>
           <div class="cursor-pointer text-[14px]">
-            <div   @click="this.$router.push('/profile')"
+            <div   @click="this.$router.push('/profile'), visible=false"
             class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-user mx-3"></i>
-              Profile
+              voir mon profile
             </div>
-            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
-              @click="this.$router.push('/admin/liste-utilisateur') , visible=false">
-
-              <i class="fa-solid fa-bell  mx-3"></i>
-              Utilisateurs
+            <div  v-if="User.type == 'admin'" 
+              class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/admin/liste-utilisateur') , visible=false" >
+                <i class="fa-solid  fa-users mx-3"></i>
+              Gérer l'utilisateurs
+            </div>
+            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
+              <i class="fa-brands fa-facebook-messenger mx-3"></i>
+              Messages
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
               @click="this.$router.push('/user/home')">
 
               <i class="fa-solid fa-bell  mx-3"></i>
               Notifications
-
-            </div>
-            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
-              <i class="fa-brands fa-facebook-messenger mx-3"></i>
-              Messages
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-cog mx-3"></i>
@@ -95,7 +94,6 @@ export default {
       let token = JSON.parse(localStorage.getItem('token'))
       if (token) {
         const res = await Axios.get('userConnect')
-        
         this.User = res.data.user
         this.isConnect = true
       }else{

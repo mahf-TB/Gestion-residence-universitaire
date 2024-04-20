@@ -128,6 +128,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import Axios from '@/_Service/caller.service';
 import Dialog from 'primevue/dialog';
 import VueMultiselect from 'vue-multiselect'
@@ -200,6 +201,11 @@ export default {
                 const response =await Axios.put(`/etudiants/${this.id}`, this.etudiant)
                 console.log(response)
                 this.visible = false
+                Swal.fire({
+                        title: "Enregistrement...!",
+                        text: "Your file has been saved.",
+                        icon: "success"
+                    });
                 this.getterEtudiant()
 
             } catch (error) {

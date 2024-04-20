@@ -14,7 +14,8 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        return User::whereIn('type', ['P-service' , 'P-maintenance' , 'P-accueil'])->get();
+        // return User::paginate(1);
+        return User::whereIn('type', ['P-service' , 'P-maintenance' , 'P-accueil'])->paginate(5);
     }
  
     /**

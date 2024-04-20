@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
-    public function indexResto()
+    public function indexResto(Request $request)
     {
+        if ($request->type =='resto') {
+            $Mainte = Service::with('user')->where('type_service', 'RestoPlat')->orderBy('updated_at', 'desc')->get();
+        }else{
 
-        $Mainte = Service::with('user')->orderBy('created_at', 'desc')->get();
+            $Mainte = Service::with('user')->where('type_service', '!=', 'RestoPlat')->orderBy('updated_at', 'desc')->get();
+        }
 
         $dataRes =  $Mainte->map(function ($items) {
             return [
@@ -32,6 +36,30 @@ class ServiceController extends Controller
 
         return  $dataRes;
     } 
+
+    public function ajouterService(ServiceRequest $request)
+    {
+        $data = $request->validated();
+        $image = $request->file('image');
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $image->store('/ServiceImage', 'public');
+        }
+
+        $main = Service::create($data);
+        if ($main) {
+            return response()->json([
+                'data' => $main,
+                'message' => 'Enregistrer bien effectuer',
+                'status' =>  true
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Failed..! Enregistrer echec',
+                'status' =>  false
+            ]);
+        }
+    }
 
     public function ajouterPlat(ServiceRequest $request)
     {
@@ -69,7 +97,6 @@ class ServiceController extends Controller
     {
         $plat = Service::with('user')->find($id);
         $plat['imageUrl'] = $plat->image == null ? '' : $plat->imageUrl();
-        // $plat['image'] = $plat->image;
         return $plat;
     }
 
@@ -90,13 +117,16 @@ class ServiceController extends Controller
            
         }
 
-        $resPub = $pub->update([
-            "contenu" => $data['description'],
-            "image" => $data['image'],
-        ]);
+        if ($request->type_service == 'RestoPlat') {
+            # code...
+            $resPub = $pub->update([
+                "contenu" => $data['description'],
+                "image" => $data['image'],
+            ]);
+        }
         
         $res = $service->update($data);
-        if ($res && $resPub) {  
+        if ($res) {  
             return response()->json([
                 'status' => 'success',
                 'new' => $service->fresh(),

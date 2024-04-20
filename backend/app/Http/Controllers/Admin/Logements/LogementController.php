@@ -87,13 +87,13 @@ class LogementController extends Controller
 
                 if (count($log) > 0) {
                     return response()->json([
-                        'status' => '',
-                        'message' => 'Logement est deja enregistrer',
+                        'status' => 'numero',
+                        'message' => 'Numero de logement est deja enregistrer',
                     ]);
                 } else {
                     return response()->json([
-                        'status' => 'numero',
-                        'message' => 'le numero de logement est trop grand.',
+                        'status' => 'etage',
+                        'message' => 'logement est au dela de etage et trop grand.',
                     ]);
                 }
             }

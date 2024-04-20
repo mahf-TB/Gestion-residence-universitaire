@@ -32,7 +32,7 @@
             <div class="flex mb-1 justify-between">
               <label for="toggle" class="mb-3 relative rounded-full w-12 h-6 transition duration-200 ease-linear"
                 :class="[toggle ? 'bg-green-400' : 'bg-gray-200']">
-                <div 
+                <div
                   class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer"
                   :class="[toggle ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-200']">
                   <input type="checkbox" id="toggle" name="toggle"
@@ -84,15 +84,36 @@ export default {
         if (response.data.status == 'success') {
           let user = response.data.user
           console.log(user.type)
-          
+
           //add to user and token dans le localeStorage
           localStorage.setItem("token", JSON.stringify(response.data.access_token))
-          
-          if (user.type == 'admin') {
-            this.$router.push("/admin/dashboard");
-          } else if (user.type == 'user') {
-            this.$router.push("/user/home");
+
+          switch (user.type) {
+            case 'admin':
+              this.$router.push('/admin/dashboard')
+              break;
+            case 'user':
+              this.$router.push('/user/home')
+              break;
+            case 'P-maintenance':
+              this.$router.push('/admin/dashboard-maintenance')
+              break;
+            case 'P-accueil':
+              this.$router.push('/admin/dashboard-accueil')
+              break;
+            case 'P-service':
+              this.$router.push('/admin/dashboard-service')
+              break;
+
+            default:
+              break;
           }
+
+          // if (user.type == 'admin' || user.type == 'P-service' || user.type == 'P-accueil' || user.type == 'P-maintenance') {
+          //   this.$router.push("/admin/dashboard");
+          // } else if (user.type == 'user') {
+          //   this.$router.push("/user/home");
+          // }
         } else {
           this.errorID = 'Incorrect !, verifiez votre address email'
           this.errorPWD = 'Incorrect !, verifiez votre mot de passe '

@@ -14,15 +14,14 @@
             <div class="border p-2">
                 <form @submit.prevent="enregistrer()" class="px-1">
                     <div class="flex flex-col text-sm rounded-md ">
-                        <div class="flex mb-2 h-40"> 
-                            <section 
-                                class="p-2 w-full h-full flex flex-col ">
+                        <div class="flex mb-2 h-40">
+                            <section class="p-2 w-full h-full flex flex-col ">
                                 <input type="file" id="fileInput" @change="handleFileUpload" multiple hidden />
-                                <header  v-if="imageUrl == null"  @dragover="dragOverHandler" @drop="dropHandler"
+                                <header v-if="imageUrl == null" @dragover="dragOverHandler" @drop="dropHandler"
                                     class="border-dashed border-2 border-gray-400 h-full flex  flex-col items-center justify-center ">
                                     <label for="fileInput"
-                                        class="mt-2 rounded-full px-3 py-2 text-2xl text-center bg-gray-200 hover:bg-gray-300"> 
-                                        <i class="fa-solid fa-cloud-arrow-up"></i>    
+                                        class="mt-2 rounded-full px-3 py-2 text-2xl text-center bg-gray-200 hover:bg-gray-300">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
                                     </label>
                                     <p
                                         class="mb-2 font-semibold flex flex-col text-center  text-gray-900 justify-center">
@@ -30,7 +29,8 @@
                                         <span class="text-xs text-gray-500 font-light">ou faite glisser-déposer</span>
                                     </p>
                                 </header>
-                                <div class="relative flex items-center justify-center" @mouseover="show = true" @mouseout="show = false">
+                                <div class="relative flex items-center justify-center" @mouseover="show = true"
+                                    @mouseout="show = false">
                                     <img v-if="imageUrl != null" :src="imageUrl" :alt="fileImage.name"
                                         class="w-44 h-40 object-scale-down">
                                     <label for="fileInput" v-if="show"
@@ -51,6 +51,7 @@
                                 <option value="3">Batiment C</option>
                             </select>
                         </div>
+                        <p class="text-red-500 text-xs italic mb-3">{{ err.message }}</p>
                         <div class="flex flex-col">
                             <!-- Nom d'estudiant-->
                             <div class="grow flex flex-col mr-1">
@@ -62,6 +63,7 @@
                                     name="integration[name]" required placeholder="Numéro du logement "
                                     v-model="logement.num_logement" />
                             </div>
+                            <p class="text-red-500 text-xs italic mb-3">{{ err.message + ' ' + err.num }}</p>
                         </div>
                         <div class="grow flex flex-col ">
                             <label for="sexe" class="my-1 text-md">Type du logement<span class="text-red-500">*</span>
@@ -70,12 +72,16 @@
                                 v-model="logement.type_logement" aria-label="Default select example" id="sexe"
                                 name="sexe" required>
                                 <option disabled value="">Selectionner ici</option>
+                                <option value="Chambre Individuel">Chambre individuelle</option>
+                                <option value="Chambre double">Chambre double</option>
+                                <option value="Chambre triple"> Chambre triple</option>
                                 <option value="Appartement">Appartement</option>
-                                <option value="Chambre Individuel">Chambre Individuel</option>
-                                <option value="Chambre Parteger">Chambre à Parteger</option>
+                                <option value="Suite"> Suite </option>
+                                <option value="Studio"> Studio </option>
                             </select>
                         </div>
-                        <div class="flex mb-3">
+                        <p class="text-red-500 text-xs italic mb-3">{{ err.message }}</p>
+                        <div class="mb-3">
                             <!-- Nom d'estudiant-->
                             <div class="grow flex flex-col mr-1">
                                 <label for="integration[name]" class="my-1 text-md">Montant du loyer<span
@@ -86,9 +92,10 @@
                                     name="integration[name]" required placeholder="Entrer votre Nom"
                                     v-model="logement.prix" />
                             </div>
+                            <p class="text-red-500 text-xs italic mb-3">{{ err.message }}</p>
                         </div>
                         <!-- adresse email -->
-                      
+
                     </div>
                     <div class="flex items-center justify-end mt-3 ">
                         <div @click="visible = false"
@@ -113,9 +120,12 @@
 import Axios from '@/_Service/caller.service';
 import Dialog from 'primevue/dialog';
 import VueMultiselect from 'vue-multiselect'
+import Swal from 'sweetalert2'
+
 export default {
     name: 'AjouterLogement',
     components: { Dialog, VueMultiselect },
+    props: { getterLogement: Function },
     data() {
         return {
             visible: false,
@@ -125,10 +135,14 @@ export default {
                 num_logement: '',
                 type_logement: '',
                 prix: '',
-                image:null
+                image: null
             },
             fileImage: null,
-            imageUrl: null
+            imageUrl: null,
+            err: {
+                num: '',
+                message: '',
+            }
         }
     },
     mounted() {
@@ -143,9 +157,9 @@ export default {
                 console.error(error.message)
             }
         },
-        enregistrer() {
+        async enregistrer() {
             this.logement.image = this.fileImage
-            console.log(this.logement)
+
             const formData = new FormData();
             formData.append('id_batiment', this.logement.id_batiment);
             formData.append('num_logement', this.logement.num_logement);
@@ -153,15 +167,25 @@ export default {
             formData.append('prix', this.logement.prix);
             formData.append('status', 'libre');
             formData.append('image', this.fileImage);
-            
-            console.log(formData)
+
             try {
-                const response = Axios.post('/logement', formData)
-                this.visible = false
-                console.log(response)
+                const response = await Axios.post('/logement', formData)
+                console.log(response.data)
+                if (response.data.status == 'sucess') {
+                    this.visible = false
+                    Swal.fire({
+                        title: "Enregistrement...!",
+                        text: "Your file has been saved.",
+                        icon: "success"
+                    });
+                    this.getterLogement();
+                } else {
+                    this.err.num = response.data.message
+                }
 
             } catch (error) {
                 console.error(error.message)
+                this.err.message = 'verifiez tout vos champs de formulaires'
             }
         },
         handleFileUpload(event) {

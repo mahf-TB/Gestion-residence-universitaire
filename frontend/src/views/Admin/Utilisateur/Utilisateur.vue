@@ -58,7 +58,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y  divide-gray-200" v-for="(data, index) in paginatedData"
+                        <tbody class="divide-y  divide-gray-200" v-for="(data, index) in dataArray"
                             v-bind:key="index">
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="py-2 px-4 border-b border-grey-light text-left">
@@ -127,24 +127,13 @@ export default {
     data() {
         return {
             dataArray: [],
-            itemsPerPage: 5,
+            itemsPerPage: null,
             length: null,
-            first: 0,
             query: '',
-            expandData: [],
-            dataRows: []
-
         }
     },
     computed: {
-        paginatedData() {
-            if (!this.dataArray) {
-                return [];
-            }
-            this.length = this.dataArray.length
-            const endIndex = this.first + this.itemsPerPage;
-            return this.dataArray.slice(this.first, endIndex);
-        },
+       
     },
     mounted() {
         this.getterUtilisateurs();
@@ -153,16 +142,24 @@ export default {
         async getterUtilisateurs() {
             try {
                 var response = await Axios.get('/utilisateurs')
-                this.dataArray = response.data;
+                this.dataArray = response.data.data;
+                this.length = response.data.total
+                this.itemsPerPage = response.data.per_page
             } catch (error) {
                 console.error(error);
             }
         },
-        handlePagination(event) {
-            this.expandData = []
-            this.first = event.first
+        async handlePagination(event) {
+            let page = event.page+1;
+            try {
+                var response = await Axios.get('/utilisateurs?page='+page)
+                this.dataArray = response.data.data;
+
+            } catch (error) {
+                console.error(error);
+            }
+        
         },
-        // etudiant_logement
 
         deleteOne(id, nom) {
             console.log(id);

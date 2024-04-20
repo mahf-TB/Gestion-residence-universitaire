@@ -3,7 +3,7 @@
         <div class="mt-8 p-4 border-b bg-white border-gray-400 divide-y rounded-md shadow">
             <div class="bg-white rounded-md ">
                 <h2 class="text-blue-2 text-xl text-center uppercase font-semibold ">
-                    Liste des plats et des goutés dans resto-interne
+                    Liste des menu du plat et des goutés dans resto-interne
                 </h2>
                 <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px mb-4"></div>
                 <div class="flex justify-between max-md:flex-col">
@@ -71,7 +71,6 @@
                                             <img class="w-full h-full object-cover"
                                                 :src="row.image" alt="" />
                                         </div>
-                                       
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
@@ -80,18 +79,20 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b whitespace-nowrap">
-                                    <div class="text-sm text-gray-900  max-w-52 overflow-hidden">{{ row.description }}</div>
+                                    <div class="text-sm text-gray-900  h-10 w-80 overflow-hidden">
+                                        {{ row.description }}
+                                    </div>
+                                </td>
+                                <td class="px-3 py-3  border-b whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        {{ row.tarifs +' MGA'}} 
+                                    </div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
                                     <span
                                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                        {{ row.tarifs }}
-                                    </span>
-                                </td>
-                                <td class="px-3 py-3  border-b whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">
                                         {{ row.dispo ? 'Disponible' : 'Pas disponible' }}
-                                    </div>
+                                    </span>
                                 </td>
                                 <td class="px-3 py-3  border-b whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
@@ -128,7 +129,7 @@ import Swal from 'sweetalert2'
 import Axios from '@/_Service/caller.service';
 import Paginator from 'primevue/paginator';
 import AjouterEtudiant from '@/components/AdminComponents/Resto-Service/AjouterPlat.vue';
-import ModifierPlat from '../../../components/AdminComponents/Resto-Service/ModifierPlat.vue';
+import ModifierPlat from '@/components/AdminComponents/Resto-Service/ModifierPlat.vue';
 export default {
     name: 'Restaurent',
     components: { Paginator, AjouterEtudiant, ModifierPlat },
@@ -157,29 +158,15 @@ export default {
     methods: {
         async getterPlatResto() {
             try {
-                var response = await Axios.get('/index_resto')
+                var response = await Axios.get('/index_service?type=resto')
                 this.arrayData = response.data
+                
 
             } catch (error) {
                 console.error(error);
             }
         },
-        getDateAjouter(date) {
-            let dateAjout = new Date(date);
-            let dateNow = new Date()
-            let dateNouveau = new Date(dateNow.getFullYear() - 1, dateNow.getMonth(), dateNow.getDate());
-            let dateAcienne = new Date(dateNow.getFullYear() - 5, dateNow.getMonth(), dateNow.getDate());
-
-            if (dateAjout > dateNouveau) {
-                return 'Nouveaux Membre'
-            }
-            else if (dateAcienne < dateAjout && dateAjout <= dateNouveau) {
-                return 'Membre'
-            } else if (dateAcienne >= dateAjout) {
-                return 'Ancien Membre'
-            }
-
-        },
+        
         handlePagination(event) {
             this.first = event.first
             console.log(event);

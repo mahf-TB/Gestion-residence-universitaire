@@ -28,7 +28,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     return $request->user();
-    
 });
 
 //authentification
@@ -59,7 +58,7 @@ Route::post('/uploadImage', [LogementController::class, 'uploadImage']);
 Route::group(['controller' => ReservationController::class], function () {
     Route::post('/reservation', 'addReservationAction');
     Route::get('/reservation',  'getAllReservation');
-    Route::post('/send_email',  'validationDemande'); 
+    Route::post('/send_email',  'validationDemande');
     Route::get('/reservation_status', 'countReserseStatus');
 });
 
@@ -74,7 +73,8 @@ Route::group(['controller' =>  MaintenanceController::class], function () {
 //Service routes
 Route::group(['controller' => ServiceController::class], function () {
     Route::post('/ajouter_service',  'ajouterPlat');
-    Route::get('/index_resto',  'indexResto');
+    Route::post('/ajouter/service',  'ajouterService');
+    Route::get('/index_service',  'indexResto');
     Route::get('/showOne/{id}',  'showPlat');
     Route::post('/update_plat/{id}',  'updatePlatResto');
     Route::delete('/deleteService/{id}',  'deleteService');

@@ -19,7 +19,7 @@
               type="search" placeholder="Recherche..." />
           </div>
           <div class="text-xl  pb-4">
-            <ajouter-logement></ajouter-logement>
+            <ajouter-logement :getterLogement="getterLogement"></ajouter-logement>
           </div>
         </div>
         <div class="my-1"></div>
@@ -77,7 +77,7 @@
                 </td>
                 <td class="py-2 px-4 border-b border-grey-light text-center">
                   <div class="flex items-center justify-around text-[1rem]">
-                    <modifier-logement :id="data.id" :getterLogement="getterLogement"></modifier-logement>
+                    <modifier-logement :id="data.id" :getterLogement="getterLogement" ></modifier-logement>
                     <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500 rounded-full"
                       @click="deleteOne(data.id, data.num_logement + ' ' + data.batiment.nom_batiment)">
                       <i class="fa-solid fa-trash-can text-[14px]"></i>

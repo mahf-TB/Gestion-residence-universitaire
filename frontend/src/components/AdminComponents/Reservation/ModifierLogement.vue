@@ -64,19 +64,22 @@
                             </div>
                         </div>
                         <div class="grow flex flex-col ">
-                            <label for="sexe" class="my-1 text-md">Type du logement<span class="text-red-500">*</span>
+                            <label for="type" class="my-1 text-md">Type du logement<span class="text-red-500">*</span>
                             </label>
                             <select class="custom-select w-100  mb-1 text-[14px] form-select h-[52px]"
-                                v-model="logement.type_logement" aria-label="Default select example" id="sexe"
-                                name="sexe" required>
-                                <option disabled value="">Selectionner ici</option>
+                                v-model="logement.type_logement" aria-label="Default select example" id="type"
+                                name="type" required>
+                                <option disabled value="">Sel ectionner ici</option>
+                                <option value="Chambre Individuel">Chambre individuelle</option>
+                                <option value="Chambre double">Chambre double</option>
+                                <option value="Chambre triple"> Chambre triple</option>
                                 <option value="Appartement">Appartement</option>
-                                <option value="Chambre Individuel">Chambre Individuel</option>
-                                <option value="Chambre Parteger">Chambre à Parteger</option>
+                                <option value="Suite"> Suite </option>
+                                <option value="Studio"> Studio </option>
                             </select>
                         </div>
                         <div class="flex mb-3">
-                            <!-- Nom d'estudiant--> 
+                            <!-- Nom d'estudiant-->
                             <div class="grow flex flex-col mr-1">
                                 <label for="integration[name]" class="my-1 text-md">Montant du loyer<span
                                         class="text-red-500">*</span>
@@ -109,6 +112,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import Axios from '@/_Service/caller.service';
 import Dialog from 'primevue/dialog';
 import VueMultiselect from 'vue-multiselect'
@@ -131,7 +135,7 @@ export default {
                 image: null
             },
             imageUrl: null,
-            image_old:null,
+            image_old: null,
         }
     },
     mounted() {
@@ -165,6 +169,12 @@ export default {
             console.log(this.logement)
             try {
                 const response = await Axios.put(`/logement/${this.id}`, this.logement);
+                
+                Swal.fire({
+                    title: "Enregistrement...!",
+                    text: "Your file has been saved.",
+                    icon: "success"
+                });
                 this.visible = false
                 this.getterLogement()
                 console.log(response)
@@ -173,7 +183,7 @@ export default {
                 console.error(error.message)
             }
         },
-      async  handleFileUpload(event) {
+        async handleFileUpload(event) {
             let file = event.target.files[0];
             if (file.type.match("image/*")) {
                 let objectURL = URL.createObjectURL(file);
@@ -197,7 +207,7 @@ export default {
             event.preventDefault();
             event.dataTransfer.dropEffect = 'copy';
         },
-       async dropHandler(event) {
+        async dropHandler(event) {
             event.preventDefault();
             const files = event.dataTransfer.files[0];
             console.log(files)

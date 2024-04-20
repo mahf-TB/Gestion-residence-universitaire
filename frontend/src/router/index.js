@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { auth } from "../_Helper";
 
-import Login from '../views/Login.vue'
-import Signup from '../views/Signup.vue'
-import Page404 from '../views/Page404.vue'
 
 import * as Admin from '@/views/Admin/_NavAdmin'
 import * as Etudiant from '@/views/Residents/_NavUser'
@@ -15,18 +12,26 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component: Admin.LayoutAdmin,
-    beforeEnter: auth.adminConnect,
     children: [
-      { path: 'dashboard', name: 'Dashboard', component: Admin.Home },
-      { path: 'etudiant', name: 'Etudiant', component: Admin.Etudiant },
-      { path: 'logement', name: 'Logement', component: Admin.Logement },
-      { path: 'listeReservation', name: 'Liste Reservation', component: Admin.Reservation },
-      { path: 'listeMaintenace', name: 'Liste Maintenace', component: Admin.Maintenace },
+      { path: 'dashboard', name: 'Dashboard', component: Admin.Home , beforeEnter: auth.adminConnect},
+
+      { path: 'dashboard-accueil', name: 'Dashboard Accueil', component: Admin.DashboardAccueil , beforeEnter: auth.accueilConnect },
+      { path: 'etudiant', name: 'Etudiant', component: Admin.Etudiant , beforeEnter: auth.accueilConnect },
+      { path: 'logement', name: 'Logement', component: Admin.Logement , beforeEnter: auth.accueilConnect},
+      { path: 'listeReservation', name: 'Liste Reservation', component: Admin.Reservation, beforeEnter: auth.accueilConnect },
+
+
+      { path: 'dashboard-maintenance', name: 'Dashboard Maintenance', component: Admin.DashboardMaintenance , beforeEnter: auth.maintenanceConnect },
+      { path: 'listeMaintenace', name: 'Liste Maintenace', component: Admin.Maintenace , beforeEnter: auth.maintenanceConnect },
+
       { path: 'messenger', name: 'Admin Messenger', component: Page.Messenger },
-      { path: 'restaurent', name: 'Restaurent', component: Admin.Restaurant },
-      { path: 'liste-commande', name: 'Liste Commande', component: Admin.ListeCommande },
-      { path: 'service', name: 'Service ', component: Admin.Service },
-      { path: 'liste-utilisateur', name: 'Liste Utilisateur', component: Admin.Utilisateur },
+
+      { path: 'dashboard-service', name: 'Dashboard Service', component: Admin.DashboardService , beforeEnter: auth.serviceConnect },
+      { path: 'restaurent', name: 'Restaurent', component: Admin.Restaurant , beforeEnter: auth.serviceConnect},
+      { path: 'liste-commande', name: 'Liste Commande', component: Admin.ListeCommande , beforeEnter: auth.serviceConnect },
+      { path: 'service', name: 'Service ', component: Admin.Service , beforeEnter: auth.serviceConnect },
+
+      { path: 'liste-utilisateur', name: 'Liste Utilisateur', component: Admin.Utilisateur , beforeEnter: auth.adminConnect },
     ]
   },
   {
@@ -65,19 +70,19 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: Page.Login,
     beforeEnter: auth.Deconnect,
   },
   {
     path: '/signup',
     name: 'SignUp',
-    component: Signup,
+    component: Page.Signup,
     beforeEnter: auth.Deconnect,
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'Page404',
-    component: Page404
+    component: Page.Page404
   },
 ]
 
@@ -88,7 +93,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = `${to.name} | ${ process.env.VUE_APP_TITLE }`
-  next()
+  next();
 })
 
 export default router

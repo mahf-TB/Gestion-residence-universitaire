@@ -31,6 +31,7 @@ export default{
 
         }
     }, 
+  
     computed: {
         isConnect() {
             let user = JSON.parse(localStorage.getItem('token'))

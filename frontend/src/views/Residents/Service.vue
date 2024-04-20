@@ -11,9 +11,9 @@
           </div>
           <div class="flex items-center justify-between">
             <div
-              class="mx-1 px-3 py-1 flex items-center text-base text-blue-0 bg-blue-1 hover:bg-slate-200 hover:text-blue-1 rounded transition-all cursor-pointer">
+              class="mx-1 px-3 py-1 flex items-center text-base text-blue-0 bg-blue-2 hover:bg-blue-1  rounded transition-all cursor-pointer">
               <span class="mx-2"><i class="fa-solid fa-calendar-days "></i></span>
-              <span class="mx-2 font-bold ">
+              <span class="mx-2 font-light ">
                 Filtres
               </span>
             </div>
@@ -26,14 +26,14 @@
           <div
             class="mx-1 px-4 py-2 flex items-center justify-center text-blue-2  border-b-4 border-blue-2   transition-all cursor-pointer w-1/2">
             <span class="mx-2"><i class="fa-solid fa-calendar-days "></i></span>
-            <span class="mx-2 font-bold ">
+            <span class="mx-2 font-ligth ">
               Vue Liste
             </span>
           </div>
           <div
             class="mx-1 px-4 py-2 flex items-center justify-center text-blue-2  hover:text-blue-2 hover:bg-blue-0 rounded transition-all cursor-pointer  w-1/2">
             <span class="mx-2"><i class="fa-solid fa-calendar-days "></i></span>
-            <span class="mx-2 font-bold ">
+            <span class="mx-2 font-ligth ">
               Vue Grille
             </span>
           </div>
@@ -75,7 +75,7 @@ export default {
   methods: {
     async getAllReparations() {
       try {
-        var response = await Axios.get('/index_resto')
+        var response = await Axios.get('/index_service?type=resto')
         console.log(response.data)
         this.dataArray = response.data;
       } catch (error) {

@@ -9,10 +9,15 @@ use Illuminate\Http\Request;
 class PubController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->params == 'user') {
+            $Mainte = Publication::with('auteurPub')->with('service')->where('auteur', auth()->user()->id )->orderBy('created_at', 'desc')->get();
+        }else{
 
-        $Mainte = Publication::with('auteurPub')->with('service')->orderBy('created_at', 'desc')->get();
+            $Mainte = Publication::with('auteurPub')->with('service')->orderBy('created_at', 'desc')->get();
+        }
+
         $dataRes =  $Mainte->map(function ($items) {
             return [
                 "id" => $items->id,
@@ -25,7 +30,7 @@ class PubController extends Controller
                 "date" => $items->updated_at,
             ];
         })->values();
-      
+
         return  $dataRes;
     }
 }

@@ -1,4 +1,9 @@
 import Home from './Dashboard.vue'
+import DashboardAccueil from './Personnel/DashboardAccueil.vue'
+import DashboardService from './Personnel/DashboardService.vue'
+import DashboardMaintenance from './Personnel/DashboardMaintenance.vue'
+
+
 import LayoutAdmin from './LayoutAdmin.vue'
 import Etudiant from './Reservation/Etudiant.vue'
 import Logement from './Reservation/Logement.vue'
@@ -21,5 +26,8 @@ export {
     Restaurant, 
     ListeCommande,
     Utilisateur,
-    Service
+    Service,
+    DashboardMaintenance,
+    DashboardService,
+    DashboardAccueil
 }

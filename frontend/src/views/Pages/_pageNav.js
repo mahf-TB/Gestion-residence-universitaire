@@ -1,6 +1,9 @@
 import Messenger from './Messenger.vue';
 import Profile from './Profile.vue';
+import Login from './Login.vue';
+import Signup from './Signup.vue';
+import Page404 from './Page404.vue';
 
 export{
-    Messenger, Profile
+    Messenger, Profile, Login, Signup, Page404
 }

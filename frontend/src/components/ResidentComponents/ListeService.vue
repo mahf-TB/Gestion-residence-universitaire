@@ -4,7 +4,7 @@
                 <div class="flex items-center">
                     <div> 
                         <img class="inline-block h-10 w-10 rounded-full"
-                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="">
+                        :src="require('@/assets/image/pdpNone.jpeg')" alt="">
                     </div>
                     <div class="flex flex-col ml-4 list-none">
                         <span class="text-base  font-medium text-blue-1">
@@ -18,14 +18,14 @@
                     </div>
                 </div>
         </div>
-        <div class="p-4 pb-1">
-            <p class="text-base width-auto font-medium text-blue-4 flex-shrink">
+        <div class="p-0 pb-1">
+            <p class="px-4 pt-4 m-0  text-base width-auto font-medium text-blue-4 flex-shrink">
                 {{ data.description }}
                
                 <br/>
                 <a href="#" class="text-blue-400"> #Prix: {{ data.tarifs }} Ar</a>
             </p>
-            <div class="md:flex-shrink px-6 py-3" v-if="data.image != ''">
+            <div class="md:flex-shrink " v-if="data.image != ''">
                 <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-[450px]">
                     <img class="object-cover w-full h-full"
                     :src="data.image"
@@ -34,7 +34,7 @@
             </div>
 
             <div class="mt-3 mb-1 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
-            <div class="flex items-center justify-between my-2">
+            <div class="flex items-center justify-between mx-3 my-2">
                 <div
                     class="flex items-center cursor-pointer justify-center rounded text-blue-4  text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">

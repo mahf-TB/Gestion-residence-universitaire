@@ -132,6 +132,7 @@
 import Axios from '@/_Service/caller.service';
 import Dialog from 'primevue/dialog';
 import VueMultiselect from 'vue-multiselect'
+import Swal from 'sweetalert2'
 export default {
     name: 'AjouterEtudiant',
     components: { Dialog, VueMultiselect },
@@ -172,7 +173,11 @@ export default {
             try {
                 const response = Axios.post('/etudiants', this.etudiant)
                 this.visible = false
-                this.$router.push("/admin/etudiant")
+                Swal.fire({
+                    title: "Enregistrement...!",
+                    text: "Your file has been saved.",
+                    icon: "success"
+                });
                 console.log(response)
 
             } catch (error) {
