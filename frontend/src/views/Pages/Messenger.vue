@@ -118,9 +118,8 @@
 
             </div>
           </div>
-
           <!--  contenu du message -->
-          <div class="h-full  px-10 py-4 overflow-scroll">
+          <div class="h-full  px-10 bg-slate-200 py-4 overflow-scroll">
             <!-- message container -->
             <div class="text-center ">
               <span class="text-xs text-blue-1 font-medium px-3 -mt-3">Wednesday, Feburary
@@ -147,6 +146,7 @@
                 </div>
               </div>
             </div>
+            
             <!-- me -->
             <div class="w-full flex justify-end mt-3">
               <div class="w-1/2 ">
@@ -165,10 +165,11 @@
                 </div>
               </div>
             </div>
+            
           </div>
 
           <!--  footer du message avec send -->
-          <div class="w-full  px-2 py-3">
+          <div class="w-full bg-slate-200  px-2 py-3">
             <div
               class="h-12 relative flex justify-between px-3 items-center border border-transparent bg-slate-50 focus-within:border-slate-300 rounded-full">
               <input class="w-full px-3 h-10 bg-transparent outline-none placeholder:text-slate-400"
@@ -190,7 +191,6 @@
                 <i class="fa-solid fa-paper-plane"></i>
               </div>
             </div>
-
             <!-- <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
             <svg class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
         </button> -->

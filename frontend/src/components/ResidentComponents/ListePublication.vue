@@ -3,8 +3,8 @@
         <div class="flex flex-shrink-0 p-4 pb-0">
             <div class="flex items-center">
                 <div>
-                    <img class="inline-block h-10 w-10 rounded-full"
-                    :src="require('@/assets/image/pdpNone.jpeg')" alt="">
+                    <img class="inline-block h-10 w-10 rounded-full" :src="require('@/assets/image/pdpNone.jpeg')"
+                        alt="">
                 </div>
                 <div class="flex flex-col ml-4 list-none">
                     <span class="text-base  font-medium text-blue-1">
@@ -22,6 +22,8 @@
                 {{ data.contenu }}
                 <br />
                 <a href="#" class="text-blue-400">#WomenWhoCode #CodeNewbie</a>
+
+                <!-- <pre>{{ data }}</pre> -->
             </p>
             <div class="md:flex-shrink  py-1">
                 <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-[500px]">
@@ -41,7 +43,7 @@
                             </path>
                         </g>
                     </svg>
-                    J'aime
+                    J'aime 
                 </div>
                 <div
                     class="flex items-center cursor-pointer justify-center rounded text-blue-4 text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
@@ -54,32 +56,33 @@
                     </svg>
                     Commenter
                 </div>
-                <div
+                <div v-if="data.service == ''"
                     class="flex items-center cursor-pointer justify-center rounded text-blue-4 text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
-                   
-                    <i v-if="data.service =!''" class="fa fa-cart-plus mr-4"></i>
-                    <svg v-else viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                         <g>
                             <path
                                 d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
                             </path>
                         </g>
                     </svg>
-                    {{ data.service =!'' ? 'Commander' : 'Parteger' }}
+                    Parteger
                 </div>
-
+               
+                <card-panier :service="data.service" :image="data.image"></card-panier>
             </div>
         </div>
     </article>
 
+
 </template>
 
 <script>
+import CardPanier from './CardPanier.vue'
 export default {
     name: 'ListePublication',
-    props: { data: Array },
+    props: { data: Object },
     components: {
-
+        CardPanier
     },
 }
 </script>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Resident\CommandeController;
 use App\Http\Controllers\Resident\PubController;
 use App\Http\Controllers\Resident\ReparationController;
 use Illuminate\Http\Request;
@@ -75,14 +76,20 @@ Route::group(['controller' => ServiceController::class], function () {
     Route::post('/ajouter_service',  'ajouterPlat');
     Route::post('/ajouter/service',  'ajouterService');
     Route::get('/index_service',  'indexResto');
+    Route::get('/index-commande',  'indexCommande');
     Route::get('/showOne/{id}',  'showPlat');
     Route::post('/update_plat/{id}',  'updatePlatResto');
     Route::delete('/deleteService/{id}',  'deleteService');
 });
 //Service routes
 Route::group(['controller' => PubController::class], function () {
-
     Route::get('/index_pub',  'index');
+});
+
+
+Route::group(['controller' => CommandeController::class], function () {
+    Route::post('/commande-service',  'demandeService');
+    Route::get('/index-service',  'index');
 });
 
 

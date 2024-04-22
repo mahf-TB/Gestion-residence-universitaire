@@ -75,7 +75,7 @@ export default {
   methods: {
     async getAllReparations() {
       try {
-        var response = await Axios.get('/index_service?type=resto')
+        var response = await Axios.get('/index-service')
         console.log(response.data)
         this.dataArray = response.data;
       } catch (error) {

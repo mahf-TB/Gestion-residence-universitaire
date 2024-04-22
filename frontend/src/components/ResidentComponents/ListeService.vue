@@ -57,12 +57,7 @@
                     </svg>
                     Commenter
                 </div>
-                <div :class="data.dispo==1?'text-blue-4 hover:bg-blue-2 hover:text-white':'text-blue-4 '"
-                    class="flex items-center cursor-pointer justify-center rounded  text-xs py-2 w-1/3  transition duration-350 ease-in-out">
-                    <i class="fa fa-cart-plus mr-4"></i>
-                     {{ data.dispo==1?'Commander':'Pas Disponible' }}
-                </div>
-
+                <card-panier :service="data" :image="data.image"></card-panier>
             </div>
         </div>
     </article>
@@ -70,10 +65,12 @@
 </template>
 
 <script>
+import CardPanier from './CardPanier.vue'
 export default {
     name: 'ListeService',
     props: { data: Array },
     components: {
+        CardPanier
 
     },
     methods: {

@@ -9,7 +9,7 @@
         <Dialog v-model:visible="visible" modal :style="{ width: '40rem' }" class="bg-blue-0"
             :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
             <!-- Modal -->
-            <template #header>
+            <template #header> 
                 <div class="flex items-center justify-center uppercase w-full">
                     <span class="font-semibold text-lg text-blue-2">Faites votre demande réparation</span>
                 </div>

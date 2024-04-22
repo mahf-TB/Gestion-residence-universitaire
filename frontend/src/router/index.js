@@ -64,7 +64,8 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'Admin Profile',
+    name: 'Profile',
+    beforeEnter: auth.userConnect,
     component: Page.Profile
   },
   {

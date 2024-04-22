@@ -30,7 +30,7 @@
             </div>
             <div  v-if="User.type == 'admin'" 
               class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
-              @click="this.$router.push('/admin/liste-utilisateur') , visible=false" >
+              @click="this.$router.push('/admin/liste-utilisateur'), visible=false" >
                 <i class="fa-solid  fa-users mx-3"></i>
               Gérer l'utilisateurs
             </div>
@@ -43,6 +43,12 @@
 
               <i class="fa-solid fa-bell  mx-3"></i>
               Notifications
+            </div>
+            <div  v-if="User.type == 'user'" 
+              class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/admin/liste-utilisateur') , visible=false" >
+                <i class="fa-solid  fa-users mx-3"></i>
+              Changer de chambre
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-cog mx-3"></i>

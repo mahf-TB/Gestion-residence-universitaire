@@ -48,11 +48,13 @@
                         <div @click="this.$router.push('/user/messenger')"
                             :class="{ 'text-blue-700': $route.path === '/user/messenger' }" class="text-blue-4 px-4">
                             <i class="fa-brands fa-facebook-messenger" style="font-size: 1.4rem"></i>
+
                         </div>
                         <div class="text-blue-4 px-4" @click="$refs.menu1.toggle($event)">
                             <i class="fa-solid fa-bell" style="font-size: 1.4rem"></i>
                             <Menu ref="menu1" :popup="true" class="flex" :model="items"></Menu>
                         </div>
+                        
                     </span>
                 </div>
             </div>
@@ -65,11 +67,12 @@
 import Axios from '@/_Service/caller.service'
 import Menu from 'primevue/menu';
 import HautHeaderVue from '../HautHeader.vue';
+import CardPanierVue from './CardPanier.vue';
 
 export default {
     name: 'Header',
     components: {
-        Menu, HautHeaderVue
+        Menu, HautHeaderVue, CardPanierVue
     },
     data() {
         return {

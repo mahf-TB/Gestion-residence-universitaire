@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceRequest;
+use App\Models\Commande;
+use App\Models\Etudiant;
+use App\Models\Logement;
 use App\Models\Publication;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -34,6 +37,29 @@ class ServiceController extends Controller
             ];
         })->values();
 
+        return  $dataRes;
+    } 
+
+    public function indexCommande()
+    {
+        $data = Commande::with('user')->with('service')->get();
+
+        $dataRes =  $data->map(function ($items) {
+            $etudiant = Etudiant::with('logement')->find($items->user->id_etudiant);
+            $logement = Logement::with('batiment')->find($etudiant->logement->id);
+            return [
+                "id" => $items->id,
+                "nom_service" => $items->service->nom_service,
+                "description" => $items->service->description,
+                "image" =>  $items->service->image != null ? $items->service->imageUrl() : '',
+                "tele" => $etudiant->telephone,
+                "status" => $items->status,
+                "nom_etudaiant" => $etudiant->nom.' '. $etudiant->prenom,
+                "logement" => $etudiant->logement->type_logement.' '.$etudiant->logement->num_logement,
+                "batiment" => $logement->batiment->nom_batiment,
+                "date" => $items->updated_at,
+            ];
+        })->values();
         return  $dataRes;
     } 
 
