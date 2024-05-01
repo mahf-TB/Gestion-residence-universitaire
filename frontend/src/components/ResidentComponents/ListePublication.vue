@@ -3,7 +3,7 @@
         <div class="flex flex-shrink-0 p-4 pb-0">
             <div class="flex items-center">
                 <div>
-                    <img class="inline-block h-10 w-10 rounded-full" :src="require('@/assets/image/pdpNone.jpeg')"
+                    <img class="inline-block h-10 w-10 rounded-full" :src="data.auteur.photo ? data.auteur.photo: require('@/assets/image/pdpNone.jpeg')"
                         alt="">
                 </div>
                 <div class="flex flex-col ml-4 list-none">

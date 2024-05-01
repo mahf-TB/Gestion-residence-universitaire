@@ -19,11 +19,11 @@ class ServiceController extends Controller
         if ($request->type =='resto') {
             $Mainte = Service::with('user')->where('type_service', 'RestoPlat')->orderBy('updated_at', 'desc')->get();
         }else{
-
             $Mainte = Service::with('user')->where('type_service', '!=', 'RestoPlat')->orderBy('updated_at', 'desc')->get();
         }
 
         $dataRes =  $Mainte->map(function ($items) {
+
             return [
                 "id" => $items->id,
                 "nom_service" => $items->nom_service,
@@ -40,16 +40,29 @@ class ServiceController extends Controller
         return  $dataRes;
     } 
 
-    public function indexCommande()
+    public function indexCommande(Request $request)
     {
-        $data = Commande::with('user')->with('service')->get();
+        if ($request->status == 'enattente'){
 
+            $data = Commande::where('status', 'en attente')->with('user', 'service')->get();
+            
+        }else if ($request->status == 'annuler') {
+            $data = Commande::where('status', 'annuler')->with('user', 'service')->get();
+            
+        }
+        else if ($request->status == 'livrer'){
+            $data = Commande::where('status', 'livré')->with('user', 'service')->get();
+        }
+        else{
+            $data = Commande::with('user', 'service')->get();
+        }
         $dataRes =  $data->map(function ($items) {
             $etudiant = Etudiant::with('logement')->find($items->user->id_etudiant);
             $logement = Logement::with('batiment')->find($etudiant->logement->id);
             return [
                 "id" => $items->id,
                 "nom_service" => $items->service->nom_service,
+                "nombre" => $items->nombre,
                 "description" => $items->service->description,
                 "image" =>  $items->service->image != null ? $items->service->imageUrl() : '',
                 "tele" => $etudiant->telephone,
@@ -176,5 +189,13 @@ class ServiceController extends Controller
                 'message' => 'Service deleted in successfully',
             ]);
         }
+    }
+
+    public function countStatus()
+    {
+        $data= Commande::select('status')
+            ->selectRaw('count(*) as nombre')
+            ->groupby('status')->get();
+        return $data;
     }
 }

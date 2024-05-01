@@ -5,7 +5,7 @@
     <div class="container pt-3">
       <router-view class="font-Avenir" />
     </div>
-    <footer class="relative bg-blueGray-200 pt-8 pb-6">
+    <!-- <footer class="relative bg-blueGray-200 pt-8 pb-6">
       <div class="container mx-auto px-4">
         <hr class="my-6 border-blueGray-300">
         <div class="flex flex-wrap items-center md:justify-between justify-center">
@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 

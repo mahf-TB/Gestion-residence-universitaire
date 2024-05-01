@@ -15,13 +15,16 @@ class ReparationController extends Controller
         $Mainte = Maintenance::where('id_user', $id)->orderBy('created_at', 'desc')->get();
 
         $dataRes =  $Mainte->map(function ($items) {
+            $user = $items['user'];
+            $user['photo'] = $user->photo ? $user->imageUrl() : null;
             return [
                 "id" => $items->id,
                 "type" => $items->type_probleme,
                 "design" => $items->description,
                 "status" => $items->status,
                 "image" =>  $items->image == null ? '' :$items->imageUrl() ,
-                "user" => $items->user->username,
+                "user" => $user,
+                // "user" => $items->user->imageUrl(),
                 "date" => $items->created_at,
             ];
         })->values();

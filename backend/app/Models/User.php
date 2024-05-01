@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
@@ -38,6 +39,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Etudiant::class, 'id_etudiant');
     }
 
+    public function imageUrl(): string
+    {
+        return Storage::disk('public')->url($this->photo);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

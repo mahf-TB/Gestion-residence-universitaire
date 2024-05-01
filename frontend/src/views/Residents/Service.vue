@@ -4,20 +4,24 @@
     <div class=" w-[60%]">
       <div class="bg-fotsy px-3 pt-2 mb-1 rounded-xl shadow">
         <div class="flex items-center justify-between w-full">
-          <div class="text-blue-4">
-            <span class="uppercase mx-1 font-bold ">
-              Services Disponible
-            </span>
+          <div class="p-1 flex items-center text-base text-blue-4  rounded transition-all ">
+            <span class="px-2 py-1 cursor-pointer rounded-sm hover:bg-blue-1 hover:text-blue-0"><i class="fa-solid fa-calendar-days "></i></span>
+            <div class="text-blue-4">
+              <span class="uppercase mx-1 font-bold ">
+                Services Disponible
+              </span>
+            </div>
           </div>
+
           <div class="flex items-center justify-between">
+
             <div
               class="mx-1 px-3 py-1 flex items-center text-base text-blue-0 bg-blue-2 hover:bg-blue-1  rounded transition-all cursor-pointer">
               <span class="mx-2"><i class="fa-solid fa-calendar-days "></i></span>
               <span class="mx-2 font-light ">
-                Filtres
+                Votre commande
               </span>
             </div>
-
           </div>
 
         </div>
@@ -48,7 +52,7 @@
     <div class="my-2">
       <div class=" h-full p-2 text-center">
         <span class="font-semibold text-lg text-blue-2">Aucun service disponible</span>
-      </div> 
+      </div>
     </div>
 
 
@@ -66,7 +70,7 @@ export default {
   },
   data() {
     return {
-      dataArray:[]
+      dataArray: []
     }
   },
   mounted() {

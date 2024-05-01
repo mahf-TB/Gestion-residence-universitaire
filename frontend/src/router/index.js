@@ -45,6 +45,7 @@ const routes = [
       { path: 'service', name: 'Service', component: Etudiant.Service },
       { path: 'maintenance', name: 'Maintenance', component: Etudiant.Maintenance },
       { path: 'messenger', name: 'Messenger User', component: Page.Messenger },
+      { path: 'chambre', name: 'Chambre Etudiant', component: Etudiant.Chambre },
     ]
   },
   {
@@ -75,7 +76,7 @@ const routes = [
     beforeEnter: auth.Deconnect,
   },
   {
-    path: '/signup',
+    path: '/signup/:id',
     name: 'SignUp',
     component: Page.Signup,
     beforeEnter: auth.Deconnect,
