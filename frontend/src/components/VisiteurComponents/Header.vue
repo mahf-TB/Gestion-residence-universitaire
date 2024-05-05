@@ -15,9 +15,11 @@
                             Nos Résidences 
                             <Menu ref="menu1" :popup="true" class="flex" :model="items"></Menu>
                         </button>
-                         <router-link to="/activites"  class="text-blue-0 px-4 flex items-center h-full " :class="{ 'border-b-4 border-blue-0': $route.path === '/activites' }">
-                            Activités<span class="lowercase mx-1">et</span>Services
-                         </router-link>
+                        <button @click="$refs.activity.toggle($event)" class="text-blue-0 flex items-center px-4 uppercase  h-full " :class="{ 'border-b-4 border-blue-0': $route.path === '/activites' }"> 
+                            Activités
+                            <Menu ref="activity" :popup="true" class="flex" :model="activities"></Menu>
+                        </button>
+
                         <router-link to="/contact" class="text-blue-0 px-4 flex items-center h-full " :class="{ 'border-b-4 border-blue-0': $route.path === '/contact' }">
                             Guide pratique
                         </router-link>
@@ -54,10 +56,16 @@ export default {
                 { label: 'Toutes nos logements', command: () => this.$router.push("/residences?cas=logement") },
                 { label: 'Espace commun', command: () => this.$router.push("/residences?cas=espace") },
                 { label: 'Service ', command: () => this.$router.push("/residences?cas=service") },
+            ],
+            activities: [
+                { label: 'Activités sportives', command: () => this.$router.push("/activites?cas=sport") },
+                { label: 'Activités éducatives', command: () => this.$router.push("/activites?cas=education") },
+                { label: 'Activités divertissement ', command: () => this.$router.push("/activites?cas=divertissement") },
             ]
         }
     },
     mounted() {
+
     },
     computed: {
         isConnect() {
