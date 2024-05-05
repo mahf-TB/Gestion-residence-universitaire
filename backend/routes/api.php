@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Resident\CommandeController;
+use App\Http\Controllers\Resident\NotifController;
 use App\Http\Controllers\Resident\PubController;
 use App\Http\Controllers\Resident\ReparationController;
 use Illuminate\Http\Request;
@@ -90,6 +91,11 @@ Route::group(['controller' => ServiceController::class], function () {
 //Service routes
 Route::group(['controller' => PubController::class], function () {
     Route::get('/index_pub',  'index');
+});
+//Service routes
+Route::group(['controller' => NotifController::class], function () {
+    Route::get('/index_notif',  'indexNotification');
+    Route::get('/read',  'readAll');
 });
 
 

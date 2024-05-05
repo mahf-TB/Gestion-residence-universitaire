@@ -72,8 +72,6 @@
             </div>
         </div>
     </article>
-
-
 </template>
 
 <script>

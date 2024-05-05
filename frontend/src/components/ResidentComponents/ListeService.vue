@@ -71,7 +71,6 @@ export default {
     props: { data: Array },
     components: {
         CardPanier
-
     },
     methods: {
 

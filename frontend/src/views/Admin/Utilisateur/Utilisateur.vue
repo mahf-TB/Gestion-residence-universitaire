@@ -137,6 +137,7 @@ export default {
     },
     mounted() {
         this.getterUtilisateurs();
+      
     },
     methods: {
         async getterUtilisateurs() {

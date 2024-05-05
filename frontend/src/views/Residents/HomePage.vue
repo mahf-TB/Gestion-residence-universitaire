@@ -63,7 +63,6 @@ export default {
     async getAllReparations() {
       try {
         var response = await Axios.get('/index_pub')
-        console.log(response.data)
         this.dataArray = response.data;
       } catch (error) {
         console.error(error);
@@ -74,9 +73,7 @@ export default {
             if (token) {
                 const res = await Axios.get('userConnect')
                 if (res.data.status == 'success') {
-                    console.log(res.data)
                     this.user = res.data.user
-                    console.log(this.user)
                 }
             }
         },
