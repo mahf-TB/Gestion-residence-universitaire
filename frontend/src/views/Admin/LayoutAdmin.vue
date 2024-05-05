@@ -2,7 +2,7 @@
   <div class="bg-blue-0 ">
     <Header v-if="user.type == 'admin'"></Header>
     <header-personnel v-else></header-personnel>
-    <div class="container pt-3">
+    <div class="container">
       <router-view class="font-Avenir" />
     </div>
     <!-- <footer class="relative bg-blueGray-200 pt-8 pb-6">

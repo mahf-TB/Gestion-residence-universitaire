@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-20 mb-10">
+    <div class="mt-24 mb-10">
       <div class=" bg-white p-4  divide-y border-gray-400 rounded-md shadow ">
         <div class="relative rounded-md">
           <card-reservation :getterMaintenance="getterMaintenance"></card-reservation>

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header></Header>
         <div class="relative bg-blue-0 text-blue-4">
             <main class="container flex justify-between pt-2">
                 <div class="w-2/3 flex flex-col mt-2">

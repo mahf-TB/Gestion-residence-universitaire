@@ -23,7 +23,7 @@
           </div>
           <div class="bg-gradient-to-r from-blue-1 to-blue-2 h-px my-3"></div>
           <div class="cursor-pointer text-[14px]">
-            <div @click="this.$router.push('/profile'), visible = false"
+            <div @click="openProfile(User.type)"
               class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
               <i class="fa-solid fa-user mx-3"></i>
               Mon profile
@@ -121,6 +121,15 @@ export default {
 
   },
   methods: {
+    openProfile(items){
+      console.log(items)
+      if (items == 'user') {
+        this.$router.push(`/user/profile`) 
+      }else{
+        this.$router.push(`/admin/profile`)
+      }
+      this.visible = false
+    },
     async isConnectUser() {
       let token = JSON.parse(localStorage.getItem('token'))
       if (token) {
