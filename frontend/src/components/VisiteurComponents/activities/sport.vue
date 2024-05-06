@@ -1,8 +1,9 @@
 <template>
-      <h1 class="text-5xl text-[#0458a0] font-bold mb-16 bg-[#ecf2f5] text-center py-16">
+  <div>
+    <h1 class="text-5xl text-[#0458a0] font-bold mb-16 bg-[#ecf2f5] text-center py-16">
       Activités Sportives et Loisirs
     </h1>
-    <div   class="container my-5">
+    <div class="container my-5">
       <div class="flex flex-wrap justify-around">
         <div class="w-[500px] pb-16">
           <a href="#" class="shadow-2xl relative">
@@ -157,10 +158,11 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "sport"
+  name: "sport"
 }
 </script>

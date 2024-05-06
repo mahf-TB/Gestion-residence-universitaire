@@ -1,4 +1,4 @@
-<template>
+<template> 
       <div >
       <h1 class="text-5xl text-[#0458a0] font-bold mb-16 bg-[#ecf2f5] text-center py-16">
         Activités éducatives et de développement personnel
