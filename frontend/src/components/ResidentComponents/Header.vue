@@ -15,7 +15,8 @@
                 </div>
                 <div class="w-2/4 h-full text-blue-4 mx-5 flex items-center justify-between ">
                     <nav class="text-[18px] h-full w-full flex items-center justify-center">
-                        <router-link to="/user/home" :class="{ 'text-blue-700 border-b-2 border-blue-2': $route.path === '/user/home' }"
+                        <router-link to="/user/home"
+                            :class="{ 'text-blue-700 border-b-2 border-blue-2': $route.path === '/user/home' }"
                             class="text-blue-4 px-20 h-full  flex items-center justify-center flex-col  transition-all ">
                             <i class="fa-solid fa-house-chimney" style="font-size: 1.4rem"></i>
                             <span class="text-xs lowercase font-extralight">Accueil</span>
@@ -26,7 +27,8 @@
                             <i class="fa-solid fa-calendar-days" style="font-size: 1.4rem"></i>
                             <span class="text-xs lowercase font-extralight">évenement</span>
                         </router-link>
-                        <router-link to="/user/service" :class="{ 'text-blue-700 border-b-2 border-blue-2': $route.path === '/user/service' }"
+                        <router-link to="/user/service"
+                            :class="{ 'text-blue-700 border-b-2 border-blue-2': $route.path === '/user/service' }"
                             class="text-blue-4 px-20  h-full  flex items-center justify-center flex-col transition-all ">
                             <span class="flex">
                                 <i class="fa-solid fa-bell-concierge" style="font-size: 1.4rem"></i>
@@ -43,18 +45,16 @@
 
                     </nav>
                 </div>
-                <div class="w-1/4 flex items-center justify-center text-gray-500">
-                    <span class="material-icons-outlined text-blue-0 relative cursor-pointer flex">
+                <div class="w-1/4 flex items-center justify-center h-full text-gray-500">
+                    <span class="material-icons-outlined text-blue-0 relative h-full flex items-center">
                         <div @click="this.$router.push('/user/messenger')"
-                            :class="{ 'text-blue-700': $route.path === '/user/messenger' }" class="text-blue-4 px-4">
+                            :class="{ 'text-blue-700': $route.path === '/user/messenger' }"
+                            class="text-blue-4 px-2 cursor-pointer h-full flex items-center relative">
                             <i class="fa-brands fa-facebook-messenger" style="font-size: 1.4rem"></i>
-
+                            <span
+                                class="absolute top-2 right-1 text-[8px] px-[6px] py-[2px] rounded-full bg-red-500 text-fotsy">5</span>
                         </div>
-                        <div class="text-blue-4 px-4" @click="$refs.menu1.toggle($event)">
-                            <i class="fa-solid fa-bell" style="font-size: 1.4rem"></i>
-                            <Menu ref="menu1" :popup="true" class="flex" :model="items"></Menu>
-                        </div>
-                        
+                      <notif-card></notif-card>
                     </span>
                 </div>
             </div>
@@ -65,26 +65,17 @@
 <script>
 
 import Axios from '@/_Service/caller.service'
-import Menu from 'primevue/menu';
 import HautHeaderVue from '../HautHeader.vue';
 import CardPanierVue from './CardPanier.vue';
+import NotifCard from './NotifCard.vue';
 
 export default {
     name: 'Header',
     components: {
-        Menu, HautHeaderVue, CardPanierVue
+        HautHeaderVue, CardPanierVue,
+        NotifCard
     },
-    data() {
-        return {
-            items: [
-                { label: 'Type de logement', command: () => this.$router.push("/accueil") },
-                { label: 'Logement pour etudiant', command: () => this.$router.push("/user/residences") },
-                { label: 'Service', command: () => this.$router.push("/user/service") },
-            ]
-        }
-    },
-    mounted() {
-    },
+  
     computed: {
     },
     methods: {

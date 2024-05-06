@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="bg-blue-4">
     <div class="flex items-center justify-center h-screen relative  overflow-hidden">
       <div class="max-w-md text-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="524.67004" height="531.39694"
@@ -174,39 +174,40 @@
           <div class="flex flex-col text-sm rounded-md">
             <!-- adresse email ou username -->
             <input type="email" class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 "
-              name="integration[email]" required placeholder="Entrer votre Email" v-model="user.email" />
+              name="integration[email]" required placeholder="Juste pour être sûr, entrer votre email lors inscription " v-model="user.email" />
             <p class="text-red-500 text-xs italic mb-3">{{ Erreur.email ? 'Email est deja enregistrer' : '' }}</p>
+            <p class="text-red-500 text-xs italic mb-3">{{ errEmail }}</p>
 
             <!-- adresse email ou username -->
             <input type="text"
               class="rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
-              name="integration[name]" required placeholder="Entrer nom d'utilisateur" v-model="user.nom" />
+              name="integration[name]" required placeholder="Nom de l'utilisateur" v-model="user.nom" />
             <p class="text-red-500 text-xs italic mb-3">{{ Erreur.username ? 'Username est en 6 caracteur minimum' : '' }}
             </p>
 
             <!-- input pour votre mot de passe -->
             <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[password]" :type="[toggle ? 'text' : 'password']"
-              placeholder="Entrer votre mot de passe" v-model="user.motdepasse" />
+              placeholder="Nouveaux mot de passe" v-model="user.motdepasse" />
             <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe' : '' }}</p>
 
             <!-- input pour votre mot de passe -->
             <input class=" rounded-[4px] p-3 text-[16px]  mb-1  border-1 border-gray-400 hover:border-green-400"
               name="integration[confirmePwd]" :type="[toggle ? 'text' : 'password']"
-              placeholder="Confirmer votre mot de passe" v-model="user.confirmePwd" />
+              placeholder="Confirmation du mot de passe" v-model="user.confirmePwd" />
             <p class="text-red-500 text-xs italic mb-3">{{ Erreur.password ? 'verifiez votre mot de passe si il est même':''}}</p>
 
             <!-- toggle voir ou hash pour votre mot de passe -->
             <div class="flex mb-1 justify-between">
-              <div class="mb-3 relative rounded-full w-12 h-6 transition duration-200 ease-linear"
-                :class="[toggle ? 'bg-green-400' : 'bg-gray-200']">
-                <label for="toggle"
-                  class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer"
-                  :class="[toggle ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-200']">
+              <label for="toggle" class="mb-3 relative rounded-full w-12 h-6 transition duration-200 ease-linear"
+              :class="[toggle ? 'bg-green-400' : 'bg-gray-200']">
+              <div 
+                class="absolute left-0 bg-white border-2 mb-2 w-6 h-6 rounded-full transition transform duration-100 ease-linear cursor-pointer"
+                :class="[toggle ? 'translate-x-full border-green-400' : 'translate-x-0 border-gray-200']">
                   <input type="checkbox" id="toggle" name="toggle"
                     class="appearance-none w-full h-full active:outline-none focus:outline-none" @click="onToggle()" />
-                </label>
-              </div>
+                </div>
+              </label>
             </div>
           </div>
           <button
@@ -238,18 +239,20 @@ export default {
         email: '',
         motdepasse: '',
         confirmePwd: '',
-        type: 'user'
+        type: 'user',
+        id: this.$route.params.id,
       },
       toggle: false,
-      Erreur: []
+      Erreur: [],
+      errEmail:''
     }
   },
   mounted() {
-    const cas = this.$route.query.cas;
-    console.log('Valeur du paramètre "cas" :', cas);
+
   },
   methods: {
     async signUp() {
+      this.Erreur =[]
       console.log(this.user)
       const formData = new FormData()
       formData.append('username', this.user.nom)
@@ -257,13 +260,12 @@ export default {
       formData.append('password', this.user.motdepasse)
       formData.append('password_confirmation', this.user.confirmePwd)
       formData.append('type', this.user.type)
+      formData.append('id_etudiant', this.user.id)
       try {
         const response = await Axios.post('/auth/register', formData)
-        console.log(response)
+        console.log(response.data)
         if (response.data.status == 'success') {
-          //ajouter a user-info dans le localeStorage
           let user = response.data.user
-
           //ajouter a token dans le localeStorage
           let access_token = response.data.access_token
           localStorage.setItem("token", JSON.stringify(access_token))
@@ -273,6 +275,8 @@ export default {
           } else if (user.type == 'user') {
             this.$router.push("/user/home");
           }
+        }else{
+          this.errEmail = 'Verifiez votre adresse email si le même'
         }
       } catch (error) {
         console.log(error.response.data.errors);

@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container">
     <h1 class="text-xxl text-[#2b6b88]">Bienvenu dans evenement</h1>
     <!-- Button trigger modal -->
     

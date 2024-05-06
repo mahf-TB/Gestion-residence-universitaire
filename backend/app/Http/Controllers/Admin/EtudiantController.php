@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EtudiantRequest;
+use App\Mail\AccepteEmail;
 use App\Models\Etudiant;
 use App\Models\Logement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EtudiantController extends Controller
 {
@@ -44,7 +46,17 @@ class EtudiantController extends Controller
                 $logement = $chambre->update([
                     'status' => 'occuper',
                 ]);
-                if ($logement) {
+                $mailData = [
+                    "titre" => "Bienvenue parmis nos membre",
+                    "para" => "Cher " . $request->nom . "  ,Votre demande de réservation pour la chambre " . $chambre->num_logement . " a été acceptée. 
+                    Votre séjour est prévu du " . $request->nom . " au " . $request->nom,
+                    "body" => "Nous sommes heureux de vous compter parmi nos membres.",
+                    "link" => "http://localhost:8001/signup?email=" . $etudiant->id,
+                ];
+                $mail = Mail::to($request->email)
+                    ->send(new AccepteEmail($mailData));
+
+                if ($logement && $mail) {
                     return response()->json([
                         'Logement' => $logement,
                         'status' => 'success',
@@ -83,7 +95,7 @@ class EtudiantController extends Controller
 
     public function getEtudiantLogment(Request $request)
     {
-        $result = Etudiant::where('id_logement', $request->id )->get();
+        $result = Etudiant::where('id_logement', $request->id)->get();
         if ($result) {
             return $result;
         } else {

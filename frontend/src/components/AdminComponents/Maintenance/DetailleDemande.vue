@@ -9,39 +9,41 @@
                 </h2>
             </template>
             <section class="bg-white">
-                <div class="container px-2 py-4 mx-auto">
-                    <div class="mt-2 lg:-mx-6 lg:flex lg:items-start">
+                <div class="container px-2 py-2 mx-auto">
+                    <div class="mt-2 lg:-mx-6 lg:flex ">
                         <img class="object-cover w-full lg:mx-6 lg:w-1/2 rounded-xl h-72 lg:h-96" :src="data.image"
                             alt="pdp ">
-                        <div class="mt-4 lg:w-1/2 lg:mt-0 lg:mx-6 ">
-                            <div class="flex items-center ">
-                                <div>
-                                    <img class="object-cover object-center w-12 h-12 rounded-full"
-                                        src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-                                        alt="">
-                                </div>
-                                <div class="mx-2">
-                                    <h1 class="text-sm text-gray-700">{{ data.etudiant }}</h1>
-                                    <div class="flex  text-xs items-center">
-                                        <span class=" text-gray-500">
-                                            {{ new Date(data.date).toLocaleDateString() + ' à ' + new
-                                                Date(data.date).toLocaleTimeString()
-                                            }}
-                                        </span>
+                        <div class="mt-4 lg:w-1/2 lg:mt-0 lg:mx-6 flex flex-col justify-between lg:h-80">
+                            <div>
+                                <div class="flex items-center ">
+                                    <div>
+                                        <img class="object-cover object-center w-12 h-12 rounded-full"
+                                            src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+                                            alt="">
+                                    </div>
+                                    <div class="mx-2">
+                                        <h1 class="text-sm text-gray-700">{{ data.etudiant }}</h1>
+                                        <div class="flex  text-xs items-center">
+                                            <span class=" text-gray-500">
+                                                {{ new Date(data.date).toLocaleDateString() + ' à ' + new
+                                                    Date(data.date).toLocaleTimeString()
+                                                }}
+                                            </span>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <p class="text-sm m-3 text-blue-500 uppercase"><span class="">{{ data.type }}</span>
-                            </p>
-                            <a href="#"
-                                class="block mb-3 text-base font-semibold text-gray-800 hover:underline">
-                                {{ data.logement +' dans le '+ data.batiment}}
-                            </a>
+                                <p class="text-sm my-3  uppercase">Probleme <span class="text-blue-500">{{ data.type }}</span>
+                                </p>
+                                <a href="#" class="block mb-3 text-base font-semibold text-gray-800 hover:underline">
+                                    {{ data.logement + ' dans le ' + data.batiment }}
+                                </a>
 
-                            <p class="mt-3 text-sm text-gray-700  md:text-sm">
-                                {{ data.design }}
-                            </p>
+                                <p class="mt-3 text-sm text-gray-700  md:text-sm">
+                                    {{ data.design }}
+                                </p>
+
+                            </div>
                             <div class="flex items-center justify-end" v-if="data.status == 'en attente'">
                                 <button @click="visible = false"
                                     class="text-center hover:shadow-lg mx-2 text-lg cursor-pointer btn btn-danger  rounded-full">
@@ -49,7 +51,7 @@
                                 </button>
                                 <button @click="reparationEncours('encours', data)"
                                     class="text-center hover:shadow-lg mx-2 text-lg cursor-pointer btn btn-primary rounded-full">
-                                    <i class="fa-solid fa-hammer"></i> Reparer
+                                    <i class="fa-solid fa-wrench"></i> Reparer
                                 </button>
                             </div>
                             <div class="flex items-center justify-end" v-if="data.status == 'en cours'">

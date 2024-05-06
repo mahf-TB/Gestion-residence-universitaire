@@ -2,7 +2,7 @@
     <div class="mt-20 mb-10">
       <div class=" bg-white p-4  divide-y border-gray-400 rounded-md shadow ">
         <div class="relative rounded-md">
-          <card-reservation></card-reservation>
+          <card-reservation :getterMaintenance="getterMaintenance"></card-reservation>
           <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px mt-5 mb-4"></div>
           <div class="flex justify-between max-md:flex-col">
             <!-- Recherche input en top -->
@@ -134,13 +134,13 @@
       },
     },
     mounted() {
-      this.getterLogement();
+      this.getterMaintenance();
   
     },
     methods: {
-      async getterLogement() {
+      async getterMaintenance(status) {
         try {
-          var response = await Axios.get('/maintenance')
+          var response = await Axios.get('/maintenance?status='+status)
           this.dataArray = response.data;
         } catch (error) {
           console.error(error);
@@ -167,7 +167,6 @@
         if (status == 'terminer') {
           return "fa-solid fa-circle-check mr-2"
         }
-
         return "fa-solid fa-clock mr-2"
       },
   

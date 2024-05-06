@@ -13,13 +13,14 @@
                     <span class="font-semibold text-lg text-blue-2">Faites votre Commande </span>
                 </div>
             </template>
+            <div class="my-2 bg-gradient-to-r from-blue-900 to-blue-800 h-px"></div>
             <div class="modal-content">
                 <div
                     class=" relative flex h-full w-full flex-col rounded-[20px] bg-white bg-clip-border p-4 shadow-3xl shadow-shadow-500">
                     <div class="modal-header p-0">
                         <div class="w-full">
                             <h4 class="text-xl font-bold text-navy-700 text-black">
-                                Tous les voiture commander
+                                Voulez-vous commandée du {{ service.nom_service }}
                             </h4>
                         </div>
                     </div>
@@ -64,7 +65,6 @@
                 </div>
             </template>
         </Dialog>
-
     </div>
 </template>
 

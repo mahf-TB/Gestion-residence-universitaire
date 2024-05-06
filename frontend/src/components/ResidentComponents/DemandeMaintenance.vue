@@ -33,8 +33,8 @@
                     <div class="pt-4 mb-3 px-4 bg-transparent rounded-b-lg">
                         <select name="type" id="type" v-model="data.type_probleme"
                             class="bg-transparent  border-b-2 border-blue-1  text-blue-1">
-                            <option selected disabled value="">Quel type de problème</option>
-                            <option value="Plombier">Plombier</option>
+                            <option selected disabled value="">Quel est le type de problème</option>
+                            <option value="Plombier">Plomberie</option>
                             <option value="Electricité">Electricité</option>
                             <option value="Infrastructure">Infrastructure</option>
                             <option value="Autre">Autre</option>

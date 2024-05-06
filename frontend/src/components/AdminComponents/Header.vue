@@ -26,16 +26,22 @@
                             class="text-blue-0 px-4 uppercase h-full  flex items-center transition-all  hover:bg-blue-1">
                             Service <span class="lowercase mx-1">et</span> Activités
                         </Button>
-                        <Menu ref="menu2" :popup="true" class="flex" :model="items1"></Menu>
+                        <Menu ref="menu2" :popup="true" class="flex" :model="items1">
+                        </Menu>
                     </nav>
                 </div>
                 <div class="flex items-center text-gray-500">
-                    <span class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer flex">
-                        <div class="h-full mx-1 px-2">
+                    <span class="material-icons-outlined h-full text-blue-0 p-2 relative cursor-pointer flex">
+                        <div @click="this.$router.push('/admin/messenger')"
+                            :class="{ 'text-blue-4': $route.path === '/admin/messenger' }" class="h-full px-2 relative">
                             <i class="fa-brands fa-facebook-messenger" style="font-size: 1.4rem"></i>
+                            <span
+                                class="absolute -top-2 right-1 text-[8px] px-[6px] py-[2px] rounded-full bg-red-500 text-fotsy">3</span>
                         </div>
-                        <div class="h-full mx-1 px-2">
-                            <i class="fa-solid fa-bell mx-3" style="font-size: 1.4rem"></i>
+                        <div class="h-full  px-2 relative">
+                            <i class="fa-solid fa-bell" style="font-size: 1.4rem"></i>
+                            <span v-if="note"
+                                class="absolute -top-2 right-1 text-[8px] px-[6px] py-[2px] rounded-full bg-red-500 text-fotsy">{{ note }}</span>
                         </div>
                     </span>
                 </div>
@@ -64,14 +70,19 @@ export default {
                 { label: 'Restaurent Interne', command: () => this.$router.push("/admin/restaurent") },
                 { label: 'Autre Service', command: () => this.$router.push("/admin/service") },
             ],
-            routeClass: 'border-b-4 border-blue-0'
+            routeClass: 'border-b-4 border-blue-0',
+            note: 0
         }
     },
     computed: {
 
     },
     mounted() {
-
+        window.Echo.channel('hello').listen('HelloEvents', (e) => {
+            this.note++;
+            console.log('go... ', this.note)
+            console.log(e)
+        })
     },
     methods: {
 

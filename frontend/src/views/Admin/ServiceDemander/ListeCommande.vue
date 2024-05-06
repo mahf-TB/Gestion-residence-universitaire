@@ -2,7 +2,7 @@
   <div class="mt-24">
     <div class=" bg-white p-4 divide-y border-gray-400 rounded-md shadow ">
       <div class="relative rounded-md">
-        <card-reservation :functStatus='getterReservation'></card-reservation>
+        <card-commande :functStatus='getterCommande'></card-commande>
         <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px mt-5 mb-4"></div>
         <div class="flex justify-between max-md:flex-col">
           <!-- Recherche input en top -->
@@ -34,6 +34,9 @@
                   Service
                 </th>
                 <th class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                  Nombre
+                </th>
+                <th class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   noms
                 </th>
                 <th class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
@@ -61,7 +64,7 @@
                   </div>
 
                 </td>
-                <td class="px-6 py-3 border-b  whitespace-nowrap">
+                <td class="px-3 py-3 border-b  whitespace-nowrap">
                   <div class="flex items-center  ">
                     <div class="flex-shrink-0 w-16 h-16">
                       <img class="w-full h-full object-cover" :src="data.image" alt="" />
@@ -69,6 +72,7 @@
                   </div>
                 </td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.nom_service }}</td>
+                <td class="py-2 px-4 border-b border-grey-light text-left">{{ data.nombre }}</td>
                 <td class="py-2 px-4 border-b border-grey-light text-left">
                   <div class="ml-4">
                     <div class="text-sm font-medium text-gray-900"> {{ data.nom_etudaiant }}
@@ -110,17 +114,17 @@
 <script>
 
 import Axios from '@/_Service/caller.service';
-import CardReservation from '@/components/AdminComponents/Reservation/CardReservation.vue';
 import Paginator from 'primevue/paginator';
 import Menu from 'primevue/menu';
 import DetailleValidation from '@/components/AdminComponents/Reservation/DetailleValidation.vue';
+import CardCommande from '@/components/AdminComponents/Resto-Service/CardCommande.vue';
 
 export default {
   name: 'Restaurent',
   components: {
     Paginator, Menu,
-    CardReservation,
-    DetailleValidation
+    DetailleValidation,
+    CardCommande
   },
   data() {
     return {
@@ -129,10 +133,7 @@ export default {
       length: null,
       first: 0,
       query: '',
-      items1: [
-        { label: 'Accepter', command: () => this.getterLogement() },
-        { label: 'Refuser', command: () => this.getterLogement() },
-      ]
+      
     }
   },
   computed: {
@@ -146,13 +147,13 @@ export default {
     },
   },
   mounted() {
-    this.getterReservation();
+    this.getterCommande();
 
   },
   methods: {
-    async getterReservation(data) {
+    async getterCommande(status) {
       try {
-        var response = await Axios.get(`/index-commande`)
+        var response = await Axios.get(`/index-commande?status=${status}`)
         console.log(response)
         this.dataArray = response.data;
       } catch (error) {
@@ -168,19 +169,19 @@ export default {
       return new Date(items).toLocaleDateString()
     },
     isValide(status) {
-      if (status == 'accepter') {
+      if (status == 'livré') {
         return "text-green-800 bg-green-100"
       }
-      if (status == 'refuser') {
+      if (status == 'annuler') {
         return "text-red-800 bg-red-100"
       }
       return "text-yellow-800 bg-yellow-100"
     },
     isIconValide(status) {
-      if (status == 'accepter') {
+      if (status == 'livré') {
         return "fa-solid fa-circle-check mr-2"
       }
-      if (status == 'refuser') {
+      if (status == 'annuler') {
         return "fa-solid fa-circle-xmark mr-2"
       }
       return "fa-solid fa-clock mr-2"

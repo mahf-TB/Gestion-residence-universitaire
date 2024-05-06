@@ -11,10 +11,18 @@ use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
-        $Mainte = Maintenance::with('user')->orderBy('created_at', 'desc')->get();
+        if ($request->status == 'enattend') {
+            $Mainte = Maintenance::where('status', 'en attente')->with('user')->orderBy('created_at', 'desc')->get();
+        } elseif ($request->status == 'encours') {
+            $Mainte = Maintenance::where('status', 'en cours')->with('user')->orderBy('created_at', 'desc')->get();
+        } elseif ($request->status == 'terminer') {
+            $Mainte = Maintenance::where('status', 'terminer')->with('user')->orderBy('created_at', 'desc')->get();
+        } else {
+            $Mainte = Maintenance::with('user')->orderBy('created_at', 'desc')->get();
+        }
+     
 
         $dataRes =  $Mainte->map(function ($items) {
             $etudiant = Etudiant::with('logement')->find($items->user->id_etudiant);

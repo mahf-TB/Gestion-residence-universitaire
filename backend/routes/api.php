@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Resident\CommandeController;
+use App\Http\Controllers\Resident\NotifController;
 use App\Http\Controllers\Resident\PubController;
 use App\Http\Controllers\Resident\ReparationController;
 use Illuminate\Http\Request;
@@ -39,6 +40,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('change_password', [ProfileController::class, 'changeUserPassword']);
     Route::get('/userConnect', [AuthController::class, 'getUser']);
     Route::get('/logout', [AuthController::class, 'logout']);
+});
+
+Route::group(['controller' => ProfileController::class], function () {
+    Route::post('/uploadPhoto',  'ajouterPhotoProfile');
+    Route::post('/change-password',  'changeUserPassword');
 });
 
 Route::apiResource('/utilisateurs', UtilisateurController::class);
@@ -77,6 +83,7 @@ Route::group(['controller' => ServiceController::class], function () {
     Route::post('/ajouter/service',  'ajouterService');
     Route::get('/index_service',  'indexResto');
     Route::get('/index-commande',  'indexCommande');
+    Route::get('/service_status',  'countStatus');
     Route::get('/showOne/{id}',  'showPlat');
     Route::post('/update_plat/{id}',  'updatePlatResto');
     Route::delete('/deleteService/{id}',  'deleteService');
@@ -85,12 +92,18 @@ Route::group(['controller' => ServiceController::class], function () {
 Route::group(['controller' => PubController::class], function () {
     Route::get('/index_pub',  'index');
 });
+//Service routes
+Route::group(['controller' => NotifController::class], function () {
+    Route::get('/index_notif',  'indexNotification');
+    Route::get('/read',  'readAll');
+});
 
 
 Route::group(['controller' => CommandeController::class], function () {
     Route::post('/commande-service',  'demandeService');
     Route::get('/index-service',  'index');
 });
+
 
 
 Route::group(['controller' => ReparationController::class], function () {

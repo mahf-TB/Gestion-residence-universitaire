@@ -18,14 +18,11 @@ class ReservationController extends Controller
     {
         if ($request->status == 'enattend') {
             $data = Reservation::where('status', 'en attend')->with('etudiant', 'logement')->orderBy('created_at', 'desc')->get();
-        }
-        elseif ($request->status == 'refuser') {
+        } elseif ($request->status == 'refuser') {
             $data = Reservation::where('status', 'refuser')->with('etudiant', 'logement')->orderBy('created_at', 'desc')->get();
-        }
-        elseif ($request->status == 'accepter') {
+        } elseif ($request->status == 'accepter') {
             $data = Reservation::where('status', 'accepter')->with('etudiant', 'logement')->orderBy('created_at', 'desc')->get();
-        }
-        else{
+        } else {
             $data = Reservation::with('etudiant', 'logement')->orderBy('created_at', 'desc')->get();
         }
         $dataRes =  $data->map(function ($items) {
@@ -57,7 +54,7 @@ class ReservationController extends Controller
             "email" => $request->email,
         ];
         $etudiant = Etudiant::create($etudeRequest);
-        if ($etudiant) { 
+        if ($etudiant) {
             $reserveRequest = [
                 'id_etudiant' => $etudiant->id,
                 'id_logement' => $request->id_logement,
@@ -87,7 +84,8 @@ class ReservationController extends Controller
             "chambre" => $request->chambre,
             "date_debut" => $request->date_debut,
             "date_fin" => $request->date_fin,
-            "status" => $request->status
+            "status" => $request->status,
+            "id_etudiant" => $reservation->id_etudiant
         );
 
         $logement = Logement::find($reservation->id_logement);
@@ -107,7 +105,7 @@ class ReservationController extends Controller
                 $etudiant = Etudiant::find($reservation->id_etudiant);
                 $res = $etudiant->update(["id_logement" => $reservation->id_logement]);
                 //modification du status de logement que occuper par l'etudiant 
-              
+
                 $resLog = $logement->update(["status" => 'occuper']);
 
                 if ($res1 && $res && $resLog) {
@@ -116,7 +114,6 @@ class ReservationController extends Controller
                         'envoyer' => $resLog,
                     ]);
                 }
-               
             }
         } elseif ($request->status == 'refuser') {
             $resMail = $this->DemandeRefuser($data);
@@ -139,7 +136,7 @@ class ReservationController extends Controller
             "para" => "Cher " . $array['noms'] . "  ,Votre demande de réservation pour la chambre " . $array['chambre'] . " a été acceptée. 
             Votre séjour est prévu du " . $array['date_debut'] . " au " . $array['date_fin'],
             "body" => "Nous sommes heureux de vous compter parmi nos membres.",
-            "link" => "http://localhost:8001/signup?email=" . $array['email'],
+            "link" => "http://localhost:8001/signup/" . $array['id_etudiant'],
         ];
         try {
             Mail::to($array['email'])
@@ -147,7 +144,6 @@ class ReservationController extends Controller
             return true;
         } catch (Exception $e) {
             return false;
-          
         }
     }
 
@@ -155,7 +151,7 @@ class ReservationController extends Controller
     {
         $mailData = [
             "titre" => "Votre demande à été refusée",
-            "para" => "Cher " . $array['noms'] . ",<br/><br/>Nous regrettons de vous informer que votre demande de réservation pour la chambre " . $array['chambre'] . "a été refusée.",
+            "para" => "Cher " . $array['noms'] . ",Nous regrettons de vous informer que votre demande de réservation pour la chambre " . $array['chambre'] . "a été refusée.",
             "body" => " Si vous avez des questions, n'hésitez pas à nous contacter.",
         ];
         try {
@@ -175,7 +171,4 @@ class ReservationController extends Controller
             ->groupby('status')->get();
         return $dataReserve;
     }
-
-
-
 }

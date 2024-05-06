@@ -1,7 +1,7 @@
 <template>
   <div v-if="isConnect" @click="visible = true"
     class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2">
-    <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12  object-cover rounded-full"
+    <img :src="User.photo ? User.photo: require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12  object-cover rounded-full"
       alt="photo de profile">
 
     <!-- // SideBar Menu pour l'utilisateur -->
@@ -11,9 +11,9 @@
       <div class="flex flex-col  justify-between h-full">
         <div>
           <div class="flex items-center justify-start my-3">
-            <div v-if="isConnect"
+            <div v-if="isConnect" @click="this.$router.push('/profile'), visible = false"
               class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12  ml-2">
-              <img :src="require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12 object-cover rounded-full"
+              <img :src="User.photo ? User.photo:require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12 object-cover rounded-full"
                 alt="photo de profile">
             </div>
             <div class="pt-2">
@@ -23,32 +23,57 @@
           </div>
           <div class="bg-gradient-to-r from-blue-1 to-blue-2 h-px my-3"></div>
           <div class="cursor-pointer text-[14px]">
-            <div   @click="this.$router.push('/profile'), visible=false"
-            class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
-              <i class="pi pi-user mx-3"></i>
-              voir mon profile
+            <div @click="this.$router.push('/profile'), visible = false"
+              class="mt-auto cursor-pointer  py-2 rounded transition-all hover:bg-blue-2">
+              <i class="fa-solid fa-user mx-3"></i>
+              Mon profile
             </div>
-            <div  v-if="User.type == 'admin'" 
+            <div v-if="User.type == 'user'"
               class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
-              @click="this.$router.push('/admin/liste-utilisateur'), visible=false" >
-                <i class="fa-solid  fa-users mx-3"></i>
+              @click="this.$router.push('/user/chambre'), visible = false">
+              <i class="fa-solid fa-house-user mx-3"></i>
+              Mon chambre
+            </div>
+            <div v-if="User.type == 'admin'"
+              class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
+              <i class="fa-solid  fa-users mx-3"></i>
               Gérer l'utilisateurs
             </div>
-            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
+            <div @click="this.$router.push(`/${User.type}/messenger`), visible = false"
+              class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="fa-brands fa-facebook-messenger mx-3"></i>
-              Messages
+              Messagerie
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
               @click="this.$router.push('/user/home')">
-
               <i class="fa-solid fa-bell  mx-3"></i>
               Notifications
             </div>
-            <div  v-if="User.type == 'user'" 
+
+            <div v-if="User.type == 'user'"
               class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
-              @click="this.$router.push('/admin/liste-utilisateur') , visible=false" >
-                <i class="fa-solid  fa-users mx-3"></i>
-              Changer de chambre
+              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
+              <i class="fa-solid fa-graduation-cap mx-3"></i>
+              Activités Résidentielles
+            </div>
+            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
+              <i class="fa-solid  fa-shield-halved mx-3"></i>
+
+              Sécurité
+            </div>
+            <div v-if="User.type == 'user'"
+              class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
+              <i class="fa-solid fa-circle-info mx-3"></i>
+              Support Résidentiel
+            </div>
+            <div v-if="User.type == 'user'"
+              class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
+              <i class="fa-solid fa-triangle-exclamation mx-3"></i>
+              Signaler probleme
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-cog mx-3"></i>
@@ -101,9 +126,14 @@ export default {
       if (token) {
         const res = await Axios.get('userConnect')
         this.User = res.data.user
+        if (this.User.photo) {
+          this.photo = this.User.photo
+        } else {
+          this.photo = require('@/assets/image/pdpNone.jpeg')
+        }
         this.isConnect = true
-      }else{
-        this.isConnect =false
+      } else {
+        this.isConnect = false
       }
     },
     async deconnect() {
@@ -121,14 +151,14 @@ export default {
         try {
           const res = await Axios.get('logout')
           if (res.data.status) {
-          localStorage.removeItem('token');
-          this.$router.push("/login");
+            localStorage.removeItem('token');
+            this.$router.push("/login");
           }
-      } catch (error) {
-        console.error(error)
+        } catch (error) {
+          console.error(error)
+        }
       }
-      }
-      
+
     },
   },
 }

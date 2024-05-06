@@ -97,7 +97,8 @@
                                 </td>
                                 <td class="px-6 py-3 border-b  text-sm font-medium text-center whitespace-nowrap">
                                     <div class="flex items-center justify-between text-[1rem]">
-                                        <modifier-etudiant :id="row.id"  :getterEtudiant="getterEtudiant"></modifier-etudiant>
+                                        <modifier-etudiant :id="row.id"
+                                            :getterEtudiant="getterEtudiant"></modifier-etudiant>
                                         <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500  rounded-full"
                                             @click="deleteOne(row.id, row.nom)">
                                             <i class="fa-solid fa-trash-can text-[14px]"></i>
@@ -107,6 +108,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="p-2 text-center bg-blue-0 w-full" v-if="paginatedData == ''">
+                        Aucune données trouver
+                    </div>
                 </div>
                 <div class="py-1 text-lg text-center">
                     <Paginator :rows="itemsPerPage" :totalRecords="length"
@@ -128,7 +132,7 @@ import AjouterEtudiant from '@/components/AdminComponents/Reservation/AjouterEtu
 import ModifierEtudiant from '@/components/AdminComponents/Reservation/ModifierEtudiant.vue';
 export default {
     name: 'Etudiant',
-    components: { Paginator, AjouterEtudiant ,  ModifierEtudiant},
+    components: { Paginator, AjouterEtudiant, ModifierEtudiant },
     data() {
         return {
             arrayData: [],
@@ -143,6 +147,18 @@ export default {
     },
     computed: {
         paginatedData() {
+            if (this.query != '') {
+                const query = this.query.toLowerCase();
+                return this.arrayData.filter(item => {
+                    return item.nom.toLowerCase().includes(query)
+                        || item.prenom.toLowerCase().includes(query)
+                        || item.matricule.toLowerCase().includes(query)
+                        || item.cin.toLowerCase().includes(query)
+                        || item.telephone.toLowerCase().includes(query)
+                        || item.created_at.toLowerCase().includes(query);
+                });
+
+            }
             if (!this.arrayData) {
                 return [];
             }
@@ -166,7 +182,7 @@ export default {
         deleteOne(id, nom) {
             console.log(id);
             Swal.fire({
-                title: "Es-tu sûre de supprimer "+nom+"?",
+                title: "Es-tu sûre de supprimer " + nom + "?",
                 text: "Vous ne serez pas en mesure d'inverser cela.",
                 icon: "warning",
                 showCancelButton: true,

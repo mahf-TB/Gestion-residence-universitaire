@@ -88,30 +88,19 @@
                         <div class="mb-2 text-3xl">
                             <span class="text-blue-2 font-bold">Comment pouvons-nous vous contacter ?</span>
                         </div>
-                     
-                        
+
+
                         <div class="my-4 ">
                             <div class="relative z-0">
-                            <input type="email" name="name" v-model="email" required :class="emptyEmail !=''?'border-red-600':'border-blue-3'"
-                                class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
-                                placeholder=" " />
-                            <label :class="emptyEmail !=''?' text-red-600':'text-gray-500 '"
-                                class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                                Quel est votre e-mail</label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p> 
-                        </div>
-                            <!-- <div class="relative z-0 w-full mb-5">
-                                <input type="email" name="email" placeholder=" " v-model="email" required
-                                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200" />
-                                <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">
-                                   
-                                </label>
-                                <span class="text-sm text-red-600 hidden" id="error">Email address is required</span>
-                            </div> -->
-                            <!-- <input type="email"
-                                class="rounded-[4px] w-full p-2 text-[16px] bg-blue-0 border-none placeholder:text-blue-1  mb-1  border-1 border-gray-400 hover:border-blue-2"
-                                name="integration[prenom]" required placeholder="Entrer votre email" v-model="email" />
-                            -->
+                                <input type="email" name="name" v-model="email" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Quel est votre e-mail</label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
+                            </div>
                         </div>
                         <button
                             class=" p-5 py-2 px-3 flex items-center justify-center cursor-pointer text-blue-0 border-3 border-blue-2 rounded bg-blue-2 hover:bg-blue-1 hover:border-blue-1 transition-all duration-300"
@@ -132,105 +121,142 @@
                 <form @submit.prevent="enregistrer()" class="px-1">
                     <div class="flex flex-col text-sm rounded-md">
                         <!-- adresse email -->
-                        <div class="mb-3 border-b-2 pb-1 flex flex-col">
-                            <label for="integration[email]" class="my-1 text-sm">Juste pour être sûr<span
-                                    class="text-red-500">*</span></label>
-                            <input type="email"
-                                class="rounded-[4px]  p-2 text-[14px]  mb-1 bg-blue-0 border-none placeholder:text-blue-1"
-                                name="integration[email]" required placeholder="Confirmation d'E-mail"
-                                v-model="client.email" />
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p> 
-                        </div>
-                        <div class="flex mb-3">
-                            <!-- adresse email ou username -->
-                            <div class="grow flex flex-col mr-1 border-b-2 pb-1 ">
-                                <label for="integration[name]" class="my-1 text-sm">Nom<span
-                                        class="text-red-500">*</span></label>
-                                <input type="text"
-                                    class="rounded-[4px]  p-2 text-[14px]  mb-1  bg-blue-0 border-none placeholder:text-blue-1"
-                                    name="integration[name]" required placeholder="Entrer votre nom"
-                                    v-model="client.nom" />
+                        <div class="mb-4  flex flex-col">
+                            <div class="relative z-0">
+                                <input type="email" name="name" v-model="client.email" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Juste pour être sûr, votre email<span  class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
-                            <!-- adresse email ou username -->
-                            <div class="grow flex flex-col ml-1 border-b-2 pb-1 ">
-                                <label for="integration[prenom]" class="my-1 text-sm">Prenom<span
-                                        class="text-red-500">*</span></label>
-                                <input type="text"
-                                    class="rounded-[4px] p-2 text-[14px]  mb-1 bg-blue-0 border-none placeholder:text-blue-1"
-                                    name="integration[prenom]" required placeholder="Entrer votre prenom"
-                                    v-model="client.prenom" />
-                            </div>
+                           
                         </div>
-                        <div class="mb-3 border-b-2 pb-1 flex flex-col">
-                            <label for="integration[email]" class="my-1 text-sm">Matricule<span
-                                    class="text-red-500">*</span></label>
-                            <input type="text"
-                                class="rounded-[4px]  p-2 text-[14px]  mb-1 bg-blue-0 border-none placeholder:text-blue-1"
-                                name="integration[email]" required placeholder="Votre matricule"
-                                v-model="client.matricule" />
-                        </div>
-                        <div class="flex mb-3">
-                            <!-- adresse email ou username -->
-                            <div class="grow flex flex-col mr-1 border-b-2 pb-1">
-                                <label for="integration[name]" class="my-1 text-sm">Date de naissance<span
-                                        class="text-red-500">*</span></label>
-                                <input type="date"
-                                    class="rounded-[4px] p-2 text-[14px]  mb-1 text-blue-1 bg-blue-0 border-none placeholder:text-blue-1"
-                                    name="integration[name]" required placeholder="Entrer votre Nom"
-                                    v-model="client.date_naissance" />
+                        <div class="flex items-center justify-between mb-4">
+                             <!--  votre nom -->
+                            <div class="relative pb-1 z-0 w-1/2 mr-1">
+                                <input type="text" name="name" v-model="client.nom" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Entrer votre nom<span  class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
-                            <!-- adresse email ou username -->
-                            <div class="grow flex flex-col ml-1 border-b-2 pb-1">
-                                <label for="sexe" class="my-1 text-sm">Civilité<span
-                                        class="text-red-500">*</span></label>
-                                <select
-                                    class=" w-100  mb-1 rounded-[4px] p-[10px] text-[14px] text-blue-1 bg-blue-0 border-none placeholder:text-blue-1"
-                                    v-model="client.sexe" aria-label="Default select example" id="sexe" name="sexe"
-                                    required>
+                            <!--  votre prenom -->
+                            <div class="relative pb-1 z-0 w-1/2  ml-1">
+                                <input type="text" name="name" v-model="client.prenom" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Entrer votre prenom<span  class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
+                            </div>
+                           
+                        </div>
+                        <div class="mb-4 flex flex-col">
+                            <!--  Numéro du matricule -->
+                            <div class="relative z-0">
+                                <input type="text" name="name"  v-model="client.matricule" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Numéro du matricule<span  class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
+                            </div>
+                           
+                        </div>
+                        <div class="flex mb-4">
+                            <!-- Date de naissance -->
+                            <div class="relative pb-1 z-0 w-1/2 mr-1">
+                                <input type="date" name="name" v-model="client.date_naissance" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Date de naissance<span class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
+                            </div>
+                        
+                            <!-- Civilité -->
+                            <div class="relative pb-1 z-0 w-1/2  ml-1">
+                                <select  name="name"   v-model="client.sexe" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " >
                                     <option disabled value="" class="text-sm">Selectionner ici</option>
                                     <option value="H">Homme</option>
                                     <option value="F">Femme</option>
                                 </select>
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Civilité<span class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
+                            
                         </div>
-                        <div class="flex mb-3">
-                            <!-- adresse email ou username -->
-                            <div class="grow flex flex-col mr-1 border-b-2 pb-1 ">
-                                <label for="integration[name]" class="my-1 text-sm">CIN</label>
-                                <input type="text" maxlength="12" minlength="12"
-                                    class="rounded-[4px]  p-2 text-[14px]  mb-1  bg-blue-0 border-none placeholder:text-blue-1"
-                                    name="integration[name]" required placeholder="Numéro d'identité National"
-                                    v-model="client.cin" />
+                        <div class="flex mb-4">
+                            <!-- Numéros de CIN -->
+                            <div class="relative pb-1 z-0 w-1/2 mr-1">
+                                <input type="text" name="name" v-model="client.cin" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Numéros de CIN<span  class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
-                            <!-- adresse email ou username -->
-                            <div class="grow flex flex-col ml-1 border-b-2 pb-1 ">
-                                <label for="integration[prenom]" class="my-1 text-sm">Telephone<span
-                                        class="text-red-500">*</span></label>
-                                <input type="text" maxlength="13" minlength="10"
-                                    class="rounded-[4px] p-2 text-[14px]  mb-1 bg-blue-0 border-none placeholder:text-blue-1"
-                                    name="integration[prenom]" required placeholder="Votre numéro telephone"
-                                    v-model="client.telephone" />
+                           
+                            <!-- Numéros du Telephone -->
+                            <div class="relative pb-1 z-0 w-1/2  ml-1">
+                                <input type="text" name="name"   v-model="client.telephone" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Numéros du Telephone<span  class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
+                          
                         </div>
-                        <div class="flex">
-                            <!-- adresse email -->
-                            <div class="grow flex flex-col mr-1   border-b-2 pb-1">
-                                <label for="integration[debut]" class="my-1 text-sm">Date debut<span
-                                        class="text-red-500">*</span></label>
-                                <input type="date"
-                                    class="rounded-[4px]  p-2 text-[14px]  mb-1  text-blue-1 bg-blue-0 border-none placeholder:text-blue-1"
-                                    name="integration[debut]" required placeholder="Entrer votre Nom"
-                                    v-model="client.date_debut" />
+                        <div class="flex mb-4">
+                            <!--  Date d'entree soundites , date debut -->
+                            <div class="relative pb-1 z-0 w-1/2 mr-1">
+                                <input type="date" name="name" v-model="client.date_debut" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " />
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Date d'entree soundites<span  class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
-                            <!-- adresse email -->
-                            <div class="grow flex flex-col ml-1  border-b-2 pb-1">
-                                <label for="integration[fin]" class="my-1 text-sm">Date fin<span
-                                        class="text-red-500">*</span></label>
-                                <input type="date"
-                                    class="rounded-[4px] p-2 text-[14px]  mb-1 text-blue-1  bg-blue-0 border-none placeholder:text-blue-1"
-                                    name="integration[fin]" required placeholder="Entrer votre Nom"
-                                    v-model="client.date_fin" />
+                           
+                            <!-- Durée de location en mois -->
+                            <div class="relative pb-1 z-0 w-1/2  ml-1">
+                                <select  name="name"   v-model="mois" required
+                                    :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
+                                    class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
+                                    placeholder=" " >
+                                    <option disabled value="" class="text-sm">moins de 1 mois</option>
+                                    <option v-for="i of 36"  :key="i" :value="i">{{i}}</option>
+                                </select>
+                                <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
+                                    class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Durée de location<span class="text-red-500">*</span></label>
+                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
+                           
                         </div>
                     </div>
                     <button
@@ -272,6 +298,7 @@ export default {
                 date_debut: null,
                 date_fin: null,
             },
+            mois:null,
             loge: [],
             bati: [],
             etage: '',
@@ -291,16 +318,15 @@ export default {
             console.log(this.client);
             if (this.email == this.client.email) {
                 try {
-                    const response = await Axios.post('/reservation', this.client)
-                    console.log(response);
+                    // const response = await Axios.post('/reservation', this.client)
+                    // console.log(response);
                     this.client = []
                 } catch (error) {
                     console.error(error)
                 }
-            }else{
+            } else {
                 this.emptyEmail = 'verifiez votre E-mail '
             }
-
         },
         async getOneLogement() {
             try {
@@ -321,10 +347,10 @@ export default {
             var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
             if (this.index < 1 || this.email != '') {
-                if ( this.index < 1 || this.email.match(validRegex)) {
+                if (this.index < 1 || this.email.match(validRegex)) {
                     localStorage.setItem("index", this.index += 1)
                     this.emptyEmail = ''
-                }else{
+                } else {
                     this.emptyEmail = 'verifiez votre E-mail '
                 }
 

@@ -4,7 +4,7 @@
     <div class=" w-[60%]">
       <div class="bg-fotsy px-3 pt-3 rounded-xl shadow-sm">
         <div class="flex w-full">
-          <img :src="require('@/assets/image/pdpNone.jpeg')"
+          <img :src="user.photo ? user.photo: require('@/assets/image/pdpNone.jpeg')"
             class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full" alt="photo de profile">
           <demande-maintenance :getAllReparations="getAllReparations"></demande-maintenance>
           <div
@@ -40,7 +40,7 @@
       </div>
     </div>
     <!-- right contenu -->
-    <liste-reparer class="my-3" :dataArray="dataArray" v-if="dataArray != ''"></liste-reparer>
+    <liste-reparer class="my-3"  :dataArray="dataArray" v-if="dataArray != ''"></liste-reparer>
   </div>
 </template>
 
@@ -56,11 +56,13 @@ export default {
   },
   data() {
     return {
-      dataArray: []
+      dataArray: [],
+      user: []
     }
   },
   mounted() {
     this.getAllReparations()
+    this.getUser()
   },
   methods: {
     async getAllReparations() {
@@ -71,7 +73,18 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+    async getUser() {
+            let token = JSON.parse(localStorage.getItem('token'))
+            if (token) {
+                const res = await Axios.get('userConnect')
+                if (res.data.status == 'success') {
+                    console.log(res.data)
+                    this.user = res.data.user
+                    console.log(this.user)
+                }
+            }
+        },
   }
 }
 </script>

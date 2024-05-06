@@ -56,11 +56,11 @@
                     <div class="w-full flex flex-col  lg:w-2/3 p-3">
                         <div class="flex items-center justify-between w-full">
                             <div class="flex">
-                                <img :src="require('@/assets/image/pdpNone.jpeg')"
+                                <img :src="data.user.photo ? data.user.photo :require('@/assets/image/pdpNone.jpeg')"
                                     class="h-10 w-10 mx-2 object-cover cursor-pointer rounded-full"
                                     alt="photo de profile">
                                 <div class="ml-2">
-                                    <p class="work-sans font-semibold text-lg m-0 text-blue-4">{{ data.user }} <span
+                                    <p class="work-sans font-semibold text-lg m-0 text-blue-4">{{ data.user.username }} <span
                                             class="font-extralight">à faite demande le </span></p>
                                     <p class="text-xs text-slate-500 -mt-0.5  m-0 font-normal flex items-center">
                                         <span>{{ new Date(data.date).toLocaleDateString() + ' à ' + new

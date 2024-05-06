@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\HelloEvents;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
@@ -14,8 +15,11 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        // return User::paginate(1);
-        return User::whereIn('type', ['P-service' , 'P-maintenance' , 'P-accueil'])->paginate(5);
+       $user = User::whereIn('type', ['P-service' , 'P-maintenance' , 'P-accueil'])->paginate(5);
+
+
+        // event(new HelloEvents($user->items()));
+        return $user;
     }
  
     /**
@@ -24,7 +28,6 @@ class UtilisateurController extends Controller
     public function store(UserRequest $request)
     {
         $user = User::create($request->validated());
-
         if ($user) {
             return response()->json([
                 'status' => 'sucess',
