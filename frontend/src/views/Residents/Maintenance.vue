@@ -5,7 +5,7 @@
       <div class="bg-fotsy px-3 pt-3 rounded-xl shadow-sm">
         <div class="flex w-full">
           <img :src="user.photo ? user.photo: require('@/assets/image/pdpNone.jpeg')"
-            class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full" alt="photo de profile">
+            class="h-12 w-16 object-cover cursor-pointer rounded-full" alt="photo de profile">
           <demande-maintenance :getAllReparations="getAllReparations"></demande-maintenance>
           <div
             class="mx-1 px-3  my-1 flex items-center text-sm text-blue-0 bg-blue-1 hover:bg-slate-50 hover:text-blue-1 rounded transition-all cursor-pointer">

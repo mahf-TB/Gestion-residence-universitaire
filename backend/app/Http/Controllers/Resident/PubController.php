@@ -26,6 +26,7 @@ class PubController extends Controller
                 "nb_commentaire" => $items->nb_commentaire,
                 "image" => $items->image != null ? $items->imageUrl() : '',
                 "service" => $items->service,
+                "pdp" => $items->auteurPub->imageUrl(),
                 "auteur" => $items->auteurPub,
                 "date" => $items->updated_at,
             ];

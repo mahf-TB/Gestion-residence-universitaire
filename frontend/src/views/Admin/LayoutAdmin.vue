@@ -1,7 +1,7 @@
 <template>
   <div class="bg-blue-0 ">
-    <Header v-if="user.type == 'admin'"></Header>
-    <header-personnel v-else></header-personnel>
+    <Header class="sticky top-0 z-10" v-if="user.type == 'admin'"></Header>
+    <header-personnel v-else class="sticky top-0 z-10"></header-personnel>
     <div class="container">
       <router-view class="font-Avenir" />
     </div>

@@ -45,9 +45,14 @@
                                 class="flex justify-center text-fotsy max-h-max whitespace-nowrap   rounded max-w-max border bg-blue-2  items-center hover:shadow-lg font-light py-2 px-3  mr-0 ml-auto">
                                 <i class="fa-solid  fa-pen mr-2"></i>Modifier Profile
                             </button>
-                            <button v-else @click="saveImage()"
-                                class="flex justify-center text-fotsy max-h-max whitespace-nowrap   rounded max-w-max border bg-blue-2  items-center hover:shadow-lg font-light py-2 px-3  mr-0 ml-auto">
-                                <i class="fa-solid fa-upload mx-2"></i>Enregistrer
+                            <button v-else
+                                class="flex justify-center text-blue-2 max-h-max whitespace-nowrap    max-w-max  items-center  font-light py-2 px-3 ">
+                                <div @click="fileImage=null" class=" hover:bg-red-100 rounded p-2 text-red-600">
+                                    <span><i class="fa-solid fa-upload mx-2"></i>Annuler</span>
+                                </div>
+                                <div  @click="saveImage()" class=" hover:bg-green-100 rounded p-2 text-green-600">
+                                    <span><i class="fa-solid fa-upload mx-2"></i>Enregistrer</span>
+                                </div>
                             </button>
                         </div>
                     </div>

@@ -10,7 +10,6 @@
         </div>
         <Dialog v-model:visible="visible" modal :style="{ width: '40rem' }" class="bg-blue-0"
             :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
-
             <!-- Modal -->
             <template #header>
                 <div class="flex items-center justify-center uppercase w-full">

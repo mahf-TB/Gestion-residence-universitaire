@@ -2,7 +2,7 @@
     <div class="bg-fotsy">
         <div class="relative  text-blue-4">
             <main class="container flex justify-center pt-2">
-                <div class="flex flex-col mt-2 ">
+                <div class="flex flex-col mt-2 overflow-auto ">
                     <div class="bg-fotsy pt-3 rounded-xl flex">
                         <profile-card-vue></profile-card-vue>
                     </div>
@@ -15,12 +15,9 @@
                                 <publication></publication>
                             </div>
                             <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
-                            <div class="flex items-center">
-                               
-                            </div>
                         </div>
                         <div class="container py-1 my-3" v-for="(data, i) in dataArray" :key="i">
-                            <ListePublicationVue class="bg-fotsy hover:bg-gray-50" :data="data">
+                            <ListePublicationVue class="bg-gray-100 hover:bg-gray-50" :data="data">
                             </ListePublicationVue>
                         </div>
                         <div v-if="dataArray == ''" class="my-2">
