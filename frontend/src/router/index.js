@@ -13,25 +13,27 @@ const routes = [
     name: 'Admin',
     component: Admin.LayoutAdmin,
     children: [
-      { path: 'dashboard', name: 'Dashboard', component: Admin.Home , beforeEnter: auth.adminConnect},
+      { path: 'dashboard', name: 'Dashboard', component: Admin.Home, beforeEnter: auth.adminConnect },
 
-      { path: 'dashboard-accueil', name: 'Dashboard Accueil', component: Admin.DashboardAccueil , beforeEnter: auth.accueilConnect },
-      { path: 'etudiant', name: 'Etudiant', component: Admin.Etudiant , beforeEnter: auth.accueilConnect },
-      { path: 'logement', name: 'Logement', component: Admin.Logement , beforeEnter: auth.accueilConnect},
+      { path: 'dashboard-accueil', name: 'Dashboard Accueil', component: Admin.DashboardAccueil, beforeEnter: auth.accueilConnect },
+      { path: 'etudiant', name: 'Etudiant', component: Admin.Etudiant, beforeEnter: auth.accueilConnect },
+      { path: 'logement', name: 'Logement', component: Admin.Logement, beforeEnter: auth.accueilConnect },
       { path: 'listeReservation', name: 'Liste Reservation', component: Admin.Reservation, beforeEnter: auth.accueilConnect },
 
 
-      { path: 'dashboard-maintenance', name: 'Dashboard Maintenance', component: Admin.DashboardMaintenance , beforeEnter: auth.maintenanceConnect },
-      { path: 'listeMaintenace', name: 'Liste Maintenace', component: Admin.Maintenace , beforeEnter: auth.maintenanceConnect },
+      { path: 'dashboard-maintenance', name: 'Dashboard Maintenance', component: Admin.DashboardMaintenance, beforeEnter: auth.maintenanceConnect },
+      { path: 'listeMaintenace', name: 'Liste Maintenace', component: Admin.Maintenace, beforeEnter: auth.maintenanceConnect },
 
       { path: 'messenger', name: 'Admin Messenger', component: Page.Messenger },
+      {  path: 'profile', name: 'Profile Admin', component: Page.ProfileAdmin},
 
-      { path: 'dashboard-service', name: 'Dashboard Service', component: Admin.DashboardService , beforeEnter: auth.serviceConnect },
-      { path: 'restaurent', name: 'Restaurent', component: Admin.Restaurant , beforeEnter: auth.serviceConnect},
-      { path: 'liste-commande', name: 'Liste Commande', component: Admin.ListeCommande , beforeEnter: auth.serviceConnect },
-      { path: 'service', name: 'Service ', component: Admin.Service , beforeEnter: auth.serviceConnect },
+      { path: 'dashboard-service', name: 'Dashboard Service', component: Admin.DashboardService, beforeEnter: auth.serviceConnect },
+      { path: 'restaurent', name: 'Restaurent', component: Admin.Restaurant, beforeEnter: auth.serviceConnect },
+      { path: 'liste-commande', name: 'Liste Commande', component: Admin.ListeCommande, beforeEnter: auth.serviceConnect },
+      { path: 'service', name: 'Service ', component: Admin.Service, beforeEnter: auth.serviceConnect },
 
-      { path: 'liste-utilisateur', name: 'Liste Utilisateur', component: Admin.Utilisateur , beforeEnter: auth.adminConnect },
+      { path: 'liste-utilisateur', name: 'Liste Utilisateur', component: Admin.Utilisateur, beforeEnter: auth.adminConnect },
+      
     ]
   },
   {
@@ -44,8 +46,10 @@ const routes = [
       { path: 'evenement', name: 'Evenement', component: Etudiant.Evenement },
       { path: 'service', name: 'Service', component: Etudiant.Service },
       { path: 'maintenance', name: 'Maintenance', component: Etudiant.Maintenance },
-      { path: 'messenger', name: 'Messenger User', component: Page.Messenger },
       { path: 'chambre', name: 'Chambre Etudiant', component: Etudiant.Chambre },
+      { path: 'messenger', name: 'Messenger User', component: Page.Messenger },
+      {  path: 'profile', name: 'Profile', component: Page.Profile
+      },
     ]
   },
   {
@@ -63,12 +67,7 @@ const routes = [
       { path: 'reservation/:id', name: 'Reservation', component: User.Reservation },
     ]
   },
-  {
-    path: '/profile',
-    name: 'Profile',
-    beforeEnter: auth.userConnect,
-    component: Page.Profile
-  },
+
   {
     path: '/login',
     name: 'Login',
@@ -94,7 +93,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.name} | ${ process.env.VUE_APP_TITLE }`
+  document.title = `${to.name} | ${process.env.VUE_APP_TITLE}`
   next();
 })
 

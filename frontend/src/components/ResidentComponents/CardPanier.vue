@@ -1,69 +1,94 @@
 <template>
-    <div :class="service.disponible ? 'text-blue-4 hover:bg-blue-2 cursor-pointer hover:text-white' : 'text-blue-4 '"
+    <div @click="openPosition('top')"
+        :class="service.disponible ? 'text-blue-4 hover:bg-blue-2 cursor-pointer hover:text-white' : 'text-blue-4 '"
         class="flex items-center  justify-center rounded text-blue-4 text-xs py-2 w-1/3  transition duration-350 ease-in-out">
-        <button  :disabled="service.disponible?false:true"
-            v-if="service != ''" @click="openPosition('top')">
+        <button :disabled="service.disponible ? false : true" v-if="service != ''">
             <i class="fa fa-cart-plus mr-4"></i>
             {{ service.disponible ? 'Commander' : 'Pas Disponible' }}
         </button>
-         <Dialog v-model:visible="visible" :style="{ width: '40rem' }"
+        <Dialog v-model:visible="visible" :style="{ width: '50rem' }"
             :breakpoints="{ '1199px': '75vw', '575px': '90vw' }" :position="position" :modal="true" :draggable="false">
             <template #header>
                 <div class="flex items-center justify-center uppercase w-full">
                     <span class="font-semibold text-lg text-blue-2">Faites votre Commande </span>
                 </div>
             </template>
-            <div class="my-2 bg-gradient-to-r from-blue-900 to-blue-800 h-px"></div>
+            <div class="mb-4 mt-1 bg-gradient-to-r from-blue-900 to-blue-800 h-px"></div>
             <div class="modal-content">
                 <div
-                    class=" relative flex h-full w-full flex-col rounded-[20px] bg-white bg-clip-border p-4 shadow-3xl shadow-shadow-500">
+                    class=" relative flex h-full w-full flex-col rounded-[20px] bg-white bg-clip-border p-2 shadow-3xl shadow-shadow-500">
                     <div class="modal-header p-0">
                         <div class="w-full">
-                            <h4 class="text-xl font-bold text-navy-700 text-black">
+                            <h4 class="text-base font-light text-navy-700 text-black">
                                 Voulez-vous commandée du {{ service.nom_service }}
                             </h4>
                         </div>
                     </div>
                     <div class="modal-body p-0">
-                        <div class="max-h-[600px] overflow-auto">
+                        <div class=" overflow-auto">
                             <div
-                                class="flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 ">
-                                <div class="flex items-center">
-                                    <div class="h-20 w-2/12">
-                                        <img class="justify-center grid h-[200px] w-[200px] object-cover rounded-lg"
+                                class="flex w-full flex-col items-center justify-between rounded-2xl bg-white p-2 shadow-3xl shadow-shadow-500 ">
+                                <div class="flex items-start">
+                                    <div class="w-5/12">
+                                        <img class="justify-center grid h-[330px] w-[500px] object-cover rounded-lg"
                                             width="375" height="400" :src="image" alt="voiture Mercedes" />
                                     </div>
-                                    <div class="ml-4 w-8/12">
-                                        <div class="text-base font-medium uppercase text-navy-700 text-black">
-                                            {{ service.nom_service }} <span>({{ commande.nombre }})</span>
+                                    <div class="ml-4 w-7/12">
+                                        <div class="text-base my-2  font-medium uppercase text-navy-700 text-black">
+                                            {{ service.nom_service }} <span></span>
                                         </div>
-                                        <div v-html="service.description.substring(0, 80)"
-                                            class="mt-2  overflow-auto text-sm text-gray-600" />
+                                        <div class="text-[14px] my-2 font-light  text-navy-700 text-black">
+                                            Disponibilité: <span :class="{ 'text-green-500': service.disponible }"
+                                                class="">{{
+                                                service.disponible?'Mbola misy':'Efa lany' }}</span>
+                                        </div>
+                                        <div class="text-[14px] my-2 font-light  text-navy-700 text-black">
+                                            Prix: <span>{{ service.tarifs }} MGA</span>
+                                        </div>
+                                        <span class="my-2 inline overflow-auto text-sm text-gray-600">
+                                            {{ }}
+                                            <div v-html="(service.nom_service + ' ' + service.description).substring(0, 200)"
+                                                class="" />
+                                        </span>
+                                        <div class="text-[14px] my-3 font-light text-navy-700 text-black">
+
+                                            <span class="text-sm text-blue-4">Ajouter au panier</span>
+                                            <div class="flex ">  
+                                                <span class="py-2 px-5 border border-gray-400 ">{{ commande.nombre }}</span>
+                                                <div class="flex items-center justify-center bg-blue-0">
+                                                    <div @click="panier(1)"
+                                                        class="w-1/2 px-4 p-2 flex items-center hover:shadow justify-center text-blue-600 text-lg ">
+                                                        <i class="fa-solid fa-plus cursor-pointer"></i>
+                                                    </div>
+                                                    <div @click="panier(-1)"
+                                                        class="w-1/2 px-4 p-2 flex items-center hover:shadow justify-center text-red-600 text-lg">
+                                                        <i class="fa-solid fa-minus cursor-pointer"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         </div>
+                                         <div class="text-[14px] my-3 font-light text-navy-700 text-black">
+                                            <span class="text-sm text-blue-4">Options de paiement</span>
+                                            <div class="flex ">  
+                                                <span class="py-2 px-3 border border-gray-400 ">Espèces</span>
+                                                <span class="py-2 px-3 border border-gray-400 ">PayPal</span>
+                                                <span class="py-2 px-3 border border-gray-400 ">Carte de crédit</span>
+                                                
+                                            </div>
+                                         </div>
+                                        <div class="my-3 p-0 ">
+                                            <button @click="saveCommande(service.id)"
+                                                class="flex justify-center text-sm text-fotsy max-h-max whitespace-nowrap uppercase rounded max-w-max border bg-blue-2  items-center hover:shadow-lg font-light py-2 px-3  mr-0 ml-auto">
+                                                Envoyer votre commande
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div @click="panier(1)"
-                                    class="w-1/12 mr-4 flex items-center justify-center text-blue-600 text-lg">
-                                    <i class="fa-solid fa-plus cursor-pointer"></i>
-                                </div>
-                                <div @click="panier(-1)"
-                                    class="w-1/12 mr-4 flex items-center justify-center text-red-600 text-lg">
-                                    <i class="fa-solid fa-minus cursor-pointer"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <template #footer>
-                <div class="modal-footer p-0 ">
-                    <button @click="saveCommande(service.id)"
-                        class="flex justify-center text-fotsy max-h-max whitespace-nowrap   rounded max-w-max border bg-blue-2  items-center hover:shadow-lg font-light py-2 px-3  mr-0 ml-auto">
-                        Envoyer votre commande
-                    </button>
-
-                </div>
-            </template>
         </Dialog>
     </div>
 </template>

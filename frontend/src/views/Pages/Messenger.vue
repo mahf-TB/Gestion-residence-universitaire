@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-3">
     <div class=" h-full bg-blue-0  flex flex-col rounded-xl  shadow-xl">
       <!-- body -->
       <div class="h-[700px] flex">

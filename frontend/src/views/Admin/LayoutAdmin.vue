@@ -1,8 +1,8 @@
 <template>
   <div class="bg-blue-0 ">
-    <Header v-if="user.type == 'admin'"></Header>
-    <header-personnel v-else></header-personnel>
-    <div class="container pt-3">
+    <Header class="sticky top-0 z-10" v-if="user.type == 'admin'"></Header>
+    <header-personnel v-else class="sticky top-0 z-10"></header-personnel>
+    <div class="container">
       <router-view class="font-Avenir" />
     </div>
     <!-- <footer class="relative bg-blueGray-200 pt-8 pb-6">

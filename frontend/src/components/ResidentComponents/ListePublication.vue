@@ -3,8 +3,8 @@
         <div class="flex flex-shrink-0 p-4 pb-0">
             <div class="flex items-center">
                 <div>
-                    <img class="inline-block h-10 w-10 rounded-full" :src="data.auteur.photo ? data.auteur.photo: require('@/assets/image/pdpNone.jpeg')"
-                        alt="">
+                    <img class="inline-block h-10 w-10 rounded-full" :src="data.auteur.photo ? data.pdp: require('@/assets/image/pdpNone.jpeg')"
+                        alt="photo de profile">
                 </div>
                 <div class="flex flex-col ml-4 list-none">
                     <span class="text-base  font-medium text-blue-1">
@@ -22,8 +22,6 @@
                 {{ data.contenu }}
                 <br />
                 <a href="#" class="text-blue-400">#WomenWhoCode #CodeNewbie</a>
-
-                <!-- <pre>{{ data }}</pre> -->
             </p>
             <div class="md:flex-shrink  py-1">
                 <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-[500px]">
@@ -66,8 +64,7 @@
                         </g>
                     </svg>
                     Parteger
-                </div>
-               
+                </div>  
                 <card-panier :service="data.service" :image="data.image"></card-panier>
             </div>
         </div>
