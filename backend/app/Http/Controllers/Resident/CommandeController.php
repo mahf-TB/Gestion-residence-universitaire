@@ -17,8 +17,8 @@ class CommandeController extends Controller
 
     public function index()
     {
-            $Mainte = Service::with('user')->orderBy('updated_at', 'desc')->get();
 
+        $Mainte = Service::with('user')->orderBy('updated_at', 'desc')->get();
         $dataRes =  $Mainte->map(function ($items) {
             return [
                 "id" => $items->id,
@@ -34,15 +34,34 @@ class CommandeController extends Controller
         })->values();
 
         return  $dataRes;
-
     }
 
-    
+    public function commandeUser(){
+        $id = auth()->user()->id;
+        $data = Commande::with('user','service')->where('id_user', $id)->get();
+        
+        return $data->map(function ($items) {
+            return [
+                "id" => $items->id,
+                "nom_service" => $items->service->nom_service,
+                "type_service" => $items->service->type_service,
+                "description" => $items->service->description,
+                "tarifs" => $items->service->tarifs,
+                "status" => $items->status,
+                "nombre" => $items->nombre,
+                "image" => $items->service->image != null ? $items->service->imageUrl() : '',
+                "user" => $items->user->username,
+                "date" => $items->updated_at,
+            ];
+        })->values();
+;
+    }
+
     public function demandeService(CommandeRequest $request)
     {
         $data = $request->validated();
         $service = Service::find($request->id_service);
-        if (!$service->disponible){
+        if (!$service->disponible) {
             return response()->json([
                 'message' => 'Failed..! Service non disponible',
                 'status' =>  false

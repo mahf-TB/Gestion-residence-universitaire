@@ -16,8 +16,6 @@ class UtilisateurController extends Controller
     public function index()
     {
        $user = User::whereIn('type', ['P-service' , 'P-maintenance' , 'P-accueil'])->paginate(5);
-
-
         // event(new HelloEvents($user->items()));
         return $user;
     }

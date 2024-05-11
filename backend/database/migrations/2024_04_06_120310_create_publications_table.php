@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
-            $table->string('contenu',500);
+            $table->text('contenu');
             $table->bigInteger('nb_like');
             $table->bigInteger('nb_commentaire');
             $table->string('image')->nullable();

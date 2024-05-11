@@ -4,13 +4,30 @@ namespace App\Http\Controllers\Resident;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
+use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class NotifController extends Controller
 {
     public function indexNotification(){
         $data = Notification::orderBy('created_at', 'desc')->get();
-        return $data;
+        return $data->map(function ($items) {
+            $message =  json_decode($items->message);
+            $service = Service::with('user')->find($message->id_service);
+            if ($items->user_id){
+                $user = User::find($items->user_id);
+            }
+            return [
+                "id" => $items->id,
+                "read" => $items->read,
+                "message" => $message ,
+                "user" => $user ?? '' ,
+                "service" => $service ,
+                "image" => 'http://127.0.0.1:8000/Storage/'.$message->image ,
+                "date" => $items->updated_at,
+            ];
+        })->values();
     }
 
     public function readAll(Request $request){

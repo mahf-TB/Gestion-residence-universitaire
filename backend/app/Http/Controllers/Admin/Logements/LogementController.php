@@ -61,7 +61,6 @@ class LogementController extends Controller
             $log = Logement::where('num_logement', $request->num_logement)->where('id_batiment', $request->id_batiment)->get();
             $nbEtage = ($bat->nb_etages * 100) + 100;
 
-
             if (count($log) <= 0 &&  $nbEtage > $request->num_logement) {
 
                 $data = $request->validated();
@@ -154,6 +153,9 @@ class LogementController extends Controller
     public function destroy(string $id)
     {
         $Logement = Logement::find($id);
+        if ($Logement->image) {
+            Storage::disk('public')->delete($Logement->image);
+        }
         $isDelete =  $Logement->delete();
         if ($isDelete) {
             return response()->json([

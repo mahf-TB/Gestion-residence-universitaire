@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\EtudiantController;
 use App\Http\Controllers\Admin\Logements\BatimentController;
 use App\Http\Controllers\Admin\Logements\LogementController;
+use App\Http\Controllers\Admin\Logements\MaterielControlleur;
 use App\Http\Controllers\Admin\MaintenanceController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -61,6 +62,9 @@ Route::get('/type_logement', [LogementController::class, 'getTypeLogement']);
 Route::get('/logement_type', [LogementController::class, 'getLogement']);
 Route::post('/uploadImage', [LogementController::class, 'uploadImage']);
 
+Route::group(['controller' => MaterielControlleur::class], function () {
+    Route::post('/add-materiel',  'store');
+});
 //RESERVATIONS routes
 Route::group(['controller' => ReservationController::class], function () {
     Route::post('/reservation', 'addReservationAction');
@@ -91,6 +95,8 @@ Route::group(['controller' => ServiceController::class], function () {
 //Service routes
 Route::group(['controller' => PubController::class], function () {
     Route::get('/index_pub',  'index');
+    Route::post('/add_publication',  'addPublication');
+    Route::get('/publication/{id}',  'showOnePub');
 });
 //Service routes
 Route::group(['controller' => NotifController::class], function () {
@@ -99,9 +105,11 @@ Route::group(['controller' => NotifController::class], function () {
 });
 
 
+
 Route::group(['controller' => CommandeController::class], function () {
     Route::post('/commande-service',  'demandeService');
     Route::get('/index-service',  'index');
+    Route::get('/commande-user',  'commandeUser');
 });
 
 

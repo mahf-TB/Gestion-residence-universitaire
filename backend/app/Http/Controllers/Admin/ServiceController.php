@@ -32,7 +32,7 @@ class ServiceController extends Controller
                 "description" => $items->description,
                 "tarifs" => $items->tarifs,
                 "dispo" => $items->disponible,
-                "image" => $items->image != null? $items->imageUrl() : '',
+                "image" => $items->image != null ? $items->imageUrl() : '',
                 "user" => $items->user->username,
                 "date" => $items->updated_at,
             ];
@@ -105,22 +105,21 @@ class ServiceController extends Controller
         }
         $main = Service::create($data);
         if ($main) {
-            $ser = Service::find($main->id);
-
-            $Datanote = ["message" => json_encode($ser)];
-            $resNot = Notification::create($Datanote);
-            if ($resNot) {
-                ServiceNotif::dispatch($resNot);
-                $dataPub = [
-                    "contenu" => $data['description'],
-                    "nb_like" => 0,
-                    "nb_commentaire" => 0,
-                    "image" => $data['image'],
-                    "id_service" => $main->id,
-                    "auteur" => auth()->user()->id,
-                ];
-                $pub = Publication::create($dataPub);
-                if ($pub) {
+            $dataPub = [
+                "contenu" => $data['description'],
+                "nb_like" => 0,
+                "nb_commentaire" => 0,
+                "image" => $data['image'],
+                "id_service" => $main->id,
+                "auteur" => auth()->user()->id,
+            ];
+            $pub = Publication::create($dataPub);
+            if ($pub) {
+               $pubNotif=  Publication::find($pub->id);
+                $Datanote = ["message" => json_encode($pubNotif)];
+                $resNot = Notification::create($Datanote);
+                if ($resNot) {
+                    ServiceNotif::dispatch($resNot);
                     return response()->json([
                         'dataPub' => $pub,
                         'data' => $main,
@@ -149,8 +148,7 @@ class ServiceController extends Controller
     {
         $data = $request->validated();
         $service = Service::findOrFail($id);
-
-        $pub =  Publication::where('id_service', $id);
+        $pub =  Publication::where('id_service', $id)->first();
 
         if ($service->image != $request->image) {
             Storage::disk('public')->delete($service->image);
@@ -162,28 +160,28 @@ class ServiceController extends Controller
             $data['image'] = $img;
         }
 
-        if ($request->type_service == 'RestoPlat') {
-            $resPub = $pub->update([
-                "contenu" => $data['description'],
-                "image" => $data['image'],
-            ]);
-        }
-        $Notif = Notification::where('message', json_encode($service))->first();
+        $Notif = Notification::where('message', json_encode($pub))->first();
+       
         $res = $service->update($data);
-        if ($Notif) {
-            $resNot =  $Notif->update(["message" => json_encode($service->fresh())]);
-            if ($res && $resNot){
+        if ($res) {
+            if ($request->type_service == 'RestoPlat') {
+                $pub->update([
+                    "contenu" => $data['description'],
+                    "image" => $data['image'],
+                ]);
+            }
+            $resNot =  $Notif->update(["message" => json_encode($pub->fresh())]);
+            if ($res || $resNot) {
                 return response()->json([
                     'status' => 'success',
                     'new' => $service->fresh(),
                     'message' => 'Service updated successfully',
                 ]);
-            }
-            else{ 
+            } else {
                 return response()->json([
-                'status' => 'Failder',
-                '$Notif' => $service,
-            ]);
+                    'status' => 'Failder',
+                    '$Notif' => $service,
+                ]);
             }
         }
     }
