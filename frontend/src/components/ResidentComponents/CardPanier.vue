@@ -2,7 +2,7 @@
     <div @click="openPosition('top')"
         :class="service.disponible ? 'text-blue-4 hover:bg-blue-2 cursor-pointer hover:text-white' : 'text-blue-4 '"
         class="flex items-center  justify-center rounded text-blue-4 text-xs py-2 w-1/3  transition duration-350 ease-in-out">
-        <button :disabled="service.disponible ? false : true" v-if="service != ''">
+        <button :disabled="service.disponible ? false : true" >
             <i class="fa fa-cart-plus mr-4"></i>
             {{ service.disponible ? 'Commander' : 'Pas Disponible' }}
         </button>
@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+
 import VueMultiselect from 'vue-multiselect'
 import Dialog from 'primevue/dialog';
 import Axios from '@/_Service/caller.service'
@@ -104,7 +104,8 @@ export default {
     name: 'CardAchat',
     props: {
         service: Object,
-        image: String
+        image: String,
+        commandeUser: Function
     },
     components: {
         VueMultiselect, Dialog
@@ -139,6 +140,7 @@ export default {
                         text: "Your file has been saved.",
                         icon: "success"
                     });
+                    this.commandeUser();
                 }
             } catch (error) {
                 console.error(error)

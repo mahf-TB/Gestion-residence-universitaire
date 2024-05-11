@@ -19,8 +19,6 @@
                                                 }}</span>
                                         </label>
                                     </div>
-                                    <input type="file" id="fileInput" @change="handleFileUpload" hidden />
-
                                 </div>
                                 <div class="px-4 pt-4">
                                     <div class="relative flex justify-between w-full">
@@ -67,12 +65,7 @@
                     <div class="mt-3">
                         <div class="bg-fotsy px-3 py-3 rounded-xl shadow-sm">
                             <div class="flex items-center justify-between w-full">
-                                <div class="flex flex-col text-right">
-                                    <button
-                                        class="flex justify-center text-fotsy max-h-max whitespace-nowrap  hover:bg-blue-1  rounded max-w-max border bg-blue-2  items-center hover:shadow-lg font-light py-2 px-3  mr-0 ml-auto">
-                                        <i class="fa-solid fa-upload mx-2"></i>Enregistrer votre materiele
-                                    </button>
-                                </div>
+                                    <ajouter-materiels :logement="logement"></ajouter-materiels>
                                 <div
                                     class="mx-1 px-4 py-2 flex text-blue-2 hover:bg-blue-1 hover:text-blue-0 rounded transition-all cursor-pointer">
                                     <img :src="require('@/assets/icon-image.png')" class="mx-2 object-cover" height="24"
@@ -177,9 +170,11 @@
 <script>
 
 import Axios from '@/_Service/caller.service';
+import AjouterMateriels from '@/components/ResidentComponents/AjouterMateriels.vue';
 export default {
     name: 'Chambre',
     components: {
+        AjouterMateriels
     },
     data() {
         return {
@@ -198,7 +193,6 @@ export default {
             if (token) {
                 const res = await Axios.get('userConnect')
                 if (res.data.status == 'success') {
-                    console.log(res.data)
                     this.user = res.data.user
                     this.etudiant = res.data.etudiant
                     this.logement = res.data.logement

@@ -1,6 +1,6 @@
 <template>
     <article class="transition duration-350 rounded ease-in-out">
-        <div class="flex flex-shrink-0 p-4 pb-0">
+        <div class="flex justify-between flex-shrink-0 p-4 pb-0">
             <div class="flex items-center">
                 <div>
                     <img class="inline-block h-10 w-10 rounded-full" :src="data.auteur.photo ? data.pdp: require('@/assets/image/pdpNone.jpeg')"
@@ -16,21 +16,24 @@
                     </span>
                 </div>
             </div>
+            <div>
+                <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
+            </div>
         </div>
         <div class=" pb-2">
-            <p class="px-4 pt-4 m-0 text-base width-auto font-medium text-blue-4 flex-shrink">
+            <p class="px-4 pt-4 my-1 text-base width-auto font-medium text-blue-4 flex-shrink">
                 {{ data.contenu }}
                 <br />
                 <a href="#" class="text-blue-400">#WomenWhoCode #CodeNewbie</a>
             </p>
-            <div class="md:flex-shrink  py-1">
+            <div class="md:flex-shrink ">
                 <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-[500px]">
                     <img class="object-cover object-center w-full h-full" :src="data.image" alt="">
                 </div>
             </div>
 
 
-            <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
+            <div class="mb-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
             <div class="flex items-center justify-between mx-3">
                 <div
                     class="flex items-center cursor-pointer justify-center rounded text-blue-4 text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
@@ -54,7 +57,8 @@
                     </svg>
                     Commenter
                 </div>
-                <div v-if="data.service == ''"
+                <card-panier v-if="data.service" :service="data.service" :image="data.image"></card-panier>
+                <div v-else
                     class="flex items-center cursor-pointer justify-center rounded text-blue-4 text-xs py-2 w-1/3  hover:bg-blue-2 hover:text-white transition duration-350 ease-in-out">
                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                         <g>
@@ -65,7 +69,6 @@
                     </svg>
                     Parteger
                 </div>  
-                <card-panier :service="data.service" :image="data.image"></card-panier>
             </div>
         </div>
     </article>

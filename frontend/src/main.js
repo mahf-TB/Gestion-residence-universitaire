@@ -4,8 +4,13 @@ import router from './router'
 import store from './store'
 import PrimeVue from 'primevue/config';
 
+// import dotenv from 'dotenv';
+
 import Echo from "laravel-echo"
 import Pusher from "pusher-js";
+
+console.log(process.env.VUE_APP_URL_BACK)
+// dotenv.config();
 window.Pusher = Pusher;
 
 window.Echo = new Echo({

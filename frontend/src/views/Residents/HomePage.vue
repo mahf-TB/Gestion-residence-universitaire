@@ -7,7 +7,7 @@
           <div class="flex w-full">
             <img :src="user.photo ? user.photo : require('@/assets/image/pdpNone.jpeg') "
               class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full" alt="photo de profile">
-            <publication></publication>
+            <publication :getAllPub="getAllPub"></publication>
           </div>
           <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
           <div class="flex items-center">
@@ -24,7 +24,7 @@
         <!-- liste des publication  -->
 
         <div class="container py-3" v-for="(data, i) in dataArray" :key="i">
-          <ListePublicationVue class="bg-fotsy hover:bg-gray-50" :data="data"></ListePublicationVue>
+          <ListePublicationVue class="bg-fotsy hover:bg-gray-50" :data="data" ></ListePublicationVue>
         </div>
       </div>
       <div class="my-2">
@@ -56,11 +56,11 @@ export default {
     }
   },
   mounted() {
-    this.getAllReparations()
+    this.getAllPub()
     this.getUser()
   },
   methods: {
-    async getAllReparations() {
+    async getAllPub() {
       try {
         var response = await Axios.get('/index_pub')
         this.dataArray = response.data;

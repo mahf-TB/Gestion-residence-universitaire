@@ -21,7 +21,7 @@
                             class="text-blue-0 px-4  h-full  flex items-center transition-all  hover:bg-blue-1">
                             Maintenance
                         </router-link>|
-                        <Button @click="$refs.menu2.toggle($event)"
+                        <Button @click="$refs['menu2'].toggle($event)"
                             :class="{ 'border-b-4 border-blue-0': $route.path === '/admin/liste-commande' || $route.path === '/admin/restaurent' || $route.path === '/admin/service' }"
                             class="text-blue-0 px-4 uppercase h-full  flex items-center transition-all  hover:bg-blue-1">
                             Service <span class="lowercase mx-1">et</span> Activités

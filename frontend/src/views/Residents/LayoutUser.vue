@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import HautHeader from '../../components/HautHeader.vue'
-import Header from '../../components/ResidentComponents/Header.vue'
+import HautHeader from '@/components/HautHeader.vue'
+import Header from '@/components/ResidentComponents/Header.vue'
 export default {
   name: 'LayoutUser',
   components: {
@@ -18,4 +18,3 @@ export default {
   },
 }
 </script>
-    HautHeader

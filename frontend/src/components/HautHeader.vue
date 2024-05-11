@@ -11,7 +11,7 @@
                         <i class="fa-solid fa-envelope pr-2"></i>lodgecite.univ@gmail.com</span>
                 </div>
                 <button class="btn btn-primary" v-if="isConnect">
-                    <router-link to="/login" class="text-blue-0 font-light">se connecter</router-link>
+                    <router-link to="/login" class="text-blue-0 font-light">Connexion</router-link>
                 </button>
                 <side-bar-menu></side-bar-menu>
             </div>

@@ -47,6 +47,8 @@ const routes = [
       { path: 'service', name: 'Service', component: Etudiant.Service },
       { path: 'maintenance', name: 'Maintenance', component: Etudiant.Maintenance },
       { path: 'chambre', name: 'Chambre Etudiant', component: Etudiant.Chambre },
+      { path: 'show-pub/:id', name: 'ShowPub', component: Etudiant.ShowPub },
+
       { path: 'messenger', name: 'Messenger User', component: Page.Messenger },
       {  path: 'profile', name: 'Profile', component: Page.Profile
       },

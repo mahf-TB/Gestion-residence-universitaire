@@ -1,35 +1,35 @@
 <template>
     <article class="transition duration-350 rounded ease-in-out">
-        <div class="flex flex-shrink-0 p-4 pb-0">
-                <div class="flex items-center">
-                    <div> 
-                        <img class="inline-block h-10 w-10 rounded-full"
-                        :src="require('@/assets/image/pdpNone.jpeg')" alt="">
-                    </div>
-                    <div class="flex flex-col ml-4 list-none">
-                        <span class="text-base  font-medium text-blue-1">
-                            {{data.user}}
-                        </span>
-                        <span
-                            class="text-sm font-ligth text-gray-600  transition ease-in-out duration-150">
-                            <span>{{ new Date(data.date).toLocaleDateString() + ' à ' + new
-                                            Date(data.date).toLocaleTimeString() }}</span>
-                        </span>
-                    </div>
+        <div class="flex justify-between flex-shrink-0 p-4 pb-0">
+            <div class="flex items-center">
+                <div>
+                    <img class="inline-block h-10 w-10 rounded-full" :src="require('@/assets/image/pdpNone.jpeg')"
+                        alt="">
                 </div>
+                <div class="flex flex-col ml-4 list-none">
+                    <span class="text-base  font-medium text-blue-1">
+                        {{ data.user }}
+                    </span>
+                    <span class="text-sm font-ligth text-gray-600  transition ease-in-out duration-150">
+                        <span>{{ new Date(data.date).toLocaleDateString() + ' à ' + new
+                            Date(data.date).toLocaleTimeString() }}</span>
+                    </span>
+                </div>
+            </div>
+            <div>
+                <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
+            </div>
         </div>
         <div class="p-0 pb-1">
             <p class="px-4 pt-4 m-0  text-base width-auto font-medium text-blue-4 flex-shrink">
                 {{ data.description }}
-               
-                <br/>
+
+                <br />
                 <a href="#" class="text-blue-400"> #Prix: {{ data.tarifs }} Ar</a>
             </p>
             <div class="md:flex-shrink " v-if="data.image != ''">
                 <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-[450px]">
-                    <img class="object-cover w-full h-full"
-                    :src="data.image"
-                    alt="">
+                    <img class="object-cover w-full h-full" :src="data.image" alt="">
                 </div>
             </div>
 
@@ -57,18 +57,20 @@
                     </svg>
                     Commenter
                 </div>
-                <card-panier :service="data" :image="data.image"></card-panier>
+                <card-panier :service="data" :image="data.image" :commandeUser="commandeUser"></card-panier>
             </div>
         </div>
     </article>
 
 </template>
-
 <script>
 import CardPanier from './CardPanier.vue'
 export default {
     name: 'ListeService',
-    props: { data: Array },
+    props: {
+        data: Array,
+        commandeUser: Function
+    },
     components: {
         CardPanier
     },

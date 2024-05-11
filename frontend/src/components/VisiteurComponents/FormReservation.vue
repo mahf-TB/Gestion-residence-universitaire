@@ -132,7 +132,6 @@
                                     Juste pour être sûr, votre email<span  class="text-red-500">*</span></label>
                                 <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
-                           
                         </div>
                         <div class="flex items-center justify-between mb-4">
                              <!--  votre nom -->

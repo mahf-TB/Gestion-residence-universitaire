@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div>
-                <form>
+                <form @submit.prevent="addPost()">
                     <div class="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
                         <textarea id="contenu" rows="1" v-autoresize v-model="contenu"
                             class="block w-full p-2 text-lg text-gray-800 bg-white border-0 overflow-hidden resize-none focus:outline-none"
@@ -39,7 +39,7 @@
                     </div>
 
                     <section v-if="showImage" class="overflow-auto p-2 w-full h-full flex flex-col max-h-[500px]">
-                        <input type="file" id="fileInput" @change="handleFileUpload" multiple hidden />
+                        <input type="file" id="fileInput" @change="handleFileUpload"  hidden />
                         <header v-if="imageUrl == null" @dragover="dragOverHandler" @drop="dropHandler"
                             class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
                             <label for="fileInput"
@@ -52,7 +52,7 @@
                         </header>
                         <div class="relative" @mouseover="show =true" @mouseout="show =false"> 
                             <img v-if="imageUrl != null" :src="imageUrl" :alt="fileImage" width="300" height="500" 
-                            class="w-full h-full  object-scale-down ">
+                            class="w-full h-full  object-cover ">
                             <label for="fileInput"  v-if="show"
                                 class="absolute mt-2 rounded-md px-2 py-1 left-1 top-0 text-base bg-blue-0 text-blue-1">
                                 <i class="fa-solid fa-file-image mr-2"></i>Changer le photo</label>
@@ -92,10 +92,14 @@
 </template>
 
 <script>
+import Axios from '@/_Service/caller.service'
 import Dialog from 'primevue/dialog';
 
 export default {
     name: 'Publication',
+    props:{
+        getAllPub:Function
+    },
     components: {
         Dialog
     },
@@ -112,6 +116,24 @@ export default {
     methods: {
         showImageAction() {
             this.showImage = !this.showImage;
+        },
+       async addPost() {
+            console.log(this.fileImage);
+            const formData = new FormData();
+            formData.append('image', this.fileImage);
+            formData.append('contenu', this.contenu);
+
+            console.log(formData);
+                try {
+                    const res = await Axios.post('add_publication', formData)
+                    console.log(res)
+                    if (res.data.status) {
+                        this.visible = false;
+                        this.getAllPub()
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
         },
       
         handleFileUpload(event) {
