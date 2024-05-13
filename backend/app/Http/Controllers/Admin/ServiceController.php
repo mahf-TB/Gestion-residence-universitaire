@@ -142,7 +142,7 @@ class ServiceController extends Controller
         $plat['imageUrl'] = $plat->image == null ? '' : $plat->imageUrl();
         return $plat;
     }
-
+ 
 
     public function updatePlatResto($id, ServiceRequest $request)
     {

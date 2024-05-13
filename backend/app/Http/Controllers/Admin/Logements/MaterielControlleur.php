@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Storage;
 
 class MaterielControlleur extends Controller
 {
+    public function index(){
+        $Mainte = Materiel::where('id_user', auth()->user()->id)->get();
+        $dataRes =  $Mainte->map(function ($items) {
+            return [
+                "id" => $items->id,
+                "nom" => $items->nom,
+                "description" => $items->description,
+                "qte" => $items->qte,
+                "image" =>  $items->image == null ? '' :$items->imageUrl() ,
+                "isImage" => $items->image,
+                "date" => $items->updated_at,
+            ];
+        })->values();
+        return $dataRes;
+    }
     //
     public function store(MaterielRequest $request){
         $data = $request->validated();

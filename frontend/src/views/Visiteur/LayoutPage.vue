@@ -1,6 +1,7 @@
 <template>
   <div class="bg-white h-full">
-   <Header class="sticky"></Header>
+    <haut-header></haut-header>
+   <Header class="sticky top-0 z-50"></Header>
     <div class="">
       <router-view class="font-Avenir" />
     </div>
@@ -11,10 +12,12 @@
 <script>
 import FooterVue from '@/components/VisiteurComponents/Footer.vue'
 import Header from '@/components/VisiteurComponents/Header.vue'
+import HautHeader from '../../components/HautHeader.vue'
 export default {
   name: 'LayoutPage',
   components: {
-    Header, FooterVue
+    Header, FooterVue,
+    HautHeader
   },
 }
 </script>

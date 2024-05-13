@@ -48,14 +48,14 @@
                                     <!-- Profile info -->
                                     <div class="flex justify-start w-full mt-3 ml-3">
                                         <!-- Description and others -->
-                                        <div class="text-center px-3 py-2 border-b-4 border-blue-2 text-blue-2">
+                                        <div class="text-center cursor-pointer px-3 py-2 border-b-4 border-blue-2 text-blue-2">
                                             <span class="font-bold"> Toutes</span>
                                         </div>
-                                        <div class="text-center px-3 py-2 text-blue-4">
+                                        <div class="text-center cursor-pointer px-3 py-2 text-blue-4">
                                             <span class="font-bold">En commun</span>
                                         </div>
-                                        <div class="text-center px-3 py-2 text-blue-4">
-                                            <span class="font-bold">Votre kit</span>
+                                        <div class="text-center cursor-pointer px-3 py-2 text-blue-4">
+                                            <span class="font-bold">Vos matériel</span>
                                         </div>
                                     </div>
                                 </div>
@@ -65,19 +65,24 @@
                     <div class="mt-3">
                         <div class="bg-fotsy px-3 py-3 rounded-xl shadow-sm">
                             <div class="flex items-center justify-between w-full">
-                                    <ajouter-materiels :logement="logement"></ajouter-materiels>
+                                <ajouter-materiels :logement="logement"></ajouter-materiels>
                                 <div
                                     class="mx-1 px-4 py-2 flex text-blue-2 hover:bg-blue-1 hover:text-blue-0 rounded transition-all cursor-pointer">
-                                    <img :src="require('@/assets/icon-image.png')" class="mx-2 object-cover" height="24"
-                                        width="24" alt="photo de profile">
+                                    <img :src="require('@/assets/icon-image.png')" class="mx-2 object-cover" height="20"
+                                        width="20" alt="photo de profile">
                                     <span class="uppercaose mx-1 font-bold text-base">
-                                        Photo/Video
+                                        Photo
                                     </span>
                                 </div>
                             </div>
-                            <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
+                            <div class="mt-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
                             <div class="flex items-center">
 
+                            </div>
+                        </div>
+                        <div class="grid  grid-cols  md:grid-cols-2 lg:grid-cols-3  my-2">
+                            <div class="max-w-[300px] my-3 mx-3" v-for="(data, index) in materiel" :key="index">
+                                <card-materiel :materiel="data"></card-materiel>
                             </div>
                         </div>
                         <div v-if="dataArray == ''" class="my-2">
@@ -92,7 +97,7 @@
                         <div class="flex flex-col">
                             <div class="flex my-1 items-center">
                                 <div>
-                                   Demande de changement de logement
+                                    Demande de changement de logement
                                 </div>
                                 <button
                                     class="flex  items-center  justify-center text-blue-4  whitespace-nowrap hover:text-blue-1  rounded-full hover:bg-slate-200 font-light  p-3 mr-0 ml-auto">
@@ -103,7 +108,7 @@
                         </div>
                     </div>
                     <div class="bg-fotsy my-2 px-4 py-3 rounded-xl shadow-sm">
-                        <div class="flex flex-col">
+                        <div class="flex flex-col overflow-auto  lg:overflow-hidden">
                             <div class="flex my-2 items-center">
                                 <div class="font-bold text-blue-2">
                                     Votre Collocateur
@@ -170,22 +175,26 @@
 <script>
 
 import Axios from '@/_Service/caller.service';
-import AjouterMateriels from '@/components/ResidentComponents/AjouterMateriels.vue';
+import AjouterMateriels from '@/components/ResidentComponents/Materiel/AjouterMateriels.vue';
+import CardMateriel from '@/components/ResidentComponents/Materiel/CardMateriel.vue';
 export default {
     name: 'Chambre',
     components: {
-        AjouterMateriels
+        AjouterMateriels,
+        CardMateriel
     },
     data() {
         return {
             user: [],
             etudiant: [],
             logement: [],
-            colloc: []
+            colloc: [],
+            materiel: []
         }
     },
     mounted() {
         this.getUser()
+        this.getUserMateriel()
     },
     methods: {
         async getUser() {
@@ -199,6 +208,17 @@ export default {
                     this.colloc = res.data.colloc
                 }
             }
+        },
+        async getUserMateriel() {
+            try {
+                const res = await Axios.get('index_materiel')
+                this.materiel = res.data
+                console.log(res.data)
+            } catch (error) {
+                console.error(error.message)
+            }
+
+
         },
     },
 

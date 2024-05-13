@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Materiel extends Model
 {
@@ -26,4 +27,10 @@ class Materiel extends Model
     {
         return $this->belongsTo(Logement::class, 'logement_id');
     }
+
+    public function imageUrl(): string
+    {
+        return Storage::disk('public')->url($this->image);
+    }
+
 }

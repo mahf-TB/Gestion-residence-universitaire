@@ -1,7 +1,7 @@
 <template>
   <div class="container flex items-center flex-col justify-center">
     <!-- contenu center -->
-    <div class=" w-[60%]">
+    <div class="w-full lg:w-4/5 xl:w-3/5">
       <div class="bg-fotsy px-3 pt-2 mb-1 rounded-xl shadow">
         <div class="flex items-center justify-between w-full">
           <div class="p-1 flex items-center text-base text-blue-4  rounded transition-all ">
@@ -23,19 +23,19 @@
               </span>
             </div>
           </div>
-
+ 
         </div>
         <div class="my-2 bg-gradient-to-r from-blue-900 to-blue-800 h-px"></div>
         <div class="flex items-center">
-          <div
-            class="mx-1 px-4 py-2 flex items-center justify-center text-blue-2  border-b-4 border-blue-2   transition-all cursor-pointer w-1/2">
+          <div :class="{ 'text-blue-2  border-b-4 border-blue-2': !liste }" @click="doListe()"
+            class="mx-1 px-4 py-2 flex items-center justify-center text-blue-1  hover:text-blue-2 hover:bg-blue-0  rounded-t  transition-all cursor-pointer w-1/2">
             <span class="mx-2"><i class="fa-solid fa-table-cells-large"></i></span>
             <span class="mx-2 font-ligth ">
               Vue grille
             </span>
           </div>
-          <div
-            class="mx-1 px-4 py-2 flex items-center justify-center text-blue-2  hover:text-blue-2 hover:bg-blue-0 rounded transition-all cursor-pointer  w-1/2">
+          <div :class="{ 'text-blue-2  border-b-4 border-blue-2': liste }" @click="doListe()"
+            class="mx-1 px-4 py-2 flex items-center justify-center text-blue-1  hover:text-blue-2 hover:bg-blue-0 rounded-t transition-all cursor-pointer  w-1/2">
             <span class="mx-2"><i class="fa-solid fa-list"></i></span>
             <span class="mx-2 font-ligth ">
               Vue liste
@@ -44,17 +44,18 @@
         </div>
       </div>
       <!-- Contenu liste des pub de service -->
-      <div class="my-3" v-if="commande != ''">
-        <div v-for="(data, index) in commande" :key="index">
+      <div class="my-3" v-if="commandes != ''">
+        <div v-for="(data, index) in commandes" :key="index">
           <card-commande-user :commande="data"></card-commande-user>
-
         </div>
-        <div v-if="commande == ''" class="my-2">
+        <div v-if="commandes == ''" class="my-2">
           <div class=" h-full p-2 text-center">
             <span class="font-semibold text-lg text-blue-2">Aucun commande effectuer</span>
           </div>
         </div>
       </div>
+
+      <!-- Contenu liste des commande effectuer-->
       <div v-else class="container py-3" v-for="(data, i) in dataArray" :key="i">
         <ListeService :data="data"  :commandeUser="commandeUser"
         class="bg-fotsy hover:bg-gray-50"></ListeService>
@@ -82,7 +83,8 @@ export default {
   data() {
     return {
       dataArray: [],
-      commande: []
+      commandes: [],
+      liste:false
     }
   },
   mounted() {
@@ -105,6 +107,10 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    doListe(){
+      this.liste = !this.liste
+      this.getAllReparations()
     }
   }
 }

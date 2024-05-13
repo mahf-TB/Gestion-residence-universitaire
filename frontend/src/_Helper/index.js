@@ -15,7 +15,7 @@ let adminConnect = async (to) => {
                 return true
             }
         } catch (error) {
-            console.log('error connecting go to login page')
+            console.log('error connecting go to login page', error)
         }
     }
     router.push('/login')
@@ -33,7 +33,7 @@ let maintenanceConnect = async (to) => {
                 return true
             }
         } catch (error) {
-            console.log('error connecting go to login page')
+            console.log('error connecting go to login page', error)
         }
     }
     router.push('/login')
@@ -51,7 +51,7 @@ let accueilConnect = async (to) => {
                 return true
             }
         } catch (error) {
-            console.log('error connecting go to login page')
+            console.log('error connecting go to login page', error)
         }
     }
     router.push('/login')
@@ -69,7 +69,7 @@ let serviceConnect = async (to) => {
                 return true
             }
         } catch (error) {
-            console.log('error connecting go to login page')
+            console.log('error connecting go to login page', error)
         }
     }
     router.push('/login')
@@ -93,7 +93,7 @@ let userConnect = async (to) => {
                 return true
             }
         } catch (error) {
-            console.log('error connecting go to login page')
+            console.log('error connecting go to login page', error)
         }
     }
 

@@ -1,13 +1,14 @@
 <template>
-  <div class="mx-3 flex items-start  justify-center">
+  <div class=" container flex items-center flex-col justify-center">
     <!-- contenu center -->
-    <div class="w-2/4 mx-10">
+    <div class="w-full lg:w-4/5 xl:w-3/5 mx-10">
       <div class=" w-[100%]">
         <div class="bg-fotsy px-3 py-3 rounded-xl shadow-sm">
           <div class="flex w-full">
-            <img :src="user.photo ? user.photo : require('@/assets/image/pdpNone.jpeg') "
+            <img :src="user.photo ? user.photo : require('@/assets/image/pdpNone.jpeg')"
               class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full" alt="photo de profile">
-            <publication :getAllPub="getAllPub"></publication>
+            <publication :getAllPub="getAllPub" :user="user.username"></publication>
+            {{ }}
           </div>
           <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
           <div class="flex items-center">
@@ -24,7 +25,7 @@
         <!-- liste des publication  -->
 
         <div class="container py-3" v-for="(data, i) in dataArray" :key="i">
-          <ListePublicationVue class="bg-fotsy hover:bg-gray-50" :data="data" ></ListePublicationVue>
+          <ListePublicationVue class="bg-fotsy hover:bg-gray-50" :data="data"></ListePublicationVue>
         </div>
       </div>
       <div class="my-2">
@@ -35,7 +36,7 @@
 
     </div>
     <!-- right contenu -->
-    
+
   </div>
 </template>
 
@@ -52,7 +53,7 @@ export default {
   data() {
     return {
       dataArray: [],
-      user:[]
+      user: []
     }
   },
   mounted() {
@@ -69,14 +70,19 @@ export default {
       }
     },
     async getUser() {
-            let token = JSON.parse(localStorage.getItem('token'))
-            if (token) {
-                const res = await Axios.get('userConnect')
-                if (res.data.status == 'success') {
-                    this.user = res.data.user
-                }
-            }
-        },
+      let token = JSON.parse(localStorage.getItem('token'))
+      if (token) {
+        try {
+          const res = await Axios.get('userConnect')
+          if (res.data.status == 'success') {
+            this.user = res.data.user
+          }
+        } catch (error) {
+          console.error(error);
+        }
+
+      }
+    },
   }
 }
 </script>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Chats\ChatController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Resident\CommandeController;
 use App\Http\Controllers\Resident\NotifController;
@@ -42,17 +43,27 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/userConnect', [AuthController::class, 'getUser']);
     Route::get('/logout', [AuthController::class, 'logout']);
 });
-
+ 
 Route::group(['controller' => ProfileController::class], function () {
     Route::post('/uploadPhoto',  'ajouterPhotoProfile');
     Route::post('/change-password',  'changeUserPassword');
 });
 
+//Utilisateur routes API crud
 Route::apiResource('/utilisateurs', UtilisateurController::class);
+
+//Chat with user routes
+Route::group(['controller' => ChatController::class], function () {
+    Route::get('/message_to/{id}',  'user_message');
+    Route::get('/user_list',  'user_list');
+    Route::get('/users-message-current',  'userMessageCurrent');
+    Route::post('/send_message',  'send_message');
+});
 
 //ETUDIANT routes api CRUD 
 Route::apiResource('/etudiants', EtudiantController::class);
 Route::get('/etudiant_logement', [EtudiantController::class, 'getEtudiantLogment']);
+
 
 //BATIMENT et batiments routes api CRUD 
 Route::apiResource('/batiments', BatimentController::class);
@@ -62,9 +73,13 @@ Route::get('/type_logement', [LogementController::class, 'getTypeLogement']);
 Route::get('/logement_type', [LogementController::class, 'getLogement']);
 Route::post('/uploadImage', [LogementController::class, 'uploadImage']);
 
+//Materiel user routes
 Route::group(['controller' => MaterielControlleur::class], function () {
     Route::post('/add-materiel',  'store');
+    Route::get('/index_materiel',  'index');
 });
+
+
 //RESERVATIONS routes
 Route::group(['controller' => ReservationController::class], function () {
     Route::post('/reservation', 'addReservationAction');
@@ -92,20 +107,24 @@ Route::group(['controller' => ServiceController::class], function () {
     Route::post('/update_plat/{id}',  'updatePlatResto');
     Route::delete('/deleteService/{id}',  'deleteService');
 });
-//Service routes
+
+
+//Publication routes
 Route::group(['controller' => PubController::class], function () {
     Route::get('/index_pub',  'index');
     Route::post('/add_publication',  'addPublication');
     Route::get('/publication/{id}',  'showOnePub');
 });
-//Service routes
+
+
+//Notification routes
 Route::group(['controller' => NotifController::class], function () {
     Route::get('/index_notif',  'indexNotification');
     Route::get('/read',  'readAll');
 });
 
 
-
+//Commande routes
 Route::group(['controller' => CommandeController::class], function () {
     Route::post('/commande-service',  'demandeService');
     Route::get('/index-service',  'index');
@@ -113,7 +132,7 @@ Route::group(['controller' => CommandeController::class], function () {
 });
 
 
-
+//Reparation routes
 Route::group(['controller' => ReparationController::class], function () {
     Route::get('/index_reparer',  'index');
     Route::delete('/delete_reparation',  'annulerDemande');

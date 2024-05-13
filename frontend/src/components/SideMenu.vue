@@ -1,8 +1,15 @@
 <template>
-  <div v-if="isConnect" @click="visible = true"
-    class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2">
-    <img :src="User.photo ? User.photo: require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12  object-cover rounded-full"
-      alt="photo de profile">
+  <div v-if="isConnect" class="flex items-center">
+    <div v-if="menu" @click="visible = true"
+      class="text-blue-2 px-2 cursor-pointer h-full mx-3 lg:hidden flex items-center relative">
+      <i class="fa-solid fa-list" style="font-size: 1.4rem"></i>
+    </div>
+    <div v-else @click="visible = true"
+      class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2">
+      <img :src="User.photo ? User.photo : require('@/assets/image/pdpNone.jpeg')"
+        class="h-12 w-12  object-cover rounded-full" alt="photo de profile">
+    </div>
+
 
     <!-- // SideBar Menu pour l'utilisateur -->
     <Sidebar v-model:visible="visible" :baseZIndex="1000" position="right"
@@ -13,8 +20,8 @@
           <div class="flex items-center justify-start my-3">
             <div v-if="isConnect" @click="this.$router.push('/profile'), visible = false"
               class="cursor-pointer bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12  ml-2">
-              <img :src="User.photo ? User.photo:require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12 object-cover rounded-full"
-                alt="photo de profile">
+              <img :src="User.photo ? User.photo : require('@/assets/image/pdpNone.jpeg')"
+                class="h-12 w-12 object-cover rounded-full" alt="photo de profile">
             </div>
             <div class="pt-2">
               <h1 class="text-[14px] ml-3">{{ User.username }}</h1>
@@ -51,29 +58,29 @@
               Notifications
             </div>
 
+            <div class="mt-auto cursor-pointer lg:hidden my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/user/evenement'), visible = false">
+              <i class="fa-solid  fa-calendar-days mx-3"></i>
+              Évenement
+            </div>
+            <div v-if="User.type == 'user'"
+              class="mt-auto cursor-pointer lg:hidden my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/user/service'), visible = false">
+              <i class="fa-solid fa-bell-concierge mx-3"></i>
+              Service
+            </div>
+            <div v-if="User.type == 'user'"
+              class="mt-auto cursor-pointer lg:hidden my-2 py-2 rounded transition-all hover:bg-blue-2"
+              @click="this.$router.push('/user/maintenance'), visible = false">
+              <i class="fa-solid fa-briefcase mx-3"></i>
+              Maintenance
+            </div>
+
             <div v-if="User.type == 'user'"
               class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
-              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
+              @click="this.$router.push('/user/liste'), visible = false">
               <i class="fa-solid fa-graduation-cap mx-3"></i>
               Activités Résidentielles
-            </div>
-            <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
-              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
-              <i class="fa-solid  fa-shield-halved mx-3"></i>
-
-              Sécurité
-            </div>
-            <div v-if="User.type == 'user'"
-              class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
-              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
-              <i class="fa-solid fa-circle-info mx-3"></i>
-              Support Résidentiel
-            </div>
-            <div v-if="User.type == 'user'"
-              class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2"
-              @click="this.$router.push('/admin/liste-utilisateur'), visible = false">
-              <i class="fa-solid fa-triangle-exclamation mx-3"></i>
-              Signaler probleme
             </div>
             <div class="mt-auto cursor-pointer my-2 py-2 rounded transition-all hover:bg-blue-2">
               <i class="pi pi-cog mx-3"></i>
@@ -104,6 +111,7 @@ import Sidebar from 'primevue/sidebar';
 import Swal from 'sweetalert2';
 export default {
   name: 'SideMenu',
+  props: { menu: Boolean },
   components: {
     Sidebar,
   },
@@ -121,11 +129,11 @@ export default {
 
   },
   methods: {
-    openProfile(items){
+    openProfile(items) {
       console.log(items)
       if (items == 'user') {
-        this.$router.push(`/user/profile`) 
-      }else{
+        this.$router.push(`/user/profile`)
+      } else {
         this.$router.push(`/admin/profile`)
       }
       this.visible = false
@@ -133,14 +141,20 @@ export default {
     async isConnectUser() {
       let token = JSON.parse(localStorage.getItem('token'))
       if (token) {
-        const res = await Axios.get('userConnect')
-        this.User = res.data.user
-        if (this.User.photo) {
-          this.photo = this.User.photo
-        } else {
-          this.photo = require('@/assets/image/pdpNone.jpeg')
+        try {
+          const res = await Axios.get('userConnect')
+          this.User = res.data.user
+          if (this.User.photo) {
+            this.photo = this.User.photo
+          } else {
+            this.photo = require('@/assets/image/pdpNone.jpeg')
+          }
+          this.isConnect = true
+
+        } catch (error) {
+          console.error(error)
         }
-        this.isConnect = true
+
       } else {
         this.isConnect = false
       }
@@ -167,7 +181,6 @@ export default {
           console.error(error)
         }
       }
-
     },
   },
 }

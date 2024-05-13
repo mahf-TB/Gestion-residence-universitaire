@@ -27,17 +27,15 @@ class AuthController extends Controller
         //recuperer le compte de l'etudiant
         $USR = User::findOrFail($user->id);
         $user['photo'] = $USR->photo == null ? '' : $USR->imageUrl();
-        if ($user->id_etudiant) {
-            //recuperer  l'etudiant
-            $etudiant =  Etudiant::find($user->id_etudiant);
 
+        if ($user->id_etudiant) {
+            $etudiant =  Etudiant::find($user->id_etudiant);
             //recuperer le collocateur de l'etudiant
             $colloc = Etudiant::where('id_logement', $etudiant->id_logement)->get();
             $colloc = $colloc->filter(function ($items) use ($etudiant) {
                 return $items->id != $etudiant->id;
             });
             $logement = Logement::findOrFail($etudiant->id_logement);
-
             $logement['imageUrl'] = $logement->image == null ? '' : $logement->imageUrl();
         }
 

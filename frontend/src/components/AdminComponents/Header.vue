@@ -35,8 +35,8 @@
                         <div @click="this.$router.push('/admin/messenger')"
                             :class="{ 'text-blue-4': $route.path === '/admin/messenger' }" class="h-full px-2 relative">
                             <i class="fa-brands fa-facebook-messenger" style="font-size: 1.4rem"></i>
-                            <span
-                                class="absolute -top-2 right-1 text-[8px] px-[6px] py-[2px] rounded-full bg-red-500 text-fotsy">3</span>
+                            <!-- <span
+                                class="absolute -top-2 right-1 text-[8px] px-[6px] py-[2px] rounded-full bg-red-500 text-fotsy">3</span> -->
                         </div>
                         <div class="h-full  px-2 relative">
                             <i class="fa-solid fa-bell" style="font-size: 1.4rem"></i>

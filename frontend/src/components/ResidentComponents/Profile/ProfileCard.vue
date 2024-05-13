@@ -35,7 +35,7 @@
                     <div
                         class="absolute -bottom-5 flex items-end justify-end w-full text-white text-left transition-all ease-in-out duration-500">
                         <div class="mx-3 flex">
-                            <label for="fileInput"
+                            <label for="filecc"
                                 class="text-sm font-light cursor-pointer bg-slate-200 text-slate-900 p-2 mb-4 mx-1 rounded">
                                 <i class="fa-solid fa-camera mx-2"></i> <span>Ajouter un
                                     photo</span>
@@ -45,22 +45,22 @@
                                 <i class="fa-solid fa-upload mx-2"></i><span>Enregistrer</span>
                             </h2>
                         </div>
-                        <input type="file" id="fileInput" @change="handleFileUpload" hidden />
                     </div>
                 </div>
             </div>
             <div class="px-4 pt-4">
-                <div class="relative flex justify-between w-full">
+                <div class="relative flex-col xl:flex-row flex justify-between w-full">
                     <!-- Avatar PDP -->
-                    <div class="flex flex-1">
+                    <input type="file" id="fileImagePdp" @change="handleFileUpload" hidden />
+                    <div class="flex  flex-1">
                         <div style="margin-top: -4rem;">
                             <div style="height:9rem; width:9rem;"
                                 class="md rounded-full relative avatar overflow-hidden group">
                                 <img style="height:9rem; width:9rem;"
                                     class="md rounded-full object-cover object-center relative border-4  z-0 border-gray-200"
-                                    :src="fileImage == null ? photo : pdp"
+                                    :src="fileImagePdp == null ? photo : pdp"
                                     alt="photo de profile">
-                                <label for="fileInput"
+                                <label for="fileImagePdp"
                                     class="absolute cursor-pointer group-hover:top-0 left-0 w-full h-full  group-hover:bg-slate-900/60 transition-all ease-in-out duration-500">
                                     <div
                                         class="absolute  flex items-start justify-center w-full group-hover:-top-16 text-white text-left transition-all ease-in-out duration-500">
@@ -91,19 +91,25 @@
                                 <span class="text-gray-600">Commande</span>
                             </div>
                             <div class="text-center px-3">
-                                <span class="font-bold text-blue-4">2</span>
+                                <span class="font-bold text-blue-4">2 </span>
                                 <span class="text-gray-600">Demande</span>
                             </div>
                         </div>
                         <!-- Follow Button -->
                         <div class="flex flex-col text-right">
-                            <button v-if="fileImage == null"
+                            <button v-if="fileImagePdp == null"
                                 class="flex justify-center text-fotsy max-h-max whitespace-nowrap   rounded max-w-max border bg-blue-2  items-center hover:shadow-lg font-light py-2 px-3  mr-0 ml-auto">
                                 <i class="fa-solid  fa-pen mr-2"></i>Modifier Profile
                             </button>
-                            <button v-else @click="saveImage()"
-                                class="flex justify-center text-fotsy max-h-max whitespace-nowrap   rounded max-w-max border bg-blue-2  items-center hover:shadow-lg font-light py-2 px-3  mr-0 ml-auto">
-                                <i class="fa-solid fa-upload mx-2"></i>Enregistrer
+                            <button v-else 
+                                class="flex justify-center text-fotsy max-h-max whitespace-nowrap   rounded max-w-max  items-center  font-light py-2 px-3  mr-0 ml-auto">
+                                <!-- <i class="fa-solid fa-upload mx-2"></i>Enregistrer -->
+                                <div @click="fileImagePdp=null" class="hover:shadow-lg hover:bg-red-100 rounded p-2 text-red-600">
+                                    <span><i class="fa-solid fa-upload mx-2"></i>Annuler</span>
+                                </div>
+                                <div  @click="saveImage()" class="hover:shadow-lg hover:bg-green-100 rounded p-2 text-green-600">
+                                    <span><i class="fa-solid fa-upload mx-2"></i>Enregistrer</span>
+                                </div>
                             </button>
                         </div>
                     </div>
@@ -138,7 +144,7 @@ export default {
         return {
             user: [],
             etudiant: [],
-            fileImage: null,
+            fileImagePdp: null,
             pdc:null,
             photo: null,
             pdp: null,
@@ -166,12 +172,12 @@ export default {
         },
         async saveImage() {
             const formData = new FormData();
-            formData.append('photo', this.fileImage);
+            formData.append('photo', this.fileImagePdp);
             try {
                 const res = await Axios.post('uploadPhoto', formData)
                 console.log(res.data)
                 this.getUser()
-                this.fileImage = null;
+                this.fileImagePdp = null;
             } catch (error) {
                 console.log(error)
             }
@@ -182,7 +188,7 @@ export default {
             if (file.type.match("image/*")) {
                 console.log(file)
                 let objectURL = URL.createObjectURL(file);
-                this.fileImage = file
+                this.fileImagePdp = file
                 this.pdp = objectURL
             }
         },

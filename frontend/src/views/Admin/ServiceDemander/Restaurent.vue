@@ -16,7 +16,7 @@
                             class="w-full h-10 pl-10 pr-4 py-1 text-base placeholder-gray-500 border rounded-full focus:shadow-outline"
                             type="search" placeholder="Recherche..." />
                     </div>
-                    <AjouterEtudiant :getterPlatResto="getterPlatResto"></AjouterEtudiant>
+                    <AjouterPlat v-if="auth_user.type == 'P-service'" :getterPlatResto="getterPlatResto"></AjouterPlat>
                 </div>
                 <div class="my-1"></div>
                 <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
@@ -68,14 +68,13 @@
                                 <td class="px-6 py-3 border-b  whitespace-nowrap">
                                     <div class="flex items-center  ">
                                         <div class="flex-shrink-0 w-16 h-16">
-                                            <img class="w-full h-full object-cover"
-                                                :src="row.image" alt="" />
+                                            <img class="w-full h-full object-cover" :src="row.image" alt="" />
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
-                                        {{ row.nom_service}}
+                                        {{ row.nom_service }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b whitespace-nowrap">
@@ -85,7 +84,7 @@
                                 </td>
                                 <td class="px-3 py-3  border-b whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
-                                        {{ row.tarifs +' MGA'}} 
+                                        {{ row.tarifs + ' MGA' }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
@@ -101,7 +100,7 @@
                                 </td>
                                 <td class="px-6 py-3 border-b  text-sm font-medium text-center whitespace-nowrap">
                                     <div class="flex items-center justify-between text-[1rem]">
-                                       <modifier-plat :id="row.id" :getterPlatResto="getterPlatResto"></modifier-plat>
+                                        <modifier-plat :id="row.id" :getterPlatResto="getterPlatResto"></modifier-plat>
                                         <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500  rounded-full"
                                             @click="deleteOne(row.id, row.nom_service)">
                                             <i class="fa-solid fa-trash-can text-[14px]"></i>
@@ -113,7 +112,7 @@
                     </table>
                 </div>
                 <div class="py-1 text-lg text-center">
-                    <Paginator :rows="itemsPerPage" :totalRecords="length" 
+                    <Paginator :rows="itemsPerPage" :totalRecords="length"
                         template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                         currentPageReportTemplate="Affichage {first} de {last} à {totalRecords}"
                         @page="handlePagination" />
@@ -128,11 +127,12 @@
 import Swal from 'sweetalert2'
 import Axios from '@/_Service/caller.service';
 import Paginator from 'primevue/paginator';
-import AjouterEtudiant from '@/components/AdminComponents/Resto-Service/AjouterPlat.vue';
+import AjouterPlat from '@/components/AdminComponents/Resto-Service/AjouterPlat.vue';
 import ModifierPlat from '@/components/AdminComponents/Resto-Service/ModifierPlat.vue';
 export default {
     name: 'Restaurent',
-    components: { Paginator, AjouterEtudiant, ModifierPlat },
+    components: { Paginator, AjouterPlat, ModifierPlat },
+    props: { auth_user: Object },
     data() {
         return {
             arrayData: [],
@@ -160,47 +160,47 @@ export default {
             try {
                 var response = await Axios.get('/index_service?type=resto')
                 this.arrayData = response.data
-                
+
 
             } catch (error) {
                 console.error(error);
             }
         },
-        
+
         handlePagination(event) {
             this.first = event.first
             console.log(event);
         },
         deleteOne(id, nom) {
-      console.log(id);
-      Swal.fire({
-        title: "Es-tu sûre de supprimer " + nom + "?",
-        text: "Vous ne serez pas en mesure d'inverser cela.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: "Annuler!",
-        confirmButtonText: "Oui, supprimez-le!",
-
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          try {
-            const response = Axios.delete(`/deleteService/${id}`)
-            this.getterPlatResto();
-            console.log(response)
+            console.log(id);
             Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success"
-            });
-          } catch (error) {
-            console.error(error);
-          }
+                title: "Es-tu sûre de supprimer " + nom + "?",
+                text: "Vous ne serez pas en mesure d'inverser cela.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Annuler!",
+                confirmButtonText: "Oui, supprimez-le!",
 
-        }
-      });
-    },
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = Axios.delete(`/deleteService/${id}`)
+                        this.getterPlatResto();
+                        console.log(response)
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
+
+                }
+            });
+        },
     }
 }
 </script>

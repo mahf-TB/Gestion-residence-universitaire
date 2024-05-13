@@ -9,7 +9,7 @@
             <template #header>
                 <div class="flex items-center justify-center w-full">
                     <h2 class="text-lg text-center font-light m-0 uppercase text-blue-2">
-                        Ajouter une nouvelle plat d'aujourd'hui
+                        Ajouter vos materiel dans base de données
                     </h2>
                 </div>
 

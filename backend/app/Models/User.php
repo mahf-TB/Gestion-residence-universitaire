@@ -44,6 +44,18 @@ class User extends Authenticatable implements JWTSubject
         return Storage::disk('public')->url($this->photo);
     }
 
+    public function sentMessages()
+    {
+        return $this->hasMany(Chatmessage::class, 'id_send');
+    }
+
+    /**
+     * Obtenir les messages reçus par cet utilisateur.
+     */
+    public function receivedMessages()
+    {
+        return $this->hasMany(Chatmessage::class, 'id_receive');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

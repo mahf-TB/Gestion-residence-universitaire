@@ -16,7 +16,7 @@
                             class="w-full h-10 pl-10 pr-4 py-1 text-base placeholder-gray-500 border rounded-full focus:shadow-outline"
                             type="search" placeholder="Recherche..." />
                     </div>
-                    <AjouterService :getterPlatResto="getterPlatResto"></AjouterService>
+                    <AjouterService v-if="auth_user.type == 'P-service'" :getterPlatResto="getterPlatResto"></AjouterService>
                 </div>
                 <div class="my-1"></div>
                 <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
@@ -129,10 +129,11 @@ import Swal from 'sweetalert2'
 import Axios from '@/_Service/caller.service';
 import Paginator from 'primevue/paginator';
 import AjouterService from '@/components/AdminComponents/Resto-Service/AjouterService.vue';
-import ModifierService from '../../../components/AdminComponents/Resto-Service/ModifierService.vue';
+import ModifierService from '@/components/AdminComponents/Resto-Service/ModifierService.vue';
 export default {
     name: 'Service',
     components: { Paginator, AjouterService, ModifierService },
+    props: { auth_user: Object },
     data() {
         return {
             arrayData: [],

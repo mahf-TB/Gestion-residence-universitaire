@@ -54,7 +54,6 @@
             <CardLogement :data="data"></CardLogement>
           </div>
         </div>
-
         <div class="p-4 text-lg text-center mb-5 ">
           <Paginator :rows="itemsPerPage" :totalRecords="dataArray.length" @page="handlePagination"></Paginator>
         </div>
@@ -62,7 +61,6 @@
     </div>
   </div>
 </template>
-
 <script>
 
 import Axios from '@/_Service/caller.service';

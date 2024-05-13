@@ -1,15 +1,16 @@
 <template>
   <div class="container flex items-center flex-col justify-center">
 
-    <div class=" w-[60%]">
+    <div class="w-full lg:w-4/5 xl:w-3/5">
+      <!-- card pour envoyer demande de maintenance -->
       <div class="bg-fotsy px-3 pt-3 rounded-xl shadow-sm">
         <div class="flex w-full">
-          <img :src="user.photo ? user.photo: require('@/assets/image/pdpNone.jpeg')"
+          <img :src="user.photo ? user.photo : require('@/assets/image/pdpNone.jpeg')"
             class="h-12 w-16 object-cover cursor-pointer rounded-full" alt="photo de profile">
           <demande-maintenance :getAllReparations="getAllReparations"></demande-maintenance>
           <div
-            class="mx-1 px-3  my-1 flex items-center text-sm text-blue-0 bg-blue-1 hover:bg-slate-50 hover:text-blue-1 rounded transition-all cursor-pointer">
-            <span class="mx-1"><i class="fa-regular fa-calendar-days "></i></span>
+            class="mx-1 px-3  my-1 flex items-center text-sm text-blue-0 bg-blue-2 hover:bg-blue-1   rounded transition-all cursor-pointer">
+            <span class="mx-1"><i class="fa-solid fa-filter "></i></span>
             <span class="mx-1 font-light ">
               Filtres
             </span>
@@ -17,30 +18,32 @@
         </div>
         <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
         <div class="flex items-center">
-          <div
-            class="mx-1 px-4 py-2 flex items-center justify-center text-blue-2  border-b-4 border-blue-2  transition-all cursor-pointer w-1/2">
-            <span class="mx-2"><i class="fa-solid fa-calendar-days "></i></span>
-            <span class="mx-2 font-bold ">
-              Vue Liste
+          <div :class="{ 'text-blue-2  border-b-4 border-blue-2': !liste }" @click="doListe()"
+            class="mx-1 px-4 py-2 flex items-center justify-center text-blue-1 hover:text-blue-1 hover:bg-blue-0 transition-all rounded-t  cursor-pointer w-1/2">
+            <span class="mx-2"><i class="fa-solid fa-list"></i></span>
+            <span class="mx-2 font-ligth ">
+              Vue liste
             </span>
           </div>
-          <div
-            class="mx-1 px-4 py-2 flex items-center justify-center text-blue-1 hover:text-blue-1 hover:bg-slate-50 rounded transition-all cursor-pointer  w-1/2">
-            <span class="mx-2"><i class="fa-solid fa-calendar-days "></i></span>
-            <span class="mx-2 font-bold ">
-              Vue Grille
+          <!-- hover:text-blue-1 hover:bg-blue-0 -->
+          <div :class="{ 'text-blue-2  border-b-4 border-blue-2': liste}" @click="doListe()"
+            class="mx-1 px-4 py-2 flex items-center justify-center text-blue-1 hover:text-blue-1 hover:bg-blue-0  transition-all rounded-t  cursor-pointer  w-1/2">
+            <span class="mx-2"><i class="fa-solid fa-table-cells-large"></i></span>
+            <span class="mx-2 font-ligth ">
+              Vue grille
             </span>
           </div>
         </div>
       </div>
+      <!-- card pour liste le damnde effectuer -->
       <div class="my-2" v-if="dataArray == ''">
         <div class=" h-full p-2 text-center">
           <span class="font-semibold text-lg text-blue-2">Aucune demande effectué</span>
         </div>
       </div>
     </div>
-    <!-- right contenu -->
-    <liste-reparer class="my-3"  :dataArray="dataArray" v-if="dataArray != ''"></liste-reparer>
+    <!-- card pour liste le damnde effectuer  -->
+    <liste-reparer class="my-3" :dataArray="dataArray" v-if="dataArray != ''"></liste-reparer>
   </div>
 </template>
 
@@ -57,7 +60,8 @@ export default {
   data() {
     return {
       dataArray: [],
-      user: []
+      user: [],
+      liste : false,
     }
   },
   mounted() {
@@ -75,16 +79,20 @@ export default {
       }
     },
     async getUser() {
-            let token = JSON.parse(localStorage.getItem('token'))
-            if (token) {
-                const res = await Axios.get('userConnect')
-                if (res.data.status == 'success') {
-                    console.log(res.data)
-                    this.user = res.data.user
-                    console.log(this.user)
-                }
-            }
-        },
+      let token = JSON.parse(localStorage.getItem('token'))
+      if (token) {
+        const res = await Axios.get('userConnect')
+        if (res.data.status == 'success') {
+          console.log(res.data)
+          this.user = res.data.user
+          console.log(this.user)
+        }
+      }
+    },
+    doListe(){
+      this.liste = !this.liste
+      this.getAllReparations()
+    }
   }
 }
 </script>

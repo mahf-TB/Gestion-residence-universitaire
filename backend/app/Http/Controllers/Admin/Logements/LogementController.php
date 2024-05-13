@@ -30,7 +30,6 @@ class LogementController extends Controller
                 "date" => $items->updated_at,
             ];
         })->values();
-
         return $dataRes;
     }
     public function getTypeLogement()

@@ -55,7 +55,7 @@ export default {
         return {
             note: 0,
             dataArray: []
-        }
+        } 
     },
     mounted() {
         window.Echo.channel('notif').listen('ServiceNotif', (e) => {

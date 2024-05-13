@@ -9,7 +9,6 @@ import PrimeVue from 'primevue/config';
 import Echo from "laravel-echo"
 import Pusher from "pusher-js";
 
-console.log(process.env.VUE_APP_URL_BACK)
 // dotenv.config();
 window.Pusher = Pusher;
 
@@ -17,10 +16,12 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'local',
     wsHost:'127.0.0.1',
+    // wsHost:'172.20.10.3',
     wsPort: 6001,
     cluster: "mt1",
     forceTLS: false,
     disableStats: true,
+    // authEndpoint :'http://172.20.10.3:8000/api/broadcasting/auth',
     authEndpoint :'http://127.0.0.1:8000/api/broadcasting/auth',
     auth:{
         headers: {

@@ -12,7 +12,7 @@
                                 <img :src="require('@/assets/image/pdpNone.jpeg')"
                                     class="h-12 w-12 mx-2 object-cover cursor-pointer rounded-full"
                                     alt="photo de profile">
-                                <publication></publication>
+                                <publication :getAllPub="getAllReparations" :user="'guys'"></publication>
                             </div>
                             <div class="my-3 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
                             <div class="flex items-center">
@@ -54,10 +54,7 @@
                                 <div>
                                     Securité de votre compte
                                 </div>
-                                <button
-                                    class="flex  items-center  justify-center text-blue-4  whitespace-nowrap hover:text-blue-1  rounded-full hover:bg-slate-200 font-light  p-3 mr-0 ml-auto">
-                                    <i class="fa-solid  fa-pen"></i>
-                                </button>
+                                <change-password></change-password>
                             </div>
                         </div>
                     </div>
@@ -83,7 +80,6 @@
                                         <h1 class="text-[12px] text-gray-500  font-Avenir">Administrateur</h1>
                                     </div>
                                 </div>
-
                                 <button
                                     class="flex  items-center  justify-center text-blue-4  whitespace-nowrap hover:underline  hover:text-blue-1 font-light  p-3 mr-0 ml-auto">
                                     Voir plus
@@ -129,11 +125,13 @@ import Axios from '@/_Service/caller.service';
 import Publication from '@/components/ResidentComponents/Publication.vue'
 import ListePublicationVue from '@/components/ResidentComponents/ListePublication.vue'
 import Header from '@/components/ResidentComponents/Header.vue';
-import ProfileCardVue from '../../components/ResidentComponents/Profile/ProfileCard.vue';
+import ProfileCardVue from '@/components/ResidentComponents/Profile/ProfileCard.vue';
+import ChangePassword from '@/components/ResidentComponents/Profile/ChangePassword.vue';
 export default {
     name: 'Profile',
     components: {
-        Publication, ListePublicationVue, Header, ProfileCardVue
+        Publication, ListePublicationVue, Header, ProfileCardVue,
+        ChangePassword,
     },
     data() {
         return {

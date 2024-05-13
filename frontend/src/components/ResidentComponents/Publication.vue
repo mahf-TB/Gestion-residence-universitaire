@@ -5,7 +5,7 @@
             class="h-12 relative flex justify-between mx-2 px-2 w-full items-center border border-transparent  bg-slate-50 hover:bg-slate-100 focus-within:border-slate-300 rounded-full">
             <input
                 class="w-full px-3 h-10 outline-none cursor-pointer rounded-full bg-transparent placeholder:text-blue-1"
-                readonly placeholder="Heyy Bienvenu, Quoi de neuf?" />
+                readonly :placeholder="`Heyy ${user}, Quoi de neuf?`" />
 
         </div>
         <Dialog v-model:visible="visible" modal :style="{ width: '40rem' }" class="bg-blue-0"
@@ -98,7 +98,8 @@ import Dialog from 'primevue/dialog';
 export default {
     name: 'Publication',
     props:{
-        getAllPub:Function
+        getAllPub:Function,
+        user:String
     },
     components: {
         Dialog

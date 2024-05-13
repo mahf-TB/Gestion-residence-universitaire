@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <haut-header-vue></haut-header-vue>
+        <!-- <haut-header-vue></haut-header-vue> -->
         <div class="sticky top-0 bg-blue-2 transition duration-[400ms] shadow py-[2px] text-blue-800  z-10 w-full">
             <div class="container flex items-center justify-between  h-[65px]">
                 <div class="text-blue-0 h-full">
