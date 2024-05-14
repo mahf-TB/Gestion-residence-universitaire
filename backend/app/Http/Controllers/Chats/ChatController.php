@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SendMessageRequest;
 use App\Models\Chatmessage;
 use App\Models\User;
-use BeyondCode\LaravelWebSockets\Dashboard\Http\Controllers\SendMessage;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -33,9 +32,11 @@ class ChatController extends Controller
         $user = User::findOrFail($id);
         $user['photo'] = $user->photo? $user->imageUrl(): '';
         $messages = $this->message_by_user($id);
+        $read = $this->update_message_by_user($id); 
         return response()->json([
             'messages' => $messages,
             'user'     => $user,
+            'read' => $read,
         ]);
     }
 
@@ -44,7 +45,6 @@ class ChatController extends Controller
         $data = $request->validated();
         $message = Chatmessage::create($data);
         SendMessageEvents::dispatch($message);
-
         return response()->json([
             'messages' => $message,
         ]);
@@ -67,7 +67,6 @@ class ChatController extends Controller
         })->values();
         return response()->json([
             'Usermessages' => $usersWithLastMessage,
-            // 'user'     => $user,
         ]);
     }
 
@@ -81,6 +80,18 @@ class ChatController extends Controller
             $q->where('id_send', $user_id);
             $q->where('id_receive', auth()->user()->id);
         })->get();
+
+        return $messages;
+    }
+    public function update_message_by_user($user_id)
+    {
+        $messages = Chatmessage::where(function ($q) use ($user_id) {
+            $q->where('id_send', auth()->user()->id);
+            $q->where('id_receive', $user_id);
+        })->orWhere(function ($q) use ($user_id) {
+            $q->where('id_send', $user_id);
+            $q->where('id_receive', auth()->user()->id);
+        })->update(['read' => 1]);
 
         return $messages;
     }

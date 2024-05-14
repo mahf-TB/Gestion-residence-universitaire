@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NotifController extends Controller
 {
@@ -24,7 +25,7 @@ class NotifController extends Controller
                 "message" => $message ,
                 "user" => $user ?? '' ,
                 "service" => $service ,
-                "image" => 'http://127.0.0.1:8000/Storage/'.$message->image ,
+                "image" =>  Storage::disk('public')->url($message->image),
                 "date" => $items->updated_at,
             ];
         })->values();

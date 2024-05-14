@@ -179,7 +179,9 @@ export default {
       try {
         const res = await Axios.get('users-message-current')
         this.allUserChat = res.data.Usermessages;
-        this.getMessagesUser(this.allUserChat[0])
+        if(this.allUserChat != ''){
+          this.getMessagesUser(this.allUserChat[0])
+        }
 
       } catch (error) {
         console.error(error)

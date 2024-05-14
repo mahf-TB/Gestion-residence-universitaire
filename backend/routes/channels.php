@@ -23,11 +23,11 @@ Broadcast::channel('chat.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('online-status.{userId}', function ($user, $userId) {
-    return (int) $user->id === (int) $userId;
-});
+// Broadcast::channel('online-status.{userId}', function ($user, $userId) {
+//     return (int) $user->id === (int) $userId;
+// });
 
-Broadcast::channel('online-status', function ($user) {
-    return $user;
-});
+// Broadcast::channel('online-status', function ($user) {
+//     return $user;
+// });
 

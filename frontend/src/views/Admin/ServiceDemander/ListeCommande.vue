@@ -116,7 +116,7 @@
 import Axios from '@/_Service/caller.service';
 import Paginator from 'primevue/paginator';
 import Menu from 'primevue/menu';
-import DetailleValidation from '@/components/AdminComponents/Reservation/DetailleValidation.vue';
+import DetailleValidation from '@/components/AdminComponents/Resto-Service/DetailleValidation.vue';
 import CardCommande from '@/components/AdminComponents/Resto-Service/CardCommande.vue';
 
 export default {
@@ -154,7 +154,6 @@ export default {
     async getterCommande(status) {
       try {
         var response = await Axios.get(`/index-commande?status=${status}`)
-        console.log(response)
         this.dataArray = response.data;
       } catch (error) {
         console.error(error);

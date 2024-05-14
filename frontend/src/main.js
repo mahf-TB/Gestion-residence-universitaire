@@ -19,13 +19,15 @@ window.Echo = new Echo({
     // wsHost:'172.20.10.3',
     wsPort: 6001,
     cluster: "mt1",
+    encrypted: true,
     forceTLS: false,
     disableStats: true,
     // authEndpoint :'http://172.20.10.3:8000/api/broadcasting/auth',
-    authEndpoint :'http://127.0.0.1:8000/api/broadcasting/auth',
+    authEndpoint :'http://127.0.0.1:8000/broadcasting/auth',
     auth:{
         headers: {
-            Authorization: 'Bearer '+localStorage.getItem('token'), 
+            Authorization: 'Bearer '+ JSON.parse(localStorage.getItem("token")), 
+            'X-Requested-With': 'XMLHttpRequest',
         }
     },
  

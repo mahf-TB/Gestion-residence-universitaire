@@ -60,7 +60,6 @@ export default {
       try {
         var response = await Axios.get('/service_status')
         let data = response.data;
-        console.log(data)
         data.forEach(items => {
           if (items.status == 'annuler') {
             this.count.refuse = items.nombre
