@@ -2,7 +2,7 @@
   <div>
     <div v-if="check" class="h-full overflow-scroll">
       <div v-for="(chat, index) in allUserChat" :key="index" @click="getMessagesUser(chat)" 
-      :class="{ 'text-blue-4 border-l-4 border-blue-1 bg-fotsy': user.id === chat.id }"
+      :class="{ 'text-blue-4 border-blue-1  bg-white cursor-pointer border-l-4 border-l-blue-500 border-y': user.id === chat.id }"
         class="px-2 py-3  flex items-center cursor-pointer border-l-4 border-l-transparen">
         <img :src="chat.photo" class="h-12 w-12 border-2 border-white rounded-full" alt="">
         <div class="ml-4">
