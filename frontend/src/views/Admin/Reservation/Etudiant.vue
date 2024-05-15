@@ -19,6 +19,7 @@
                     <AjouterEtudiant></AjouterEtudiant>
                 </div>
                 <div class="my-1"></div>
+                {{ phone }}
                 <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
 
                 <div class="overflow-x-auto">
@@ -149,7 +150,7 @@ export default {
         paginatedData() {
             if (this.query != '') {
                 const query = this.query.toLowerCase();
-                return this.arrayData.filter(item => {
+                let data = this.arrayData.filter(item => {
                     return item.nom.toLowerCase().includes(query)
                         || item.prenom.toLowerCase().includes(query)
                         || item.matricule.toLowerCase().includes(query)
@@ -158,6 +159,9 @@ export default {
                         || item.created_at.toLowerCase().includes(query);
                 });
 
+                this.length = data.length
+                const endIndex = this.first + this.itemsPerPage;
+                return data.slice(this.first, endIndex);
             }
             if (!this.arrayData) {
                 return [];
@@ -230,6 +234,7 @@ export default {
             console.log(event);
         },
 
-    }
+    },
+
 }
 </script>

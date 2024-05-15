@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div v-if="!check" class="h-full overflow-scroll">
-      <div v-for="(chat, index) in allUserChat" :key="index" @click="getMessagesUser(chat)"
-        class="px-2 py-3  flex items-center   cursor-pointer border-l-4 border-l-transparent hover:bg-slate-100">
+    <div v-if="check" class="h-full overflow-scroll">
+      <div v-for="(chat, index) in allUserChat" :key="index" @click="getMessagesUser(chat)" 
+      :class="{ 'text-blue-4 border-l-4 border-blue-1 bg-fotsy': user.id === chat.id }"
+        class="px-2 py-3  flex items-center cursor-pointer border-l-4 border-l-transparen">
         <img :src="chat.photo" class="h-12 w-12 border-2 border-white rounded-full" alt="">
         <div class="ml-4">
           <p x-text="user.name" class="text-md font-semibold text-slate-600 m-0 p-0">{{ chat.username }}
@@ -15,7 +16,7 @@
     </div>
 
     <div v-else class="h-full overflow-scroll">
-      <div v-for="(user, index) in userListe" :key="index" @click="getMessagesUser(user), check = !check"
+      <div v-for="(user, index) in userListe" :key="index" @click="getMessagesUser(user)"
         class="px-2 py-3  flex items-center   cursor-pointer border-l-4 border-l-transparent hover:bg-slate-100">
         <img :src="user.photo ? user.photo : require('@/assets/image/pdpNone.jpeg')"
           class="h-12 w-12 border-2 border-white rounded-full" alt="">
@@ -25,8 +26,6 @@
           <p class="text-xs text-green-400 -mt-0.5 font-semibold m-0" x-text="user.email">En ligne</p>
         </div>
       </div>
-
-
     </div>
   </div>
 
@@ -41,6 +40,7 @@ export default {
     allUserChat: Object,
     check: Boolean,
     getMessagesUser: Function,
+    user: Object
   },
   mounted(){
    

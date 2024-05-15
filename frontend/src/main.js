@@ -6,6 +6,8 @@ import PrimeVue from 'primevue/config';
 
 // import dotenv from 'dotenv';
 
+import VueTelInput from 'vue-tel-input'
+
 import Echo from "laravel-echo"
 import Pusher from "pusher-js";
 
@@ -35,6 +37,7 @@ window.Echo = new Echo({
 
 
 
+import 'vue-tel-input/vue-tel-input.css';
 import '../public/css/Tailwind.css';
 import '../public/css/style.css';
 
@@ -52,4 +55,4 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 
 
 
-createApp(App).use(store).use(PrimeVue).use(router).mount('#app')
+createApp(App).use(store).use(PrimeVue).use(VueTelInput).use(router).mount('#app')

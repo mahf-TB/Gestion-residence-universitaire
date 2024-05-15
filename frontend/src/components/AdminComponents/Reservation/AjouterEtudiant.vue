@@ -78,13 +78,13 @@
 
                             </div>
                         </div>
+
                         <!-- adresse email -->
                         <label for="integration[email]" class="my-1 text-md">Contact<span
-                                class="text-red-500">*</span></label>
-                        <input type="text"
-                            class="rounded-[4px] p-3 text-[14px]  mb-3  border-1 border-gray-400 hover:border-blue-2"
-                            name="integration[email]" required placeholder="Entrer votre Nom" maxlength="13"
-                            minlength="10" v-model="etudiant.telephone" />
+                            class="text-red-500">*</span></label>
+                            <vue-tel-input v-model="etudiant.telephone" mode="international"
+                            class="rounded-[4px] p-1 text-[14px]  mb-3  border-1 border-gray-400 hover:border-blue-2" ></vue-tel-input>
+                      
                         <!-- adresse email -->
                         <label for="integration[email]" class="my-1 text-md">Email<span
                                 class="text-red-500">*</span></label>
@@ -133,6 +133,8 @@ import Axios from '@/_Service/caller.service';
 import Dialog from 'primevue/dialog';
 import VueMultiselect from 'vue-multiselect'
 import Swal from 'sweetalert2'
+// import { VueTelInput } from 'vue3-tel-input'
+
 export default {
     name: 'AjouterEtudiant',
     components: { Dialog, VueMultiselect },

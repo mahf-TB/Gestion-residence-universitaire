@@ -12,6 +12,7 @@ class ProfileController extends Controller
 {
         public function __construct(private  PasswordService $service)
         {
+            $this->middleware('auth:api', ['except' => []]);
         }
 
         /**

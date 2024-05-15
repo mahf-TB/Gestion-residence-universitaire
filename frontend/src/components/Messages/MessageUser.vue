@@ -52,7 +52,6 @@ export default {
     name: 'SideBarListe',
     props: {
         messageUser: Object,
-        typingUser: Object,
         check: Boolean,
         id_user: Number
     },

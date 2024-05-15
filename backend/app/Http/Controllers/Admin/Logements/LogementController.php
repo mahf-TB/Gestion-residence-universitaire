@@ -14,16 +14,27 @@ use Illuminate\Support\Facades\Storage;
 class LogementController extends Controller
 {
 
-    public function index()
+    public function __construct()
     {
-        $Mainte = Logement::with('batiment')->get();
+        $this->middleware('auth:api', ['except' => ['getTypeLogement', 'show','index']]);
+    }
+
+    public function index(Request $request)
+    {
+        if ($request->visite) {
+
+            $Mainte = Logement::with('batiment')->where('status', 'libre')->get();
+        } else {
+
+            $Mainte = Logement::with('batiment')->get();
+        }
         $dataRes =  $Mainte->map(function ($items) {
             return [
                 "id" => $items->id,
                 "type_logement" => $items->type_logement,
                 "num_logement" => $items->num_logement,
                 "prix" => $items->prix,
-                "image" =>  $items->image == null ? '' :$items->imageUrl() ,
+                "image" =>  $items->image == null ? '' : $items->imageUrl(),
                 "isImage" => $items->image,
                 "status" => $items->status,
                 "batiment" => $items->batiment,
@@ -98,17 +109,17 @@ class LogementController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
-    } 
+    }
 
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-       $loge =  Logement::with('batiment')->find($id);
-       $loge['imageUrl'] = $loge->image==null?'':$loge->imageUrl();
-       $loge['image'] = $loge->image;
-        return $loge ;
+        $loge =  Logement::with('batiment')->find($id);
+        $loge['imageUrl'] = $loge->image == null ? '' : $loge->imageUrl();
+        $loge['image'] = $loge->image;
+        return $loge;
     }
 
     /**
@@ -117,14 +128,14 @@ class LogementController extends Controller
     public function update($id, LogementRequest $request)
     {
         $loge = Logement::findOrFail($id);
-        if ($loge->image != $request->image){
-            if ($loge->image ) {
+        if ($loge->image != $request->image) {
+            if ($loge->image) {
                 Storage::disk('public')->delete($loge->image);
             }
         }
         $data = $request->validated();
         $res = $loge->update($data);
-        if ($res) {  
+        if ($res) {
             return response()->json([
                 'status' => 'success',
                 'new' => $loge->fresh(),
@@ -134,18 +145,18 @@ class LogementController extends Controller
     }
 
 
-    public function uploadImage(Request $request){
+    public function uploadImage(Request $request)
+    {
         if ($request->image_old) {
             Storage::disk('public')->delete($request->image_old);
         }
         $image = $request->file('image');
-        if ( $image && $request->hasFile('image')) {
+        if ($image && $request->hasFile('image')) {
             $data = $image->store('/Logements', 'public');
             return $data;
         }
-
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */

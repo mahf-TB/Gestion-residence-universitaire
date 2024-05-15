@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => []]);
+    }
+    
     public function indexResto(Request $request)
     {
         if ($request->type == 'resto') {

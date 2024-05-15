@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Mail;
 
 class EtudiantController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => []]);
+    }
+    
     public function index()
     {
         $etudiant = Etudiant::with('logement')->get();

@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => []]);
+    }
+    
     public function getAllReservation(Request $request)
     {
         if ($request->status == 'enattend') {

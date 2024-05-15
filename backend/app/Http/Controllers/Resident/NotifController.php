@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class NotifController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => []]);
+    }
+    
     public function indexNotification(){
         $data = Notification::orderBy('created_at', 'desc')->get();
         return $data->map(function ($items) {

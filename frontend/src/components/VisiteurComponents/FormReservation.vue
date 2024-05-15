@@ -217,10 +217,15 @@
                            
                             <!-- Numéros du Telephone -->
                             <div class="relative pb-1 z-0 w-1/2  ml-1">
+
+                            <!-- <vue-tel-input v-model="client.telephone" mode="international"
+                            class="peer  w-full appearance-none border-none border-b-2  bg-transparent  px-0 text-sm z-50 "
+                                     ></vue-tel-input> -->
                                 <input type="text" name="name"   v-model="client.telephone" required
                                     :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
                                     class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
                                     placeholder=" " />
+
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Numéros du Telephone<span  class="text-red-500">*</span></label>
@@ -255,7 +260,6 @@
                                     Durée de location<span class="text-red-500">*</span></label>
                                 <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
-                           
                         </div>
                     </div>
                     <button
@@ -281,6 +285,8 @@ import { computed } from 'vue';
 export default {
     name: 'FormReservation',
     components: { VueMultiselect, TabView, TabPanel },
+    props:{
+    },
     data() {
         return {
             id: this.$route.params.id,
@@ -373,5 +379,8 @@ export default {
 
 .p-tabview-nav-content {
     display: none;
+}
+.peer > input {
+    border: none;
 }
 </style>

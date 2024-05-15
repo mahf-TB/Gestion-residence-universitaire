@@ -101,7 +101,7 @@ export default {
   methods: {
     async getAllLogement() {
       try {
-        var response = await Axios.get('/logement')
+        var response = await Axios.get('/logement?visite=true')
         this.dataArray = response.data;
         console.log(this.dataArray);
         localStorage.setItem("index", 0)

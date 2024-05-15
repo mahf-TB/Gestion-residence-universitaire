@@ -28,29 +28,30 @@
           <table class="min-w-full table-auto divide-y divide-gray-200">
             <thead class="bg-blue-1">
               <tr class="">
-                <th scope="col"  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   #
                 </th>
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   Batiments
                 </th>
-                <th  scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   chambre
                 </th>
-                <th  scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   Type
                 </th>
-                <th  scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   Prix
                 </th>
 
-                <th scope="col"  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   Date de modification
                 </th>
-                <th  scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-100 uppercase">
                   Status
                 </th>
-                <th  scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-100 uppercase">
+                <th scope="col"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-100 uppercase">
                   Action
                 </th>
               </tr>
@@ -77,7 +78,7 @@
                 </td>
                 <td class="py-2 px-4 border-b border-grey-light text-center">
                   <div class="flex items-center justify-around text-[1rem]">
-                    <modifier-logement :id="data.id" :getterLogement="getterLogement" ></modifier-logement>
+                    <modifier-logement :id="data.id" :getterLogement="getterLogement"></modifier-logement>
                     <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500 rounded-full"
                       @click="deleteOne(data.id, data.num_logement + ' ' + data.batiment.nom_batiment)">
                       <i class="fa-solid fa-trash-can text-[14px]"></i>
@@ -160,6 +161,19 @@ export default {
   },
   computed: {
     paginatedData() {
+      if (this.query != '') {
+        const query = this.query.toLowerCase();
+        let data = this.dataArray.filter(item => {
+          return item.num_logement.toLowerCase().includes(query)
+            || item.type_logement.toLowerCase().includes(query)
+            // || item.prix.toLowerCase().includes(query)
+            || item.status.toLowerCase().includes(query);
+        });
+
+        this.length = data.length
+        const endIndex = this.first + this.itemsPerPage;
+        return data.slice(this.first, endIndex);
+      }
       if (!this.dataArray) {
         return [];
       }

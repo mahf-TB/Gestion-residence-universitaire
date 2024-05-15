@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => []]);
+    }
+
     public function index(Request $request)
     {
         if ($request->status == 'enattend') {

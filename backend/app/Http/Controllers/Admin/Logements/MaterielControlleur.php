@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class MaterielControlleur extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => []]);
+    }
     public function index(){
         $Mainte = Materiel::where('id_user', auth()->user()->id)->get();
         $dataRes =  $Mainte->map(function ($items) {
