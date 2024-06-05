@@ -30,9 +30,9 @@ class ChatController extends Controller
     public function user_message($id)
     {
         $user = User::findOrFail($id);
-        $user['photo'] = $user->photo? $user->imageUrl(): '';
+        $user['photo'] = $user->photo ? $user->imageUrl() : '';
         $messages = $this->message_by_user($id);
-        $read = $this->update_message_by_user($id); 
+        $read = $this->update_message_by_user($id);
         return response()->json([
             'messages' => $messages,
             'user'     => $user,
@@ -40,8 +40,8 @@ class ChatController extends Controller
         ]);
     }
 
-    public function send_message( SendMessageRequest $request )
-    {   
+    public function send_message(SendMessageRequest $request)
+    {
         $data = $request->validated();
         $message = Chatmessage::create($data);
         SendMessageEvents::dispatch($message);
@@ -53,23 +53,33 @@ class ChatController extends Controller
     public function userMessageCurrent()
     {
         $data = Chatmessage::select('id_receive')->with('user_receive')->distinct()
-        ->where('id_send', auth()->user()->id)
+            ->where('id_send', auth()->user()->id)
             ->get();
-        $usersWithLastMessage = $data->map(function ($items) {
-            return [
-                "id" => $items->user_receive->id,
-                "username" => $items->user_receive->username,
-                "email" => $items->user_receive->email,
-                "type" => $items->user_receive->type,
-                "photo" =>  $items->user_receive->photo == null ? '' :$items->user_receive->imageUrl() ,
-                "id_etudiant" => $items->user_receive->id_etudiant,
-            ];
-        })->values();
+        $data1 = Chatmessage::select('id_send')->with('user_send')->distinct()
+            ->where('id_receive', auth()->user()->id)
+            ->get();
+
+        $usersWithLastMessage = $this->dataCurrentMessage($data, 'user_receive');
+        $messagesRecu = $this->dataCurrentMessage($data1, 'user_send');
+
+        // dd(json_encode($data), json_encode($data1));
         return response()->json([
             'Usermessages' => $usersWithLastMessage,
+            'messageeRecu' => $messagesRecu
         ]);
     }
-
+    public function dataCurrentMessage($data , $jointure){
+       return $data->map(function ($items) use ($jointure){
+            return [
+                "id" => $items->$jointure->id,
+                "username" => $items->$jointure->username,
+                "email" => $items->$jointure->email,
+                "type" => $items->$jointure->type,
+                "photo" =>  $items->$jointure->photo == null ? '' : $items->$jointure->imageUrl(),
+                "id_etudiant" => $items->$jointure->id_etudiant,
+            ];
+        })->values();
+    }
 
     public function message_by_user($user_id)
     {

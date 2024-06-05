@@ -58,7 +58,8 @@
               Notifications
             </div>
 
-            <div class="mt-auto cursor-pointer lg:hidden my-2 py-2 rounded transition-all hover:bg-blue-2"
+            <div  v-if="User.type == 'user'"
+              class="mt-auto cursor-pointer lg:hidden my-2 py-2 rounded transition-all hover:bg-blue-2"
               @click="this.$router.push('/user/evenement'), visible = false">
               <i class="fa-solid  fa-calendar-days mx-3"></i>
               Évenement

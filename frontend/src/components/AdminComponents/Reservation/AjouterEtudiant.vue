@@ -170,17 +170,18 @@ export default {
                 console.error(error.message)
             }
         },
-        enregistrer() {
+       async enregistrer() {
             console.log(this.etudiant)
             try {
-                const response = Axios.post('/etudiants', this.etudiant)
+                const response = await Axios.post('/etudiants', this.etudiant)
                 this.visible = false
+                console.log(response)
                 Swal.fire({
                     title: "Enregistrement...!",
                     text: "Your file has been saved.",
                     icon: "success"
                 });
-                console.log(response)
+              
 
             } catch (error) {
                 console.error(error.message)

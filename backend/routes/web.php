@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    
+    return view('mails.refuse');
 });
 Route::get('/send_email', [ReservationController::class, 'validationDemande']);

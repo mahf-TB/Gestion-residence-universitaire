@@ -61,7 +61,7 @@ class AuthController extends Controller
         }
     }
 
-
+ 
     public function register(RegisterRequest $request)
     {
         $etudiant = Etudiant::find($request->id_etudiant);

@@ -32,7 +32,7 @@
 
                             </h2>
                             <p class="text-sm leading-5 font-medium text-gray-500">
-                                <span class="mb-0 w-48 font-extralight text-xs text-gray-600">{{ user.type == 'admin' ? 'Administration' : 'Personnel Administratif' }}</span>
+                                <span class="mb-0 w-48 font-extralight text-xs text-gray-600">{{ user.type == 'admin' ? 'Administrateur' : 'Personnel Administratif' }}</span>
                             </p>
                             <p class="text-lg leading-5 font-medium text-gray-500">{{ user.email }}
                             </p>

@@ -136,11 +136,11 @@ class ReservationController extends Controller
 
     public function DemandeAccepted($array)
     {
+        
         $mailData = [
-            "titre" => "Votre demande à été acceptée",
-            "para" => "Cher " . $array['noms'] . "  ,Votre demande de réservation pour la chambre " . $array['chambre'] . " a été acceptée. 
-            Votre séjour est prévu du " . $array['date_debut'] . " au " . $array['date_fin'],
-            "body" => "Nous sommes heureux de vous compter parmi nos membres.",
+            "nom" => $array['noms'] ,
+            "date_debut" => $array['date_debut'] , 
+            "email" => $array['email'] ,
             "link" => "http://localhost:8001/signup/" . $array['id_etudiant'],
         ];
         try {
@@ -155,9 +155,8 @@ class ReservationController extends Controller
     public function DemandeRefuser($array)
     {
         $mailData = [
-            "titre" => "Votre demande à été refusée",
-            "para" => "Cher " . $array['noms'] . ",Nous regrettons de vous informer que votre demande de réservation pour la chambre " . $array['chambre'] . "a été refusée.",
-            "body" => " Si vous avez des questions, n'hésitez pas à nous contacter.",
+            "nom" => $array['noms'] ,
+            "email" => $array['email'] ,
         ];
         try {
             Mail::to($array['email'])

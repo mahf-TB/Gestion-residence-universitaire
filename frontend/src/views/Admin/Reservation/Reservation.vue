@@ -127,6 +127,25 @@ export default {
   },
   computed: {
     paginatedData() {
+
+      if (this.query != '') {
+        const query = this.query.toLowerCase();
+        let data = this.dataArray.filter(item => {
+          
+          return this.DateLocaLString(item.date_reserve).toLowerCase().includes(query)
+            || item.noms.toLowerCase().includes(query)
+            || item.email.toLowerCase().includes(query)
+            || item.chambre.toLowerCase().includes(query)
+            || this.DateLocaLString(item.date_debut).toLowerCase().includes(query)
+            || this.DateLocaLString(item.date_fin).toLowerCase().includes(query)
+            || item.status.toLowerCase().includes(query);
+        });
+
+        this.length = data.length
+        const endIndex = this.first + this.itemsPerPage;
+        return data.slice(this.first, endIndex);
+      }
+
       if (!this.dataArray) {
         return [];
       }

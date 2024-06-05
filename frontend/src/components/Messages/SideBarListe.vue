@@ -2,11 +2,12 @@
   <div>
     <div v-if="check" class="h-full overflow-scroll">
       <div v-for="(chat, index) in allUserChat" :key="index" @click="getMessagesUser(chat)" 
-      :class="{ 'text-blue-4 border-blue-1  bg-white cursor-pointer border-l-4 border-l-blue-500 border-y': user.id === chat.id }"
+      :class="{ 'text-blue-4 border-gray-400  bg-white cursor-pointer border-l-blue-500 border-y': user.id === chat.id }"
         class="px-2 py-3  flex items-center cursor-pointer border-l-4 border-l-transparen">
-        <img :src="chat.photo" class="h-12 w-12 border-2 border-white rounded-full" alt="">
+        <img :src="chat.photo? chat.photo : require('@/assets/image/pdpNone.jpeg')" class="h-12 w-12 border-2 border-white rounded-full" alt="">
         <div class="ml-4">
-          <p x-text="user.name" class="text-md font-semibold text-slate-600 m-0 p-0">{{ chat.username }}
+          <p x-text="user.name" class="text-md font-semibold text-slate-600 m-0 p-0">
+            {{ chat.username }}
           </p>
           <p class="text-xs text-slate-400 -mt-0.5 font-light m-0" x-text="user.email">
             {{ chat.email }}

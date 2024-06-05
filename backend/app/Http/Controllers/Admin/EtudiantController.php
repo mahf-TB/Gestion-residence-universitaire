@@ -52,12 +52,12 @@ class EtudiantController extends Controller
                 $logement = $chambre->update([
                     'status' => 'occuper',
                 ]);
+                
                 $mailData = [
-                    "titre" => "Bienvenue parmis nos membre",
-                    "para" => "Cher " . $request->nom . "  ,Votre demande de réservation pour la chambre " . $chambre->num_logement . " a été acceptée. 
-                    Votre séjour est prévu du " . $request->nom . " au " . $request->nom,
-                    "body" => "Nous sommes heureux de vous compter parmi nos membres.",
-                    "link" => "http://localhost:8001/signup?email=" . $etudiant->id,
+                    "nom" => $request->nom ,
+                    "date_debut" => $etudiant->updated_at, 
+                    "email" => $request->email ,
+                    "link" => "http://localhost:8001/signup/" . $etudiant->id,
                 ];
                 $mail = Mail::to($request->email)
                     ->send(new AccepteEmail($mailData));

@@ -6,9 +6,9 @@
         <!-- sidebar liste discussion personne -->
         <div class="h-full w-96  bg-slate-50 border-r flex flex-col  rounded-l-xl ">
           <div class="h-14  border-b px-2 rounded-t-xl  flex items-center justify-between space-x-4">
-            <div :class="{ 'border-b-4 border-blue-500': check }" class="px-2 py-3">Discusions{{ check }}</div>
+            <div :class="{ 'bg-blue-200 text-blue-700': check }" class="px-3 py-2 rounded-full cursor-pointer hover:bg-blue-200 hover:text-blue-2" @click="check = true">Discusions</div>
             <div class="flex items-center justify-end text-blue-2">
-              <div :class="{ 'border-b-4 border-blue-500': !check }" class="px-2 py-3" @click="check = false"><i
+              <div :class="{ 'bg-blue-200 text-blue-700': !check }" class="px-2.5 rounded-full cursor-pointer py-2" @click="check = false"><i
                   class="fa-solid  fa-users"></i></div>
               <div class="px-2 py-4 "><i class="fa-regular fa-pen-to-square"></i></div>
             </div>
@@ -21,7 +21,7 @@
           <div
             class="h-16 border-b flex bg-slate-50 justify-between items-center rounded-tr-xl w-full px-5 py-2 shadow-sm">
             <div class="flex items-center">
-              <img class="h-10 w-10 overflow-hidden rounded-full" :src="user.photo" alt="">
+              <img class="h-10 w-10 overflow-hidden rounded-full" :src="user.photo ? user.photo : require('@/assets/image/pdpNone.jpeg')" alt="">
               <div class="flex flex-col">
                 <span class="font-semibold ml-3 text-slate-600">{{ user.username }}</span>
                 <span class="font-light text-xs ml-3 text-green-600">En ligne </span>
@@ -43,7 +43,7 @@
           </div>
           <message-user id="scroll" :messageUser="messageUser" :id_user="user.id"></message-user>
           <!--  footer du message avec send -->
-          <div class="w-full bg-slate-200  px-2 py-3">
+          <div class="w-full bg-slate-200  px-2 py-3 rounded-br-xl">
             
             <form @submit.prevent="sendMessage(user.id)">
               <div
@@ -118,7 +118,6 @@ export default {
     this.getListeUser()
     this.allUsersChat()
 
-
     window.Echo.channel(`chat.${this.auth_user.id}`)
       .listen("SendMessageEvents", e => {
         this.messageUser.push(e.message)
@@ -179,7 +178,18 @@ export default {
       // users-message-current
       try {
         const res = await Axios.get('users-message-current')
-        this.allUserChat = res.data.Usermessages;
+
+        this.allUserChat = res.data.Usermessages; //[1, 2, 3]
+        var dataRecu = res.data.messageeRecu // [5 , 6 ,7 ,2]
+
+        this.allUserChat.forEach(element => {
+          dataRecu = dataRecu.filter(item => {return element.id != item.id})
+        });
+
+        dataRecu.forEach(element => {
+          this.allUserChat.push(element )
+        });
+
         if(this.allUserChat != ''){
           this.getMessagesUser(this.allUserChat[0])
         }

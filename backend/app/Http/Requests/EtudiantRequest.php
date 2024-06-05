@@ -28,7 +28,7 @@ class EtudiantRequest extends FormRequest
             'date_naissance' => ['nullable','date'],
             'sexe' => ['nullable','string','max:1'],
             'cin' => ['nullable', 'string','min:12', 'max:12'],
-            'telephone' =>  ['nullable', 'string', 'max:13', 'min:10'],
+            'telephone' =>  ['nullable', 'string'],
             'email' => ['required','string', 'email','max:255', 'unique:etudiants'],
             'id_logement' =>  ['nullable', 'integer'],
         ];

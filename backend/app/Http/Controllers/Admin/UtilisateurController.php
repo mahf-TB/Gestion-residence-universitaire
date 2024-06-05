@@ -21,6 +21,10 @@ class UtilisateurController extends Controller
     {
        $user = User::whereIn('type', ['P-service' , 'P-maintenance' , 'P-accueil'])->paginate(5);
         // event(new HelloEvents($user->items()));
+        foreach ($user as $item){
+
+            $item['photo'] =$item->photo ? $item->imageUrl(): '';
+        }
         return $user;
     }
  

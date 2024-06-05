@@ -88,7 +88,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
-                                    <span
+                                    <span :class="{'text-red-800 bg-red-100 ' : !row.dispo}"
                                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                         {{ row.dispo ? 'Disponible' : 'Pas disponible' }}
                                     </span>
@@ -99,7 +99,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-3 border-b  text-sm font-medium text-center whitespace-nowrap">
-                                    <div class="flex items-center justify-between text-[1rem]">
+                                    <div v-if="auth_user.type == 'P-service'" class="flex items-center justify-between text-[1rem]">
                                         <modifier-plat :id="row.id" :getterPlatResto="getterPlatResto"></modifier-plat>
                                         <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500  rounded-full"
                                             @click="deleteOne(row.id, row.nom_service)">

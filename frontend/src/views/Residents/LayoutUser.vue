@@ -31,6 +31,7 @@ export default {
       if (token) {
         const res = await Axios.get('userConnect')
         this.user = res.data.user
+        // console.log(this.user)
       } 
     },
   }

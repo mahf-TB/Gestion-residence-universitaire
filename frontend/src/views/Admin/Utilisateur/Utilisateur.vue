@@ -64,12 +64,12 @@
                                 <td class="py-2 px-4 border-b border-grey-light text-left">
                                     {{ data.id }}
                                 </td>
-
+                                
                                 <td class="py-2 px-4 border-b border-grey-light text-left">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 w-10 h-10">
                                             <img class="w-10 h-10 rounded-full"
-                                                :src="require('@/assets/image/pdpNone.jpeg')" alt="" />
+                                                :src="data.photo ? data.photo : require('@/assets/image/pdpNone.jpeg')" alt="" />
                                         </div>
                                     </div>
                                 </td>
@@ -144,6 +144,7 @@ export default {
             try {
                 var response = await Axios.get('/utilisateurs')
                 this.dataArray = response.data.data;
+                console.log(this.dataArray)
                 this.length = response.data.total
                 this.itemsPerPage = response.data.per_page
             } catch (error) {

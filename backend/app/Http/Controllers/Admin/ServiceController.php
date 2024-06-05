@@ -69,6 +69,8 @@ class ServiceController extends Controller
                 "tele" => $etudiant->telephone,
                 "status" => $items->status,
                 "nom_etudaiant" => $etudiant->nom . ' ' . $etudiant->prenom,
+                "photo" =>  $items->user->photo != null ? $items->user->imageUrl() : '',
+
                 "logement" => $etudiant->logement->type_logement . ' ' . $etudiant->logement->num_logement,
                 "batiment" => $logement->batiment->nom_batiment,
                 "date" => $items->updated_at,

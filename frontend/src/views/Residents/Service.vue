@@ -8,7 +8,7 @@
             <span class="px-2 py-1 cursor-pointer rounded-sm hover:bg-blue-1 hover:text-blue-0"><i class="fa-solid fa-filter"></i></span>
             <div class="text-blue-4">
               <span class="uppercase mx-1 font-bold ">
-                {{ commande == '' ? 'Services Disponible' : 'Liste de votre commande' }}
+                {{ isCommande  ?  'Liste de votre commande' :'Services Disponible'}}
               </span>
             </div>
           </div>
@@ -43,8 +43,8 @@
           </div>
         </div>
       </div>
-      <!-- Contenu liste des pub de service -->
-      <div class="my-3" v-if="commandes != ''">
+      <!-- Contenu liste des commande effectuer-->
+      <div class="my-3" v-if="isCommande">
         <div v-for="(data, index) in commandes" :key="index">
           <card-commande-user :commande="data"></card-commande-user>
         </div>
@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <!-- Contenu liste des commande effectuer-->
+      <!-- Contenu liste des pub de service -->
       <div v-else class="container py-3" v-for="(data, i) in dataArray" :key="i">
         <ListeService :data="data"  :commandeUser="commandeUser"
         class="bg-fotsy hover:bg-gray-50"></ListeService>
@@ -84,7 +84,8 @@ export default {
     return {
       dataArray: [],
       commandes: [],
-      liste:false
+      liste:false,
+      isCommande:false
     }
   },
   mounted() {
@@ -102,15 +103,15 @@ export default {
     async commandeUser() {
       try {
         var response = await Axios.get('/commande-user')
-        console.log(response.data)
-        this.commande = response.data;
+        this.commandes = response.data;
+        this.isCommande = true;
       } catch (error) {
         console.error(error);
       }
     },
     doListe(){
       this.liste = !this.liste
-      this.getAllReparations()
+      this.isCommande = false;
     }
   }
 }
