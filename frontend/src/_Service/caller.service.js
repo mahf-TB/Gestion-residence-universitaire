@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// const Axios = axios.create({ baseURL: 'http://192.168.1.137:8000/api/'})
+const Axios = axios.create({ baseURL: 'http://192.168.1.137:8000/api/'})
 // const Axios = axios.create({ baseURL: 'http://172.20.10.3:8000/api/'})
-const Axios = axios.create({ baseURL: process.env.VUE_APP_URL_BACK})
+// const Axios = axios.create({ baseURL: process.env.VUE_APP_URL_BACK})
 
 // console.log( process.env.VUE_APP_URL_BACK )
 

@@ -13,8 +13,7 @@
                 <h1 class="text-lg flex items-center justify-between mb-0 mt-3">Adresse :</h1>
                 <div class="text-sm flex items-start text-left text-blue-4 ">
                     <p class="  text-blue-1 px-3 rounded cursor-pointer">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam facilis distinctio obcaecati
-                        sequi asperiores 
+                        Tanambao Fianarantsoa
                     </p>
                 </div>
                 <div class="flex flex-col text-left text-base  text-blue-1">
@@ -34,11 +33,12 @@
            
         </div>
         <div class="pt-5">
-            <div>
+            <div class="text-blue-1">
                 © 2024 les Lodge Cité by Zifukoro
             </div>
         </div>
     </div>
+    
 </template>
 
 <script>

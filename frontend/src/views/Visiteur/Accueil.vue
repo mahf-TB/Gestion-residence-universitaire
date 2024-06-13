@@ -93,9 +93,9 @@
     </div>
 
     <!-- lien pour un template de site pour visiteur -->
-    <div class="bg-blue-1">
+    <!-- <div class="bg-blue-1">
       <card-activiter></card-activiter>
-    </div>
+    </div> -->
   </div>
 </template>
 
