@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Etudiant;
 use App\Models\Logement;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,7 @@ class DashController extends Controller
             "etudiants" => Etudiant::get()->count(),
             "logements" => Logement::get()->count(),
             "users" => User::get()->count(),
+            "reservation" => Reservation::get()->count(),
         ];
         return $data;
     }

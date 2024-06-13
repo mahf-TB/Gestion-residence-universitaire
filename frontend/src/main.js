@@ -17,8 +17,8 @@ window.Pusher = Pusher;
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'local',
-    wsHost:'127.0.0.1',
-    // wsHost:'192.168.1.137',
+    // wsHost:'127.0.0.1',
+    wsHost:'192.168.1.137',
     // wsHost:'172.20.10.3',
     wsPort: 6001,
     cluster: "mt1",

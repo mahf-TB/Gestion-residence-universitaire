@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Chats\ChatController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Resident\CommandeController;
+use App\Http\Controllers\Resident\EventController;
 use App\Http\Controllers\Resident\NotifController;
 use App\Http\Controllers\Resident\PubController;
 use App\Http\Controllers\Resident\ReparationController;
@@ -121,6 +122,11 @@ Route::group(['controller' => PubController::class], function () {
     Route::get('/index_pub',  'index');
     Route::post('/add_publication',  'addPublication');
     Route::get('/publication/{id}',  'showOnePub');
+});
+Route::group(['controller' => EventController::class], function () {
+    Route::get('/index_event',  'index');
+    Route::post('/save_Evenement',  'addEnvenement');
+
 });
 
 

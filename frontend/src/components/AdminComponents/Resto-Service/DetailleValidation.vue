@@ -56,21 +56,27 @@
                                 <div class="text-[14px] my-3 font-light text-navy-700 text-black">
                                     <span class="text-sm text-blue-4">Status du commande</span>
                                     <div class="flex ">
-                                        <span class="py-2 px-3 border border-gray-400 "
-                                            :class="{'bg-yellow-100 text-yellow-500': data.status == 'en attente'}">En
-                                            attendant</span>
+                                        <span class="py-2 px-3 border border-gray-400 font-bold"
+                                            :class="{'bg-yellow-100 text-yellow-500': data.status == 'en attente'}">{{  data.status }}</span>
                                     </div>
                                 </div>
-                                <div class="my-3 p-0 flex items-center">
-                                    <button @click="saveCommande(data.id)"
+                                <div class="my-3 p-0 flex items-center" v-if="data.status == 'en attente'">
+                                    <button @click="saveCommande(data.id, data.status)"
                                         class="flex items-center w-1/2 justify-center text-sm text-fotsy max-h-max  uppercase rounded border bg-blue-2  hover:shadow-lg font-light py-2 px-3">
                                         Confirmer
                                     </button>
-                                    <button @click="saveCommande(data.id)"
+                                    <button @click="saveCommande(data.id, 'annuler')"
                                         class="flex items-center w-1/2  justify-center text-sm text-fotsy max-h-max  uppercase rounded border bg-red-500  hover:shadow-lg font-light py-2 px-3">
                                         Annuler
                                     </button>
                                 </div>
+                                <div class="my-3 p-0 flex items-center" v-if="data.status == 'en cours'">
+                                    <button @click="saveCommande(data.id, data.status)"
+                                        class="flex items-center  justify-center text-xs text-fotsy max-h-max  uppercase rounded border bg-blue-2  hover:shadow-lg font-light py-2 px-3">
+                                        Confirmer que la livraison est terminée
+                                    </button>
+                                </div>
+
                             </div>
                             <div class="my-1 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
                         </div>
@@ -89,7 +95,8 @@ export default {
     name: 'DetailleValidation',
     components: { Dialog },
     props: {
-        data: Object
+        data: Object,
+        getterCommande:Function
     },
     data() {
         return {
@@ -97,17 +104,19 @@ export default {
         }
     },
     methods: {
-        async saveCommande(id) {
+        async saveCommande(id, data) {
             
             console.log(id);
-            // try {
-            //     var response = await Axios.post(`/send_email?status=${status}`, post);
-            //     if (!response.data.envoyer) {
-            //         alert('Verifiez votre connexion ou votre router');
-            //     }
-            // } catch (error) {
-            //     console.error('holllaallaaa.  ', error);
-            // }
+            try {
+                var response = await Axios.get(`/commande/${id}?status=${data}`);
+                if (response.data.status) {
+                    this.visible = false
+                    this.getterCommande()
+                }
+                console.log(response.data.status);
+            } catch (error) {
+                console.error('  ', error);
+            }
         },
     }
 }

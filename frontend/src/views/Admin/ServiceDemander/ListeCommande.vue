@@ -90,7 +90,7 @@
                 </td>
                 <td class="py-2 px-4 border-b border-grey-light text-center">
                   <div class="flex items-center justify-between text-[1rem]">
-                    <detaille-validation :data="data"></detaille-validation>
+                    <detaille-validation :data="data" :getterCommande="getterCommande"></detaille-validation>
                   </div>
                 </td>
               </tr>
@@ -185,6 +185,9 @@ export default {
       if (status == 'livré') {
         return "text-green-800 bg-green-100"
       }
+      if (status == 'en cours') {
+        return "text-blue-800 bg-blue-100"
+      }
       if (status == 'annuler') {
         return "text-red-800 bg-red-100"
       }
@@ -196,6 +199,9 @@ export default {
       }
       if (status == 'annuler') {
         return "fa-solid fa-circle-xmark mr-2"
+      }
+      if (status == 'en cours') {
+        return "fa-solid fa-clock mr-2"
       }
       return "fa-solid fa-clock mr-2"
     },

@@ -51,7 +51,11 @@ class ServiceController extends Controller
             $data = Commande::where('status', 'en attente')->with('user', 'service')->get();
         } else if ($request->status == 'annuler') {
             $data = Commande::where('status', 'annuler')->with('user', 'service')->get();
-        } else if ($request->status == 'livrer') {
+        }
+        else if ($request->status == 'encours') {
+            $data = Commande::where('status', 'en cours')->with('user', 'service')->get();
+        }
+        else if ($request->status == 'livrer') {
             $data = Commande::where('status', 'livré')->with('user', 'service')->get();
         } else {
             $data = Commande::with('user', 'service')->get();
@@ -79,22 +83,30 @@ class ServiceController extends Controller
         return  $dataRes;
     }
 
-    public function confirmeCommande(Request $request)
+    public function confirmeCommande($id , Request $request)
     {
-        if ($request->status == 'encours') {
+        if ($request->status == 'en attente') {
 
-            $main = Maintenance::find($request->id);
+            $main = Commande::find($id);
             $resLog = $main->update(["status" => 'en cours']);
 
             return response()->json([
-                'message' => 'Reparation en cours',
+                'message' => 'Commadne passe en cours',
+                'status' =>  $resLog,
+            ]);
+        } else if ($request->status == 'en cours') {
+            $main = Commande::find($id);
+            $resLog = $main->update(["status" => 'livré']);
+            return response()->json([
+                'message' => 'commande livraison Terminer',
                 'status' =>  $resLog
             ]);
-        } else {
-            $main = Maintenance::find($request->id);
-            $resLog = $main->update(["status" => 'terminer']);
+        }
+        else if ($request->status == 'annuler') {
+            $main = Commande::find($id);
+            $resLog = $main->update(["status" => 'annuler']);
             return response()->json([
-                'message' => 'Reparation en Terminer',
+                'message' => 'commande annuler',
                 'status' =>  $resLog
             ]);
         }
