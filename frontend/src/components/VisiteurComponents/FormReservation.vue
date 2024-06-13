@@ -142,7 +142,6 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Entrer votre nom<span  class="text-red-500">*</span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                             <!--  votre prenom -->
                             <div class="relative pb-1 z-0 w-1/2  ml-1">
@@ -153,7 +152,6 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Entrer votre prenom<span  class="text-red-500"></span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                            
                         </div>
@@ -167,7 +165,6 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Numéro du matricule<span  class="text-red-500"></span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                            
                         </div>
@@ -181,7 +178,6 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Date de naissance<span class="text-red-500">*</span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                         
                             <!-- Civilité -->
@@ -197,7 +193,6 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Sexe<span class="text-red-500"></span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                             
                         </div>
@@ -211,7 +206,6 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Numéros de CIN<span  class="text-red-500"></span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                            
                             <!-- Numéros du Telephone -->
@@ -228,7 +222,7 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Numéros du Telephone<span  class="text-red-500">*</span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
+
                             </div>
                           
                         </div>
@@ -242,7 +236,6 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Date d'entrée<span  class="text-red-500">*</span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                            
                             <!-- Durée de location en mois -->
@@ -255,7 +248,6 @@
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Durée de location<span class="text-red-500">*</span></label>
-                                <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                         </div>
                     </div>
