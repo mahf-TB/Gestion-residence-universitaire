@@ -79,9 +79,25 @@ class ServiceController extends Controller
         return  $dataRes;
     }
 
-    public function indexPublication(Request $request)
+    public function confirmeCommande(Request $request)
     {
+        if ($request->status == 'encours') {
 
+            $main = Maintenance::find($request->id);
+            $resLog = $main->update(["status" => 'en cours']);
+
+            return response()->json([
+                'message' => 'Reparation en cours',
+                'status' =>  $resLog
+            ]);
+        } else {
+            $main = Maintenance::find($request->id);
+            $resLog = $main->update(["status" => 'terminer']);
+            return response()->json([
+                'message' => 'Reparation en Terminer',
+                'status' =>  $resLog
+            ]);
+        }
     }
 
 

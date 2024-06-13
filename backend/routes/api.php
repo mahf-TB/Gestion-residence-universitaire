@@ -111,6 +111,7 @@ Route::group(['controller' => ServiceController::class], function () {
     Route::get('/service_status',  'countStatus');
     Route::get('/showOne/{id}',  'showPlat');
     Route::post('/update_plat/{id}',  'updatePlatResto');
+    Route::get('/commande/{id}',  'confirmeCommande');
     Route::delete('/deleteService/{id}',  'deleteService');
 });
 
