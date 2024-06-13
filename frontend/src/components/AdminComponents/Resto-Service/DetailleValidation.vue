@@ -61,20 +61,18 @@
                                             attendant</span>
                                     </div>
                                 </div>
-                                <div class="my-3 p-0 flex items-center justify-around">
+                                <div class="my-3 p-0 flex items-center">
                                     <button @click="saveCommande(data.id)"
-                                        class="flex items-center justify-start text-sm text-fotsy max-h-max  uppercase rounded max-w-max border bg-blue-2  hover:shadow-lg font-light py-2 px-3">
+                                        class="flex items-center w-1/2 justify-center text-sm text-fotsy max-h-max  uppercase rounded border bg-blue-2  hover:shadow-lg font-light py-2 px-3">
                                         Confirmer
                                     </button>
                                     <button @click="saveCommande(data.id)"
-                                        class="flex items-center justify-start text-sm text-fotsy max-h-max  uppercase rounded max-w-max border bg-red-500  hover:shadow-lg font-light py-2 px-3">
+                                        class="flex items-center w-1/2  justify-center text-sm text-fotsy max-h-max  uppercase rounded border bg-red-500  hover:shadow-lg font-light py-2 px-3">
                                         Annuler
                                     </button>
                                 </div>
                             </div>
-
                             <div class="my-1 bg-gradient-to-r from-blue-500 to-blue-700 h-px"></div>
-                            <pre>{{ data }}</pre>
                         </div>
                     </div>
                 </div>
@@ -99,16 +97,9 @@ export default {
         }
     },
     methods: {
-        async validationDemande(status, data) {
-            let post = {
-                'email': data.email,
-                'id': data.id,
-                'date_debut': data.date_debut,
-                'date_fin': data.date_fin,
-                'noms': data.noms,
-                'chambre': data.chambre,
-            }
-            console.log(post);
+        async saveCommande(id) {
+            
+            console.log(id);
             // try {
             //     var response = await Axios.post(`/send_email?status=${status}`, post);
             //     if (!response.data.envoyer) {

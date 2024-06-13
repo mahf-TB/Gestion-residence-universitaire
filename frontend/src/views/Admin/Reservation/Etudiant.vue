@@ -156,7 +156,8 @@ export default {
                         || item.matricule.toLowerCase().includes(query)
                         || item.cin.toLowerCase().includes(query)
                         || item.telephone.toLowerCase().includes(query)
-                        || item.created_at.toLowerCase().includes(query);
+                        || this.DateLocaLString(item.date_naissance).toLowerCase().includes(query)
+                        || this.DateLocaLString(item.created_at).toLowerCase().includes(query);
                 });
 
                 this.length = data.length
@@ -181,6 +182,9 @@ export default {
             } catch (error) {
                 console.error(error);
             }
+        },
+        DateLocaLString(items) {
+            return new Date(items).toLocaleDateString()
         },
 
         deleteOne(id, nom) {

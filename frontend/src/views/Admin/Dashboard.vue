@@ -1,35 +1,35 @@
 <template>
-  <div class="">
-    <h1 class="text-xxl text-[#2b6b88]">Tableau de bord</h1>
-    <button @click="add()"
-      class="uppercase max-md:w-full max-md:mt-2 bg-blue-2 hover:bg-blue-1 transition-all text-white text-sm py-2 px-4 rounded">
-      Nouveaux Notif
-    </button>
+  <div class="pb-5">
+    <CardStat></CardStat>
+    <table-users></table-users>
   </div>
 </template>
 
 <script>
 
 import Axios from '@/_Service/caller.service';
+import CardStat from '@/components/AdminComponents/Dashboard/CardStat.vue';
+import TableUsers from '../../components/AdminComponents/Dashboard/TableUsers.vue';
 export default {
   name: 'Dashboard',
   components: {
-
+    CardStat,
+    TableUsers,
   },
-  data(){
+  data() {
     return {
-      note : 0
+      note: 0
     }
   }
   ,
   mounted() {
-  
+    this.add()
   },
   methods: {
-    add() {
+    async add() {
       try {
-        var response = Axios.get('/utilisateurs')
-        console.log(response)
+        var response = await Axios.get('/utilisateurs')
+        console.log(response.data)
       } catch (error) {
         console.error(error);
       }

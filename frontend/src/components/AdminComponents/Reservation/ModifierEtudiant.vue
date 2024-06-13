@@ -53,7 +53,7 @@
                                     minlength="12" v-model="etudiant.cin" />
                             </div>
                         </div>
-                        <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center justify-between mb-3"> 
                             <!-- Nom d'estudiant-->
                             <div class="grow flex flex-col mr-1 w-[50%]">
                                 <label for="integration[name]" class="my-1 text-md">Date de naissance<span

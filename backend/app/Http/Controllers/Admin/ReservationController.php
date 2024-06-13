@@ -16,7 +16,7 @@ class ReservationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => []]);
+        $this->middleware('auth:api', ['except' => ['addReservationAction']]);
     }
     
     public function getAllReservation(Request $request)

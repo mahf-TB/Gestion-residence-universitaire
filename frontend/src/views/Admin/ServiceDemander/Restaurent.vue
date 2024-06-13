@@ -88,7 +88,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
-                                    <span :class="{'text-red-800 bg-red-100 ' : !row.dispo}"
+                                    <span :class="{ 'text-red-800 bg-red-100 ': !row.dispo }"
                                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                         {{ row.dispo ? 'Disponible' : 'Pas disponible' }}
                                     </span>
@@ -99,12 +99,22 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-3 border-b  text-sm font-medium text-center whitespace-nowrap">
-                                    <div v-if="auth_user.type == 'P-service'" class="flex items-center justify-between text-[1rem]">
+                                    <div v-if="auth_user.type == 'P-service'"
+                                        class="flex items-center justify-between text-[1rem]">
                                         <modifier-plat :id="row.id" :getterPlatResto="getterPlatResto"></modifier-plat>
                                         <div class="text-center hover:shadow-lg py-2 px-3 text-xs cursor-pointer text-red-500  rounded-full"
                                             @click="deleteOne(row.id, row.nom_service)">
                                             <i class="fa-solid fa-trash-can text-[14px]"></i>
                                         </div>
+                                    </div>
+                                    <div v-else>
+                                        <a title="Edit password" class="hover:text-red-500"><svg
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                            </svg>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -147,6 +157,22 @@ export default {
     },
     computed: {
         paginatedData() {
+            if (this.query != '') {
+                const query = this.query.toLowerCase();
+                let data = this.arrayData.filter(item => {
+                    let dispo = item.dispo ? 'Disponible' : 'Pas disponible'
+                    console.log(dispo)
+                    return item.nom_service.toLowerCase().includes(query)
+                        || item.description.toLowerCase().includes(query)
+                        || item.tarifs.toString().toLowerCase().includes(query)
+                        || this.DateLocaLString(item.date).toLowerCase().includes(query)
+                    // || dispo.toLowerCase().includes(query);
+                });
+
+                this.length = data.length
+                const endIndex = this.first + this.itemsPerPage;
+                return data.slice(this.first, endIndex);
+            }
             if (!this.arrayData) {
                 return [];
             }
@@ -166,7 +192,9 @@ export default {
                 console.error(error);
             }
         },
-
+        DateLocaLString(items) {
+      return new Date(items).toLocaleDateString()
+    },
         handlePagination(event) {
             this.first = event.first
             console.log(event);

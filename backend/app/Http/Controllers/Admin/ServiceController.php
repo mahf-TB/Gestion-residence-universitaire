@@ -79,6 +79,13 @@ class ServiceController extends Controller
         return  $dataRes;
     }
 
+    public function indexPublication(Request $request)
+    {
+
+    }
+
+
+
     public function ajouterService(ServiceRequest $request)
     {
         $data = $request->validated();
@@ -149,7 +156,6 @@ class ServiceController extends Controller
         $plat['imageUrl'] = $plat->image == null ? '' : $plat->imageUrl();
         return $plat;
     }
- 
 
     public function updatePlatResto($id, ServiceRequest $request)
     {

@@ -138,6 +138,21 @@ export default {
   },
   computed: {
     paginatedData() {
+      if (this.query != '') {
+                const query = this.query.toLowerCase();
+                let data = this.dataArray.filter(item => {
+                    let dispo = item.dispo ? 'Disponible' : 'Pas disponible'
+                    console.log(dispo)
+                    return item.nom_service.toLowerCase().includes(query)
+                        || item.logement.toLowerCase().includes(query)
+                        || item.nom_etudaiant.toLowerCase().includes(query)
+                        || item.date.toLowerCase().includes(query)
+                        || this.DateLocaLString(item.date).toLowerCase().includes(query)
+                });
+                this.length = data.length
+                const endIndex = this.first + this.itemsPerPage;
+                return data.slice(this.first, endIndex);
+            }
       if (!this.dataArray) {
         return [];
       }
@@ -159,7 +174,6 @@ export default {
         console.error(error);
       }
     },
-
     handlePagination(event) {
       this.first = event.first
       console.log(event);

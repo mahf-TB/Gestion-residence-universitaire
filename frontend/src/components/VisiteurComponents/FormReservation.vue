@@ -65,7 +65,6 @@
             </TabPanel>
             <TabPanel>
                 <div class="container mr-5">
-
                     <div class="my-5">
                         <div class="absolute -top-11 left-0 px-3 py-2 text-lg cursor-pointer transition-all duration-300 hover:bg-blue-0 rounded"
                             @click="preveIndex()">
@@ -147,13 +146,13 @@
                             </div>
                             <!--  votre prenom -->
                             <div class="relative pb-1 z-0 w-1/2  ml-1">
-                                <input type="text" name="name" v-model="client.prenom" required
+                                <input type="text" name="name" v-model="client.prenom" 
                                     :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
                                     class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
                                     placeholder=" " />
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                                    Entrer votre prenom<span  class="text-red-500">*</span></label>
+                                    Entrer votre prenom<span  class="text-red-500"></span></label>
                                 <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                            
@@ -161,13 +160,13 @@
                         <div class="mb-4 flex flex-col">
                             <!--  Numéro du matricule -->
                             <div class="relative z-0">
-                                <input type="text" name="name"  v-model="client.matricule" required
+                                <input type="text" name="name"  v-model="client.matricule" 
                                     :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
                                     class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
                                     placeholder=" " />
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                                    Numéro du matricule<span  class="text-red-500">*</span></label>
+                                    Numéro du matricule<span  class="text-red-500"></span></label>
                                 <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                            
@@ -187,7 +186,7 @@
                         
                             <!-- Civilité -->
                             <div class="relative pb-1 z-0 w-1/2  ml-1">
-                                <select  name="name"   v-model="client.sexe" required
+                                <select  name="name"   v-model="client.sexe" 
                                     :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
                                     class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
                                     placeholder=" " >
@@ -197,7 +196,7 @@
                                 </select>
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                                    Civilité<span class="text-red-500">*</span></label>
+                                    Civilité<span class="text-red-500"></span></label>
                                 <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                             
@@ -205,13 +204,13 @@
                         <div class="flex mb-4">
                             <!-- Numéros de CIN -->
                             <div class="relative pb-1 z-0 w-1/2 mr-1">
-                                <input type="text" name="name" v-model="client.cin" required
+                                <input type="text" name="name" v-model="client.cin"  maxlength="12" minlength="12"
                                     :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
                                     class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
                                     placeholder=" " />
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                                    Numéros de CIN<span  class="text-red-500">*</span></label>
+                                    Numéros de CIN<span  class="text-red-500"></span></label>
                                 <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                            
@@ -221,7 +220,7 @@
                             <!-- <vue-tel-input v-model="client.telephone" mode="international"
                             class="peer  w-full appearance-none border-none border-b-2  bg-transparent  px-0 text-sm z-50 "
                                      ></vue-tel-input> -->
-                                <input type="text" name="name"   v-model="client.telephone" required
+                                <input type="text" name="name"   v-model="client.telephone" required maxlength="13" minlength="10" 
                                     :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
                                     class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
                                     placeholder=" " />
@@ -248,13 +247,11 @@
                            
                             <!-- Durée de location en mois -->
                             <div class="relative pb-1 z-0 w-1/2  ml-1">
-                                <select  name="name"   v-model="mois" required
+                                
+                                <input type="number" name="name" v-model="mois" required
                                     :class="emptyEmail != '' ? 'border-red-600' : 'border-blue-3'"
                                     class="peer block w-full appearance-none border-b-2  bg-transparent py-2.5 px-0 text-sm  focus:border-blue-600 focus:outline-none focus:ring-0"
-                                    placeholder=" " >
-                                    <option disabled value="" class="text-sm">moins de 1 mois</option>
-                                    <option v-for="i of 36"  :key="i" :value="i">{{i}}</option>
-                                </select>
+                                    placeholder=" " />
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                                     Durée de location<span class="text-red-500">*</span></label>
@@ -268,6 +265,9 @@
                         Envoyez votre demande
                     </button>
                 </form>
+            </TabPanel>
+            <TabPanel>
+                <h1>Merci de vos reservation </h1>
             </TabPanel>
         </TabView>
 
@@ -303,7 +303,7 @@ export default {
                 date_debut: null,
                 date_fin: null,
             },
-            mois:null,
+            mois:0,
             loge: [],
             bati: [],
             etage: '',
@@ -320,11 +320,16 @@ export default {
     },
     methods: {
         async enregistrer() {
-            console.log(this.client);
+            
+            const debut = new Date(this.client.date_debut)
+            let fin = debut.setMonth(debut.getMonth() + this.mois)
+            this.client.date_fin = new Date(fin).toISOString().split('T')[0]
+
             if (this.email == this.client.email) {
                 try {
-                    // const response = await Axios.post('/reservation', this.client)
-                    // console.log(response);
+                    const response = await Axios.post('/reservation', this.client)
+                    localStorage.setItem("index", this.index += 1)
+                    console.log(response);
                     this.client = []
                 } catch (error) {
                     console.error(error)

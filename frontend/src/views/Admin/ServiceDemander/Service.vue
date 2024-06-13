@@ -65,15 +65,6 @@
                                 <td class="px-3 py-3 border-b whitespace-nowrap">
                                     <div class="text-sm text-gray-900">{{ row.id }}</div>
                                 </td>
-                                <!-- <td class="px-6 py-3 border-b  whitespace-nowrap">
-                                    <div class="flex items-center  ">
-                                        <div class="flex-shrink-0 w-16 h-16">
-                                            <img class="w-full h-full object-cover" :src="row.image" alt="" />
-                                        </div>
-
-                                    </div>
-                                </td> -->
-                                
                                 <td class="px-6 py-3  border-b  whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
                                         {{ row.nom_service }}
@@ -148,6 +139,21 @@ export default {
     },
     computed: {
         paginatedData() {
+            if (this.query != '') {
+                const query = this.query.toLowerCase();
+                let data = this.arrayData.filter(item => {
+                    let dispo = item.dispo ?'Disponible':'Pas disponible'
+                    console.log(dispo)
+                    return item.nom_service.toLowerCase().includes(query)
+                        || item.description.toLowerCase().includes(query)
+                        || item.tarifs.toString().toLowerCase().includes(query)
+                        // || dispo.toLowerCase().includes(query);
+                });
+
+                this.length = data.length
+                const endIndex = this.first + this.itemsPerPage;
+                return data.slice(this.first, endIndex);
+            }
             if (!this.arrayData) {
                 return [];
             }

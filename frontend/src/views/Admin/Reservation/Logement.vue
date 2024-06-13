@@ -118,9 +118,11 @@
                   </table>
                 </td>
               </tr>
-
             </tbody>
           </table>
+          <div class="p-2 text-center bg-blue-0 w-full" v-if="paginatedData == ''">
+            Aucune données trouver
+          </div>
         </div>
         <div class="py-1 text-lg text-center">
           <Paginator :rows="itemsPerPage" :totalRecords="length"
@@ -166,8 +168,9 @@ export default {
         let data = this.dataArray.filter(item => {
           return item.num_logement.toLowerCase().includes(query)
             || item.type_logement.toLowerCase().includes(query)
-            // || item.prix.toLowerCase().includes(query)
-            || item.status.toLowerCase().includes(query);
+            || item.prix.toString().toLowerCase().includes(query)
+            || item.status.toLowerCase().includes(query)
+            || this.DateLocaLString(item.date).toLowerCase().includes(query);
         });
 
         this.length = data.length
@@ -197,6 +200,9 @@ export default {
     handlePagination(event) {
       this.expandData = []
       this.first = event.first
+    },
+    DateLocaLString(items) {
+      return new Date(items).toLocaleDateString()
     },
     // etudiant_logement
     async expandTable(index, dataId) {

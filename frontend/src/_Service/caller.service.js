@@ -5,6 +5,7 @@ import axios from "axios";
 const Axios = axios.create({ baseURL: process.env.VUE_APP_URL_BACK})
 
 // console.log( process.env.VUE_APP_URL_BACK )
+
 Axios.interceptors.request.use(request => {
     const token = JSON.parse(localStorage.getItem("token"));
     if(token){

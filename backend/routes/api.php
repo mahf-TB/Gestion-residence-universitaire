@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashController;
 use App\Http\Controllers\Admin\EtudiantController;
 use App\Http\Controllers\Admin\Logements\BatimentController;
 use App\Http\Controllers\Admin\Logements\LogementController;
@@ -77,6 +78,11 @@ Route::post('/uploadImage', [LogementController::class, 'uploadImage']);
 Route::group(['controller' => MaterielControlleur::class], function () {
     Route::post('/add-materiel',  'store');
     Route::get('/index_materiel',  'index');
+});
+
+Route::group(['controller' => DashController::class], function () {
+    Route::get('/index_count',  'index');
+    Route::get('/index_staff',  'index_staff');
 });
 
 
