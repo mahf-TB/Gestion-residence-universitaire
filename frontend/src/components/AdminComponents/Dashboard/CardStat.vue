@@ -77,10 +77,10 @@ export default {
           }
         },
         {
-          value: 56,
-          name: 'Agents qui ont des Categorie HEE',
+          value: data.reservation,
+          name: 'Nombre des réservations dans le résidence',
           class: 'bg-blue-400 border-blue-600 cursor-pointer',
-          icon: 'text-blue-400',
+          icon: 'text-blue-400 fa-solid fa-book',
           command: () => {
           }
         },
