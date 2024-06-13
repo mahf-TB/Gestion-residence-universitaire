@@ -77,7 +77,7 @@
                             <div class="mb-2">
                                 <span class="text-blue-2 font-bold">Bonjour,</span>
                             </div>
-                            <span class="text-base mb-2"> Vous souhaitez faire une demande de réservation pour un
+                            <span class="text-base mb-2"> Vous souhaitez faire une demande de réservation pour la
                             </span>
 
                             <span class="text-base underline">Chambre N°: {{ loge.num_logement }}</span>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="m-0">
                         <div class="mb-2 text-3xl">
-                            <span class="text-blue-2 font-bold">Comment pouvons-nous vous contacter ?</span>
+                            <span class="text-blue-2 font-bold">Comment pouvons-nous vous contacter?</span>
                         </div>
 
 
@@ -105,7 +105,7 @@
                             class=" p-5 py-2 px-3 flex items-center justify-center cursor-pointer text-blue-0 border-3 border-blue-2 rounded bg-blue-2 hover:bg-blue-1 hover:border-blue-1 transition-all duration-300"
                             @click="passeIndex()">
                             <span class="text-base uppercase ">
-                                suivante
+                                suivant
                             </span>
                         </button>
 
@@ -196,7 +196,7 @@
                                 </select>
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                                    Civilité<span class="text-red-500"></span></label>
+                                    Sexe<span class="text-red-500"></span></label>
                                 <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                             
@@ -241,7 +241,7 @@
                                     placeholder=" " />
                                 <label :class="emptyEmail != '' ? ' text-red-600' : 'text-gray-500 '"
                                     class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                                    Date d'entree soundites<span  class="text-red-500">*</span></label>
+                                    Date d'entrée<span  class="text-red-500">*</span></label>
                                 <p class="text-red-500 text-xs italic mb-1">{{ emptyEmail }}</p>
                             </div>
                            
@@ -267,125 +267,133 @@
                 </form>
             </TabPanel>
             <TabPanel>
-                <h1>Merci de vos reservation </h1>
+                <!-- component -->
+                <div class=" pt-36 h-screen">
+                    <div class="md:mx-auto">
+                        <svg viewBox="0 0 24 24" class="text-green-600 w-16 h-16 mx-auto my-6">
+                            <path fill="currentColor"
+                                d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
+                            </path>
+                        </svg>
+                        <div class="text-center">
+                            <h2 class="md:text-2xl text-base text-gray-900 font-semibold text-center">Réservation envoyée avec succès</h2>
+                            <p class="text-gray-600 my-2">Un mail vous a été envoyé, veuillez vérifier votre boîte de récéption</p>
+                        </div>
+                    </div>
+                </div>
             </TabPanel>
         </TabView>
 
     </div>
 </template>
 <script>
-
-
-import Axios from '@/_Service/caller.service';
-import VueMultiselect from 'vue-multiselect'
-import TabView from 'primevue/tabview';
-import TabPanel from 'primevue/tabpanel';
-import { computed } from 'vue';
+import Axios from "@/_Service/caller.service";
+import VueMultiselect from "vue-multiselect";
+import TabView from "primevue/tabview";
+import TabPanel from "primevue/tabpanel";
+import { computed } from "vue";
 
 export default {
-    name: 'FormReservation',
-    components: { VueMultiselect, TabView, TabPanel },
-    props:{
-    },
-    data() {
-        return {
-            id: this.$route.params.id,
-            client: {
-                matricule: '',
-                nom: '',
-                prenom: '',
-                email: '',
-                date_naissance: '',
-                cin: '',
-                sexe: '',
-                telephone: '',
-                id_logement: this.$route.params.id,
-                date_debut: null,
-                date_fin: null,
-            },
-            mois:0,
-            loge: [],
-            bati: [],
-            etage: '',
-            email: '',
-            index: 0,
-            emptyEmail: '',
+  name: "FormReservation",
+  components: { VueMultiselect, TabView, TabPanel },
+  props: {},
+  data() {
+    return {
+      id: this.$route.params.id,
+      client: {
+        matricule: "",
+        nom: "",
+        prenom: "",
+        email: "",
+        date_naissance: "",
+        cin: "",
+        sexe: "",
+        telephone: "",
+        id_logement: this.$route.params.id,
+        date_debut: null,
+        date_fin: null,
+      },
+      mois: 0,
+      loge: [],
+      bati: [],
+      etage: "",
+      email: "",
+      index: 0,
+      emptyEmail: "",
+    };
+  },
+  mounted() {
+    this.getOneLogement();
+    var tok = JSON.parse(localStorage.getItem("index"));
+    this.index = tok ? tok : 0;
+  },
+  methods: {
+    async enregistrer() {
+      const debut = new Date(this.client.date_debut);
+      let fin = debut.setMonth(debut.getMonth() + this.mois);
+      this.client.date_fin = new Date(fin).toISOString().split("T")[0];
 
+      if (this.email == this.client.email) {
+        try {
+          const response = await Axios.post("/reservation", this.client);
+          localStorage.setItem("index", (this.index += 1));
+          console.log(response);
+          this.client = [];
+        } catch (error) {
+          console.error(error);
         }
+      } else {
+        this.emptyEmail = "verifiez votre E-mail ";
+      }
     },
-    mounted() {
-        this.getOneLogement();
-        var tok = JSON.parse(localStorage.getItem('index'));
-        this.index = tok ? tok : 0;
+    async getOneLogement() {
+      try {
+        var response = await Axios.get(`/logement/${this.id}`);
+        this.loge = response.data;
+        this.bati = this.loge.batiment;
+        this.etage = this.loge.num_logement.charAt(0);
+        if (this.etage == "1") {
+          this.etage = "1ére Etage";
+        } else {
+          this.etage = this.etage + "éme Etage";
+        }
+      } catch (error) {
+        console.error(error);
+      }
     },
-    methods: {
-        async enregistrer() {
-            
-            const debut = new Date(this.client.date_debut)
-            let fin = debut.setMonth(debut.getMonth() + this.mois)
-            this.client.date_fin = new Date(fin).toISOString().split('T')[0]
+    passeIndex() {
+      var validRegex =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-            if (this.email == this.client.email) {
-                try {
-                    const response = await Axios.post('/reservation', this.client)
-                    localStorage.setItem("index", this.index += 1)
-                    console.log(response);
-                    this.client = []
-                } catch (error) {
-                    console.error(error)
-                }
-            } else {
-                this.emptyEmail = 'verifiez votre E-mail '
-            }
-        },
-        async getOneLogement() {
-            try {
-                var response = await Axios.get(`/logement/${this.id}`)
-                this.loge = response.data
-                this.bati = this.loge.batiment
-                this.etage = this.loge.num_logement.charAt(0)
-                if (this.etage == '1') {
-                    this.etage = '1ére Etage'
-                } else {
-                    this.etage = this.etage + 'éme Etage'
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        },
-        passeIndex() {
-            var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-            if (this.index < 1 || this.email != '') {
-                if (this.index < 1 || this.email.match(validRegex)) {
-                    localStorage.setItem("index", this.index += 1)
-                    this.emptyEmail = ''
-                } else {
-                    this.emptyEmail = 'verifiez votre E-mail '
-                }
-
-            } else {
-                this.emptyEmail = 'Veillez entre votre E-mail pour vous contactez'
-            }
-        },
-        preveIndex() {
-            if (this.index > 0) {
-                localStorage.setItem("index", this.index -= 1)
-            }
-        },
-    }
-}
+      if (this.index < 1 || this.email != "") {
+        if (this.index < 1 || this.email.match(validRegex)) {
+          localStorage.setItem("index", (this.index += 1));
+          this.emptyEmail = "";
+        } else {
+          this.emptyEmail = "verifiez votre E-mail ";
+        }
+      } else {
+        this.emptyEmail = "Veillez entre votre E-mail pour vous contactez";
+      }
+    },
+    preveIndex() {
+      if (this.index > 0) {
+        localStorage.setItem("index", (this.index -= 1));
+      }
+    },
+  },
+};
 </script>
 
 <style>
 .multiselect {
-    min-height: 50px;
+  min-height: 50px;
 }
 
 .p-tabview-nav-content {
-    display: none;
+  display: none;
 }
 .peer > input {
-    border: none;
+  border: none;
 }
 </style>

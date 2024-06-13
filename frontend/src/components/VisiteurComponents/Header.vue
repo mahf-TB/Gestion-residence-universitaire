@@ -21,7 +21,7 @@
                         </button>
 
                         <router-link to="/contact" class="text-blue-0 px-4 flex items-center h-full " :class="{ 'border-b-4 border-blue-0': $route.path === '/contact' }">
-                            Guide pratique
+                            Contacts
                         </router-link>
                     </nav>
                 </div>
@@ -30,10 +30,6 @@
                         <i class="fa-brands fa-facebook  mx-2" style="font-size: 1.4rem"></i>
                         <i class="fa-brands fa-instagram  mx-2" style="font-size: 1.4rem"></i>
                         <i class="fa-brands fa-x-twitter  mx-2" style="font-size: 1.4rem"></i>
-                    </span>
-                    <span v-if="!isConnect" class="material-icons-outlined text-blue-0 p-2 relative cursor-pointer">
-                        <i class="fa-solid fa-bell mx-3" style="font-size: 1.4rem"></i>
-                        <i class="fa-brands fa-facebook-messenger" style="font-size: 1.4rem"></i>
                     </span>
                 </div>
             </div>
