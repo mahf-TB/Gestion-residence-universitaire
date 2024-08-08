@@ -1,4 +1,4 @@
-<img width="1792" alt="Capture d’écran 2024-08-08 à 07 25 26" src="https://github.com/user-attachments/assets/98b92662-b40d-4c72-8cf9-f693aa0fef14"># webApp-Cite-universitaire
+# webApp-Cite-universitaire
 ```
 cd backend
 php artisan install
@@ -32,4 +32,6 @@ npm run serve
 <img width="1792" alt="Capture d’écran 2024-08-08 à 07 22 50" src="https://github.com/user-attachments/assets/e7cf41c5-1ba5-4da9-8631-4458965fc44e">
 <img width="1792" alt="Capture d’écran 2024-08-08 à 07 20 23" src="https://github.com/user-attachments/assets/c02e2a7b-0d01-4ebd-97c2-e5b2d3ab465e">
 <img width="1792" alt="Capture d’écran 2024-08-08 à 07 25 26" src="https://github.com/user-attachments/assets/f01f58bf-9fe4-49e6-bfb1-03b5132366af">
+<img width="1792" alt="Capture d’écran 2024-08-08 à 07 25 26" src="https://github.com/user-attachments/assets/98b92662-b40d-4c72-8cf9-f693aa0fef14">
+
 <img width="1792" alt="Capture d’écran 2024-08-08 à 07 23 42" src="https://github.com/user-attachments/assets/e01fbed9-9f3b-4603-9f8f-221ccae80133">
