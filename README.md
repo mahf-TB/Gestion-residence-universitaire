@@ -1,4 +1,6 @@
 # webApp-Cite-universitaire
+<img width="1792" alt="Capture d’écran 2024-08-08 à 07 26 48" src="https://github.com/user-attachments/assets/241951cc-8a9f-4d3e-abc4-0e3a019c0b90">
+
 ```
 cd backend
 php artisan install
@@ -24,7 +26,6 @@ php artisan websocket:serve
 ```
 npm run serve 
 ```
-<img width="1792" alt="Capture d’écran 2024-08-08 à 07 26 48" src="https://github.com/user-attachments/assets/241951cc-8a9f-4d3e-abc4-0e3a019c0b90">
 <img width="1792" alt="Capture d’écran 2024-08-08 à 07 26 33" src="https://github.com/user-attachments/assets/8d5eac27-4417-4a23-b288-ad539b2799b9">
 
 
